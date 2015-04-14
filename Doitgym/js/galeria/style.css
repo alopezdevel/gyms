@@ -1,0 +1,27 @@
+﻿
+a {
+	outline: none;
+}
+
+a img {
+	border: none;
+	padding: 0px;
+	margin: 0px 0px 0px 0;
+	vertical-align: center;
+}
+
+a img.last {
+	margin-right: 0;	
+}
+
+ul {
+	margin-bottom: 0px;
+	padding-left: 0px;
+}
+
+hr {
+	border: none;
+	height: 1px; line-height: 1px;
+	margin-bottom: 20px;
+	padding: 0;
+}

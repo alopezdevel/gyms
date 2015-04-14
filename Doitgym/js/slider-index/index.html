@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- JS Includes -->
+	<script src="jquery.js" type="text/javascript"></script>
+	<script src="billy.carousel.jquery.min.js" type="text/javascript"></script>
+
+	<!-- CSS Includes -->
+	<link rel="stylesheet" href="demonstration.css" type="text/css" media="screen" />
+
+	
+	<title>Slider</title>
+	
+	<style type="text/css">
+	.auto-style1 {
+		border-width: 0px;
+	}
+	</style>
+	
+</head>
+
+<body>
+	
+	<script type="text/javascript">
+		$(document).ready( function() {
+		
+		// ----- Carousel
+			$('#billy_scroller').billy({
+				slidePause: 5000,
+				// We need custom next/prev buttons for this example. If we used the defaults (#billy_next/#billy_prev), every carousel instance on the page would scroll when they're clicked...
+				nextLink: $('#carousel_billy_next'),
+				prevLink: $('#carousel_billy_prev'),
+			});
+			
+		// ----- Tabber
+			$('#tabber').billy({
+				slidePause: 5000,
+				indicators: $('ul#tabber_tabs'),
+				customIndicators: true,
+				autoAnimate: false,
+				noAnimation: true
+			});
+			
+		});
+				
+	</script>
+
+	<!-- Demonstration of the carousel in action -->
+
+	<div id="container" >
+		
+		<div id="billy_clip">
+			<ul id="billy_scroller">
+				<li><a href="../../como_empezar.php" target="_blank"><img src="imgs/1.jpg" width="710" height="253" alt="Do it GYM" class="auto-style1"></a></li>
+				<li><a href="../../contacto.php" target="_blank"><img src="imgs/2.jpg" width="710" height="253" alt="Do it GYM" class="auto-style1"></a></li>
+				<li><a href="../../membresia_doit.php" target="_blank"><img src="imgs/3.jpg" width="710" height="253" alt="Do it GYM" class="auto-style1"></a></li>
+			</ul>	
+		</div>
+		<ul id="billy_indicators">
+		</ul>
+		
+	</div>	
+
+	<!-- Demonstration of the carousel used as tabber -->
+
+	
+
+</body>
+</html>
