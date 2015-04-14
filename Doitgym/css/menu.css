@@ -1,0 +1,274 @@
+﻿/*MENU PRINCIPAL*/
+
+#nav_first{
+	
+	list-style:none;
+	width:auto;
+    min-width:650px;
+    margin:-55px 20px 0px 330px;
+    padding:0px 0px 0px 0px;
+    position:relative;
+    text-align:center;
+    float:right;
+    z-index:2;
+}
+#nav_first li{
+	
+	float:left;
+	margin: -10px 15px auto 15px;
+	height:30px;
+	padding: 10px 5px 0px 5px;
+	border: 1px solid transparent;
+	position:relative;
+	
+}
+#nav_first li:hover{
+	
+	/*background: #b51b1a;
+	  border: 1px solid #800b0b;*/
+        
+	-moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+     border-radius:  6px 6px 6px 6px;
+
+}
+#nav_first li.sub:hover{
+
+
+	 
+	-moz-border-radius: 6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0px 0px;
+     border-radius:  6px 6px 0px 0px;
+     
+     padding-right:5px;
+     padding-left: 5px;
+     
+
+
+}
+#nav_first li a{
+	
+	
+	font-family:'antipastoregular',Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#ffffff;
+	text-decoration:none;
+	text-shadow: 1px 1px 2px #272727;
+}
+#nav_first li:hover a, #nav_first li:active a{color:#f5c739;}
+#dropdown{
+	
+		list-style:none;
+		width: 180px;
+		float:left;
+        margin:10px 0px;
+        z-index: 1000;
+        position:absolute;
+        left:-990em;
+        text-align:left;
+        padding:10px 5px 0px 0px;
+        
+        
+        /* Gradient background */
+        background: rgba(31,31,31,1);
+        background: -moz-linear-gradient(45deg, rgba(31,31,31,1) 0%, rgba(28,28,28,0.9) 48%, rgba(19,19,19,0.8) 100%);
+        background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(31,31,31,1)), color-stop(48%, rgba(28,28,28,0.9)), color-stop(100%, rgba(19,19,19,0.8)));
+        background: -webkit-linear-gradient(45deg, rgba(31,31,31,1) 0%, rgba(28,28,28,0.9) 48%, rgba(19,19,19,0.8) 100%);
+        background: -o-linear-gradient(45deg, rgba(31,31,31,1) 0%, rgba(28,28,28,0.9) 48%, rgba(19,19,19,0.8) 100%);
+        background: -ms-linear-gradient(45deg, rgba(31,31,31,1) 0%, rgba(28,28,28,0.9) 48%, rgba(19,19,19,0.8) 100%);
+        background: linear-gradient(45deg, rgba(31,31,31,1) 0%, rgba(28,28,28,0.9) 48%, rgba(19,19,19,0.8) 100%);    
+        
+        /* Rounded Corners */
+        -moz-border-radius: 3px;
+   	    -webkit-border-radius:3px;
+   		 border-radius:3px;
+   		 
+   		 border:1px solid #232323;
+   		 border-top:none;
+
+}
+#nav_first li:hover #dropdown{left:-1px;top:auto;}
+#nav_first li:hover #dropdown.admin{width:250px;}
+#dropdown li{
+    	
+    float:left;
+    text-align:left;
+   	position:relative;
+   	padding: 7px 5px 3px 0px;
+   	margin-bottom:10px;
+    width:160px; 
+    height:30px;
+	border-bottom:1px inset #232323;
+    
+    /*--animacion--*/
+    -webkit-transition: left 0.2s linear;
+    -webkit-transition-property:border-color;    
+    -moz-transition: left 0.2s linear;
+    -moz-transition-property:border-color;
+    -o-transition: left 0.2s linear;
+    -o-transition-property:border-color;
+    -ms-transition: left 0.2s linear;
+    -ms-transition-property:border-color;
+    transition: left 0.2s linear;
+    transition-property:border-color;
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+    -o-transition:all 1s;
+    -ms-transition:all 1s;
+    -khtml-transition:all 1s;
+    transition:all 1s;
+
+      
+}
+#dropdown li:hover{
+	
+	background: transparent;
+	border-radius:0px;
+	box-shadow:0px 0px 0px 0px;
+	border: 1px solid transparent;
+	border-bottom:1px inset #474747;
+
+
+}
+#dropdown li a{
+    
+    padding: 10px 5px;
+    color:#ffffff!important;
+    /*--animacion--*/
+    -webkit-transition: left 0.2s linear;
+    -webkit-transition-property:color;    
+    -moz-transition: left 0.2s linear;
+    -moz-transition-property:color;
+    -o-transition: left 0.2s linear;
+    -o-transition-property:color;
+    -ms-transition: left 0.2s linear;
+    -ms-transition-property:color;
+    transition: left 0.2s linear;
+    transition-property:color;
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+    -o-transition:all 1s;
+    -ms-transition:all 1s;
+    -khtml-transition:all 1s;
+    transition:all 1s;
+} 
+#dropdown li a:hover{color:#facb3a!important;}
+/* ICONS*/ 
+    
+    #icon{
+		
+		width:28px;
+		height:24px;
+		float:left;
+		margin: 0px;
+		vertical-align:middle;
+	}
+    
+    #icon.doit, #icon.pesa, #icon.memb,#icon.key,#icon.clock,#icon.men,#icon.money,#icon.chat,#icon.dollar {
+	
+		background-image: url(../images/nav/first/icons.png);
+		background-repeat:no-repeat;
+		-moz-background-size: 28px 432px;
+		-o-background-size: 28px 432px;
+		-webkit-background-size: 28px 432px;
+		background-size: 28px 432px;
+		
+	}
+    #icon.doit{
+     
+    	background-position: 50% 0px;
+	
+	}
+	#dropdown li a:hover #icon.doit{
+     
+    	background-position:  50% -23px;
+	
+	}
+	
+	#icon.pesa{
+     
+    	background-position: 50% -48px;
+	
+	}
+	#dropdown li a:hover #icon.pesa{
+     
+    	background-position:  50% -72px;
+	
+	}
+	#icon.memb{
+     
+    	background-position: 50% -96px;
+	
+	}
+	#dropdown li a:hover #icon.memb{
+     
+    	background-position:  50% -120px;
+	
+	}
+	#icon.key{
+     
+    	background-position: 50% -144px;
+	
+	}
+	#dropdown li a:hover #icon.key{
+     
+    	background-position:  50% -168px;
+	
+	}
+	#icon.clock{
+     
+    	background-position: 50% -192px;
+	
+	}
+	#dropdown li a:hover #icon.clock{
+     
+    	background-position:  50% -216px;
+	
+	}
+		#icon.men{
+     
+    	background-position: 50% -240px;
+	
+	}
+	#dropdown li a:hover #icon.men{
+     
+    	background-position:  50% -264px;
+	
+	}
+	#icon.money{
+     
+    	background-position: 50% -288px;
+	
+	}
+	#dropdown li a:hover #icon.money{
+     
+    	background-position:  50% -312px;
+	
+	}
+	#icon.chat{
+     
+    	background-position: 50% -336px;
+	
+	}
+	#dropdown li a:hover #icon.chat{
+     
+    	background-position:  50% -360px;
+	
+	}
+	#icon.dollar{
+     
+    	background-position: 50% -384px;
+	
+	}
+	#dropdown li a:hover #icon.dollar{
+     
+    	background-position:  50% -408px;
+	
+	}
+
+
+
+
+
+

@@ -1,0 +1,300 @@
+﻿
+@import 'index_style.css';
+@import 'menu.css';
+@import 'contenido.css';
+
+@font-face {
+    font-family: 'BuxtonSketchRegular';
+    src: url('../fonts/buxtonsketch.eot');
+    src: url('../fonts/buxtonsketch.eot') format('embedded-opentype'),
+         url('../fonts/buxtonsketch.woff') format('woff'),
+         url('../fonts/buxtonsketch.ttf') format('truetype'),
+         url('../fonts/buxtonsketch.svg#BuxtonSketchRegular') format('svg');
+}
+@font-face {
+    font-family: 'antipastoregular';
+    src: url('../fonts/antipasto-webfont.eot');
+    src: url('../fonts/antipasto-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/antipasto-webfont.woff') format('woff'),
+         url('../fonts/antipasto-webfont.ttf') format('truetype'),
+         url('../fonts/antipasto-webfont.svg#antipastoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body{
+	
+	margin:0;
+	background:#191919 url('../images/content/background_2.jpg') fixed center top no-repeat;
+	
+	font-family:Arial, Helvetica, sans-serif;
+    cursor: default;
+    font-size: 14px;
+
+}
+#page{
+	
+	margin: 0px auto;
+	width:1200px;
+	
+}
+#header .logo{
+	
+	z-index:2;
+	position:relative;
+	margin:-12px auto auto 0px;
+	width:324px;
+	
+}
+#header .logo img{border:0px;}
+/*END HEADER*/
+
+
+/*FOOTER*/
+
+#footer{
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#9b9b9b;
+	margin: 10px auto auto auto;
+	bottom:0;
+	text-align:center;
+	height:40px;
+	width:1024px;
+	position:static;
+	clear:both;
+	
+}
+#footer a{
+
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#9b9b9b;
+}
+#footer a:hover{
+
+	text-decoration:underline;	
+}
+
+.left{
+	
+	float:left;
+}
+.right{
+	float:right;
+}
+
+/*END FOOTER*/
+
+#nav_container{
+	
+	/*background:url('../images/nav/first/bg_menu.png') no-repeat center top;  */
+    background:#a7383f;
+    background: -moz-linear-gradient(top, #222224, #141414);
+    background: linear-gradient(to bottom, #222224, #141414);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222224), to(#141414));
+	width:100%;
+	height:40px;
+	margin: -70px auto auto 0px;
+	z-index:1;
+	position:relative;
+    padding: 5px 10px;
+    
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #272727;
+    -webkit-box-shadow:inset 1px 1px 1px 0px #505052;
+    -moz-box-shadow:inset 1px 1px 1px  0px #505052;
+    box-shadow:inset 1px 1px 1px 0px #505052;
+
+
+}
+
+/*nav_sup*/
+
+#nav_sup{
+	
+	float:right;
+	margin: -170px 0px 0px 0px;
+	z-index:2000;
+	
+}
+#btn{
+	
+	width:63px;
+	height:74px;
+	background: url('../images/nav/up/btn_hover.png') no-repeat left top;
+	outline:none;
+	float:left;
+	cursor:pointer;
+
+		
+}
+#btn img{
+	
+	border:0;
+	/*vertical-align:middle;*/
+}
+#btn.login:hover{
+	
+	background-position: 50% -74px;
+	
+	
+}
+#btn.twitt:hover{
+	
+	background-position: 50% -148px;
+	
+}
+#btn.fb:hover{
+	
+	background-position: 50% -222px;
+	
+}
+#btn.home:hover{
+	
+	background-position: 50% -296px;
+	
+}
+
+/*------------------------ BIENVENIDA A USUARIO ------------------------------------*/
+#nav_sup .user{
+	
+	width:auto;
+	float:left;
+	font-family:'BuxtonSketchRegular', Arial, Helvetica, sans-serif;
+	font-size:19px;
+	color:#d4d4d4;
+	text-shadow: 1px 1px 2px #111111;
+	
+	position:relative;
+	margin-left:-150px;
+	
+	height:47px;
+	
+}
+#nav_sup .user img{
+	vertical-align:middle;
+}
+#nav_sup .user a{
+	
+	font-family:'BuxtonSketchRegular', Arial, Helvetica, sans-serif;
+	color:#a1a1a1;
+	text-shadow: 1px 1px 2px #111111;
+	font-size:19px;
+	text-decoration:none;
+}
+#nav_sup .user a:hover{
+	
+	color:#d4d4d4;
+}
+
+
+
+/* END HEADER*/
+
+
+/* --- Chat estilos-------*/
+
+#chat-contenedor{
+		
+		width:250px;
+		height:185px;
+		z-index:5000;
+		position:fixed;
+		margin: 48% auto auto 80%;
+		float:right;
+	
+	
+	 	/* Gradient background */
+        background:#b51b1a;
+        background: linear-gradient(to bottom,#b51b1a, #850e0e);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b51b1a), to(#850e0e));
+        
+        
+        -moz-border-radius: 0px 6px 0px 0px;
+   		-webkit-border-radius: 0px 6px 0px 0px;
+     	 border-radius:  0px 6px 0px 0px;
+   		 
+   		 border:1px solid #2b2b2b;
+   		 
+   		 box-shadow: 1px 2px 3px #171717;
+   		 
+   		 clear:both;
+         /*--- ocultando el chat ---*/
+         display:none;
+
+}
+chat-contenedor:hover{
+		
+		width:250px;
+		height:185px;
+		z-index:5000;
+		position:fixed;
+		margin: 35% auto auto 80%;
+		float:right;
+	
+	
+	 	/* Gradient background */
+        background:#b51b1a;
+        background: linear-gradient(to bottom,#b51b1a, #850e0e);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b51b1a), to(#850e0e));
+        
+        
+        -moz-border-radius: 0px 6px 0px 0px;
+   		-webkit-border-radius: 0px 6px 0px 0px;
+     	 border-radius:  0px 6px 0px 0px;
+   		 
+   		 border:1px solid #2b2b2b;
+   		 
+   		 box-shadow: 1px 2px 3px #171717;
+   		 
+   		 clear:both;
+
+}
+
+#chat-contenedor iframe{
+	
+	margin:0px auto auto auto;
+	width:249px;
+	height:185px
+}
+#chat-contenedor h3{
+	
+	font-family:'BuxtonSketchRegular',Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#ffffff;
+	text-shadow: 2px 2px 2px #979797;
+	vertical-align: middle;
+	height: 20px;
+	padding: 5px 3px 3px 15px;
+	margin: -25px auto auto 0px;
+	position:relative;
+	width:100px;
+	cursor:pointer;
+	
+	background: #b51b1a;
+	border: 1px solid #800b0b;
+	border-bottom:0px;
+        
+	-moz-border-radius: 6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0px 0px;
+     border-radius:  6px 6px 0px 0px;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,304 @@
+@CHARSET "UTF-8";
+
+
+@font-face {
+    font-family: 'BuxtonSketchRegular';
+    src: url('../../fonts/buxtonsketch.eot');
+    src: url('../../fonts/buxtonsketch.eot') format('embedded-opentype'),
+         url('../../fonts/buxtonsketch.woff') format('woff'),
+         url('../../fonts/buxtonsketch.ttf') format('truetype'),
+         url('../../fonts/buxtonsketch.svg#BuxtonSketchRegular') format('svg');
+}
+
+
+div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+
+ tfoot, thead, tr, th, td {
+
+border:0pt none;
+
+font-style:inherit;
+
+font-weight:inherit;
+
+margin:0pt;
+
+padding:0pt;
+background:transparent;
+
+}
+
+
+.clear{
+
+	clear: both;
+
+	height: 0;
+
+	visibility: hidden;
+
+	display: block;
+
+}
+
+
+strong{
+
+	font-weight: 700;
+
+}
+
+/******* GENERAL RESET *******/
+
+/******* LOGO *******/
+
+#logo{
+
+	margin-top: 1em;
+
+	display: block;
+
+}
+
+/******* /LOGO  *******/
+
+/******* FORM *******/
+
+#form{
+
+	margin: 5px auto 10px 0px;
+
+	width: 260px;
+
+}
+
+#form table td{
+
+	text-align: left;
+
+	font-size: 11px;
+
+}
+
+#form label{
+
+	font-weight: 700;
+
+}
+
+#form input{
+
+	border: 1px solid #d0ccc9;
+
+	background: #fff;
+
+	color: #444444;
+
+	font-size: 11px;
+
+	font-weight: 700;
+
+}
+#form input:hover{
+	color:#444444;
+}
+
+#form input.text{
+
+	font-weight: normal;
+
+	color: #565656;
+
+	border: 1px solid #9c9c9c;
+
+	width: 225px;
+
+	padding: 2px;
+
+	margin-bottom: 5px;
+
+	text-align: left;
+	
+	height:25px;
+	
+	margin-left:5px;
+	opacity:0.6;
+	
+
+}
+#form input.text:hover, #form input.text:focus{
+	
+	opacity:1;
+}
+
+#form input.text.user{
+
+	width: 100px;
+
+}
+
+/******* /FORM *******/
+
+/******* MENU *******/
+
+#container{
+
+	margin: 10px 0px;
+
+	width: 260px;
+
+}
+
+#container ul{
+
+	list-style: none;
+
+	list-style-position: outside;
+
+}
+
+#container ul.menu li{
+
+	float: left;
+
+	margin-right: 5px;
+
+	margin-bottom: -1px;
+
+}
+
+#container ul.menu li{
+
+	font-weight: 700;
+
+	display: block;
+
+	padding: 5px 10px 5px 10px;
+
+	background: #870c0b;
+
+	position: relative;
+
+	color: #444444;
+
+	cursor: pointer;
+
+}
+
+/******* /MENU *******/
+
+/******* CONTENT *******/
+
+.content{
+
+	margin: 0pt auto;
+
+	text-align: left;
+
+	padding: 10px;
+
+	padding-bottom: 20px;
+
+	font-size: 11px;
+	
+	color:#f0f0f0;
+	font-family:Arial, Helvetica, sans-serif;
+
+}
+
+.content h1{
+
+	
+	font-family:'BuxtonSketchRegular',Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#ffffff;
+	text-shadow: 2px 2px 2px #979797;
+
+	line-height: 1em;
+	vertical-align: middle;
+	height: 30px;
+	padding: 5px 10px 5px 35px;
+	font-size: 25px;
+
+	background: transparent url(images/bubble.png) no-repeat scroll left top;
+	
+	
+
+}
+
+.date{
+
+	font-weight: normal;
+
+	font-size: 9px;
+
+	color: #aeaeae;
+
+}
+
+/******* /CONTENT *******/
+
+/******* LOADING *******/
+
+#loading{
+
+	text-align: center;
+
+}
+
+/******* /LOADING *******/
+
+
+
+/*--------------- boton enviar -------------------------*/
+#form button[type=submit]{
+	
+	vertical-align:middle;
+	margin: -5px auto auto auto;
+	position:relative;		
+	width:90px;
+	height:25px;
+	float:right;
+	
+	/* Rounded Corners */
+     -moz-border-radius:  3px;
+   	 -webkit-border-radius: 3px;
+      border-radius:   3px;
+      
+    padding: 1px 1px 1px 5px;
+	
+	font-family:'BuxtonSketchRegular',Arial, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	color:#ffffff;
+	text-shadow: 1px 1px 2px #272727;
+	
+	/* Gradient background */
+    background:#e3af11;
+    background: linear-gradient(to bottom,#e3af11, #aa800f);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e3af11), to(#aa800f));
+    border: 1px solid #654b03;
+}
+
+#form button[type=submit]:hover{
+
+	color:#fbf6e8;
+	cursor:pointer;
+    /* Gradient background */
+    background:#e3af11;
+    background: linear-gradient(to bottom,#aa800f, #e3af11);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#aa800f), to(#e3af11));
+	
+
+	
+}
+
+
+
+
+
+
+
+

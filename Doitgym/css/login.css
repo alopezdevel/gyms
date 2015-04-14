@@ -1,0 +1,95 @@
+﻿#form-login{
+	color:#b1b1b1;
+	text-shadow: 1px 2px 2px #d4d4d4;
+	border: 1px #fc3f33;
+	position:relative;
+	width:100%;
+    height: auto;
+	margin:0px auto;
+}
+#form-login #caja-gris{margin:40px auto!important;width:400px!important}
+#form-login input[type=text], #form-login input[type=password]{
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11pt;
+	border-style: none;
+	background: url('../images/login/text_box.png') no-repeat left top;
+	color:#b1b1b1;
+	outline:none;
+	
+    height: 39px;
+    width: 308px;
+    margin: 0 auto 8px;
+    padding: 3px 20px 0px 35px;
+    opacity: 0.7;
+    margin-bottom: 18px;
+}
+#form-login input[type=text]:hover, #form-login input[type=password]:hover{
+
+	opacity: 1.0;
+
+}
+#form-login .user input{
+	background-position:0px 0px;
+}
+#form-login .user input:focus{
+	background-position:0px -41px;
+}
+#form-login .password input[type=password]{
+	background-position:0px -81px;
+}
+#form-login .password input[type=password]:focus{
+	background-position:0px -122px;
+}
+#form-login .btn_accept{
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+    text-transform: uppercase;
+	font-size:1em;
+	color:#969696;
+	text-shadow: 1px 1px 1px #3e3e3e;
+
+	width:88%;
+	height:35px;
+	margin:0px auto 10px;
+	
+	
+	background:#615f5f;
+    background: linear-gradient(to bottom, #575454, #615f5f);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#575454), to(#615f5f));
+    border: 1px solid #b6b6b6;
+    
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    
+    cursor: pointer;
+    /*--animacion--*/
+    -webkit-transition: left 0.2s linear;
+    -webkit-transition-property:color;    
+    -moz-transition: left 0.2s linear;
+    -moz-transition-property:color;
+    -o-transition: left 0.2s linear;
+    -o-transition-property:color;
+    -ms-transition: left 0.2s linear;
+    -ms-transition-property:color;
+    transition: left 0.2s linear;
+    transition-property:color;
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+    -o-transition:all 1s;
+    -ms-transition:all 1s;
+    -khtml-transition:all 1s;
+    transition:all 1s;
+
+
+}
+#form-login .btn_accept:hover{
+		
+	background:#cb281d;
+    background: linear-gradient(to bottom, #cb281d, #ef3b2f);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cb281d), to(#ef3b2f));
+    color:#ffffff; 
+    
+}

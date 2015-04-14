@@ -1,0 +1,137 @@
+﻿/* Index Content*/
+@font-face {
+    font-family: 'BuxtonSketchRegular';
+    src: url('../fonts/buxtonsketch.eot');
+    src: url('../fonts/buxtonsketch.eot') format('embedded-opentype'),
+         url('../fonts/buxtonsketch.woff') format('woff'),
+         url('../fonts/buxtonsketch.ttf') format('truetype'),
+         url('../fonts/buxtonsketch.svg#BuxtonSketchRegular') format('svg');
+}
+
+#index-content{
+	
+	width:1175px;
+	height:auto;
+	/*background:black;*/
+	margin: 45px auto 0px;
+	position:relative;
+	z-index: 0;
+	padding: 50px 10px auto 10px;
+
+}
+#index-content .horarios{
+	
+	background: url('../images/content/bg_horarios.jpg') center top no-repeat;
+	width:269px;
+	height: 265px;
+	float:right;
+	margin: -35px auto auto auto;
+}
+#slider-container{
+	
+	/*float:left; */
+	box-shadow:1px 1px 5px rgba(0,0,0,0.7);
+	height:450px;
+	width:1175px;
+	margin: -35px auto auto 0;
+	overflow:visible;
+	position:relative;
+    clear: both;
+
+}
+#horarios-container{
+	
+	width:250px;
+	height:250px;
+	
+	position:relative;
+	
+	font-family: 'BuxtonSketchRegular',Arial, Helvetica, sans-serif;
+	font-size:22px;
+	color:#FFFFFF;
+	text-shadow: 1px 1px 2px #000000;
+	
+	margin: 63px auto auto 13px;
+    text-align: center;
+	
+	
+}
+#horarios-container span{color:#ce8e2d;}
+.btn-animacion{
+    /*--animacion--*/
+    -webkit-transition: left 0.2s linear;
+    -webkit-transition-property:background;    
+    -moz-transition: left 0.2s linear;
+    -moz-transition-property:background;
+    -o-transition: left 0.2s linear;
+    -o-transition-property:background;
+    -ms-transition: left 0.2s linear;
+    -ms-transition-property:background;
+    transition: left 0.2s linear;
+    transition-property:background;
+}
+.btn-red{
+    background: #7e1519;
+    border:1px solid #8c1e23;
+    padding:8px 15px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    color:#ffffff!important;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #680608;
+    margin: 5px auto;
+}
+.btn-red:hover{
+    background:#9a191e;
+    color:#eab435!important;
+    border:1px solid #b31b1a;
+}
+.temp{
+	
+	font-family:'BuxtonSketchRegular',Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size:50px;
+	text-shadow: 1px 2px 2px #0000000;
+	
+	text-align:center;
+	
+	position:relative;
+	margin: 0 auto;
+	width:700px;
+	clear: both;
+	
+	
+}
+
+/* ------------------------------ BANNERS ----------------------------------------*/
+#banners-container{
+	
+	width:980px;
+	height:230px;
+	margin: 5px auto 5px 20px;
+	
+	
+}
+#banners-container td{
+	width:10px;
+	/*vertical-align:top;*/
+}
+#banners-container .post-dia{
+	
+	background:url('../images/index/img_postit.png') no-repeat left top;
+	width:345px;
+	height:233px;
+	text-align:center;
+}
+#banners-container .post-dia iframe{
+	
+	margin: 5% auto;
+}
+#banners-container .anuncio-dia{
+	
+	width:345px;
+	height:233px;
+	text-align:center;
+}
+
