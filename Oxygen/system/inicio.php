@@ -4,6 +4,8 @@ session_start();
 
 include("funciones_consulta.php");
 
+$_SESSION['acceso'] = "U";
+
 if ( $_SESSION['acceso'] != "U" && $_SESSION['acceso'] != "A" ){ //No ha iniciado session
 
     header("Location: index.php");
