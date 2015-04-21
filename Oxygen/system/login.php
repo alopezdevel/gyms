@@ -113,7 +113,11 @@ function inicio(){
     </div><!-- .fluid_container -->
 </div>
 <!--- TERMINA SLIDER ----->
-<div class="copyright">Oxygen-FX Crossfit. � Copyright 2015.</div>
+<footer class="footer">
+    <div class="container"> 
+    	Oxygen-FX Crossfit.  © Copyright 2015.	    
+   	</div>
+</footer>
 </body>
 <?php }else{ ?>
 <?php  } ?>
