@@ -67,8 +67,9 @@ function inicio(){
  }
  function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
-        actualizarMensajeAlerta( "Tamano " + n + "debe estar entre " + min + " y " + max + "." );
+        actualizarMensajeAlerta( "El campo " + n + " debe contener entre " + min + " y " + max + " digitos." );
         o.addClass( "ui-state-error" );
+        o.focus();
         return false;    
     } else {             
         return true;                     
