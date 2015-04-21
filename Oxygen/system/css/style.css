@@ -799,7 +799,7 @@ border: 2px solid #fff;
 .footer .container{
 	width:1000px;
 	height:50px;
-	background: url('../../images/foot/bg_foot.png') center top no-repeat;
+	background: url('../images/foot/bg_foot.png') center top no-repeat;
 	/*-- texto--*/
 	color:#b3c4df;
 	text-align:center;
