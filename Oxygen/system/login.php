@@ -67,7 +67,7 @@ function inicio(){
  }
  function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
-        actualizarMensajeAlerta( "Length of " + n + " must be between " + min + " and " + max + "." );
+        actualizarMensajeAlerta( "Tamano " + n + "debe estar entre " + min + " y " + max + "." );
         o.addClass( "ui-state-error" );
         return false;    
     } else {             
