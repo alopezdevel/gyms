@@ -15,6 +15,7 @@ var expr1 = /^[a-zA-Z]*$/;
 $(document).ready(inicio);
 function inicio(){  
     //variables
+    
      mensaje = $( ".mensaje_valido" );
      usuario = $( "#loginUser" ),
      password = $( "#loginPassword" ),
@@ -28,15 +29,16 @@ function inicio(){
 }
  function onValidarAcceso(){ 
      //validaciones tamano
+     actualizarMensajeAlerta( "Favor de llenar todos los campos." ); 
      todosloscampos.removeClass( "error" );
+     $("#loginUser").removeClass( "error" );
+     $("#loginPassword").removeClass( "error" );
      var valid = true; 
      valid = valid && checkLength( $('#loginUser'), "Usuario", 5, 25 );
      valid = valid && checkLength( $('#loginPassword'), "Password", 6, 25 );
      
      //Validaciones de expresion regular
-     valid = valid && checkRegexp( $('#loginUser'), /^[a-z]([0-9a-z_\s])+$/i, "user consiste en datos  de a-z, 0-9, sin espacios." );
-     valid = valid && checkRegexp( $('#loginPassword'), /^[a-z]([0-9a-z_\s])+$/i, "password consiste en datos  de a-z, 0-9, sin espacios." );
-
+     valid = valid && checkRegexp( $('#loginUser'), /^[a-z]([0-9a-z_\s])+$/i, "usuario consiste en datos  de a-z, 0-9, sin espacios." );     
      if ( valid ) {
         conexion($("#loginUser").val(), $("#loginPassword").val());
      }
@@ -46,12 +48,17 @@ function inicio(){
      function(data){ 
          switch(data.respuesta){
          case "0":  $("#loginPassword").val("");
-                    $("input:text:visible:first").focus();
+                    $("#loginPassword").focus();
+                    $("#loginUser").addClass( "error" );
+                    $("#loginPassword").addClass( "error" );
+                    actualizarMensajeAlerta("El usuario con el que se desea acceder no existe. Favor de verificar los datos" );
                 break;
-         case 1:    
+         case "1":   location.href= "inicio.php?type=88e5542d2cd5b7f86cd6c204dc77fb523fb719071b2b08cfd7cbfbcadb365af1c8c9ba63";
                 break;
-         case 2:    $("#loginPassword").val("");
-                    $("input:text:visible:first").focus();
+         case "2":    $("#loginPassword").val("");
+                    $("#loginPassword").focus();
+                    $("#loginPassword").addClass( "error" );
+                    actualizarMensajeAlerta("El password de el usuario: " + $("#loginUser").val() + "no es correcto.Favor de verificar los datos"  );
                 break;  
          }
      }
@@ -65,6 +72,9 @@ function inicio(){
  }
  function checkRegexp( o, regexp, n ) {
     if ( !( regexp.test( o.val() ) ) ) {
+        actualizarMensajeAlerta( "El " + n );
+        o.addClass( "error" );
+        o.focus();
         return false;
     } else {                     
         return true;        
@@ -87,14 +97,15 @@ function inicio(){
         .addClass( "alertmessage" );
       setTimeout(function() {
         mensaje.removeClass( "alertmessage", 2500 );
-      }, 500 );
+      }, 700 );
     }  
  
-
+   
 </script>
+
 <!DOCTYPE html>
 <html>
-
+   
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <title>Oxygen-FX Crossfit - Acceso a Usuarios</title>
@@ -114,7 +125,7 @@ function inicio(){
 <div id="layer_login">
     <img alt="" src="images/login/img-logo-login.png" alt="logo">
     <form method="post" action="" onSubmit="return Validar_Login()">
-        <p class="mensaje_valido">Favor de capturar los datos.</p>
+        <p class="mensaje_valido">&nbsp;Favor de llenar todos los campos.</p>
         <input id="loginUser" class="user" name="user" type="text" placeholder="User">
         <input id="loginPassword" class="pass" name="password" type="password" placeholder="Password">
         <button id="button_aceptar" class="btn_login" type="button">LOGIN</button>
