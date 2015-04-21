@@ -84,9 +84,9 @@ function inicio(){
  function actualizarMensajeAlerta( t ) {
       mensaje
         .text( t )
-        .addClass( "ui-state-highlight" );
+        .addClass( "mensaje-alerta" );
       setTimeout(function() {
-        mensaje.removeClass( "ui-state-highlight", 1500 );
+        mensaje.removeClass( "mensaje-alerta", 1500 );
       }, 500 );
     }  
  
