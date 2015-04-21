@@ -39,8 +39,8 @@ textarea{height:120px!important;padding-top:10px!important;}
 }
 .frm-btns button, .btn-1{
     width: 140px;
-      margin: 0px auto;    
-      height:40px;
+    margin: 0px auto;    
+    height:40px;
     color:#ffffff;
     text-shadow:1px 1px 1px rgba(0,0,0,0.6);
     text-transform:uppercase;
@@ -72,3 +72,19 @@ button, .btn-1{
 }
 button:hover, .btn-1:hover{background-color:#7ecbee;}
 .msg-success{display:none;}
+form .error{
+	border:1px solid #b64141;
+	-webkit-box-shadow:inset 0px 0px 3px #decfcf;
+    -moz-box-shadow:inset 0px 0px 3px #decfcf;
+    box-shadow:inset 0px 0px 3px #decfcf;
+
+}
+form .success{
+	border:1px solid #8ac975;
+	-webkit-box-shadow:inset 0px 0px 3px #dee8da;
+    -moz-box-shadow:inset 0px 0px 3px #dee8da;
+    box-shadow:inset 0px 0px 3px #dee8da;
+
+}
+
+
