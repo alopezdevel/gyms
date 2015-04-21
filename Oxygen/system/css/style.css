@@ -800,6 +800,10 @@ border: 2px solid #fff;
 	width:1000px;
 	height:50px;
 	background: url('../../images/foot/bg_foot.png') center top no-repeat;
+	/*-- texto--*/
+	color:#b3c4df;
+	text-align:center;
+	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
 }
 .nav_foot a{color:#929292}
 .nav_foot a:hover, .nav_foot a.active{color:#d16665;}
