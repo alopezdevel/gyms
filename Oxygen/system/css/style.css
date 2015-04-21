@@ -788,7 +788,7 @@ border: 2px solid #fff;
 /* Footer
 ---------------------------------*/
 .footer{
-	padding:10px 0 25px;
+	padding:0px 0 25px;
 	background: #2b6bbe;
 	background: -webkit-gradient(linear, left top, left bottom, from(#2b6bbe), to(#457ec6));
 	background: -moz-linear-gradient(top, #2b6bbe, #457ec6);
@@ -804,6 +804,7 @@ border: 2px solid #fff;
 	color:#b3c4df;
 	text-align:center;
 	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
+	padding-top:10px
 }
 .nav_foot a{color:#929292}
 .nav_foot a:hover, .nav_foot a.active{color:#d16665;}
