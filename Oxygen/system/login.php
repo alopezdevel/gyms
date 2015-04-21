@@ -84,9 +84,9 @@ function inicio(){
  function actualizarMensajeAlerta( t ) {
       mensaje
         .text( t )
-        .addClass( "success" );
+        .addClass( "alertmessage" );
       setTimeout(function() {
-        mensaje.removeClass( "success", 1500 );
+        mensaje.removeClass( "alertmessage", 1500 );
       }, 500 );
     }  
  
