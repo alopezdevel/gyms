@@ -36,7 +36,7 @@ function inicio(){
      //Validaciones de expresion regular
      valid = valid && checkRegexp( $('#loginUser'), /^[a-z]([0-9a-z_\s])+$/i, "user consiste en datos  de a-z, 0-9, sin espacios." );
      valid = valid && checkRegexp( $('#loginPassword'), /^[a-z]([0-9a-z_\s])+$/i, "password consiste en datos  de a-z, 0-9, sin espacios." );
-     alert(valid);
+     //alert(valid);
      if ( valid ) {
         conexion($("#loginUser").val(), $("#loginPassword").val());
      }
