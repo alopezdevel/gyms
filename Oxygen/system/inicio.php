@@ -209,7 +209,7 @@ function Validar_Verificacion() {
                     <div>
                     <div class="txt-left"><label> Favor de Capturar el ID del Socio: </label></div><br>
                         <div class="frm-buscar">
-                        <input class="left" style="height: 32px!important" placeholder="ID:" name="txtBusquedaSocio" type="text" maxlength="4"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo "";}?>"
+                        <input class="left" placeholder="ID:" name="txtBusquedaSocio" type="text" maxlength="4"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo "";}?>"
 
                         <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
 
