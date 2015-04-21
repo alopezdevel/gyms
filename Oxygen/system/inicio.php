@@ -193,27 +193,20 @@ function Validar_Verificacion() {
 <?php include("header.php"); ?> 
 
 <div id="layer_content" class="main-section">
-	<div class="container">
+	<div id="verificacion_socio" class="container">
 		<h2>Registro de Entrada</h2>
 		<form action="
-
-        <?php 
-
+       	<?php 
             if ( $_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
-
-                echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Permitir")).md5(sha1("Socio"));
-
+				echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Permitir")).md5(sha1("Socio"));
             } else {
-
                 echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));
-
             }
-
         ?>"
 
              action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));?>" method="POST" name="frmBuscarSocio" onSubmit="return Validar_Verificacion()">
              <div>
-                    <div id="caja-roja" style="width: 450px;min-height:100px!important;">
+                    <div>
                     <div class="txt-left"><label> Favor de Capturar el ID del Socio: </label></div><br>
                         <div class="frm-buscar">
                         <input class="left" style="height: 32px!important" placeholder="ID:" name="txtBusquedaSocio" type="text" maxlength="4"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo "";}?>"
@@ -230,22 +223,14 @@ function Validar_Verificacion() {
 
                         />   
 
-                        <button class="btn-aceptar left" type="submit"  <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
-
-                            echo 'disabled';
-
-                        }else{
-
-                            echo 'enabled';
-
-                        }?>>Buscar</button>                                 
+                        <button class="btn-aceptar left" type="submit"  <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){echo 'disabled';}else{echo 'enabled';}?>>Buscar</button>                                 
                         </div>
                     </div>  
                     <br><br>
                 <?php if(count($arr_socio_pago)>0){ ?> 
                 </div>
                 <div>
-                <div id="caja-roja">
+                <div class="box-white">
 
                     <div>
                     <?php if($arr_socio_pago[0]['dias_restantes'] <= 0){
