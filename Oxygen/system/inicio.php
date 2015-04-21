@@ -1,5 +1,5 @@
 ﻿<?php
-$_SESSION['acceso'] = "U";
+$_SESSION['acceso'] = "A";
 
 session_start();       
 
