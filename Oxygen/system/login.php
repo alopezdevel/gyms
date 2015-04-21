@@ -14,7 +14,11 @@ var expr = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 var expr1 = /^[a-zA-Z]*$/;
 $(document).ready(inicio);
 function inicio(){  
+    //variables
      mensaje = $( ".mensaje_valido" );
+     usuario = $( "#loginUser" ),
+     password = $( "#loginPassword" ),
+     todosloscampos = $( [] ).add( usuario ).add( password );
      $("#loginUser").focus().css("background-color","#FFFFC0");     
      $("#button_aceptar").click(onValidarAcceso);
      $("#loginUser").focus(onFocus); 
@@ -24,6 +28,7 @@ function inicio(){
 }
  function onValidarAcceso(){ 
      //validaciones tamano
+     todosloscampos.removeClass( "error" );
      var valid = true; 
      valid = valid && checkLength( $('#loginUser'), "Usuario", 5, 25 );
      valid = valid && checkLength( $('#loginPassword'), "Password", 6, 25 );
@@ -68,7 +73,7 @@ function inicio(){
  function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
         actualizarMensajeAlerta( "El campo " + n + " debe contener entre " + min + " y " + max + " digitos." );
-        o.addClass( "ui-state-error" );
+        o.addClass( "error" );
         o.focus();
         return false;    
     } else {             
