@@ -1,7 +1,8 @@
 ﻿<?php
-$_SESSION['acceso'] = "A";
 
-session_start();       
+session_start(); 
+      
+$_SESSION['acceso'] = "A";
 
 include("funciones_consulta.php");
 
