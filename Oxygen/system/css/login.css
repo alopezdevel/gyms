@@ -1,4 +1,4 @@
-﻿@import 'style_system.css';/*-------- IMPORT AL CSS GENERAL ---*/
+﻿@import 'styles.css';/*-------- IMPORT AL CSS GENERAL ---*/
 
 body{
 	margin:0;
@@ -70,7 +70,7 @@ body{
 
 	display:block;
 	border:0;
-	background:url('../images/home/img_btn_blue.png') center top no-repeat;
+	background:url('../../images/home/img_btn_blue.png') center top no-repeat;
 	width:209px;
 	height:71px;
 	margin:20px auto 10px;
