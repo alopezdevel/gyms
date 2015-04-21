@@ -117,3 +117,19 @@ input:hover, .frm-login  input:focus{opacity:1;}
 .m_inf{color:#bcbcbc;text-align:center;}
 .m_inf a{color:#a6c1dc;text-decoration:none;}
 .m_inf a:hover{color:#4192e2;}
+.msg-success{display:none;}
+form .error{
+	border:1px solid #b64141;
+	-webkit-box-shadow:inset 0px 0px 3px #decfcf;
+    -moz-box-shadow:inset 0px 0px 3px #decfcf;
+    box-shadow:inset 0px 0px 3px #decfcf;
+
+}
+form .success{
+	border:1px solid #8ac975;
+	-webkit-box-shadow:inset 0px 0px 3px #dee8da;
+    -moz-box-shadow:inset 0px 0px 3px #dee8da;
+    box-shadow:inset 0px 0px 3px #dee8da;
+
+}
+
