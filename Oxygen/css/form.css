@@ -90,7 +90,8 @@ form .success{
 /*------ Para formas de busqueda----*/
 .frm-buscar{width: auto;margin:10px 0px 0px;height: 30px;}
 .frm-buscar input{width:350px!important;height:35px!important;padding-left:10px;margin:0!important;border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
-.frm-buscar button{border-radius:0px 4px 4px 0px;-moz-border-radius:0px 4px 4px 0px;-webkit-border-radius:0px 4px 4px 0px;padding: 0px 9px!important;height: 35px!important;}
+.frm-buscar button{background:#2d2d2d;border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;padding: 0px 9px!important;height: 35px!important;}
+.frm-buscar button:hover{background:#5087ce;}
 
 /*---- botones para las formas ----*/
 .btn-aceptar{
