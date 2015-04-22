@@ -267,10 +267,6 @@ button.send:hover{
     background: linear-gradient(to bottom, #8ece03, #82b515);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8ece03), to(#82b515));
 }
-/*--- form buscar ---*/
-.frm-buscar{width: auto;margin: 43px 0px 0px;height: 30px;}
-.frm-buscar input{width:300px!important;height:30px!important;padding-left:30px;margin:0!important;border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
-.frm-buscar button{border-radius:0px 4px 4px 0px;-moz-border-radius:0px 4px 4px 0px;-webkit-border-radius:0px 4px 4px 0px;}
 /*-- buscar 2 con mas campos ---*/
 .frm-buscar2{width: 1050px;;}
 .frm-buscar2 input, .frm-buscar2 select {width:300px!important;margin: 5px!important;}
