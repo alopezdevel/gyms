@@ -296,10 +296,7 @@ button.send:hover{
 	vertical-align:middle;
 	margin:5px 0px;
 	border: 1px solid #a9a9a9;
-	
-	/*width:90%;
-	height:33px;  */
-	
+		
 	/* Rounded Corners */
      -moz-border-radius:  3px;
    	 -webkit-border-radius: 3px;
