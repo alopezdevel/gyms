@@ -7,7 +7,7 @@
 ---------------------------------*/
 .left {float:left;}
 .right {float:right;}
-
+.center {margin:0 auto;}
 /* Clear Floated Elements
 ---------------------------------*/
 .clear {
@@ -93,9 +93,9 @@ p{line-height:24px;margin:0;}
 .col_3{width:33%;}
 .col_4{width:25%;}
 /*---- elementos flotantes ----*/
-.left{float:left;}
-.right{float:right;}
-.center{margin:5px auto;}
+.txt-center{text-align:center!important;}
+.txt-left{text-align:left!important;}
+.txt-right{text-align:right!important;}
 /*----- BOTONES --------------*/
 .btn_1{
 	

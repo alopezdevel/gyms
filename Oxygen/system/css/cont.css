@@ -14,7 +14,7 @@ label{
 
 }
 div{margin:0px auto 5px auto;}
-form{clear:both;margin: 5px auto 20px auto;}
+/*form{clear:both;margin: 5px auto 20px auto;}
 select{padding-left:0;height: 33px;}
 input[type="text"],input[type="email"], select, textarea{
 
@@ -49,13 +49,7 @@ input[type="text"],input[type="email"], select, textarea{
 
 }
 input[type="checkbox"], input[type="radio"]{vertical-align: middle;}
-textarea{height:80px!important;padding-top:10px!important;}
-.txt-center{text-align:center!important;}
-.txt-left{text-align:left!important;}
-.txt-right{text-align:right!important;}
-.left{float: left;}
-.right{float: right;}
-.clear{clear: both;}
+textarea{height:80px!important;padding-top:10px!important;}*/
 .rborders-right{border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
 .rborders-left{border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;}
 /*--- clases para botones ---*/
