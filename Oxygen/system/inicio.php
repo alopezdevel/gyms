@@ -207,7 +207,7 @@ function Validar_Verificacion() {
              action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));?>" method="POST" name="frmBuscarSocio" onSubmit="return Validar_Verificacion()">
              <div>
                     <div>
-                    <div class="txt-left"><label> Favor de Capturar el ID del Socio: </label></div><br>
+                    <div class="txt-left">Favor de Capturar el ID del Socio:</div>
                         <div class="frm-buscar">
                         <input class="left" placeholder="ID:" name="txtBusquedaSocio" type="text" maxlength="4"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo "";}?>"
 
