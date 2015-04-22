@@ -266,7 +266,6 @@ color: #fff;
 	height:90px;
 	z-index:6000!important;
 	border-bottom:4px solid #5087ce;
-
 }
 .main-nav{
 	text-align:center;
@@ -285,9 +284,7 @@ color: #fff;
 	-webkit-transition:all 0.3s ease-in-out;
 	position:relative;
 	background:transparent  center bottom no-repeat;
-
 }
-.main-nav li:hover{background:transparent url('../images/nav/hover_menu.png') center bottom no-repeat;}
 .main-nav li a{
 	display:inline-block;
 	color:#8c8c8c;
@@ -301,8 +298,8 @@ color: #fff;
 	-moz-transition:all 0.3s ease-in-out;
 	-webkit-transition:all 0.3s ease-in-out;
 }
-.main-nav li a:hover, .main-nav li.active a{color:#aa1525;}
-.main-nav li:hover{background:transparent url('../images/nav/hover_menu.png') center top no-repeat;}
+.main-nav li:hover a, .main-nav li.active a{color:#262626;}
+.main-nav li:hover{background:transparent url('../images/nav/hover_menu.png') center bottom no-repeat;}
 .img-logo{float: left;position: absolute;}
 .img-logo img{ padding:12px 32px 0px;}
 .res-nav_click {
