@@ -123,8 +123,8 @@ function inicio(){
 <?php if ($conexion) {    ?>
 <body>
 <div id="layer_login">
-    <img alt="" src="images/login/img-logo-login.png" alt="logo">
     <form method="post" action="" onSubmit="return Validar_Login()">
+     	<img alt="" src="images/login/img-logo-login.png" alt="logo">
         <p class="mensaje_valido">&nbsp;Favor de llenar todos los campos.</p>
         <input id="loginUser" class="user" name="user" type="text" placeholder="User">
         <input id="loginPassword" class="pass" name="password" type="password" placeholder="Password">
