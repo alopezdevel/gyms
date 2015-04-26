@@ -1,4 +1,13 @@
-﻿.home-section-a{
+#slider-container .slider-logo{
+  width: 1280px;
+  height: 325px;
+  background: url('../images/home/img_logo_slider.png') center top no-repeat;
+  margin: 120px auto 0px -630px;
+  left: 50%;
+  position: absolute;
+  z-index: 3000;
+}
+.home-section-a{
 	
 	background: rgba(245,245,245,1);
 	background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 38%, rgba(255,255,255,1) 100%);
@@ -89,8 +98,12 @@
 
 /* Contact
 ---------------------------------*/
-.main-section.contact{padding:100px 0 100px;}
-.contact h6{color:#43aae0;}
+.main-section.contact{
+    padding:100px 0 100px;
+    background:#efefef url('../images/cont/bg-contacto.jpg') center top repeat-x;    
+}
+.contact h6{color:#2e5485;text-shadow:1px 1px 1px #ffffff;}
+.contact h2{color:#ffffff;text-shadow: 1px 1px 1px #000000;letter-spacing: 1px;}
 .contact-info-box{
 	font-size:15px;
 	margin:0 0 14px 68px;
@@ -159,7 +172,6 @@
 .dribbble a:hover {
 	background: #ea4c89;
 }
-
 .form{
 	margin:0 66px 0 30px;
 }
@@ -185,7 +197,6 @@
 	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(124, 197, 118, 0.3);	
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(124, 197, 118, 0.3);
 }
-
 .input-text.text-area{
 	height:165px;
 	resize:none;
@@ -206,52 +217,17 @@
 	-moz-transition:all 0.3s ease-in-out;
 	-webkit-transition:all 0.3s ease-in-out;
 }
-
 .input-btn:hover{
 	background: #111;
 	color: #fff;
 }
-/*---form quote---*/
-#slider-container .cont{
-	width:1280px;
-	height:auto;
-	margin:0px auto;
-	position:relative;
-}
-
-.frm_quote{
-	background:#efefef;
-	width:300px;
-	height:200px;
-	float:left;
-	position:absolute;
-	z-index:3000;
-	left:8%;
-	padding:10px;
-	
-	border-radius:0px 0px 10px 10px;
-    -moz-border-radius:0px 0px 10px 10px;
-    -webkit-border-radius:0px 0px 10px 10px;
-    
-    -webkit-box-shadow: 0px 11px 26px -12px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 11px 26px -12px rgba(0,0,0,0.75);
-	box-shadow: 0px 11px 26px -12px rgba(0,0,0,0.75);
-
-}
-.frm_quote h1{
-	color:#16448f;
-	letter-spacing:1px;
-	font-family:Calibri,Arial, Helvetica, sans-serif;
-	font-size:40px;
-}
-.frm_quote p{
-	
-	margin:0px auto;
-	color:#1d88c5;
-	font-size:1.2em;
-}
-.frm_quote .btn_4{
-	display:block;
-	margin:0px auto;
-	width:100%;
+.ubicacion{background: #eef4fb;text-align: center;}
+.ubicacion h2{color:#19467f;}
+.ubicacion iframe{margin: 0 auto;}
+.galeria-enlace{
+    background:#10a2c7;
+    color: #ffffff;
+    width: 300px;
+    height: 400px;
+    padding: 10px;
 }
