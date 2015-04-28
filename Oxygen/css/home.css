@@ -1,4 +1,4 @@
-#slider-container .slider-logo{
+﻿#slider-container .slider-logo{
   width: 1280px;
   height: 325px;
   background: url('../images/home/img_logo_slider.png') center top no-repeat;
@@ -6,6 +6,29 @@
   left: 50%;
   position: absolute;
   z-index: 3000;
+}
+.home-section{position:relative;top:-50px;}
+.home-section .main-section{background:#233f65;height:auto;}
+.home-section .line{
+	width:100%;
+	height:138px;
+	background:url('../images/home/bg_homesection.png')center no-repeat;
+	/*background-color:#233f65;*/
+
+	-moz-background-size:100% 100%;
+	-o-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	position:relative;	
+	
+}
+.home-section h1{
+	
+	color:#ffffff;
+	text-shadow:1px 1px 1px rgba(0,0,0,0.8);
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
 }
 .home-section-a{
 	
