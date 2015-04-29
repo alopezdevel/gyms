@@ -8,7 +8,7 @@ include("cn_usuarios.php");
 <script src="/../../../../code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <style>
     .mensaje_valido { border: .5px solid transparent; padding: 0.1em; }
-  </style>
+</style>
 <script>
 var expr = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 var expr1 = /^[a-zA-Z]*$/;
@@ -34,11 +34,12 @@ function inicio(){
      $("#loginUser").removeClass( "error" );
      $("#loginPassword").removeClass( "error" );
      var valid = true; 
-     valid = valid && checkLength( $('#loginUser'), "Usuario", 5, 25 );
-     valid = valid && checkLength( $('#loginPassword'), "Password", 6, 25 );
+     valid = valid && checkLength( $('#loginUser'), "user", 5, 25 );
+     valid = valid && checkLength( $('#loginPassword'), "password", 6, 25 );
      
      //Validaciones de expresion regular
-     valid = valid && checkRegexp( $('#loginUser'), /^[a-z]([0-9a-z_\s])+$/i, "usuario consiste en datos  de a-z, 0-9, sin espacios." );     
+     valid = valid && checkRegexp( $('#loginUser'), /^[a-z]([0-9a-z_\s])+$/i, "user consiste en datos  de a-z, 0-9, sin espacios." );
+     valid = valid && checkRegexp( $('#loginPassword'), /^[a-z]([0-9a-z_\s])+$/i, "password consiste en datos  de a-z, 0-9, sin espacios." );     
      if ( valid ) {
         conexion($("#loginUser").val(), $("#loginPassword").val());
      }
