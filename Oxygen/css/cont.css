@@ -238,12 +238,27 @@
 	overflow:hidden;
 	/*display:inline-flex;*/
 }
-.galeria-imagenes  div{position:relative;float:left;width:50%;height:190px;}
-.galeria-imagenes img{width:100%;height:auto;padding:5px;}
+.galeria-imagenes  div{position:relative;float:left;width:50%;height:204px;}
+.galeria-imagenes img{width:100%;height:100%;padding:0px 5px 5px 0px;}
 .galeria-enlace{
     background:#10a2c7;
     color: #ffffff;
     width: 300px;
     height: 400px;
     padding: 10px;
+}
+
+/*----- Como Empezar? ------*/
+.section-comenzar{position:relative;margin-top:-60px;}
+.section-comenzar .main-section{background:#ffffff;height:auto;clear:none;}
+.section-comenzar .line{
+    width:100%;
+    height:138px;
+    background:url('../images/home/bg_homesection.png')center no-repeat;
+    -moz-background-size:100% 100%;
+    -o-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position:relative;    
+    
 }
