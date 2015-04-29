@@ -236,10 +236,10 @@
 	width:840px;
 	height:400px;
 	overflow:hidden;
-	display:inline-flex;
+	/*display:inline-flex;*/
 }
-.galeria-imagenes  div{position:relative;float:left;padding:5px;}
-.galeria-imagenes img{width:100%;height:auto;	}
+.galeria-imagenes  div{position:relative;float:left;width:50%;height:190px;}
+.galeria-imagenes img{width:100%;height:auto;padding:5px;}
 .galeria-enlace{
     background:#10a2c7;
     color: #ffffff;
