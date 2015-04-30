@@ -374,27 +374,40 @@ p{line-height:24px;margin:0;padding:15px 0px; font-size: 1.2em;}
 	padding:40px 0 110px;
 	clear:both;
 }
+/*HEADERS---*/
 /*----------------- HEADER DE SECCIONES --------*/
-.header{width:100%;height:247px;margin:0;padding:0;}
+.header{width:100%;height:250px;margin:0;padding:0;}
+.header h1, .header h3{
+    background: rgba(76,76,76,0);
+    background: -moz-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(0,0,0,1) 51%, rgba(19,19,19,0) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(76,76,76,0)), color-stop(51%, rgba(0,0,0,1)), color-stop(100%, rgba(19,19,19,0)));
+    background: -webkit-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(0,0,0,1) 51%, rgba(19,19,19,0) 100%);
+    background: -o-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(0,0,0,1) 51%, rgba(19,19,19,0) 100%);
+    background: -ms-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(0,0,0,1) 51%, rgba(19,19,19,0) 100%);
+    background: linear-gradient(to right, rgba(76,76,76,0) 0%, rgba(0,0,0,1) 51%, rgba(19,19,19,0) 100%);
+    position: relative;
+    top: 90px;
+}
 .header h1{
-	color:#ffffff;
-	text-shadow:1px 1px 1px #000000;
-	font-size:33px;
-	font-weight:bold;
-	text-align:left;
-	padding:70px 0px 0px 70px;
-	margin:0;
+    color:#ffffff;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.9);
+    font-size:38px;
+    font-weight:bold;
+    text-align:center;
+    text-transform: uppercase;
+    padding:0px 0px 0px 0px;
+    margin:0;
 }
 .header h3{
-	color:#e4f3f9;
-	font-size:18px;
-	font-weight:normal;
-	text-align:left;
-	text-shadow:1px 1px 1px #000000;
-	text-transform:none;
-	padding:5px 0px 0px 70px;
+    color:#80daea;
+    font-size:20px;
+    font-weight:normal;
+    text-align:center;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.9);
+    text-transform:none;
+    padding:5px 0px;
 }
-.header h3 span{color:#aa1525;}
+.header h3 span{color:#63be3c;}
 .header{
 	background:url('../images/headers/header-quotes.jpg') center top;
 	-moz-background-size:100% 100%!important;
@@ -402,7 +415,7 @@ p{line-height:24px;margin:0;padding:15px 0px; font-size: 1.2em;}
 	-webkit-background-size: 100% 100%!important;
 	background-size:100% 100%!important;	
 }
-.header.section-quotes{background:url('../images/headers/header-quotes.jpg') center top;}
+.header.section-comenzar{background:url('../images/headers/header-comenzar.jpg') center top;}
 .header.section-aboutus{background:url('../images/headers/header-aboutus.jpg') center top;}
 .header.section-services{background:url('../images/headers/header-services.jpg') center top;}
 .header.section-faq{background:url('../images/headers/header-faq.jpg') center top;}
