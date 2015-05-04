@@ -96,29 +96,57 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 
          session_destroy();
 
-         include('header.php');
+         //include('header.php');
 
 ?>
+<!DOCTYPE html>
+<html>
+   
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Oxygen-FX Crossfit - Acceso a Usuarios</title>
+<link rel="icon" href="../images/favicon.png" type="image/png">
+<link rel="stylesheet" href="css/login.css" type="text/css">
+    <!-----SLIDER HOMEPAGE----->
+    <link rel='stylesheet' id='camera-css'  href='../slide/css/camera.css' type='text/css' media='all'>     
+    <script type='text/javascript' src='../slide/scripts/jquery.min.js'></script>
+    <script type='text/javascript' src='../slide/scripts/jquery.mobile.customized.min.js'></script>
+    <script type='text/javascript' src='../slide/scripts/jquery.easing.1.3.js'></script> 
+    <script type='text/javascript' src='../slide/scripts/camera.js'></script> 
+    <script type='text/javascript' src='../slide/scripts/script.js'></script>
 
-<div id="content"> 
-
-	<h1><img src="images/content/tit_icons/img_tit_sistem.png">Error de acceso</h1>
-		
-		<div id="form-login" style="width:500px;margin:0px auto;text-align:center;">
-       		 <div id="caja-gris">     
-				<br><label>El usuario <?php print "<b>$usuario</b>" ?> no está registrado como un usuario <br>&nbsp;válido o la clave secreta es incorrecta.</label>
-				<br><a href="login.php">Regresar</a>
- 			 </div>
-		</div>
-  </div>
-
+</head>
+<div id="layer_login">
+    <form id="form-login" name="form-login" method="POST">
+     	<img alt="" src="images/login/img-logo-login.png" alt="logo">
+     	<h1 class="txt-center">Error de acceso</h1>
+     	<br><label>El usuario <?php print "<b>$usuario</b>" ?> no está registrado como un usuario <br>&nbsp;válido o la clave secreta es incorrecta.</label>
+		<br><br><br><a href="login.php" class="btn_1">Regresar</a>
+    </form>
+</div>
+<!--- SLIDER ----->
+<div id="slider-container" class="clear">
+    <div class="fluid_container">
+        <div class="camera_wrap camera_emboss" id="camera_wrap_3">
+            <div data-src="../slide/images/slides/1.jpg"></div>
+            <div data-src="../slide/images/slides/2.jpg"></div>
+            <div data-src="../slide/images/slides/3.jpg"></div>
+            <div data-src="../slide/images/slides/4.jpg"></div>
+        </div><!-- #camera_wrap_3 -->
+    </div><!-- .fluid_container -->
+</div>
+<!--- TERMINA SLIDER ----->
 <?php 
 
      }
 
 ?>
+<footer class="footer">
+    <div class="container"> 
+    	Oxygen-FX Crossfit.  © Copyright 2015.	    
+   	</div>
+</footer>
 
-<?php include("footer.php"); ?>
 
 
 
