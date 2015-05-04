@@ -42,6 +42,7 @@
 
 }
 .bann{text-align:center;width:95%;height:350px;margin:0 auto;padding:10px;}
+.bann.blue{background: #233f65;margin:10px auto;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 .bann p, .bann ul{text-align:justify;width:95%;margin:3px auto;clear:both;min-height:90px;color:#ffffff;}
 .bann h3{
 	
