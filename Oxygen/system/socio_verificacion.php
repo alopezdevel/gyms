@@ -186,13 +186,12 @@ function Validar_Verificacion() {
 <?php 
     include("header.php");
 ?>
-<!--- HEADER----->
-<div class="header section-oxygenfx">
-    <h1 class="wow animated fadeInLeft delay-02s">Socios</h1>
-    <h3 class="wow animated fadeInRight delay-03s">Verificacion de Socio</h3>
-</div>
 <div id="layer_content" class="main-section">
     <div class="container"> 
+    <div class="page-title">
+            <h1>Socios</h1>
+            <h2>Verificacion de socio</h2>
+    </div>
         <form action="
         <?php 
             if ( $_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
