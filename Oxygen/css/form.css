@@ -28,12 +28,12 @@ form input, form select, form textarea{
     -moz-box-shadow:inset 0px 0px 3px #cbcbcb;
     box-shadow:inset 0px 0px 3px #cbcbcb;
     
-    font-family:Arial, Helvetica, sans-serif!important;
+    font-family:Calibri, Arial, Helvetica, sans-serif!important;
     font-size:14px;
 }  
 select{height:40px!important;width: 100%!important;}
 textarea{height:120px!important;padding-top:10px!important;}
-button{cursor: pointer;}
+button{cursor: pointer;padding:10px 25px;}
 .frm-btns{
     width:99%;
     text-align:center;
@@ -54,7 +54,7 @@ button{cursor: pointer;}
 button, .btn-1{
     
     background-color:#4cafd2;
-    text-shadow:1px 1px 1px #7ecbee;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.6);
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
@@ -71,6 +71,7 @@ button, .btn-1{
     transition-property:background-color;
     
     border:1px solid #d7d7d7;
+    color: #fffff;
 }
 button:hover, .btn-1:hover{background-color:#7ecbee;}
 .msg-success{display:none;}
@@ -91,17 +92,22 @@ form .success{
 /*------ Para formas de busqueda----*/
 .frm-buscar{width: auto;margin:10px 0px 10px;height: 30px;}
 .frm-buscar input{width:350px!important;height:35px!important;padding-left:10px;margin:0!important;border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
-.frm-buscar button{background:#2d2d2d;cursor:pointer;border:1px solid #2d2d2d;border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;padding: 0px 9px!important;height: 32px!important;}
+.frm-buscar button{background:#2d2d2d;cursor:pointer;border:1px solid #2d2d2d;border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;padding: 0px 9px!important;height: 32px!important;text-transform:none;}
 .frm-buscar button:hover{background:#5087ce;border:1px solid #5087ce;}
 
 /*---- botones para las formas ----*/
+.btn-aceptar , .btn-cancelar{
+    
+    color:#ffffff;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.6);
+    font-size:1.1em;
+    text-decoration:none;
+    padding:10px 25px;
+    text-transform: uppercase;
+    
+}
 .btn-aceptar{
 	
-	color:#ffffff;
-	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
-	font-size:1.1em;
-	text-decoration:none;
-	padding:10px 25px;
 	border:1px solid #7dc217;
 	background: #7DCF3D;
 	border-radius:5px;
@@ -131,15 +137,9 @@ form .success{
 .btn-aceptar:hover{
 	text-decoration:none!important;
 	color:#ffffff;
-	background: #6bab0c;
+	background: #90de1d;
 }
 .btn-cancelar{
-	
-	color:#ffffff;
-	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
-	font-size:1.1em;
-	text-decoration:none;
-	padding:10px 25px;
 	border:1px solid #bd2122;
 	background: #bd2122;
 	border-radius:5px;
@@ -169,7 +169,7 @@ form .success{
 .btn-cancelar:hover{
 	text-decoration:none!important;
 	color:#ffffff;
-	background: #cd1f20;
+	background: #f12e2f;
 }
 
 
