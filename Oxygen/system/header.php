@@ -68,7 +68,6 @@ if(1){
     </iframe>
 </div>
 <?php }?>
-<div id="page">
 <nav class="main-nav-outer" id="layer_menu"><!--main-nav-start-->
 	<div class="container">
 		<a href="#home" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
@@ -83,36 +82,35 @@ if(1){
 			<li><a href="login.php" class="icon logout"title="Log Out"><span>Salir</span></a></li>
 		</ul>
         <ul class="main-nav">
-        	<li><a href="#">Registro de Entrada</a></li>
-            <li class="submenu"><a href="#">Socios</a></li>
-            <li><a href="#">Mensaje del Día</a></li>
-            <?php if($_SESSION["acceso"] == "U"){?>
-            <li class="submenu"><a href="#">RECEPCION</a>
-            	<ul  class="admin">
-               		<li><a href="socio_verificacion.php">Verificacion del Socio</a></li>
-                    <li><a href="monitor.php">Log del dia</a></li>
-                    <li><a href="postdeldia.php">Mensaje del Dia</a></li>
-                    <li><a href="comentarios.php">Comentarios</a></li>
-                    <li><a href="monitor_de_pago_por_usuario.php">Log de pagos por Socio</a></li>
+        	<li><a href="index.php">Inicio</a></li>
+            <?php if($_SESSION["acceso"] == "U" || $_SESSION["acceso"] == "A"){?> 
+            <!--- Menu Socios Administracion --->
+            <li class="submenu"><a href="#">Socios</a>
+                <ul>
+                    <li><a href="socio_verificacion.php">Verificacion de Socio</a></li> 
                     <li><a href="alta_socio.php">Catalogo de socios</a></li>
+                    <li><a href="monitor_usuario.php">Reporte por Socio</a></li>
+                    <li><a href="monitor_de_pago_por_usuario.php">Reporte de pagos por Socio</a></li>
+                    <li><a href="monitor.php">Asistencias del Dia</a></li>    
+                </ul>
+            </li>
+            <li><a href="postdeldia.php">Mensaje del Día</a></li>
+            <?php } if($_SESSION["acceso"] == "U"){?>
+            <li class="submenu"><a href="#">RECEPCION</a>
+            	<ul>
+                    <li><a href="comentarios.php">Comentarios</a></li>
                     <?php if(1){?><li><a href="chat-copia.php">Chat</a></li><?php } ?>
 				</ul>
             </li>
             <?php }elseif($_SESSION["acceso"] == "A"){?>
             <li class="submenu"><a href="#">ADMINISTRADOR</a>
-            	<ul class="admin">
-                	<li><a href="socio_verificacion.php">Verificacion del Socio</a></li>
-                    <li><a href="monitor.php">Log del dia</a></li>
-                    <li><a href="monitor_usuario.php">Log por Socio</a></li>
-                    <li><a href="monitor_de_pago_por_usuario.php">Log de pagos por Socio</a></li>
+            	<ul>
                     <li><a href="chat-copia.php">Chat</a></li>
-                    <li><a href="pagar_mensualidad.php">Pago de Mensualidad</a></li>
-                    <li><a href="postdeldia.php">Mensaje del Dia</a></li>
-                    <li><a href="alta_socio.php">Catalogo de socios</a></li>
+                    <li><a href="pagar_mensualidad.php">Registrar Mensualidad</a></li>   
                 </ul>
             </li>
            	<?php }else{?>
-				<li><a href="#">Socios</a></li>
+				<li><a href="membresia_doit.php">Socios</a></li>
 			<?php }?>
             <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
         </ul>

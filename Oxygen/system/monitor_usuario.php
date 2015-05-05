@@ -63,9 +63,13 @@ if($_POST['txtBusquedaSocio'] != ""){
 }
 
 ?>
-    <div id="content">
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+        <div class="page-title">
+            <h1>Socios</h1>
+            <h2>Reporte por Socio</h2>
+        </div>
     <form name="frmGenerarMonitor" action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Generar")).md5(sha1("Monitor")); ?>" method="POST" onSubmit="return Validar_Verificacion()"> 
-        <h1>Log por Socio: </h1>
         <div class="txt-content">              
             <div class="frm-buscar2">
                 <input class="left" placeholder="ID:" type="text" name="txtBusquedaSocio" maxlength="4" value="<?php echo $_POST['txtBusquedaSocio'];?>">
@@ -167,12 +171,11 @@ if($_POST['txtBusquedaSocio'] != ""){
                     ?>
                     
                 </table>
-            
-            
             </div>
-        <div class="txt-content"> 
-    </div>
    </form>
 </div>
 <?php include("footer.php"); 
 }?>
+</div> 
+</body>
+</html> 

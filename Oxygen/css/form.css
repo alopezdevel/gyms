@@ -1,4 +1,4 @@
-﻿form{width:98%;margin:0 auto;clear:both;}
+form{width:98%;margin:0 auto;clear:both;}
 form p{width:98%;margin:2px auto;}
 form input, form select, form textarea{
 
@@ -33,6 +33,7 @@ form input, form select, form textarea{
 }  
 select{height:40px!important;width: 100%!important;}
 textarea{height:120px!important;padding-top:10px!important;}
+button{cursor: pointer;}
 .frm-btns{
     width:99%;
     text-align:center;
@@ -88,9 +89,9 @@ form .success{
 
 }
 /*------ Para formas de busqueda----*/
-.frm-buscar{width: auto;margin:10px 0px 0px;height: 30px;}
+.frm-buscar{width: auto;margin:10px 0px 10px;height: 30px;}
 .frm-buscar input{width:350px!important;height:35px!important;padding-left:10px;margin:0!important;border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
-.frm-buscar button{background:#2d2d2d;border:1px solid #2d2d2d;border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;padding: 0px 9px!important;height: 35px!important;}
+.frm-buscar button{background:#2d2d2d;cursor:pointer;border:1px solid #2d2d2d;border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;padding: 0px 9px!important;height: 32px!important;}
 .frm-buscar button:hover{background:#5087ce;border:1px solid #5087ce;}
 
 /*---- botones para las formas ----*/
@@ -98,9 +99,9 @@ form .success{
 	
 	color:#ffffff;
 	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
-	font-size:1.3em;
+	font-size:1.1em;
 	text-decoration:none;
-	padding:10px 15px;
+	padding:10px 25px;
 	border:1px solid #7dc217;
 	background: #7DCF3D;
 	border-radius:5px;
@@ -136,9 +137,9 @@ form .success{
 	
 	color:#ffffff;
 	text-shadow:1px 1px 1px rgba(0,0,0,0.6);
-	font-size:1.3em;
+	font-size:1.1em;
 	text-decoration:none;
-	padding:10px 15px;
+	padding:10px 25px;
 	border:1px solid #bd2122;
 	background: #bd2122;
 	border-radius:5px;
@@ -168,7 +169,7 @@ form .success{
 .btn-cancelar:hover{
 	text-decoration:none!important;
 	color:#ffffff;
-	background: #af0a0b;
+	background: #cd1f20;
 }
 
 

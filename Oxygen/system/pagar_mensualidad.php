@@ -87,7 +87,7 @@ function SubmitFormaPaginacion(forma,accion) {
     forma.submit();
 }
 function confirmarBorrar(registro) {
-    confirmacion = confirm ("¿Está seguro que desea borrar " + registro + "?");
+    confirmacion = confirm ("ï¿½Estï¿½ seguro que desea borrar " + registro + "?");
     return confirmacion;
 }
 </script>

@@ -1,15 +1,11 @@
 <?php
-
-session_start();       
-
-include("funciones_consulta.php");
-
-include("altas_1.php");
+    session_start();       
+    include("funciones_consulta.php");
+    include("altas_1.php");
 
 if ( 0 ){ //No ha iniciado session
 
     header("Location: index.php");
-
     exit;
 
 }else {
@@ -196,9 +192,12 @@ if ( 0 ){ //No ha iniciado session
 
 </script>
 
-    <div id="content">
-
-        <h1>Catalogo de Socios</h1>
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+        <div class="page-title">
+            <h1>Socios</h1>
+            <h2>Catalogo de Socios</h2>
+        </div>
 
         <div class="txt-content">
 
@@ -385,7 +384,7 @@ if ( 0 ){ //No ha iniciado session
           <?php } ?>
         
         </div>     
-
+        <?php include("footer.php"); ?>
     </div> 
-
-<?php include("footer.php"); ?>
+</body>
+</html>

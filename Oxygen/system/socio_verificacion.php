@@ -1,18 +1,13 @@
 <?php
-
-session_start();       
-
-include("funciones_consulta.php");
+    session_start();       
+    include("funciones_consulta.php");
 
 if ( $_SESSION['acceso'] != "U" && $_SESSION['acceso'] != "A" ){ //No ha iniciado session
 
     header("Location: index.php");
-
     exit;
 
 }else {
-
-    
 
     if( $_GET['type'] == sha1(md5("Permitir")).md5(sha1("Socio"))  ){
 
@@ -189,20 +184,16 @@ function Validar_Verificacion() {
 </script>
 
 <?php 
-
-include("header.php");
-
+    include("header.php");
 ?>
-
-    <div id="content">
-
-        <h1 class="clear">Consulta de Usuarios</h1>
-        <br><br>
-        <div class="txt-content">
-            <form action="
-
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+        <div class="page-title">
+            <h1>Socios</h1>
+            <h2>Verificacion de Socio</h2>
+        </div>
+        <form action="
         <?php 
-
             if ( $_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
 
                 echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Permitir")).md5(sha1("Socio"));
@@ -212,46 +203,26 @@ include("header.php");
                 echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));
 
             }
-
         ?>"
 
              action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));?>" method="POST" name="frmBuscarSocio" onSubmit="return Validar_Verificacion()">
-             <div class="col1">
-                    <div id="caja-roja" style="width: 450px;min-height:100px!important;">
-                    <div class="txt-left"><label> Favor de Capturar el ID del Socio: </label></div><br>
-                        <div class="frm-buscar">
+             <div>
+                <div class="frm-buscar">
+                    <div class="txt-left" style="margin: 25px 0px 10px;">Favor de Capturar el ID del Socio:</div> 
                         <input class="left" style="height: 32px!important" placeholder="ID:" name="txtBusquedaSocio" type="text" maxlength="4"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo "";}?>"
-
-                        <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
-
-                            echo 'disabled';
-
-                        }else{
-
-                            echo 'enabled';
-
-                        }?>
-
-                        />   
-
-                        <button class="btn-aceptar left" type="submit"  <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
-
-                            echo 'disabled';
-
-                        }else{
-
-                            echo 'enabled';
-
-                        }?>>Buscar</button>                                 
+                            <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
+                                echo 'disabled';
+                            }else{
+                                echo 'enabled';
+                            }?>>   
+                        <button class="btn-aceptar left" type="submit"  <?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){echo 'disabled';}else{echo 'enabled';}?>>Buscar</button>                                 
                         </div>
                     </div>  
                     <br><br>
                 <?php if(count($arr_socio_pago)>0){ ?> 
                 </div>
-                <div class="col1">
-                <div id="caja-roja">
-
-                    <div>
+             <div>
+                <div class="box-white center">
                     <?php if($arr_socio_pago[0]['dias_restantes'] <= 0){
 
                             if($arr_socio_pago[0]['dias_restantes'] == 0){
@@ -284,9 +255,9 @@ include("header.php");
 
                           }?>
 
-                            <label><b>ID:  </b><?php echo $arr_socio_pago[0]['id_socio'];?></label><br>
+                          <label><b>ID:  </b><?php echo $arr_socio_pago[0]['id_socio'];?></label><br>
 
-                            <label><b>Nombre:  </b><?php echo $arr_socio_pago[0]['nombre_socio'].' '.$arr_socio_pago[0]['apellido_paterno_socio'].' '.$arr_socio_pago[0]['apellido_materno_socio'];?></label><br>
+                          <label><b>Nombre:  </b><?php echo $arr_socio_pago[0]['nombre_socio'].' '.$arr_socio_pago[0]['apellido_paterno_socio'].' '.$arr_socio_pago[0]['apellido_materno_socio'];?></label><br>
 
                           <label><b>Fecha de Vencimiento:  </b><?php echo $arr_socio_pago[0]['fecha_vencimiento'];?></label><br>
 
@@ -296,10 +267,7 @@ include("header.php");
 
                           <input type="hidden" name="folio_socio"  value="<?= $arr_socio_pago[0]['id_socio']; ?>">
                           <br>
-                          <label><button class="btn-aceptar" name="btn_permitir_denegar" type="submit" value="1">Permitir</button> &nbsp; <button class="btn-cancelar" name="btn_permitir_denegar"  type="submit" value="0">Cancelar</button></label> 
-
-                     </div>
-
+                          <div class="txt-center"><button class="btn-aceptar" name="btn_permitir_denegar" type="submit" value="1">Permitir</button> &nbsp; <button class="btn-cancelar" name="btn_permitir_denegar"  type="submit" value="0">Cancelar</button></div> 
                 </div>
 
                 <?php }elseif($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio"))){
@@ -310,26 +278,18 @@ include("header.php");
 
                 ?>
                 </div>
-                <div class="col1"> 
-                 <div id="caja-roja">
-                    <div>
+                <div> 
+                 <div class="box-white center">
                     <label><b>ID:  </b><?php echo $_POST['txtBusquedaSocio'];?></label><br> 
-                    <label><b>Estatus:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label><br>
-                    <br>
-                    <label><button name="btn_permitir_denegar" type="submit" value="0">Regresar</button>
-
-                    </div>
-
+                    <label><b>Estatus:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label>
+                    <br><br>
+                    <button name="btn_permitir_denegar" type="submit" value="0">Regresar</button>
                  </div>
-
                 <?php }?>                
              </div>
             </form>  
-
-        </div>     
-
-    </div> 
-
+<?php include("footer.php"); ?>    
 </div>
+</body>
+</html>
 
-<?php include("footer.php"); ?>
