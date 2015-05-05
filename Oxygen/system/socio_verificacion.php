@@ -186,12 +186,13 @@ function Validar_Verificacion() {
 <?php 
     include("header.php");
 ?>
+<!--- HEADER----->
+<div class="header section-oxygenfx">
+    <h1 class="wow animated fadeInLeft delay-02s">Socios</h1>
+    <h3 class="wow animated fadeInRight delay-03s">Verificacion de Socio</h3>
+</div>
 <div id="layer_content" class="main-section">
     <div class="container"> 
-        <div class="page-title">
-            <h1>Socios</h1>
-            <h2>Verificacion de Socio</h2>
-        </div>
         <form action="
         <?php 
             if ( $_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){
@@ -222,14 +223,14 @@ function Validar_Verificacion() {
                 <?php if(count($arr_socio_pago)>0){ ?> 
                 </div>
              <div>
-                <div class="box-white center">
+                <div class="box-blue center">
                     <?php if($arr_socio_pago[0]['dias_restantes'] <= 0){
 
                             if($arr_socio_pago[0]['dias_restantes'] == 0){
 
                                 $estatus ="HOY SE VENCE TU MEMBRESIA";
 
-                                $color_font = "#FF0000";
+                                $color_font = "#ebb718";
 
                                 $dias_palabra = "Restantes"; 
 
@@ -237,7 +238,7 @@ function Validar_Verificacion() {
 
                                 $estatus ="DENEGADO";
 
-                                $color_font = "#fb6f6e";
+                                $color_font = "#bd2122";
 
                                 $dias_palabra = "Vencidos"; 
 
@@ -249,41 +250,38 @@ function Validar_Verificacion() {
 
                             $estatus = "PERMITIDO";
 
-                            $color_font = "#00FF00";
+                            $color_font = "#a0db49";
 
                             $dias_palabra = "Restantes";
 
                           }?>
-
-                          <label><b>ID:  </b><?php echo $arr_socio_pago[0]['id_socio'];?></label><br>
-
-                          <label><b>Nombre:  </b><?php echo $arr_socio_pago[0]['nombre_socio'].' '.$arr_socio_pago[0]['apellido_paterno_socio'].' '.$arr_socio_pago[0]['apellido_materno_socio'];?></label><br>
-
-                          <label><b>Fecha de Vencimiento:  </b><?php echo $arr_socio_pago[0]['fecha_vencimiento'];?></label><br>
-
-                          <label><b>Dias <?php echo $dias_palabra ?> de tu mensualidad:  </b><?php echo $arr_socio_pago[0]['dias_restantes'];?></label><br>
-
-                          <label><b>Estatus:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label><br>
-
-                          <input type="hidden" name="folio_socio"  value="<?= $arr_socio_pago[0]['id_socio']; ?>">
-                          <br>
+                          <p>
+                            <label><b>ID:  </b><?php echo $arr_socio_pago[0]['id_socio'];?></label><br>
+                            <label><b>Nombre:  </b><?php echo $arr_socio_pago[0]['nombre_socio'].' '.$arr_socio_pago[0]['apellido_paterno_socio'].' '.$arr_socio_pago[0]['apellido_materno_socio'];?></label><br>
+                            <label><b>Fecha de Vencimiento:  </b><?php echo $arr_socio_pago[0]['fecha_vencimiento'];?></label><br>
+                            <label><b>Dias <?php echo $dias_palabra ?> de tu mensualidad:  </b><?php echo $arr_socio_pago[0]['dias_restantes'];?></label><br>
+                            <label><b>Estado:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label><br>
+                            <input type="hidden" name="folio_socio"  value="<?= $arr_socio_pago[0]['id_socio']; ?>">
+                          </p>
                           <div class="txt-center"><button class="btn-aceptar" name="btn_permitir_denegar" type="submit" value="1">Permitir</button> &nbsp; <button class="btn-cancelar" name="btn_permitir_denegar"  type="submit" value="0">Cancelar</button></div> 
                 </div>
 
                 <?php }elseif($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio"))){
 
-                $color_font = "#e1e246";
+                $color_font = "#ffcc01";
 
-                $estatus = "El Socio No Existe.";  
+                $estatus = "El socio NO existe";  
 
                 ?>
                 </div>
                 <div> 
-                 <div class="box-white center">
+                 <div class="box-blue center">
                     <label><b>ID:  </b><?php echo $_POST['txtBusquedaSocio'];?></label><br> 
-                    <label><b>Estatus:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label>
+                    <label><b>Estado:  </b><font color="<?php echo $color_font;?> " size="4"><?php echo $estatus;?></font></label>
                     <br><br>
-                    <button name="btn_permitir_denegar" type="submit" value="0">Regresar</button>
+                    <div class="txt-center">
+                        <button class="btn-cancelar" name="btn_permitir_denegar" type="submit" value="0">Regresar</button>
+                    </div>
                  </div>
                 <?php }?>                
              </div>
