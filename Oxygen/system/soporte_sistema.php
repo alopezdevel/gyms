@@ -70,19 +70,27 @@ if( $_GET['type'] == sha1(md5("Enviar")).md5(sha1("Mail"))  ){
         header("Location: index.php");
 } 
 include("header.php");?>
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+        <div class="page-title">
+            <h1>Soporte Tecnico</h1>
+            <h2>Necesitas Ayuda con el Sistema? Env&iacute;anos un mensaje</h2>
+        </div>
     <form action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Enviar")).md5(sha1("Mail")); ?>" method="POST">
-        <div id="content">
-            <h1>Soporte Tecnico del Sistema</h1>
-            <div id="post-dia">
-                <br />                                                                                           
-                <br />
-                <br /> 
-                <font size="6"> <textarea size="12" wrap="soft" rows="10" cols="60" name="txt_duda" style="font-family:buxtonsketch; background: url(index/img_postit.png);border: none;"><?php echo $mensaje_del_dia; ?></textarea></font>
-                <br /><br /><br />
+        <div class="txt-content">
+            <label>En el siguiente formulario puedes enviar cualquier duda, comentario o reportar alguna falla del sistema:</label>
+            <div id="post-dia" class="center">
+                <br>                                                                                           
+                <textarea size="12" wrap="soft" rows="10" cols="60" name="txt_duda"><?php echo $mensaje_del_dia; ?></textarea>
+                <br>
                 <label><button class="btn-aceptar" name="btn_guardar" type="submit" value="1">Enviar Correo</button></label>
             </div>
-            <label><font color="#FF0000" size="5">&nbsp; * Aqui puedes escribir cualquier duda sobre el sistema o reportar alguna falla.</font></label>
         </div>
     </form>
-<?php include("footer.php");
-} ?>
+<?php } ?>
+        
+        </div>     
+        <?php include("footer.php"); ?>
+    </div> 
+</body>
+</html>

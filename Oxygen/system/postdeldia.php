@@ -30,12 +30,12 @@ $mensaje_del_dia = Consulta_Comentario_Dia();?>
         </div>
     <form action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Insertar")).md5(sha1("Comentario")); ?>" method="POST">
         <div class="txt-center">
+            <label class="txt-center">En siguiente formulario puedes escribir un mensaje o anuncio para que aparezca en la p&aacute;gina principal del sistema:</label>
             <div id="post-dia" class="center">
                 <textarea size="12" wrap="soft" rows="10" cols="60" name="txt_mensaje_dia" style="font-family:buxtonsketch; background: url(index/img_postit.png);border: none;"><?php echo $mensaje_del_dia; ?></textarea>
                 <br /><br /><br />
                 <label><button class="btn-aceptar" name="btn_guardar" type="submit" value="1">Guardar</button> &nbsp; <button class="btn-cancelar" name="btn_cancelar"  type="submit" value="0">Cancelar</button></label>
             </div>
-            <label class="txt-center">* Aqui puedes poner un mensaje que se vera reflejado en la pagina principal.</label>
         </div>
     </form>
     </div>

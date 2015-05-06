@@ -49,6 +49,7 @@ if(1){
     <script type="text/javascript" src="js/galeria/funcion.js"></script>    
     <link rel="stylesheet" type="text/css" href="js/galeria/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
     <link rel="stylesheet" href="js/galeria/style.css" />
+    <link rel="stylesheet" href="../../css/form.css" /> 
     <!--- SLIDER - INDEX ---->
     <script src="js/slider-index/slider.js" type="text/javascript"></script>  
     <script src="js/slider-index/billy.carousel.jquery.min.js" type="text/javascript"></script>

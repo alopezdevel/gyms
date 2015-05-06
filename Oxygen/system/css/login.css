@@ -1,5 +1,4 @@
-﻿@import 'style_system.css';/*-------- IMPORT AL CSS GENERAL ---*/
-
+@import "style_system.css"; 
 body{
 	margin:0;
 	padding:0;
@@ -88,10 +87,10 @@ input[type=text],input[type=password]{
 	background:#ffffff url('../images/login/text-boxes.png') no-repeat left top;
 	color:#888;
 	outline:none;
-	width: 80%;
+	width: 80%!important;
     height:44px;
     margin: 5px auto 15px auto;
-    padding: 0 10px 0 35px;
+    padding: 0 10px 0 35px!important;
    
     border-radius:6px;
 	-moz-border-radius:6px;
@@ -142,6 +141,5 @@ input:hover, .frm-login  input:focus{opacity:1;}
     background:#f9f5dd;
 
 }
-
 
 
