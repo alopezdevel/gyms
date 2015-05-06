@@ -200,20 +200,14 @@ if ( 0 ){ //No ha iniciado session
         </div>
 
         <div class="txt-content">
-
         <?php if( $_GET['type'] != sha1(md5("Insertar")).md5(sha1("Socio")) && $_GET['type'] != sha1(md5("editar")).md5(sha1("Socio"))  && $_GET['type'] != sha1(md5("eliminar")).md5(sha1("Socio"))){ ?> 
-
-        <form id="form_consulta" action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));?>"
-
-         method="POST" name="frmConsultarSocio" onSubmit="return Validaciones()">
-
+        <form id="form_consulta" action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));?>" method="POST" name="frmConsultarSocio" onSubmit="return Validaciones()">
                 <div class="frm-buscar3">
-
-                    <div class="txt-left">Buscar socio por:</div>
+                    <div><label class="txt-center allcorners">Buscar socio por:</label></div>
                     <input class="left rborders-right" name="txtBusquedaNombre"  type="text"  value="" maxlength="30"  placeholder="Nombre"  />                                                                                                                                          
                     <input class="left rborders-left" name="txtBusquedaAPaterno" type="text"  value="" maxlength="30"  placeholder="Apellido Paterno" />
                     <br><br><br>
-                    <div class="frm-btns clear">
+                    <div class="frm-btns clearfix">
                         <button type="submit">Buscar</button> 
                         <button type="submit" name="RecargarLista" value="1">Actualizar lista</button>
                          <?php if($_SESSION["acceso"] == "A"){?> 
@@ -228,25 +222,14 @@ if ( 0 ){ //No ha iniciado session
                 <br>
 
                 <div id="monitor-container"> 
-
                         <table align="center" cellspacing="0">
-
                             <tr>
-
                                 <td class="head">ID</td>
-
                                 <td class="head">NOMBRE</td>
-
                                 <td class="head">APELLIDO</td>
-
                                 <td class="head">DIRECCION</td>
-
-                                <td class="head">EDITAR</td>
-
-                                <td class="head">ELIMINAR</td>
-
+                                <td class="head" colspan="2"></td>
                             </tr>
-
                             <?php if(count($arr_Socio)>0){
 
                                     $i= 0;
@@ -257,7 +240,7 @@ if ( 0 ){ //No ha iniciado session
 
                                          if ($i % 2 == 0) {
 
-                                             $color = "#C0C0C0";
+                                             $color = "transparent";
 
                                          }else{
 
@@ -320,8 +303,8 @@ if ( 0 ){ //No ha iniciado session
             <input name="txtColonia" type="text" value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtColonia'];}?>"   maxlength="30"  placeholder="Colonia"/>
             <input name="txtCorreo" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtCorreo'];}?>" maxlength="30"  placeholder="Correo"/>
             <input name="txtTelefono" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtTelefono'];}?>" maxlength="30"  placeholder="Tel&eacute;fono"/>
-            <label>Genero:</label>
-            <label>Masculino:</label><input type="radio" name="genero" id="GeneroM" value="<?php  
+            <fieldset><legend>Genero</legend>
+            <label>Masculino</label><input type="radio" name="genero" id="GeneroM" value="<?php  
 
                             if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ 
 
@@ -338,13 +321,14 @@ if ( 0 ){ //No ha iniciado session
                                 }
 
                             }?>">
-            <label>Femenino:</label><input type="radio" name="genero" id="GeneroF"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ if ($_POST['genero']!=""){echo $_POST['genero'];} else{echo 'F';}}?>">
+            <label>Femenino</label><input type="radio" name="genero" id="GeneroF"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ if ($_POST['genero']!=""){echo $_POST['genero'];} else{echo 'F';}}?>">
+            </fieldset>
             <input id="datepicker" name="txtFechaNacimiento" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtFechaNacimiento'];}?>" maxlength="10"  placeholder="Fecha Nacimiento: (ej. dd/mm/yy)"/>
             <input name="txtMensualidad" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtMensualidad'];}?>" maxlength="5"  placeholder="Mensualidad"/>
             <input name="txtComentarios" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtComentarios'];}?>" maxlength="250"  placeholder="Comentarios Generales"/>
-            <div class="frm-btns">
+            <div class="txt-center">
                 <button class="btn-aceptar" name="btn_Aceptar_Cancelar" type="submit" value="1">Guardar</button>
-                <button class="btn-aceptar" name="btn_Aceptar_Cancelar" type="submit" value="0" >Cancelar</button>
+                <button class="btn-cancelar" name="btn_Aceptar_Cancelar" type="submit" value="0" >Cancelar</button>
             </div>
           <br><br> 
           </div> 
@@ -366,16 +350,17 @@ if ( 0 ){ //No ha iniciado session
                 <input name="txtColonia" type="text"  value="<?php  if($_POST['txtColonia']==""){ echo $arr_Socio_edit[0]['colonia_socio'];}else{ echo $_POST['txtColonia'];}?>"   maxlength="30"  placeholder="Colonia"/>
                 <input name="txtCorreo" type="text" value="<?php  if($_POST['txtCorreo']==""){ echo $arr_Socio_edit[0]['correo_socio'];}else{ echo $_POST['txtCorreo'];}?>"  maxlength="30"  placeholder="Correo"/>
                 <input name="txtTelefono" type="text" value="<?php  if($_POST['txtTelefono']==""){ echo $arr_Socio_edit[0]['telefono_socio'];}else{ echo $_POST['txtTelefono'];}?>"  maxlength="30"  placeholder="Tel�fono"/>
-                <label>Genero:</label>
-                    <label>Masculino:</label><input type="radio"  value="M" <?php echo ($arr_Socio_edit[0]['genero_socio']=='M')?'checked':'' ?>  name="genero" id="GeneroM" >
-                    <label>Femenino:</label><input type="radio"   value="F" <?php echo ($arr_Socio_edit[0]['genero_socio']=='F')?'checked':'' ?>  name="genero" id="GeneroF" >
+                <fieldset><legend>Genero</legend>  
+                    <label>Masculino</label><input type="radio"  value="M" <?php echo ($arr_Socio_edit[0]['genero_socio']=='M')?'checked':'' ?>  name="genero" id="GeneroM" >
+                    <label>Femenino</label><input type="radio"   value="F" <?php echo ($arr_Socio_edit[0]['genero_socio']=='F')?'checked':'' ?>  name="genero" id="GeneroF" >
+                </fieldset>
                 <input id="datepicker" name="txtFechaNacimiento" type="text" value="<?php  if($_POST['txtFechaNacimiento']==""){ echo $arr_Socio_edit[0]['fecha_nacimiento_socio'];}else{ echo $_POST['txtFechaNacimiento'];}?>"   maxlength="10"  placeholder="Fecha Nacimiento"/>
                 <input name="txtMensualidad" type="text" value="<?php  if($_POST['txtMensualidad']==""){ echo $arr_Socio_edit[0]['cantidadPago_socio'];}else{ echo $_POST['txtMensualidad'];}?>"  maxlength="5"  placeholder="Mensualidad"/>
                 <input name="txtComentarios" type="text" value="<?php  if($_POST['txtComentarios']==""){ echo $arr_Socio_edit[0]['comentarios_generales_socio'];}else{ echo $_POST['txtComentarios'];}?>"  maxlength="250"  placeholder="Comentarios Generales"/>
                 <input type="hidden" name="folio_socio"  value="<?= $arr_Socio_edit[0]['id_socio']; ?>"> 
-                <div class="frm-btns"> 
+                <div class="txt-center"> 
                     <button class="btn-aceptar" name="btnEditar_Aceptar_Cancelar" type="submit" value="1">Guardar</button>
-                    <button class="btn-aceptar" name="btnEditar_Aceptar_Cancelar" type="submit" value="0" >Cancelar</button>
+                    <button class="btn-cancelar" name="btnEditar_Aceptar_Cancelar" type="submit" value="0" >Cancelar</button>
                 </div>
             </div>
           <br><br> 

@@ -5,13 +5,11 @@ table{
 	clear:both;
 }
 label{
-	
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:12px;
-	color:#333333;
-	text-align:right;
+	font-size:1.1em;
+	color:#4b596c;
 	width:120px;
-
+    margin: 10px 0px;
+    font-weight: bolder;
 }
 /*div{margin:0px auto 5px auto;}*/
 /*form{clear:both;margin: 5px auto 20px auto;}
@@ -52,39 +50,6 @@ input[type="checkbox"], input[type="radio"]{vertical-align: middle;}
 textarea{height:80px!important;padding-top:10px!important;}*/
 .rborders-right{border-radius:4px 0px 0px 4px!important;-moz-border-radius:4px 0px 0px 4px!important;-webkit-border-radius:4px 0px 0px 4px!important;}
 .rborders-left{border-radius:0px 4px 4px 0px!important;-moz-border-radius:0px 4px 4px 0px!important;-webkit-border-radius:0px 4px 4px 0px!important;}
-/*--- clases para botones ---*/
-/*button[type=submit]{   
-	
-	margin: 0px 10px auto 0px;	
-	width:90px;
-	height:34px;
-     -moz-border-radius:4px;
-   	 -webkit-border-radius:4px;
-      border-radius: 4px;
-    padding: 1px 1px 1px 5px;
-	color:#c7c7c7;
-    border:1px solid #282828;
-	text-shadow: 1px 1px 2px #272727;
-    background:#2d2d2d;
-    -webkit-transition: left 0.2s linear;
-    -webkit-transition-property:background;    
-    -moz-transition: left 0.2s linear;
-    -moz-transition-property:background;
-    -o-transition: left 0.2s linear;
-    -o-transition-property:background;
-    -ms-transition: left 0.2s linear;
-    -ms-transition-property:background;
-    transition: left 0.2s linear;
-    transition-property:background;
-    -webkit-transition:all 1s;
-    -moz-transition:all 1s;
-    -o-transition:all 1s;
-    -ms-transition:all 1s;
-    -khtml-transition:all 1s;
-    transition:all 1s;
-}*/
-/*button[type=submit]:hover{color:#ffffff;cursor:pointer;background:#cc9700;border:1px solid #c39513;}*/
-/* ---------------------------------#CONTENT -------------------------*/
 #content{
 	
 	width:1200px;
@@ -124,9 +89,9 @@ textarea{height:80px!important;padding-top:10px!important;}*/
 	font-size:14px;
 	color:#333333;
 }
-.txt-content{width:95%;height: auto;margin: 25px auto;font-size: 14px!important;}  
+.txt-content{width:99%;height: auto;margin: 25px auto;font-size: 14px!important;}  
 .txt-content h5{color: #bc1514;font-size: 1.3em;margin:5px;text-shadow: 1px 1px 0px #ffffff;}
-.txt-content h4{color:#a11c1b;font-size: 1.4em;margin:5px;text-shadow: 1px 1px 0px #ffffff;text-transform: uppercase;padding:0;margin:5px 0px;}
+.txt-content h4{color:#677487;font-size: 1.4em;margin:5px;text-shadow: 1px 1px 0px rgba(0,0,0,.0.6);text-transform: uppercase;padding:5px 10px;margin:5px 0px;border: 1px solid #677487;}
 .txt-content h6{color: #eea60c;font-size: 1em;margin:0px;text-shadow: 1px 1px 0px #8c6208;padding:2px 0px;text-transform: uppercase;}  
 .txt-content p{text-align: justify;}
 .col1{float: left;width:50%;padding:0px;margin:35px auto 10px;height:auto;}
@@ -134,8 +99,8 @@ textarea{height:80px!important;padding-top:10px!important;}*/
 #caja-gris{ 
 	
 	width:auto;
-    min-width:380px;
-	max-width:500px;
+    min-width:500px;
+	max-width:800px;
 	height:auto;
 	min-height:170px;
 	background:#e3e3e3;
@@ -145,11 +110,11 @@ textarea{height:80px!important;padding-top:10px!important;}*/
    	-webkit-border-radius: 20px;
      border-radius: 20px;
      position:relative;
-     padding:25px 5px 5px;
-     border:2px solid #ffffff;
-     -webkit-box-shadow:1px 1px 5px 3px #808080;
-    -moz-box-shadow:1px 1px 5px  3px #808080;
-    box-shadow:1px 1px 5px 3px #808080;
+     padding:25px 20px 60px;
+     border:1px solid #ffffff;
+     -webkit-box-shadow:1px 1px 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:1px 1px 20px rgba(0,0,0,0.8); 
+    box-shadow:1px 1px 20px rgba(0,0,0,0.8); 
 
 }
 #caja-gris div{ /* este div sirve para centrar el texto dentro de la caja gris....*/
@@ -270,8 +235,7 @@ button.send:hover{
 .frm-buscar2 input, .frm-buscar2 select {width:300px!important;margin: 5px!important;}
 .frm-buscar2 input{height:33px!important;padding-left:30px;}
 /*-- buscar 3 con mas campos ---*/
-.frm-buscar3{width: 1050px;;}
-.frm-buscar3 input {width:49%!important;margin:0px!important;height:33px!important;padding-left:30px;}
+.frm-buscar3 input {width:49%!important;margin:0px!important;height:33px!important;padding-left:30px;clear: none!important;}
 .frm-buscar3 button{float: left;width: 32%!important;margin: 3px!important;}
 
 /*---- formulario de consultas ---*/
@@ -286,7 +250,7 @@ button.send:hover{
     clear: both;
 }
 #form_consulta div{
-	margin: 0px auto 15px 10px;
+	margin:0px 0px 10px;
 }
 #form_consulta input[type=radio]{vertical-align:middle;}
 #form_consulta input[type=text], input[type=text]{
@@ -413,12 +377,12 @@ button.send:hover{
 #monitor-container tbody tr:hover{background:#f9f6de;}
 #monitor-container table{width:100%;padding:1px;}
 #monitor-container td{
-	width:25%;
+	/*width:25%; */
 	border:0px solid #333333;
-	font-family:Arial, Helvetica, sans-serif;
 	color:#181818;
-	font-size:13px;
+	font-size:1em;
 	padding:8px 5px;
+    cursor: default;
 }
 #monitor-container td.head{
 	
@@ -427,10 +391,13 @@ button.send:hover{
 	color:#FFFFFF;
 	font-size:16px;
 	font-weight:bold;
-	background:#a01b1a;
+	background: #437bc6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#437bc6), to(#2966b5));
+    background: -moz-linear-gradient(top, #437bc6, #2966b5);
+    background: linear-gradient(#437bc6, #2966b5);
 	text-align:center;
 	height:20px;
-	border: 1px solid #670403;
+	border: 1px solid #7bddf9;
 	
 	
 		
@@ -453,7 +420,7 @@ button.send:hover{
 }
 /*--- botones en las tablas ---*/
 #monitor-container a.editar, #monitor-container a.eliminar {
-    color: #bcbcbc;
+    color: #f7f7f7;
     padding:3px 5px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -470,10 +437,10 @@ button.send:hover{
     transition: left 0.2s linear;
     transition-property:background; 
 }
-#monitor-container a.editar{background:#355a29;} 
-#monitor-container a.editar:hover{background:#37b411;color:#ffffff;}  
-#monitor-container a.eliminar{background:#662626;} 
-#monitor-container a.eliminar:hover{background:#b90202;color:#ffffff;}
+#monitor-container a.editar{background:#43a9c6;} 
+#monitor-container a.editar:hover{background:#13cebf;color:#ffffff;}  
+#monitor-container a.eliminar{background:#be1616;} 
+#monitor-container a.eliminar:hover{background:#ea2424;color:#ffffff;}
 .horarios-container{
     width: 610px;
     height: 357px;
@@ -518,8 +485,8 @@ button.send:hover{
 #post-dia{
 	
 	background:url('../../images/content/img-postit-grande.png') no-repeat left top;
-	width:600px;
-	height:405px;
+	width:800px;
+	height:320px;
 	text-align:center;
 
 }

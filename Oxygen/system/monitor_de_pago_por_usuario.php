@@ -63,13 +63,17 @@ if($_POST['txtBusquedaSocio'] != ""){
 }
 
 ?>
-    <div id="content">
-    <form name="frmGenerarMonitor" action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Generar")).md5(sha1("Monitor")); ?>" method="POST" onSubmit="return Validar_Verificacion()"> 
-        <h1 class="m-pesa">Historial de Pago: </h1>             
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+        <div class="page-title">
+            <h1>Socios</h1>
+            <h2>Reporte de pagos por socio</h2>
+        </div>
+    <form name="frmGenerarMonitor" action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Generar")).md5(sha1("Monitor")); ?>" method="POST" onSubmit="return Validar_Verificacion()">              
             <div class="txt-content">
                <div class="frm-buscar" align="left">
                     <input type="text" class="left" name="txtBusquedaSocio" maxlength="4" value="<?php echo $_POST['txtBusquedaSocio'];?>" placeholder="ID:"> 
-                    <button class="left" name="btn_permitir_denegar" type="submit" value="0">Buscar</button>
+                    <button class="left" style="height: 32px!important" name="btn_permitir_denegar" type="submit" value="0">Buscar</button>
                 </div>
             </div>
             <div id="monitor-container">                
@@ -89,17 +93,17 @@ if($_POST['txtBusquedaSocio'] != ""){
                             $color_font_normal= "#000000";
                              foreach($arr_consulta_socio as $socio_log){
                                  if ($i % 2 == 0) {
-                                     $color = "#C0C0C0";
+                                     $color = "#d9d9d9";
                                  }else{
                                      $color = "#F0F0F0";
                                  }
                                  $i= $i + 1;
                                  if($socio_log['estatus_del_pago'] == "TERMINADO"){
-                                     $color_font = "#800000";
+                                     $color_font = "#cd1111";
                                      $total_de_asistencia_vencidos =  $total_de_asistencia_vencidos +1;
                                  }else{
                                      $total_de_asistencia_no_vencidos =  $total_de_asistencia_no_vencidos +1;
-                                     $color_font = "#008000";
+                                     $color_font = "#0acf0a";
                                  }
                                  ?>
                              <tr bgcolor="<?php echo $color?>">
@@ -125,12 +129,11 @@ if($_POST['txtBusquedaSocio'] != ""){
                     ?>
                     
                 </table>
-            
-            
             </div>
-
-    </div>
    </form>
 </div>
-<?php include("footer.php"); 
-}?>
+<?php include("footer.php"); ?>
+</div> 
+</body>
+</html>
+<?php }?>

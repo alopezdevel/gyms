@@ -92,8 +92,12 @@ function confirmarBorrar(registro) {
 }
 </script>
 <?php include("header.php");?>
-    <div id="content">
-        <h1>Pagar Mensualidad</h1>
+<div id="layer_content" class="main-section">
+    <div class="container"> 
+    <div class="page-title">
+            <h1>Administracion</h1>
+            <h2>Registrar mensualidad</h2>
+    </div>
         <div class="txt-content">
             <form name="frmPago" method="POST"   action="
                         <?php 
@@ -103,8 +107,7 @@ function confirmarBorrar(registro) {
                                 echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Buscar")).md5(sha1("Socio"));
                             }
                         ?>">
-            <div class="col1">
-                    <div id="caja-roja">
+            <div>
                     <div class="txt-left"><label> Favor de Capturar el ID del Socio: </label></div><br>                                                                                                                   
                         <div class="frm-buscar"> 
                         <input class="left" style="height: 32px!important;" placeholder="Escribe el ID:"  name="txtBusquedaSocio" type="text" maxlength="6"  value="<?php  if($_GET['type'] == sha1(md5("Buscar")).md5(sha1("Socio")) ){ echo $_POST['txtBusquedaSocio'];}else{ echo $_POST['folio_socio'];}?>"
@@ -121,11 +124,10 @@ function confirmarBorrar(registro) {
                             echo 'enabled';
                         }?>>Buscar</button>
                         </div>
-                    </div>
-              </div>
-              <div class="col1">  
+            </div>
+              <div>  
                 <?php if(count($arr_socio)>0){ ?> 
-                <div id="caja-roja" style="margin-bottom:20px;">
+                <div class="box-blue center">
                     <div> 
                           <label><b>ID:  </b><?php echo $arr_socio[0]['id_socio'];?></label><br> 
                           <label><b>Nombre:  </b><?php echo $arr_socio[0]['nombre'].' '.$arr_socio[0]['apellido_paterno'].' '.$arr_socio[0]['apellido_materno'];?></label><br>                          
@@ -145,7 +147,7 @@ function confirmarBorrar(registro) {
                         <td class="head">STATUS DEL PAGO</td>
                         <td class="head">FECHA DE PAGO</td>
                         <td class="head">FECHA DE VENCIMIENTO</td>
-                        <td class="head">&nbsp;</td>
+                        <td class="head" style="width: 40px;"></td>
                     </tr>
                     <?php   $total_de_asistencia_vencidos = 0;
                             $total_de_asistencia_no_vencidos = 0;
@@ -155,17 +157,17 @@ function confirmarBorrar(registro) {
                             $color_font_normal= "#000000";
                              foreach($arr_consulta_socio as $socio_log){
                                  if ($i % 2 == 0) {
-                                     $color = "#C0C0C0";
+                                     $color = "#d9d9d9";
                                  }else{
                                      $color = "#F0F0F0";
                                  }
                                  $i= $i + 1;
                                  if($socio_log['estatus_del_pago'] == "TERMINADO"){
-                                     $color_font = "#800000";
+                                     $color_font = "#cd1111";
                                      $total_de_asistencia_vencidos =  $total_de_asistencia_vencidos +1;
                                  }else{
                                      $total_de_asistencia_no_vencidos =  $total_de_asistencia_no_vencidos +1;
-                                     $color_font = "#008000";
+                                     $color_font = "#0acf0a";
                                  }
                                  ?>
                              <tr bgcolor="<?php echo $color?>">
@@ -174,7 +176,7 @@ function confirmarBorrar(registro) {
                                 <td align="center"><b><?php echo $socio_log['folio_pago'].'-' ?><font color="<?php echo $color_font ;?>">&nbsp;<?php echo strtoupper($socio_log['estatus_del_pago']) ;?></b></font></td>
                                 <td align="center"><b>&nbsp;<?php echo $socio_log['fecha_pago'];?></b></td>
                                 <td align="center"><b>&nbsp;<?php echo $socio_log['fecha_vencimiento'];?></b></td>
-                                <td width="5%" valign="top" align="center" nowrap="nowrap"><font size="2" face="<?php echo $_SESSION["disenofolio_pagotipo_letra"] ?>">
+                                <td width="40px!important" valign="top" align="center" nowrap="nowrap"><font size="2" face="<?php echo $_SESSION["disenofolio_pagotipo_letra"] ?>">
                                 <?php $url=$_SERVER['PHP_SELF']."?type=".sha1(md5("borrar")).md5(sha1("pago"))."&cve=".$socio_log["folio_pago"] ?>
                                 <a title="Borrar Registro" href="javascript: if (confirmarBorrar('el pago')) { SubmitFormaPaginacion(document.frmPago, '<?= $url ?>'); }"><img border="0" src="images/ico_tacha.gif" width="15" height="15"></a></font></td>
                              </tr>
@@ -209,7 +211,8 @@ function confirmarBorrar(registro) {
                  </div>
                 <?php }?>
             </form>  
-        </div>     
-    </div> 
+            </div>    
+    <?php include("footer.php"); ?>    
 </div>
-<?php include("footer.php"); ?>
+</body>
+</html>
