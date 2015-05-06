@@ -294,16 +294,16 @@ if ( 0 ){ //No ha iniciado session
         <form id="form_Captura" class="frm-altas" action="
 
         <?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Insertar")).md5(sha1("Socio"));?>" method="POST" name="frmInsertSocio" onSubmit="return Validaciones()" >
-        <div id="caja-gris" class="clear">
+        <div id="caja-gris" class="clearfix">
             <h2>Nuevo Socio</h2>
-            <input class="clear" name="txtNombre" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtNombre'];}?>" maxlength="30"  placeholder="Nombre"/>
+            <input name="txtNombre" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtNombre'];}?>" maxlength="30"  placeholder="Nombre"/>
             <input name="txtApaterno" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtApaterno'];}?>" maxlength="30"  placeholder="Apellido Paterno"/>
             <input name="txtAmaterno" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtAmaterno'];}?>" maxlength="30"  placeholder="Apellido Materno"/>
             <input name="txtCalle" type="text" value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtCalle'];}?>"   maxlength="30"  placeholder="Calle"/>
             <input name="txtColonia" type="text" value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtColonia'];}?>"   maxlength="30"  placeholder="Colonia"/>
             <input name="txtCorreo" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtCorreo'];}?>" maxlength="30"  placeholder="Correo"/>
             <input name="txtTelefono" type="text"  value="<?php  if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ echo $_POST['txtTelefono'];}?>" maxlength="30"  placeholder="Tel&eacute;fono"/>
-            <fieldset><legend>Genero</legend>
+            <fieldset class="txt-center">
             <label>Masculino</label><input type="radio" name="genero" id="GeneroM" value="<?php  
 
                             if($_GET['type'] == sha1(md5("Insertar")).md5(sha1("Socio")) ){ 
@@ -350,7 +350,7 @@ if ( 0 ){ //No ha iniciado session
                 <input name="txtColonia" type="text"  value="<?php  if($_POST['txtColonia']==""){ echo $arr_Socio_edit[0]['colonia_socio'];}else{ echo $_POST['txtColonia'];}?>"   maxlength="30"  placeholder="Colonia"/>
                 <input name="txtCorreo" type="text" value="<?php  if($_POST['txtCorreo']==""){ echo $arr_Socio_edit[0]['correo_socio'];}else{ echo $_POST['txtCorreo'];}?>"  maxlength="30"  placeholder="Correo"/>
                 <input name="txtTelefono" type="text" value="<?php  if($_POST['txtTelefono']==""){ echo $arr_Socio_edit[0]['telefono_socio'];}else{ echo $_POST['txtTelefono'];}?>"  maxlength="30"  placeholder="Tel�fono"/>
-                <fieldset><legend>Genero</legend>  
+                <fieldset class="txt-center">
                     <label>Masculino</label><input type="radio"  value="M" <?php echo ($arr_Socio_edit[0]['genero_socio']=='M')?'checked':'' ?>  name="genero" id="GeneroM" >
                     <label>Femenino</label><input type="radio"   value="F" <?php echo ($arr_Socio_edit[0]['genero_socio']=='F')?'checked':'' ?>  name="genero" id="GeneroF" >
                 </fieldset>

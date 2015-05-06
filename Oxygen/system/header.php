@@ -105,7 +105,7 @@ if(1){
             <?php }elseif($_SESSION["acceso"] == "A"){?>
             <li class="submenu"><a href="#">ADMINISTRADOR</a>
             	<ul>
-                    <li><a href="chat-copia.php">Chat</a></li>
+                    <li><a href="alta_socio.php">Nuevo Socio</a></li>
                     <li><a href="pagar_mensualidad.php">Registrar Mensualidad</a></li>   
                 </ul>
             </li>

@@ -30,7 +30,8 @@ form input[type="text"], form input[type="tel"], form select, form textarea{
     
     font-family:Calibri, Arial, Helvetica, sans-serif!important;
     font-size:14px;
-}  
+}
+form fieldset{border: 0px;}  
 input[type="radio"]{
     width:20px;
     position: relative;
