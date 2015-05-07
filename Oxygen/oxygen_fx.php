@@ -35,7 +35,7 @@
 <div style="overflow:hidden;" id="home">
 <nav class="main-nav-outer" id="test"><!--main-nav-start-->
     <div class="container">
-        <a href="index.html" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
+        <a href="index.php" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
         <ul class="top-nav">
             <li class="i-login"><a href="system/login.php" class="icon" title="Log In"><span></span></a></li>
             <li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" class="icon" title="Siguenos en Facebook!" target="_blank"><span></span></a></li>
@@ -45,9 +45,9 @@
             <li class="i-google"><a href="https://www.google.com/" class="icon" title="Siguenos en Google +!"><span></span></a></li>
         </ul>
         <ul class="main-nav">
-            <li><a href="index.html">Inicio</a></li>
-            <li class="active"><a href="oxygen_fx.html">Acerca de Oxygen-FX</a></li>
-            <li><a href="como_empezar.html">Como Empezar</a></li>
+            <li><a href="index.php">Inicio</a></li>
+            <li class="active"><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
+            <li><a href="como_empezar.php">Como Empezar</a></li>
             <li><a href="galeria/">Galería</a></li>
             <li><a href="#ubicacion">Ubicación</a></li>
             <li><a href="#contacto">Contacto</a></li>

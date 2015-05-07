@@ -46,8 +46,8 @@
 		</ul>
         <ul class="main-nav">
         	<li class="active"><a href="#home">Inicio</a></li>
-            <li><a href="oxygen_fx.html">Acerca de Oxygen-FX</a></li>
-            <li><a href="como_empezar.html">Como Empezar</a></li>
+            <li><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
+            <li><a href="como_empezar.php">Como Empezar</a></li>
             <li><a href="galeria/">Galería</a></li>
             <li><a href="#ubicacion">Ubicación</a></li>
             <li><a href="#contacto">Contacto</a></li>
