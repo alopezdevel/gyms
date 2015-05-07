@@ -32,7 +32,7 @@
     <div class="container">
         <a href="../index.html" class="img-logo"><img  src="../images/img-logo.png" alt="logo"></a>
         <ul class="top-nav">
-            <li class="i-login"><a href="system/login.php" class="icon" title="Log In"><span></span></a></li>
+            <li class="i-login"><a href="../system/login.php" class="icon" title="Log In"><span></span></a></li>
             <li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" class="icon" title="Siguenos en Facebook!" target="_blank"><span></span></a></li>
             <li class="i-twitter"><a href="https://twitter.com/" class="icon" title="Siguenos en Twitter!"><span></span></a></li>
             <li class="i-youtube"><a href="https://www.youtube.com/" class="icon" title="Siguenos en YouTube!" target="_blank"><span></span></a></li>
