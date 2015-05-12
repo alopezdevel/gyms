@@ -36,11 +36,11 @@ if(1){
     <script>
         !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
     </script>
-    <script type="text/javascript" src="../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-    <script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="../fancybox/lib/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script type="text/javascript" src="../fancybox/lib/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="../fancybox/fancy.js"></script>    
-    <link rel="stylesheet" type="text/css" href="..//fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-    <link rel="stylesheet" href="../../css/form.css" /> 
+    <link rel="stylesheet" type="text/css" href="../fancybox/source/jquery.fancybox-1.3.4.css" media="screen" />
+    <link rel="stylesheet" href="../css/form.css" /> 
     
 
 </head>
