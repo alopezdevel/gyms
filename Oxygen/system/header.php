@@ -83,37 +83,58 @@ if(1){
 			<li><a href="login.php" class="icon logout"title="Log Out"><span>Salir</span></a></li>
 		</ul>
         <ul class="main-nav">
-        	<li><a href="index.php">Inicio</a></li>
-            <?php if($_SESSION["acceso"] == "U" || $_SESSION["acceso"] == "A"){?> 
-            <!--- Menu Socios Administracion --->
-            <li class="submenu"><a href="#">Socios</a>
-                <ul>
-                    <li><a href="socio_verificacion.php">Verificacion de Socio</a></li> 
-                    <li><a href="alta_socio.php">Catalogo de socios</a></li>
-                    <li><a href="monitor_usuario.php">Reporte por Socio</a></li>
-                    <li><a href="monitor_de_pago_por_usuario.php">Reporte de pagos por Socio</a></li>
-                    <li><a href="monitor.php">Asistencias del Dia</a></li>    
-                </ul>
-            </li>
-            <li><a href="postdeldia.php">Mensaje del Día</a></li>
-            <?php } if($_SESSION["acceso"] == "U"){?>
-            <li class="submenu"><a href="#">RECEPCION</a>
-            	<ul>
-                    <li><a href="comentarios.php">Comentarios</a></li>
-                    <?php if(1){?><li><a href="chat-copia.php">Chat</a></li><?php } ?>
-				</ul>
-            </li>
-            <?php }elseif($_SESSION["acceso"] == "A"){?>
-            <li class="submenu"><a href="#">ADMINISTRADOR</a>
-            	<ul>
-                    <li><a href="alta_socio.php">Nuevo Socio</a></li>
-                    <li><a href="pagar_mensualidad.php">Registrar Mensualidad</a></li>   
-                </ul>
-            </li>
-           	<?php }else{?>
-				<li><a href="membresia_doit.php">Socios</a></li>
-			<?php }?>
-            <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+            <?php if($_SESSION["acceso"] == "A"){?> 
+                    <li><a href="index.php">Inicio</a></li> 
+                    
+                    <li class="submenu"><a href="#">Reportes</a>
+                        <ul> 
+                            <li><a href="monitor_usuario.php">Monitor por Socio</a></li>
+                            <li><a href="monitor_de_pago_por_usuario.php">Pagos por Socio</a></li>
+                            <li><a href="monitor.php">Asistencias del Dia</a></li>    
+                        </ul> 
+                    </li>
+                    
+                    <li class="submenu"><a href="#">Utilerias</a>
+                        <ul> 
+                           <li><a href="postdeldia.php">Mensaje del Día</a></li>    
+                        </ul> 
+                    </li>
+                    <li class="submenu"><a href="#">Socios</a>
+                        <ul> 
+                           <li><a href="socio_verificacion.php">Verificacion de asistencia del socio</a></li> 
+                           <li><a href="alta_socio.php">Catalogo de socios</a></li>
+                           <li><a href="registro_socio.php">Nuevo Socio</a></li>
+                           <li><a href="pagar_mensualidad.php">Registrar Pago del socio</a></li>    
+                        </ul> 
+                    </li>
+                   <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+                    
+            <?php } ?>
+            <?php if($_SESSION["acceso"] == "U"){?> 
+                    <li><a href="index.php">Inicio</a></li> 
+                    <li class="submenu"><a href="#">Reportes</a>
+                        <ul> 
+                            <li><a href="monitor.php">Asistencias del Dia</a></li>    
+                        </ul> 
+                    </li>
+                    <li class="submenu"><a href="#">Socios</a>
+                        <ul> 
+                           <li><a href="socio_verificacion.php">Verificacion de asistencia del socio</a></li> 
+                           <li><a href="alta_socio.php">Catalogo de socios</a></li>
+                        </ul> 
+                    </li>
+                    
+                   <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+                    
+            <?php } ?>
+            <?php if($_SESSION["acceso"] == "C"){?> 
+                     <li><a href="index.php">Inicio</a></li> 
+                     <li><a href="membresia_doit.php">Socios</a></li> 
+                     <li><a href="comentarios.php">Comentarios</a></li>
+                     <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+                    
+            <?php } ?>
+        	
         </ul>
         <!---<a class="res-nav_click right" href="#"><i class="fa-bars"></i></a>--->
     </div>

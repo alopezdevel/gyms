@@ -1,5 +1,4 @@
 <?php
-
 function array2json($arr) { 
     if(function_exists('json_encode')) return json_encode($arr); //Lastest versions of PHP already has this functionality.
     $parts = array(); 
@@ -48,7 +47,7 @@ function validacion_usuario(){
     $usuario = trim($_POST["usuario"]);
     $clave = trim($_POST["password"]);
     //CONSULTA DEL USUARIO
-    $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = sha1('".$clave."') AND hActivado = sha1('1')";
+    $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = sha1('".$clave."') AND hActivado = '1'";    
     $resultadoUsuario = @mysql_query($queryUsuario, $dbconn);
     $Usuario = mysql_fetch_array($resultadoUsuario);
     $NUM_ROWs_Usuario = mysql_num_rows($resultadoUsuario);
@@ -138,8 +137,7 @@ function listado_usuarios(){
         }
         $response = array("total"=>"$paginas_total","pagina"=>"$pagina_actual","tabla"=>"$htmlTabla");   
         echo array2json($response);    
-} 
-                 
+}                 
 function usuario_nuevo(){ //TIPOS_CAMBIO.PHP
     $usuario = trim($_POST["usuario"]);
     $password = sha1(md5(trim($_POST["password"])));
@@ -177,4 +175,163 @@ function usuario_nuevo(){ //TIPOS_CAMBIO.PHP
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
 } 
+function alta_usuario(){        
+    $nombre = $_POST['nombre'];
+    $apellido_paterno = $_POST['apellido_paterno'];
+    $apellido_materno = $_POST['apellido_materno'];
+    $email = $_POST['email'];
+    $correo = $_POST['email'];
+    $calle = $_POST['calle'];
+    $colonia = $_POST['colonia'];
+    $telefono = $_POST['telefono'];
+    $mensualidad = $_POST['mensualidad'];
+    $sexo = $_POST['sexo'];
+    $nivel = $_POST['nivel'];
+    function generaPass(){
+        $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        $longitudCadena=strlen($cadena);     
+        $pass = "";
+        $longitudPass=10;
+        for($i=1 ; $i<=$longitudPass ; $i++){
+            $pos=rand(0,$longitudCadena-1);             
+            $pass .= substr($cadena,$pos,1);
+        }
+        return $pass;
+    }  
+    $codigo1 = generaPass();
+    $codigo2 = substr( md5(microtime()), 1, 8).$codigo1.substr( md5(microtime()), 1, 5);
+    $codigoconfirm = $codigo1.$codigo2;
+    $password = generaPass();          //
+    include("cn_usuarios_2.php");        
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $sql = "SELECT sCorreoSocio FROM ct_socio WHERE sCorreoSocio = '".$email."' LOCK IN SHARE MODE";
+    $result = $conexion->query($sql);
+    $NUM_ROWs_Usuario = $result->num_rows;
+    if ($NUM_ROWs_Usuario > 0) {
+        $mensaje = "Error: $email ya fue registrado.";
+        $error = "1";
+        $conexion->rollback();
+        $conexion->close();                                                                                                                                                                       
+    } else {   
+        $sql = "INSERT INTO ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sCorreoSocio='".$email."', sComentariosGeneralesSocio='".$ComentariosGenerales."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."', sCodigoVal = '".$codigoconfirm."', dFechaRegistro=NOW(), sUsuarioCreacionRegistro='".$_SESSION['acceso']."'";  
+        $conexion->query($sql);   
+        if ($conexion->affected_rows < 1 ) {
+            $error = "1";
+               
+        }   
+        $id = $conexion->insert_id;
+        //$mensaje = "entro2";                      
+        $sql = "INSERT INTO cu_control_acceso SET  sUsuario = '".$email."',  sCorreo ='".$correo."',eTipoUsuario ='".$nivel."', sDescripcion ='".$nombre."', hActivado  ='0', sCodigoVal = '".$codigoconfirm."' , hClave = sha1('".$password."') ";
+        $conexion->query($sql);   
+        if ($conexion->affected_rows < 1 ) {
+            $error = "1";
+            $mensaje = $sql;
+            $transaccion_exitosa = false;
+            //        
+        }  
+                  
+         $ruta = "http://oxygen-fx.laredo2.net/system/confirm_mail_user.php?cuser=$codigoconfirm";
+        if ($transaccion_exitosa) {
+            //Proceso para enviar correo                 
+            require_once("./lib/mail.php");
+            $cuerpo = "
+                    <div style=\"font-size:12px;border:1px solid #6191df;border-radius:3px;padding:10px;width:95%; margin:5px auto;font-family: Arial, Helvetica, sans-serif;\">
+                         <h2 style=\"color:#313131;text-transform: uppercase; text-align:center;\">Bienvenido a Oxygen-FX Gym!</h2> \n 
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\"><strong>$correo</strong><br>Gracias por elegirnos. A continuacion se creara un acceso para que puedas verificar tus pagos y la vigencia de tu mensualidad!</p>\n 
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Te recomendamos que mantengas tus claves en algun lugar seguro.Una vez activada tu cuenta podras cambiar tu password</p>
+                         <br><br>
+                         <ul style=\"color:#010101;line-height:15px;\">
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">ID: </strong>$id</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Login User: </strong>$correo</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Password: </strong>$password</li>
+                         </ul>
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Para poder activar tu cuenta solo da click en el boton de confirmar:</p><br>
+                         <p style=\"margin:5px auto; text-align:center;\"><a href='$ruta' style='color:#ffffff;background:#6191df;padding:5px 8px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;'>Confirmar</a></p>
+                         <br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Si este correo te ha llegado por error o no deseas acceder a tu cuenta da click en cancelar:</p>
+                         <p style=\"margin:5px auto; text-align:center;\"><a href='oxygen-fx.laredo2.net' style='color:#ffffff;background:#8d0c0c;padding:5px 8px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;'>Cancelar</a></p>
+                    </div>";
+             $mail = new Mail();                                    
+             $mail->From = "soporte@oxygen-fx.com";
+             $mail->FromName = "oxygen-fx team";
+             $mail->Host = "oxygen-fx.com";
+             $mail->Mailer = "sendmail";
+             $mail->Subject = "Tu nueva cuenta de acceso "; 
+             $mail->Body  = $cuerpo;                                                                                            
+             $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
+             $mail->IsHTML(true);
+             $mail->WordWrap =150;
+             $mail_error = false;
+             $mail->AddAddress(trim($correo));
+             if (!$mail->Send()) {
+                $mail_error = true;
+                $mail->ClearAddresses();
+             }        
+            if(!$mail_error){
+                $mensaje = "El usuario $usuario se registro con exito";
+                $error = "0";
+                $conexion->commit();
+                $conexion->close();
+            }else{
+                $mensaje = "Error e-mail.";
+                $error = "1";  
+                $conexion->rollback();
+                $conexion->close();           
+            }            
+        } else {
+            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $error = "1";  
+            $conexion->rollback();
+            $conexion->close();           
+        }
+    }
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);    
+} 
+ function confirm_user(){
+      $code = trim($_POST["code"]);
+      include("cn_usuarios_2.php");
+      //$conexion->begin_transaction();
+      $conexion->autocommit(FALSE);
+      $transaccion_exitosa = true;
+      $error = "0";
+      $sql = "SELECT sUsuario, hActivado, sDescripcion FROM cu_control_acceso WHERE sCodigoVal = '".$code."'  LOCK IN SHARE MODE";
+      $result = $conexion->query($sql);
+      $NUM_ROWs_Usuario = $result->num_rows;
+      if ($NUM_ROWs_Usuario > 0) {
+           while ($usuario = $result->fetch_assoc()) {
+               if($usuario['hActivado']  == "0"){
+                   $sql = "UPDATE cu_control_acceso SET  hActivado = '1' WHERE sCodigoVal = '".$code."'";
+                   $conexion->query($sql);   
+                   if ($conexion->affected_rows < 1 ) {
+                        $error = "1";
+                        $mensaje = "Error de sistema general : Error interno";                        
+                   }else{
+                       $conexion->commit();
+                       $mensaje = "1"; //correct
+                       $usuario = $usuario['sDescripcion'];
+                       $correo =  $usuario['sUsuario'];
+                   }
+                   
+               }else{                     
+                   $mensaje = "Error: El codigo de validacion ha expirado ";
+                   $error = "2";
+               }
+               
+           }
+          
+      }else{
+          $mensaje = "Error: Usuario no existe";
+          $error = "1";
+      }
+      $conexion->close();
+      
+      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+      echo array2json($response);
+      
+  }
 ?>

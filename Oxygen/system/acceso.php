@@ -19,7 +19,7 @@
 
     //CONSULTA DEL USUARIO
 
-$queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = '".sha1(md5($clave))."' AND hActivado = sha1('1')";    $resultadoUsuario = @mysql_query($queryUsuario, $dbconn);
+$queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = sha1('".$clave."') AND hActivado = '1'";    $resultadoUsuario = @mysql_query($queryUsuario, $dbconn);
 
     $Usuario = mysql_fetch_array($resultadoUsuario);
 
@@ -74,6 +74,15 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
             case 'U':   
 
                         header("Location: socio_verificacion.php"."?type=".sha1(md5("nueva")).md5(sha1("busqueda")));
+
+                        exit();
+
+                        break;
+            case 'C':    
+
+                        
+
+                        header("Location: index.php");
 
                         exit();
 

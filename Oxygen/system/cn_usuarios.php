@@ -2,11 +2,11 @@
 
 $mysql_host = "sql.byethost25.org";
 
-$mysql_database = "laredone_gym";
+$mysql_database = "laredone_oxygen";
 
-$mysql_username = "laredone_betojr";
+$mysql_username = "laredone_wcenter";
 
-$mysql_password = "Carpintero67";
+$mysql_password = "05100248abc";
 
 //error_reporting(0);
 

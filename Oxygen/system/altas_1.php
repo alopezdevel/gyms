@@ -55,7 +55,6 @@ function insertarMensaje($usuario, $mensaje){
               
 
 }
-
 function insertarComentarioDelDia($usuario, $mensaje){
 
     include("cn_usuarios.php");//Conexion
@@ -123,7 +122,6 @@ function insertarComentarioDelDia($usuario, $mensaje){
     }
 
 }
-
 function insertarDuda($duda, $comentario){
 
     include("cn_usuarios.php");//Conexion
@@ -167,7 +165,6 @@ function insertarDuda($duda, $comentario){
     }
 
 }
-
 function insertarPagoMensualidad($id_socio,$monto,$fecha_inicial, $fecha_final){
     //include("funciones_consulta.php");
     //Validaciones
@@ -265,8 +262,6 @@ echo $sql;
         return false;
     }
 }
-
-
 function insertarNuevoSocio($nombre,$Apaterno,$Amaterno,$Calle,$Colonia,$Correo,$ComentariosGenerales,$Telefono,$Genero,$CantidadPago,$fechaNacimiento){
 
     include("cn_usuarios.php");//Conexion
@@ -311,6 +306,6 @@ function insertarNuevoSocio($nombre,$Apaterno,$Amaterno,$Calle,$Colonia,$Correo,
 
     }
 
-}    
+}
 
 ?>
