@@ -31,29 +31,16 @@ if(1){
         };        
 </script> -->
 
-    <!--- slider --- galeria instalaciones --->
-    <link href="js/gallery/demo/css/shCore.css" rel="stylesheet" type="text/css" />
-    <link href="js/gallery/demo/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="js/gallery/demo/css/demo.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="js/gallery/demo/css/flexslider.css" type="text/css" media="screen" />
-    
-    <!-- Modernizr -->
-    <script src="js/gallery/js/modernizr.js"></script>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script><!-- Galeria -->
     <script>
         !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
     </script>
-    <script type="text/javascript" src="js/galeria/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-    <script type="text/javascript" src="js/galeria/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="js/galeria/funcion.js"></script>    
-    <link rel="stylesheet" type="text/css" href="js/galeria/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-    <link rel="stylesheet" href="js/galeria/style.css" />
+    <script type="text/javascript" src="../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="../fancybox/fancy.js"></script>    
+    <link rel="stylesheet" type="text/css" href="..//fancybox/jquery.fancybox-1.3.4.css" media="screen" />
     <link rel="stylesheet" href="../../css/form.css" /> 
-    <!--- SLIDER - INDEX ---->
-    <script src="js/slider-index/slider.js" type="text/javascript"></script>  
-    <script src="js/slider-index/billy.carousel.jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="js/slider-index/demonstration.css" type="text/css" media="screen" />
     
 
 </head>
