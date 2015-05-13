@@ -1,10 +1,5 @@
-﻿div.jHtmlArea { display: block; overflow: hidden; border: solid 1px #aaa; }
-
-    div.jHtmlArea iframe, div.jHtmlArea textarea {
-        border: none;
-    }
-
-
+﻿div.jHtmlArea { display: block; overflow: hidden; border: solid 1px #aaa;height:280px;}
+div.jHtmlArea iframe, div.jHtmlArea textarea {border: none;}
 div.jHtmlArea div { display: inline-block; padding: 0px; margin: 0px; }
 div.jHtmlArea .ToolBar { display: inline-block; background: #fbfbfb; border-bottom: solid 1px #aaa; }
 div.jHtmlArea .ToolBar ul { border: solid 1px #ccc; margin: 1px; padding: 1px; float: left; background: #fff url(jHtmlArea_Toolbar_Group_BG.png) repeat-x;}
@@ -14,7 +9,9 @@ div.jHtmlArea .ToolBar ul li a { display: block; width: 16px; height: 16px; back
 div.jHtmlArea .ToolBar ul li a.highlighted { border: solid 1px #aaa; background-color: #bbb; padding: 0; }
 div.jHtmlArea .ToolBar ul li.separator {height: 16px; margin: 0 2px 0 3px; border-left: 1px solid #ccc;}
 div.jHtmlArea .ToolBar ul li.separator:hover { padding: 1px; background-color: #fff; border-top:none; border-bottom:none; border-right:none;}
-
+div.jHtmlArea iframe body{
+	font-family:Arial, Helvetica, sans-serif;font-size:13px;
+}
 div.jHtmlArea .ToolBar ul li a:hover { }
 div.jHtmlArea .ToolBar ul li a.bold { background-position: 0 0; }
 div.jHtmlArea .ToolBar ul li a.italic { background-position: -16px 0; }
