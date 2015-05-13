@@ -4,8 +4,7 @@
 ?>
 <div id="layer_content" class="main-section">  
 
-
-    <?php include("footer.php"); ?>  
 </div>
+    <?php include("footer.php"); ?>  
 </body>
 </html>
