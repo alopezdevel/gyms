@@ -36,8 +36,8 @@ if(1){
     <script type="text/javascript" src="../js/jquery.1.8.3.min.js"></script> 
     <link href="../css/form.css" rel="stylesheet" type="text/css">
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
-    <script type="text/javascript" src="../js/bootstrap.js"></script> 
+    <!--<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
+    <script type="text/javascript" src="../js/bootstrap.js"></script>--->
 </head>
 
 
