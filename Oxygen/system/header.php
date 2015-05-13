@@ -32,10 +32,8 @@ if(1){
 </script> -->
 
     
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script><!-- Galeria -->
-    <script>
-        !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
-    </script>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>--->
+    <script type="text/javascript" src="../js/jquery.1.8.3.min.js"></script> 
     <link href="../css/form.css" rel="stylesheet" type="text/css">
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
