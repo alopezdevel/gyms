@@ -4,7 +4,6 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <title>Oxygen - FX Crossfit</title>
-<link rel="stylesheet" href="css/style_system.css" type="text/css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="images/favicon.png" type="image/png"> 
 <?php 
@@ -35,9 +34,11 @@ if(1){
     <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>--->
     <script type="text/javascript" src="../js/jquery.1.8.3.min.js"></script> 
     <link href="../css/form.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style_system.css" type="text/css"> 
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
     <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="css/data_grid.css" rel="stylesheet" type="text/css">
 </head>
 
 
@@ -57,12 +58,12 @@ if(1){
 		<ul class="top-nav"> 
 			<li>
 			<?php if(isset($_SESSION['usuario_actual'])){ ?>
-				<a href="#" class="icon user" title="Log In"><span><?php echo $_SESSION['usuario_actual']; ?></span></a>
+				<a href="#" title="Log In"><i class="fa fa-user"></i><span><?php echo $_SESSION['usuario_actual']; ?></span></a>
 			<?php }else{?>
-				<a href="#" class="icon user" title="Log In"><span>Nombre de Usuario</span></a>
+				<a href="#" title="Log In"><i class="fa fa-user"></i><span>Nombre de Usuario</span></a>
 			<?php }?>
 			</li>
-			<li><a href="login.php" class="icon logout"title="Log Out"><span>Salir</span></a></li>
+			<li><a href="login.php" title="Log Out"><i class="fa fa-sign-out"></i><span>Salir</span></a></li>
 		</ul>
         <ul class="main-nav">
             <?php if($_SESSION["acceso"] == "A"){?> 
