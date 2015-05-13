@@ -162,8 +162,8 @@ function onAltaCliente(){
         </div> 
         
         <table id="data_grid_certificate" class="data_grid">
-        <thead id="grid-head2">                                                                                       
-            <tr>                            
+        <thead>                                                                                       
+            <tr id="grid-head1">                            
                 <td align="center" class="etiqueta_grid" nowrap="nowrap" ><input class="inp"  id="filtro_CreatedDate" type="text"></td>
                 <td align="center" class="etiqueta_grid"><input class="inp"  id="filtro_InsuredName" type="text"></td>
                 <td align="center" class="etiqueta_grid"><input class="inp"  id="filtro_email" type="text"></td>
@@ -173,7 +173,7 @@ function onAltaCliente(){
                 <td align="center" class="etiqueta_grid"><input class="inp"   id="filtro_SendingDate" type="text"></td>
                 <td></td> 
             </tr>
-            <tr>                            
+            <tr id="grid-head2">                            
                 <td align="center" class="etiqueta_grid" nowrap="nowrap" >Created Date</td>
                 <td align="center" class="etiqueta_grid">Insured Name</td>
                 <td align="center" class="etiqueta_grid">E-mail</td>
