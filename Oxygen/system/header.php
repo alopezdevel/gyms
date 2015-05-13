@@ -36,9 +36,10 @@ if(1){
     <script>
         !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
     </script>
-    <link rel="stylesheet" href="../css/form.css" />
-    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="../css/font-awesome.css" rel="stylesheet" type="text/css"> 
+    <link href="../css/form.css" rel="stylesheet" type="text/css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
+    <script type="text/javascript" src="../js/bootstrap.js"></script> 
 </head>
 
 
