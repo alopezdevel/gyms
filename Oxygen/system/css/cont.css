@@ -236,7 +236,7 @@ button.send:hover{
 .frm-buscar2 input{height:33px!important;padding-left:30px;}
 /*-- buscar 3 con mas campos ---*/
 .frm-buscar3 input {width:49%!important;margin:0px!important;height:33px!important;padding-left:30px;clear: none!important;}
-/*.frm-buscar3 button{float: left;width: 32%!important;margin: 3px!important;} */
+.frm-buscar3 button{float: left;width: 32%!important;margin: 3px!important;} 
 
 /*---- formulario de consultas ---*/
 #form_consulta{
