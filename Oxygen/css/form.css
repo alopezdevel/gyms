@@ -1,6 +1,6 @@
-form{width:98%;margin:0 auto;clear:both;}
+﻿form{width:98%;margin:0 auto;clear:both;}
 form p{width:98%;margin:2px auto;}
-form input[type="text"], form input[type="tel"], form select, form textarea{
+form input[type=text], form input[type=tel], form select, form textarea{
 
     width:100%;
     height:40px;
@@ -21,7 +21,7 @@ form input[type="text"], form input[type="tel"], form select, form textarea{
     font-size:14px;
 }
 form fieldset{border: 0px;}  
-input[type="radio"]{
+input[type=radio]{
     width:20px;
     position: relative;
     height: 20px;
@@ -29,14 +29,14 @@ input[type="radio"]{
 }
 select{height:40px!important;width: 100%!important;}
 textarea{height:120px!important;padding-top:10px!important;}
-button{cursor: pointer;padding:10px 25px;}
+button{cursor: pointer;/*padding:10px 25px;*/}
 .frm-btns{
     width:99%;
     text-align:center;
     margin:0px auto 0;
 }
 .frm-btns button, .btn-1{
-    width: 140px;
+    min-width: 140px;
     margin: 0px auto;    
     height:40px;
     color:#ffffff;
@@ -45,7 +45,6 @@ button{cursor: pointer;padding:10px 25px;}
     font-weight:bold;
     cursor:pointer;
     float:right;
-
 }
 button, .btn-1{
     
@@ -166,6 +165,9 @@ form .success{
 	text-decoration:none!important;
 	color:#ffffff;
 	background: #f12e2f;
+}
+#frm-post-new .btn-1{
+	width:100%;
 }
 
 
