@@ -2,6 +2,13 @@
     session_start();  
     include("header.php");
 ?>
+<link rel="Stylesheet" type="text/css" href="lib/jhtmlarea/css/jHtmlArea.css">
+<script type="text/javascript" src="lib/jhtmlarea/jHtmlArea-0.8.js"></script>
+<script type="text/javascript">
+	 $(function() {
+	 	$("#txtDefaultHtmlArea").htmlarea(); // Initialize jHtmlArea's with all default values
+	 });
+</script>
 <div id="layer_content" class="main-section">  
     <div class="container"> 
         <div class="page-title">
@@ -12,6 +19,8 @@
         <div class="row">
             <div class="col-md-8">
                 <input type="text" maxlength="200" placeholder="Introduce el título aquí">
+                <hr>
+                <textarea id="txtDefaultHtmlArea"></textarea>
             </div>
             <div class="col-md-4">
                 <div>
@@ -31,7 +40,6 @@
 					<div class="autor-name"><b>Autor:</b><span></span></div>
 					<hr>
 					<button type="button" class="btn-1"><i class="fa fa-upload"></i> Publicar Entrada</button>
-                </div>
             </div>
         </div>
         </form>
