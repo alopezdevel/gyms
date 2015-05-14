@@ -180,10 +180,10 @@
                 	<span><strong>Lunes - Viernes:</strong> 8am - 10pm</span>
                 </div>
                 <ul class="social-link">
-                	<li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa-twitter"></i></a></li>
-                    <li class="facebook"><a href="https://www.facebook.com/" target="_blank"><i class="fa-facebook"></i></a></li>
-                    <li class="gplus"><a href="https://www.google.com/" target="_blank"><i class="fa-google-plus"></i></a></li>
-                    <li class="youtube"><a href="https://www.youtube.com/" target="_blank"><i class="fa-youtube"></i></a></li>
+                	<li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li class="facebook"><a href="https://www.facebook.com/OxigenFEX" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li class="gplus"><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="youtube"><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
         </div>
