@@ -292,7 +292,53 @@ function alta_usuario(){
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);    
 } 
- function confirm_user(){
+function actualizar_usuario(){        
+    $nombre = $_POST['nombre'];
+    $apellido_paterno = $_POST['apellido_paterno'];
+    $apellido_materno = $_POST['apellido_materno'];
+    $id = $_POST['id'];
+    $calle = $_POST['calle'];
+    $colonia = $_POST['colonia'];
+    $telefono = $_POST['telefono'];
+    $mensualidad = $_POST['mensualidad'];
+    $sexo = $_POST['sexo'];
+    $nivel = $_POST['nivel'];
+    $error = "0";
+    include("cn_usuarios_2.php");        
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $sql = "SELECT iIDSocio FROM ct_socio WHERE iIDSocio = '".$id."' LOCK IN SHARE MODE";
+    $result = $conexion->query($sql);
+    $NUM_ROWs_Usuario = $result->num_rows;
+    if ($NUM_ROWs_Usuario > 0) {         
+        $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' WHERE iIDSocio = '".$id."'";  
+        $conexion->query($sql);   
+        if ($conexion->affected_rows < 1 ) {
+            $error = "1";
+            $transaccion_exitosa = false;
+            $error = "1";
+            $mensaje = "El usuario no ha sufrido ninguna modificacion";
+            
+        }   
+    } else {   
+        $mensaje = "Error: $id no existe.";
+        $error = "1";
+        
+        $transaccion_exitosa = false;   
+    }
+    if($transaccion_exitosa){
+         $mensaje = "Se actualizo correctamente el socio.";
+         $conexion->commit();
+         $conexion->close();
+    }else{
+         $conexion->rollback();
+         $conexion->close(); 
+    }     
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);    
+} 
+function confirm_user(){
       $code = trim($_POST["code"]);
       include("cn_usuarios_2.php");
       //$conexion->begin_transaction();
@@ -306,6 +352,17 @@ function alta_usuario(){
            while ($usuario = $result->fetch_assoc()) {
                if($usuario['hActivado']  == "0"){
                    $sql = "UPDATE cu_control_acceso SET  hActivado = '1' WHERE sCodigoVal = '".$code."'";
+                   $conexion->query($sql);   
+                   if ($conexion->affected_rows < 1 ) {
+                        $error = "1";
+                        $mensaje = "Error de sistema general : Error interno";                        
+                   }else{
+                       $conexion->commit();
+                       $mensaje = "1"; //correct
+                       $usuario = $usuario['sDescripcion'];
+                       $correo =  $usuario['sUsuario'];
+                   }
+                   $sql = "UPDATE ct_socio SET  bActivo = '1' WHERE sCodigoVal = '".$code."'";
                    $conexion->query($sql);   
                    if ($conexion->affected_rows < 1 ) {
                         $error = "1";
@@ -334,4 +391,137 @@ function alta_usuario(){
       echo array2json($response);
       
   }
+function get_socios_asinc(){    
+    include("cn_usuarios_2.php");
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
+    $filtroQuery .= " WHERE iIDSocio != '' ";  
+    foreach($array_filtros as $key => $valor){
+        if($array_filtros[$key] != ""){
+            $campo_valor = explode("|",$array_filtros[$key]);
+            if ($campo_valor[0] =='bactivo'){
+                    $filtroQuery.= " AND  ".$campo_valor[0]."='".$campo_valor[1]."' ";
+            }else{
+                    $filtroQuery == "" ? $filtroQuery.= " AND  ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'": $filtroQuery.= " AND ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'";
+            }
+        }
+    }
+    
+    $sql = "SELECT DATE_FORMAT(dFecharegistro,  '%d/%m/%Y')    as dFechaIngreso, iIDSocio as ID, sCorreoSocio as correo, CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,CASE WHEN  bactivo = '0' THEN 'Pendiente'  ELSE 'Activado' END  as eEstatus FROM ct_socio ".$filtroQuery;
+    $result = $conexion->query($sql);
+    $NUM_ROWs_socios = $result->num_rows;    
+    if ($NUM_ROWs_socios > 0) {
+        //$items = mysql_fetch_all($result);      
+        while ($socios = $result->fetch_assoc()) {
+           if($socios["ID"] != ""){
+                 $htmlTabla .= "<tr>                            
+                                    <td>".$socios['dFechaIngreso']."</td>".             
+                                    "<td>".$socios['ID']."</td>".
+                                   "<td>".$socios['correo']."</td>".
+                                   "<td>".$socios['nombre']."</td>".                                                  
+                                   "<td>".$socios['eEstatus']."</td>".
+                                   "<td nowrap='nowrap' ><span onclick='Onborrar(\"".$socios['ID']."\")' class='ui-icon ui-icon-circle-close'></span></td>".
+                                   "<td nowrap='nowrap' ><span onclick='onEditarCliente(\"".$socios['ID']."\")' class='ui-icon ui-icon-mail-open'></span></td>".
+                                "</tr>"   ;
+             }else{                             
+                 $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".                       
+                                   "<td>&nbsp;</td>".                      
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;
+             }    
+        }
+       // $htmlTabla .="<tr>
+         //                           <td>&nbsp;</td>".
+           //                        "<td>&nbsp;</td>".                          
+             //                      "<td>&nbsp;</td>".
+               //                    "<td>&nbsp;</td>".
+                 //"</tr>"   ;
+        
+        $conexion->rollback();
+        $conexion->close();                                                                                                                                                                       
+    } else { 
+    $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;    
+        
+    }
+    $html_tabla = utf8_encode($html_tabla); 
+     $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+     echo array2json($response);
+}  
+function borrar_socio(){    
+     $id = $_POST['id'];
+     $error = "0";
+     include("cn_usuarios_2.php");
+     $conexion->autocommit(FALSE);
+     $transaccion_exitosa = true;
+     $sql = "DELETE FROM ct_socio WHERE iIDSocio = '".$id."'";
+     $conexion->query($sql);   
+     if ($conexion->affected_rows < 1 ) {
+        $transaccion_exitosa =false;
+     }
+     if($transaccion_exitosa){
+        $conexion->commit();
+        $conexion->close();
+     }else{
+        $conexion->rollback();
+        $conexion->close();
+        $mensaje = "A general system error ocurred : internal error";
+        $error = "1";
+     }
+     $response = array("mensaje"=>"$sql","error"=>"$error");   
+     echo array2json($response);
+}
+function consulta_socio_edicion(){
+    $id = $_POST['id'];
+    $filtroQuery = " WHERE iIDSocio ='".$id."'";
+    include("cn_usuarios_2.php");
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $sql = "SELECT sCorreoSocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sTelefonoSocio,eGenero,sCantidadPago FROM ct_socio  ".$filtroQuery;
+    $result = $conexion->query($sql);
+    $NUM_ROWs_socios = $result->num_rows;   
+    $error = "0";
+    if ($NUM_ROWs_socios > 0) {     
+        while ($socios = $result->fetch_assoc()) {
+            $correo = $socios['sCorreoSocio'];
+            $nombre = $socios['sNombreSocio'];
+            $apellido_paterno = $socios['sApellidoPaternoSocio'];
+            $apellido_materno = $socios['sApellidoMaternoSocio'];   
+            $calle = $socios['sCalleSocio'];
+            $colonia = $socios['sColoniaSocio'];
+            $telefono = $socios['sTelefonoSocio'];
+            $genero = $socios['eGenero'];
+            $cantidad = $socios['sCantidadPago'];
+        }
+    }else{
+        $error = "1";
+    }
+    $response = array("mensaje"=>"$sql",
+                      "error"=>"$error",
+                      "correo"=>"$correo",
+                      "nombre"=>"$nombre",
+                      "apellido_paterno"=>"$apellido_paterno",
+                      "apellido_materno"=>"$apellido_materno",
+                      "calle"=>"$calle",    
+                      "colonia"=>"$colonia",
+                      "telefono"=>"$telefono",
+                      "genero"=>"$genero",
+                      "cantidad"=>"$cantidad"
+                      );   
+    echo array2json($response);
+}
 ?>

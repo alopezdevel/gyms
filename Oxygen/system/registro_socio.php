@@ -1,5 +1,5 @@
 <?php session_start();    
-if ( !(  ($_SESSION["acceso"] == 'U' || $_SESSION["acceso"] == 'A' ) && $_SESSION["usuario_actual"] != "" && $_SESSION["usuario_actual"] != NULL  )  ){ //No ha iniciado session, redirecciona a la pagina de login
+if ( !(  ($_SESSION["acceso"] == 'A' ) && $_SESSION["usuario_actual"] != "" && $_SESSION["usuario_actual"] != NULL  )  ){ //No ha iniciado session, redirecciona a la pagina de login
     header("Location: login.php");
     exit;
 }else{ ?>
@@ -142,6 +142,7 @@ function onInsertarUsuario(){
         return true;                     
     }                    
  }
+ 
 </script>
 <div id="layer_content" class="main-section">
     <div class="container">

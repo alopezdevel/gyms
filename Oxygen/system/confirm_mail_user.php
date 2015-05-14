@@ -65,7 +65,7 @@ function confirmarUser(code){
   
   
   <div id="error" class="container txt-center" style='display:none;'>
-        <img src="/system/images/nav/img-logo.png" border="0" alt="img-logo.png (6,517 bytes)">
+       <img src="/system/images/img-logo.png" border="0" alt="img-logo.png (6,517 bytes)">
         <h1>El codigo de certificacion caduco</h1>
         <p>Esta operacion no puede ser procesada.Posiblemente tu cuenta ya ha sido activada. </p>
         <br /><br />

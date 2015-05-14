@@ -84,8 +84,8 @@ if(1){
                     </li>
                     <li class="submenu"><a href="#">Socios</a>
                         <ul> 
-                           <li><a href="socio_verificacion.php">Verificacion de asistencia del socio</a></li> 
-                           <li><a href="alta_socio.php">Catalogo de socios</a></li>
+                           <li><a href="socio_verificacion.php">Asistencia del socio</a></li> 
+                           <li><a href="alta_socio_2.php">Catalogo de socios</a></li>
                            <li><a href="registro_socio.php">Nuevo Socio</a></li>
                            <li><a href="pagar_mensualidad.php">Registrar Pago del socio</a></li>    
                         </ul> 
@@ -102,7 +102,7 @@ if(1){
                     </li>
                     <li class="submenu"><a href="#">Socios</a>
                         <ul> 
-                           <li><a href="socio_verificacion.php">Verificacion de asistencia del socio</a></li> 
+                           <li><a href="socio_verificacion.php">Asistencia del socio</a></li> 
                            <li><a href="alta_socio.php">Catalogo de socios</a></li>
                         </ul> 
                     </li>
