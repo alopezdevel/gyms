@@ -41,8 +41,8 @@ function onInsertarPost(){
     var valid = true;
     
     //tamano
-    valid = valid && checkLength( name, "nombre_titulo", 10, 200 );
-    valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
+    valid = valid && checkLength( nombre, "nombre_titulo", 10, 200 );
+    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
     
     valid = valid && checkLength( visibilidad, "visibilidad", "" );
     
