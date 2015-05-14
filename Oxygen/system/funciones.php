@@ -291,7 +291,7 @@ function alta_usuario(){
     }
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);    
-} 
+}            
 function actualizar_usuario(){        
     $nombre = $_POST['nombre'];
     $apellido_paterno = $_POST['apellido_paterno'];
@@ -424,6 +424,76 @@ function get_socios_asinc(){
                                    "<td>".$socios['eEstatus']."</td>".
                                    "<td nowrap='nowrap' ><span onclick='Onborrar(\"".$socios['ID']."\")' class='ui-icon ui-icon-circle-close'></span></td>".
                                    "<td nowrap='nowrap' ><span onclick='onEditarCliente(\"".$socios['ID']."\")' class='ui-icon ui-icon-mail-open'></span></td>".
+                                "</tr>"   ;
+             }else{                             
+                 $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".                       
+                                   "<td>&nbsp;</td>".                      
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;
+             }    
+        }
+       // $htmlTabla .="<tr>
+         //                           <td>&nbsp;</td>".
+           //                        "<td>&nbsp;</td>".                          
+             //                      "<td>&nbsp;</td>".
+               //                    "<td>&nbsp;</td>".
+                 //"</tr>"   ;
+        
+        $conexion->rollback();
+        $conexion->close();                                                                                                                                                                       
+    } else { 
+    $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;    
+        
+    }
+    $html_tabla = utf8_encode($html_tabla); 
+     $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+     echo array2json($response);
+}  
+function get_pagos_asinc(){    
+    include("cn_usuarios_2.php");
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
+    $filtroQuery .= " WHERE iIDSocio != '' ";  
+    foreach($array_filtros as $key => $valor){
+        if($array_filtros[$key] != ""){
+            $campo_valor = explode("|",$array_filtros[$key]);
+            if ($campo_valor[0] =='bactivo'){
+                    $filtroQuery.= " AND  ".$campo_valor[0]."='".$campo_valor[1]."' ";
+            }else{
+                    $filtroQuery == "" ? $filtroQuery.= " AND  ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'": $filtroQuery.= " AND ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'";
+            }
+        }
+    }
+    
+    $sql = "SELECT DATE_FORMAT(dFecharegistro,  '%d/%m/%Y')    as dFechaIngreso, iIDSocio as ID, sCorreoSocio as correo, CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,CASE WHEN  bactivo = '0' THEN 'Pendiente'  ELSE 'Activado' END  as eEstatus FROM ct_socio ".$filtroQuery;
+    $result = $conexion->query($sql);
+    $NUM_ROWs_socios = $result->num_rows;    
+    if ($NUM_ROWs_socios > 0) {
+        //$items = mysql_fetch_all($result);      
+        while ($socios = $result->fetch_assoc()) {
+           if($socios["ID"] != ""){
+                 $htmlTabla .= "<tr>                            
+                                    <td>".$socios['dFechaIngreso']."</td>".             
+                                    "<td>".$socios['ID']."</td>".
+                                   "<td>".$socios['correo']."</td>".
+                                   "<td>".$socios['nombre']."</td>".                                                  
+                                   "<td>".$socios['eEstatus']."</td>".
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarPago(\"".$socios['ID']."\")' class='ui-icon print'></span></td>".
                                 "</tr>"   ;
              }else{                             
                  $htmlTabla .="<tr>
