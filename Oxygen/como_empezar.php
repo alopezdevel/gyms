@@ -37,12 +37,12 @@
     <div class="container">
         <a href="index.php" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
         <ul class="top-nav">
-            <li class="i-login"><a href="system/login.php" class="icon" title="Log In"><span></span></a></li>
-            <li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" class="icon" title="Siguenos en Facebook!" target="_blank"><span></span></a></li>
-            <li class="i-twitter"><a href="https://twitter.com/" class="icon" title="Siguenos en Twitter!"><span></span></a></li>
-            <li class="i-youtube"><a href="https://www.youtube.com/" class="icon" title="Siguenos en YouTube!" target="_blank"><span></span></a></li>
-            <li class="i-instagram"><a href="https://instagram.com/" class="icon" title="Siguenos en Instagram!"><span></span></a></li>
-            <li class="i-google"><a href="https://www.google.com/" class="icon" title="Siguenos en Google +!"><span></span></a></li>
+			<li class="i-login"><a href="system/login.php" title="Log In"><span><i class="fa fa-user"></i></span></a></li>
+			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
+			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
+			<li class="i-youtube"><a href="https://www.youtube.com/" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
+			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
+			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
         </ul>
         <ul class="main-nav">
             <li><a href="index.php">Inicio</a></li>
