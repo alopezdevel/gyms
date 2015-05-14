@@ -335,10 +335,13 @@ p{line-height:24px;margin:0;padding:15px 0px; font-size: 1.2em;}
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
     background:#f2f2f2;
-    
+    width: 30px;
+  	height: 30px;
+  	text-align: center;
     
 }
-.top-nav li a{color:#7c7c7c;text-decoration:none;}
+.top-nav li .fa{color:#7c7c7c;text-decoration:none;}
+.top-nav li:hover .fa{color:#ffffff;}
 .icon span{width:20px; height:25px;display:block;}
 .top-nav li .icon span{background:url('../images/nav/nav_top.png') no-repeat;-moz-background-size:20px auto;-o-background-size: 20px auto;-webkit-background-size: 20px auto;background-size: 20px auto;}
 .top-nav li.i-login:hover{background:#5c86bd;}
