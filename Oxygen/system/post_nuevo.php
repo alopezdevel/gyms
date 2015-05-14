@@ -41,7 +41,7 @@ function onInsertarPost(){
     var valid = true;
     
     //tamano
-    valid = valid && checkLength( nombre, "nombre_titulo", 10, 200 );
+    valid = valid && checkLength( nombre, "Titulo", 10, 200 );
     valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
     
     valid = valid && checkLength( visibilidad, "visibilidad", "" );
@@ -78,7 +78,7 @@ function checkRegexp( o, regexp, n ) {
  }
 function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
-        actualizarMensajeAlerta( "Length of " + n + " must be between " + min + " and " + max + "."  );
+        actualizarMensajeAlerta( "La longitud del " + n + " debe ser por lo menos entre " + min + " y " + max + "."  );
         o.addClass( "error" );
         o.focus();
         return false;    
