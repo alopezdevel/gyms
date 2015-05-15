@@ -58,9 +58,9 @@ if(1){
 		<ul class="top-nav"> 
 			<li>
 			<?php if(isset($_SESSION['usuario_actual'])){ ?>
-				<a href="#" title="Log In"><i class="fa fa-user"></i><span> <?php echo $_SESSION['usuario_actual']; ?></span></a>
+				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> <?php echo $_SESSION['usuario_actual']; ?></span></a>
 			<?php }else{?>
-				<a href="#" title="Log In"><i class="fa fa-user"></i><span> Nombre de Usuario</span></a>
+				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> Nombre de Usuario</span></a>
 			<?php }?>
 			</li>
 			<li><a href="login.php" title="Log Out"><i class="fa fa-sign-out"></i><span> Salir</span></a></li>
