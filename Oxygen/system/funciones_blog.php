@@ -89,7 +89,7 @@ function post_nuevo(){
             mysql_query("COMMIT");     
             mysql_close($dbconn);
         } else {
-            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $mensaje = "Error al guardar los datos. Favor de verificarlos 1.";
             $error = "1";  
             mysql_query("ROLLBACK");
             mysql_close($dbconn);

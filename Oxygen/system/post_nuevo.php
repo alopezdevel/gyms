@@ -28,7 +28,7 @@ function onInsertarPost(){
          
     //Variables
     var nombre = $("#nombre_titulo");
-    var contenido_blog = $('#contenido_blog').htmlarea('html');
+    var contenido_blog = $('#contenido_blog').htmlarea('html').toString();;
     var visibilidad = $("#visibilidad");
     var categoria = $("#categoria");
     todosloscampos = $( [] ).add( nombre_titulo ).add( visibilidad ).add( categoria ).add(contenido_blog);
@@ -59,12 +59,12 @@ function onInsertarPost(){
 	//} 
 	
 	if ( valid ) {
-        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog.htmlarea('html');, visibilidad: visibilidad.val(), categoria: categoria.value(), usuario_actual: usuario_actual.val()},
+        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog, visibilidad: visibilidad.val(), categoria: categoria.val(), usuario_actual: usuario_actual},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
                          $("#nombre_titulo").focus();
-                         email.addClass( "error" ); 
+                         //email.addClass( "error" ); 
                     break;
              case "0":   actualizarMensajeAlerta("Todos los campos son requeridos.");
                          $("#nombre_titulo").val("");
