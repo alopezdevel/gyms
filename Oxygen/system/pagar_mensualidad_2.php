@@ -7,6 +7,29 @@ include("header.php");?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">          
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '<Ant',
+ nextText: 'Sig>',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
+<script>     
 function llenadoGrid(){
     var filtro = "";  //DATE_FORMAT(dFechaIngreso,  '%m/%d/%Y')         
     if($('#filtro_fecha_creacion').val() !=""){     
@@ -57,8 +80,7 @@ function inicio(){
       width: 1296,                                 
       modal: true,         
       close: function() {
-        //form[ 0 ].reset();
-        //allFields.removeClass( "ui-state-error" );
+       $("#body_historial").empty().append("<td></td><td></td><td></td><td></td><td></td><td></td>");
       }
     }); 
      //focus
@@ -86,29 +108,43 @@ function inicio(){
     $("#filtro_correo_socio").keyup(onkeyup);
     $("#filtro_nombre_socio").keyup(onkeyup);  
     $("#filtro_Estatus_Cuenta" ).selectmenu({ change: function( event, ui ) { onkeyup(); }});
-    llenadoGrid();   
+    llenadoGrid();
+     
      $("#tabs" ).tabs({                                                                  
             activate:function(event,ui){    
-                     var $activeTab = $('#tabs').tabs('option', 'active');      
+                     var $activeTab = $('#tabs').tabs('option', 'active');                      
                      if($activeTab == "1"){
-                         onCargarHistorial($("#id_pago").val())
+                         
                      }
                     
                     }                                                                          
      });  
-    
+     $("#pago").keyup(onActualizarPago);
+   $( "#check_promocion" ).button();  
 }
 function onkeyup(){
     llenadoGrid();
 }   
+function onActualizarPago(){
+    if( $('#check_promo').attr('checked') ) {
+    }else{
+        $("#pago_final").val($("#pago").val());
+    }
+    
+    
+    
+}
 function onCargarHistorial(id_socio){
     if(id_socio != ""){
         $.post("funciones.php", { accion: "get_pago_asinc",id_socio:id_socio},
         function(data){ 
              switch(data.error){
-             case "1":  
+             case "1": $("#body_historial").empty().append("<td></td><td></td><td></td><td></td><td></td><td></td>");  
                     break;
-             case "0":   
+             case "0":  
+                       $("#body_historial").empty().append(data.tabla);
+                       $("#body_historial tr:even").addClass('gray');
+                       $("#body_historial tr:odd").addClass('white');   
                     break;  
              }
          }
@@ -120,7 +156,15 @@ function onRegistrarMensualidad(){
 }           
 function onRegistrarPago(id){
     $("#id_pago").val(id);
-    $( "#dialog-user" ).dialog("open");
+    onCargarHistorial($("#id_pago").val());
+    $( "#dialog-user" ).dialog("open"); 
+    var index = "0";
+    $( "#filtro_fecha_inicial" ).datepicker({ minDate: -30,defaultDate: "+1w",changeMonth: false,numberOfMonths: 1, onClose: function( selectedDate ) { $( "#filtro_fecha_final" ).datepicker( "option", "minDate", selectedDate ); },dateFormat: 'dd/mm/yy'});
+    $( "#filtro_fecha_final" ).datepicker({defaultDate: "+1w",changeMonth: false, numberOfMonths: 1,onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      },dateFormat: 'dd/mm/yy'});
+    //$( "#filtro_fecha_inicial" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
+    $('#tabs').tabs("option", "active", 0);    
 }
 
 
@@ -166,7 +210,7 @@ function onFocus(){
     <div class="container"> 
         <div class="page-title">
             <h1>Socios</h1>
-            <h2>Registrar Pago del Socios</h2>
+            <h2>Pagos</h2>
         </div>
         
         
@@ -221,7 +265,24 @@ function onFocus(){
             <div id="tabs-1">
                 <form method="post" action="">
                     <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
-                    <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >         
+                    <fieldset>
+                        <input  id="filtro_fecha_inicial" class="texto" type="text" placeholder="Fecha inicial">
+                        <input   id="filtro_fecha_final"  class="texto"  type="text" placeholder="Fecha final">
+                        <input  id = "pago" name="pago" class="texto" type="text" placeholder="Monto a pagar $$$">
+                        <br />
+                        <br />  
+                        <input type="checkbox" id="check_promo"><label for="check1">Promocion</label>                          
+                        <input  id = "promocion" name="promocion" class="texto" type="text" placeholder="Cantidad promocion $$$">                        
+                        <br />
+                        <br />
+                        <label>Total a pagar </label>
+                        <input  id = "pago_final" name="pago_final" class="texto" type="text" placeholder="Pago Calculado" readonly disabled>
+                        <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >                             
+                        <fieldset>                             
+                            <input  id = "button_aceptar" name="button_aceptar" class="btn_register btn_4" type="button" value="Registrar Pago">
+                            <input  id = "button_cancelar" name="button_cancelar" class="btn_register btn_4" type="button" value="Cancelar Pago">
+                        </fieldset>
+                    </fieldset>
                         
                 </form>
             </div>
@@ -229,20 +290,24 @@ function onFocus(){
                 <table id="data_grid_pagos" class="data_grid"> 
                     <thead>                                                                                       
                         <tr id="grid-head2"> 
-                            <td align="center" class="etiqueta_grid">ID socio</td>
-                            <td align="center" class="etiqueta_grid">Nombre del socio</td>
+                            <td align="center" class="etiqueta_grid">Folio del Pago</td>
+                            <td align="center" class="etiqueta_grid">Correo</td>
+                            <td align="center" class="etiqueta_grid">Nombre</td>
                             <td align="center" class="etiqueta_grid">Fecha de pago</td>
+                            <td align="center" class="etiqueta_grid">Cantidad</td>
                             <td align="center" class="etiqueta_grid">Fecha de vencimiento</td>
                         </tr>
-                    </thead>
-                    <tbody id="body_historial">
-                        <tr > 
-                            <td align="center" >&nbsp;</td>
-                            <td align="center" >&nbsp;</td>
-                            <td align="center" >&nbsp;</td>
-                            <td align="center" >&nbsp;</td>
-                        </tr>
-                    </tbody>  
+                    </thead>   
+                    <form id="form_pagos_socio">
+                        <tbody id="body_historial">
+                            <tr > 
+                                <td align="center" >&nbsp;</td>
+                                <td align="center" >&nbsp;</td>
+                                <td align="center" >&nbsp;</td>
+                                <td align="center" >&nbsp;</td>
+                            </tr>
+                        </tbody>  
+                    </form>
                 </table>
             </div>
             

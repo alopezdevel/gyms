@@ -598,9 +598,9 @@ function get_pago_asinc(){
     include("cn_usuarios_2.php");
     $id = $_POST['id_socio'];
     //$conexion->begin_transaction();
-    $conexion->autocommit(FALSE);
+    $conexion->autocommit(FALSE);                        
     $transaccion_exitosa = true;   
-    $sql = "SELECT cb_pagos_socio.iFolio as id_pago, ct_socio.sNombreSocio as nombre, DATE_FORMAT(cb_pagos_socio.dFechaPago, '%dd/%mm/&yyyy') as fecha_pago, DATE_FORMAT(cb_pagos_socio.dFechaVencimiento, '%dd/%mm/&yyyy') as fecha_vencimiento FROM cb_pagos_socio LEFT JOIN ct_socio ON cb_pagos_socio.iIDSocio = ct_socio.iIDSocio WHERE cb_pagos_socio.iIDSocio='".$id."' ";
+    $sql = "SELECT cb_pagos_socio.iFolio as id_pago,ct_socio.sCorreoSocio as correo, iCantidadPago as pago_cant,  CONCAT(ct_socio.sNombreSocio,' ',ct_socio.sApellidoPaternoSocio,' ', ct_socio.sApellidoMaternoSocio)  as nombre, DATE_FORMAT(cb_pagos_socio.dFechaPago, '%d/%m/%Y') as fecha_pago, DATE_FORMAT(cb_pagos_socio.dFechaVencimiento, '%d/%m/%Y') as fecha_vencimiento FROM cb_pagos_socio LEFT JOIN ct_socio ON cb_pagos_socio.iIDSocio = ct_socio.iIDSocio WHERE cb_pagos_socio.iIDSocio='".$id."' ";
     $result = $conexion->query($sql);
     $NUM_ROWs_pagos = $result->num_rows; 
     $error = "0";
@@ -608,10 +608,12 @@ function get_pago_asinc(){
         while ($pagos = $result->fetch_assoc()) {
            if($pagos["id_pago"] != ""){
                  $htmlTabla .= "<tr>                            
-                                    <td>".$socios['id_pago']."</td>".             
-                                   "<td>".$socios['nombre']."</td>".
-                                   "<td>".$socios['fecha_pago']."</td>".
-                                   "<td>".$socios['fecha_vencimiento']."</td>".                                                                                     
+                                    <td>".$pagos['id_pago']."</td>".             
+                                   "<td>".$pagos['correo']."</td>".
+                                   "<td>".$pagos['nombre']."</td>".
+                                   "<td>".$pagos['fecha_pago']."</td>".
+                                   "<td> \$ ".$pagos['pago_cant']."</td>".
+                                   "<td>".$pagos['fecha_vencimiento']."</td>".                                                                                     
                                 "</tr>"   ;
              }else{// el pago esta mal registrado                             
                  $htmlTabla .="<tr>
