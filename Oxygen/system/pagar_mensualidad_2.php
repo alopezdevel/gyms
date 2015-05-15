@@ -102,7 +102,19 @@ function onkeyup(){
     llenadoGrid();
 }   
 function onCargarHistorial(id_socio){
-    alert(id_socio);
+    if(id_socio != ""){
+        $.post("funciones.php", { accion: "get_pago_asinc",id_socio:id_socio},
+        function(data){ 
+             switch(data.error){
+             case "1":  
+                    break;
+             case "0":   
+                    break;  
+             }
+         }
+         ,"json");
+    }
+    
 }
 function onRegistrarMensualidad(){
 }           
