@@ -33,6 +33,8 @@ function onInsertarPost(){
     var categoria = $("#categoria");
     todosloscampos = $( [] ).add( nombre_titulo ).add( visibilidad ).add( categoria ).add(contenido_blog);
     todosloscampos.removeClass( "error" );
+    
+    var usuario_actual = <?php echo json_encode($_SESSION['usuario_actual']);?>
 
     $("#nombre_titulo").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" ); 
@@ -43,12 +45,41 @@ function onInsertarPost(){
     //tamano
     valid = valid && checkLength( nombre, "Titulo", 10, 200 );
     valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
-    
-    valid = valid && checkLength( visibilidad, "visibilidad", "" );
-    
-    valid = valid && checkLength( categoria, "categoria", "" );
-    
-    valid = valid && checkLength( contenido_blog, "contenido_blog", "" );  
+        
+	//if(contenido_blog != "" && valid){
+    	
+    	//valid = true;
+    	//return false;
+		
+	//}else{
+	
+	//	actualizarMensajeAlerta( "Por favor, escribe algun contenido para la entrada." );
+		//valid = false;
+		//return false;
+	//} 
+	
+	if ( valid ) {
+        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog.val(), visibilidad: visibilidad.val(), categoria: categoria.value(), usuario_actual: usuario_actual.val()},
+        function(data){ 
+             switch(data.error){
+             case "1":   actualizarMensajeAlerta( data.mensaje);
+                         $("#nombre_titulo").focus();
+                         email.addClass( "error" ); 
+                    break;
+             case "0":   actualizarMensajeAlerta("Todos los campos son requeridos.");
+                         $("#nombre_titulo").val("");
+                         $("#contenido_blog").htmlarea('html', '');
+                         $("#visibilidad option[value='']").attr('selected',true);
+                         $("#categoria option[value='']").attr('selected',true);
+                         $("#nombre_titulo").focus();
+                         alert("Gracias, has creado una nueva entrada en tu Blog");
+                         actualizarMensajeAlerta("Gracias, has creado una nueva entrada en tu Blog");
+                         location.href= "index.php";
+                    break;  
+             }
+         }
+         ,"json"); 
+    }   
          
 }
 
@@ -96,7 +127,7 @@ function checkLength( o, n, min, max ) {
         <form id="frm-post-new" action="" method="post">
         <div class="row">
             <div class="col-md-8">
-                <p class="mensaje_valido">&nbsp;All form fields are required.</p>
+                <p class="mensaje_valido">&nbsp;Todos los campos son requeridos.</p>
                 <input id="nombre_titulo" type="text" maxlength="200" placeholder="Introduce el título aquí">
                 <hr>
                 <textarea id="contenido_blog"></textarea>
@@ -105,11 +136,13 @@ function checkLength( o, n, min, max ) {
                 <div>
                     <h5><i class="fa fa-eye"></i> Visibilidad</h5>
                     <select id="visibilidad" name="visibilidad">
+                    	<option value="">Selecciona una opcion...</option>
 						<option value="1">Público</option>
 						<option value="2">Privado</option>
 					</select>
 					<h5><i class="fa fa-check-square-o"></i> Categoría</h5>
 					<select id="categoria" name="categoria">
+                    	<option value="">Selecciona una opcion...</option>
 						<option value="1">Blog</option>
 						<option value="2">Noticias</option>
 					</select>
