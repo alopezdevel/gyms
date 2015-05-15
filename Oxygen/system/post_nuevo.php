@@ -59,7 +59,7 @@ function onInsertarPost(){
 	//} 
 	
 	if ( valid ) {
-        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog.val(), visibilidad: visibilidad.val(), categoria: categoria.value(), usuario_actual: usuario_actual.val()},
+        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog, visibilidad: visibilidad.val(), categoria: categoria.value(), usuario_actual: usuario_actual.val()},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
