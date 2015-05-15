@@ -44,7 +44,7 @@ function onInsertarPost(){
     
     //tamano
     valid = valid && checkLength( nombre, "Titulo", 10, 200 );
-    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
+    //valid = valid && checkRegexp( nombre, /^[a-z0-9_-]{3,16}$/, "El Titulo de la entrada debe contener: a-z, 0-9, espacios y debe comenzar con una letra." );
         
 	//if(contenido_blog != "" && valid){
     	

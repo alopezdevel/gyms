@@ -76,7 +76,7 @@ function post_nuevo(){
     if (mysql_num_rows($result) > 0) {
         
         @mysql_free_result($result);
-        $sql= "INSERT INTO ct_blog_noticia SET sNombreTitulo = '".$nombre_titulo."', eCategoria = '".$categoria."', eVisibilidad = '".$visibilidad."', sAutor = '".$usuario_actual."', bContenido = '".$contenido_blog."'";
+        $sql= "INSERT INTO ct_blog_noticia SET sNombreTitulo = '".$nombre_titulo."', eCategoria = '".$categoria."', eVisibilidad = '".$visibilidad."', sAutor = '".$usuario_actual."', bContenido = '".$contenido_blog."', dFEchaCreacion = NOW()";
 
         mysql_query($sql, $dbconn);
         if ( mysql_affected_rows() < 1 ) {
@@ -105,5 +105,40 @@ function post_nuevo(){
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
 } 
-  
+function get_entradas(){
+    
+    $filtro_informacion = trim($_POST['filtroInformacion']);
+     
+    include("cn_usuarios.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido FROM ct_blog_noticia WHERE eCategoria = '".$filtro_informacion."'";
+    $result = mysql_query($sql, $dbconn);
+    $htmlTabla = "";
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($entradas = mysql_fetch_array($result)) {
+           if($entradas["sNombreTitulo"] != ""){
+                 $htmlTabla .= "<div>
+                                    <h2>".$entradas["sNombreTitulo"]."</h2>".
+                                    "<p class=\"fecha\"><span>Publicado el </span>".$entradas["dFechaCreacion"]." </p>".
+                                    "<div class=\"cont\">".$entradas["bContenido"]."</div>".
+                                    "<p class=\"autor-categoria\"><span>Publicado en </span>".$entradas["eCategoria"]."<span> por </span>".$entradas["sAutor"]."</p>
+                                    <hr></div>";
+             }else{                             
+                 $htmlTabla .="<div></div>";
+             }    
+        }
+        
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);                                                                                                                                                                      
+    } else{
+        
+         $htmlTabla .="<div></div>";
+    }
+        $html_tabla = utf8_encode($html_tabla); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        echo array2json($response);
+
+} 
 ?>

@@ -17,7 +17,6 @@
   width: 0;
   height: 0;
 }
-
 .clearfix:before,
 .clearfix:after {
   content: '\0020';
@@ -27,18 +26,13 @@
   width: 0;
   height: 0;
 }
-
 .clearfix:after {
   clear: both;
 }
-
 .figure{ margin:0px;}
-
 img{ max-width:100%;}
-
 a, a:hover, a:active{ outline:0px !important}
 a:hover{text-decoration:none;}
-
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../fonts/fontawesome-webfont.eot?v=4.1.0');
@@ -746,7 +740,21 @@ border: 2px solid #fff;
 .copyright{color:#b4c7e3;font-size:0.9em;display:block;text-align:center;height:24px;margin:0;padding:4px 0px;}
 .copyright a{color:#7cc576;font-weight:600;text-decoration: none;transition:all 0.3s ease-in-out;-moz-transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;}
 .copyright a:hover {color: #fff;}
-
+/*------BLOG-----*/
+#blog-list h2{
+   
+     font-size: 23px;
+     color:#1b1b1b;
+     text-transform: none;
+     text-shadow:1px 1px 1px #ffffff;
+     clear: both;
+     padding: 5px 0px; 
+    
+}
+#blog-list .cont{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight: normal;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode";}
+.cont h1, .cont h2, .cont h3, .cont h4, .cont h5, .cont h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;}
+#blog-list .fecha span, #blog-list .autor-categoria span{color: #323232; font-style: italic;}
+#blog-list .autor-categoria{color:#2d60a1;}
 
 
 /* Animation Timers
