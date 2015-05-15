@@ -256,8 +256,6 @@ p{line-height:24px;margin:0;padding:15px 0px; font-size: 1.2em;}
 ---------------------------------*/
 .main-nav-outer{
 	padding:0px;
-	/*border-bottom:1px solid #ffffff;*/
-	/*box-shadow:0 4px 5px -3px #676767;*/
 	position:relative;
 	background: rgba(245,245,245,1);
 	background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 38%, rgba(255,255,255,1) 100%);
@@ -272,7 +270,7 @@ p{line-height:24px;margin:0;padding:15px 0px; font-size: 1.2em;}
 }
 .main-nav{
 	text-align:center;
-	margin:0px;
+	margin: 3px 0px 0px;
 	padding:0;
 	list-style:none;
 	float: right;
