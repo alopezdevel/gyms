@@ -19,9 +19,8 @@
                 dataType : "json",
                 success : function(data){                               
                     $(fn_blog.blog_list).empty().append(data.tabla);
-                        limite_text = $(fn_blog.blog_list + ' .cont').text();
-                                if(limite_text.length > 150){
-                                    limite = limite_text.substr(0,150)+" ...";
+                                if($(fn_blog.blog_list + ' .cont').text().length > 150){
+                                    limite = $(fn_blog.blog_list + ' .cont').text().substr(0,150)+" ...";
                                     $(fn_blog.blog_list + ' .cont').text(limite);
                                 }
                     
