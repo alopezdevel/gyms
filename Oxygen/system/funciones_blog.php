@@ -112,18 +112,31 @@ function get_entradas(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido FROM ct_blog_noticia WHERE eCategoria = '".$filtro_informacion."'";
+    $sql = "SELECT sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido FROM ct_blog_noticia WHERE eCategoria = '".$filtro_informacion."' AND eVisibilidad = 'publico'";
     $result = mysql_query($sql, $dbconn);
     $htmlTabla = "";
     
     if (mysql_num_rows($result) > 0) { 
         while ($entradas = mysql_fetch_array($result)) {
            if($entradas["sNombreTitulo"] != ""){
-                 $htmlTabla .= "<div>
+                $categoria="";
+                $colorcategoria= "";
+                 switch ($entradas["eCategoria"]) {
+                    case "blog":
+                        $categoria = "fa-book";
+                        $colorcategoria = "blog-categoria";
+                        break;
+                    case "noticia":
+                        $categoria = "fa-newspaper-o";
+                        $colorcategoria = "noticia-categoria";
+                        break;
+                 }
+        
+                 $htmlTabla .= "<div class=\"blog-entrada\">
+                                    <span class=\"".$colorcategoria."\"><i class=\"fa ".$categoria."\"></i> ".$entradas["eCategoria"]."</span>
                                     <h2>".$entradas["sNombreTitulo"]."</h2>".
-                                    "<p class=\"fecha\"><span>Publicado el </span>".$entradas["dFechaCreacion"]." </p>".
                                     "<div class=\"cont\">".$entradas["bContenido"]."</div>".
-                                    "<p class=\"autor-categoria\"><span>Publicado en </span>".$entradas["eCategoria"]."<span> por </span>".$entradas["sAutor"]."</p>
+                                    "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>
                                     <hr></div>";
              }else{                             
                  $htmlTabla .="<div></div>";

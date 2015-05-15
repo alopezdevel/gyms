@@ -63,11 +63,11 @@ body {
     background:url('../images/headers/img_header.png') left bottom no-repeat;
 } 
 h2{
-	font-size:28px;
+	font-size:35px!important;
 	color:#464646;
-	font-family:Calibri,Arial, Helvetica, sans-serif;
+	font-family:Calibri,Arial, Helvetica, sans-serif!important;
 	text-shadow:1px 1px 1px #ffffff;
-	font-weight:700;
+	font-weight:700!important;
 	letter-spacing: -1px;
 	margin:0 0 15px 0;
 	text-align:left;
@@ -363,12 +363,7 @@ p{line-height:24px;margin:0;}
 	padding:40px 0 110px;
 	clear:both;
 }
-.container{
-	
-	width:98%;
-	margin:0 auto;
-	
-}
+.container{width:98%;margin:0 auto;}
 /* Featured Work
 ---------------------------------*/
 .featured-work{
@@ -403,39 +398,6 @@ p{line-height:24px;margin:0;}
 	color:#777777;
 	font-style:normal;
 }
-.featured-box-col2{ overflow:hidden;}
-.featured-box.magic{
-	background:url("../Knight-Bootstrap-Theme/img/magic.png") left top no-repeat;
-}
-.featured-box.packaged{
-	background:url("../Knight-Bootstrap-Theme/img/packaged.png") left top no-repeat;
-}
-.featured-box.seo{
-	background:url("../Knight-Bootstrap-Theme/img/seo.png") left top no-repeat;
-}
-.Learn-More{
-	display:inline-block;
-	padding:0 5px 0 0;
-	color:#7cc576;
-	font-size:16px;
-	text-transform:uppercase;
-	font-family: 'Montserrat', sans-serif;
-	font-weight:400;
-	line-height:24px;
-	transition:all 0.3s ease-in-out;
-	-moz-transition:all 0.3s ease-in-out;
-	-webkit-transition:all 0.3s ease-in-out;
-	display: none;
-}
-.Learn-More i{ 
-	padding-right:15px;
-}
-
-.Learn-More:hover, .Learn-More:focus{ 
-	text-decoration:none;
-	color: #111;
-}
-
 
 /* Portfolio
 ---------------------------------*/
@@ -741,20 +703,39 @@ border: 2px solid #fff;
 .copyright a{color:#7cc576;font-weight:600;text-decoration: none;transition:all 0.3s ease-in-out;-moz-transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;}
 .copyright a:hover {color: #fff;}
 /*------BLOG-----*/
+.jHtmlArea iframe{height:242px!important;}
+#blog-list{
+	
+  background: #ffffff!important;
+  -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  cursor:default;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;
+}
+.blog-entrada{width:100%;margin: 10px auto;padding: 20px 0px 0px;}
 #blog-list h2{
    
-     font-size: 23px;
+     font-size: 23px!important;
+     letter-spacing:0px!important;
      color:#1b1b1b;
      text-transform: none;
      text-shadow:1px 1px 1px #ffffff;
      clear: both;
-     padding: 5px 0px; 
+     padding: 0px 0px 5px;
+  	 margin: 0px 0px 10px;
+     border:0px!important;
+     cursor:pointer; 
     
 }
-#blog-list .cont{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight: normal;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode";}
-.cont h1, .cont h2, .cont h3, .cont h4, .cont h5, .cont h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;}
-#blog-list .fecha span, #blog-list .autor-categoria span{color: #323232; font-style: italic;}
-#blog-list .autor-categoria{color:#2d60a1;}
+#blog-list h2:hover{color:#2288ca;}
+#blog-list .cont{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight: normal;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+.cont h1, .cont h2, .cont h3, .cont h4, .cont h5, .cont h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+#blog-list .fecha span, #blog-list .autor span{color: #565656; font-style: italic;font-weight:normal!important;}
+#blog-list .autor, #blog-list .fecha{color:#2d60a1;font-weight:bold;font-size:.8em!important;}
+#blog-list .blog-categoria , #blog-list .noticia-categoria{text-transform:uppercase;font-size:.9em!important;}
+#blog-list .blog-categoria{color:#31bfe2;}
+#blog-list .noticia-categoria{color:#30ceab;}
 
 
 /* Animation Timers

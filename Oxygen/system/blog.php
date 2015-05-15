@@ -19,9 +19,13 @@
                 dataType : "json",
                 success : function(data){                               
                     $(fn_blog.blog_list).empty().append(data.tabla);
-                    //$(fn_blog.blog_list+" tbody tr:even").addClass('gray');
-                    //$(fn_blog.blog_list+" tbody tr:odd").addClass('white');
+                        limite_text = $(fn_blog.blog_list + ' .cont').text();
+                                if(limite_text.length > 150){
+                                    limite = limite_text.substr(0,150)+" ...";
+                                    $(fn_blog.blog_list + ' .cont').text(limite);
                                 }
+                    
+                    }
             }); 
         }    
     }
@@ -35,10 +39,11 @@
 	<div id="blog" class="container"> 
         <div class="page-title">
             <h1>Blog</h1>
-            <h2>Lo mas reciente</h2>
+            <h2>Casos más recientes</h2>
         </div>
+	<div id="blog-list" class="col-md-8">
 	</div>
-	<div id="blog-list" class="container">
+    <div class="col-md-4"></div>
 	</div> 
 <?php include("footer.php"); ?> 
 </div> 
