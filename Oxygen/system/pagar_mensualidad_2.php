@@ -118,17 +118,135 @@ function inicio(){
                      }
                     
                     }                                                                          
-     });  
-     $("#pago").keyup(onActualizarPago);
-   $( "#check_promocion" ).button();  
+     }); 
+     //Permitir solo numeros
+     $("#pago").keydown(function(event) {
+           if(event.shiftKey)
+           {
+                event.preventDefault();
+           }
+         
+           if (event.keyCode == 46 || event.keyCode == 8)    {
+           }
+           else {
+                if (event.keyCode < 95) {
+                  if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                  }
+                } 
+                else {
+                      if (event.keyCode < 96 || event.keyCode > 105) {
+                          event.preventDefault();
+                      }
+                }
+              }
+     });
+     $("#promocion").keydown(function(event) {
+           if(event.shiftKey)
+           {
+                event.preventDefault();
+           }
+         
+           if (event.keyCode == 46 || event.keyCode == 8)    {  
+           }else{
+                if (event.keyCode < 95) {
+                  if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                  }
+                }else{
+                      if (event.keyCode < 96 || event.keyCode > 105) {
+                          event.preventDefault();
+                      }
+                }
+           }                
+              //if($(this).is(':checked')){
+     }); 
+     $("#promocion").keyup(function(event) {
+           if(event.shiftKey)
+           {
+                event.preventDefault();
+           }
+         
+           if (event.keyCode == 46 || event.keyCode == 8)    {  
+               if($("#radio1").is(':checked')){                   
+                          $("#pago_final").val( $("#pago").val() -     $(this).val() );    
+               }
+               if($("#radio2").is(':checked')){                   
+                          $("#pago_final").val(  $("#pago").val() -     ($(this).val()/100* $("#pago").val()) );    
+               }
+               if($("#pago_final").val()< 1){
+                   $("#pago_final").val("0");
+               }   
+               $("#pago_final").val(   Number( $("#pago_final").val()  ).toFixed(2)   );                    
+               
+           }else{
+                if (event.keyCode < 95) {
+                  if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                  }else{ 
+                       
+                      if($("#radio1").is(':checked')){                   
+                          $("#pago_final").val( $("#pago").val() -     $(this).val() );    
+                      }
+                      if($("#radio2").is(':checked')){                   
+                          $("#pago_final").val(  $("#pago").val() -     ($(this).val()/100* $("#pago").val()) );    
+                      }
+                      if($("#pago_final").val()<1){
+                        $("#pago_final").val("0");
+                      }
+                      $("#pago_final").val(   Number( $("#pago_final").val()  ).toFixed(2)   );                    
+                      
+                  }
+                }else{
+                      if (event.keyCode < 96 || event.keyCode > 105) {
+                          event.preventDefault();
+                      }
+                }
+           }                
+              //if($(this).is(':checked')){
+     }); 
+     
+     $("#pago").keyup(onActualizarPago);   
+   //check promociones
+   $('#div_datos_promocion').hide();
+   $('#check_promo').bind('change', function(){
+    if($(this).is(':checked')){
+       $('#div_datos_promocion').show();
+       $("#pago").attr('disabled','disabled');
+       $("#promocion").focus();
+       if($("#pago").val() == ""){
+           $("#pago").val("0");
+           $("#pago_final").val("0");
+           
+       }
+       
+    }else{
+        $("#pago").focus();
+        $('#div_datos_promocion').hide();
+        $("#pago").removeAttr('disabled');
+        $("#pago_final").val($("#pago").val());
+        $("#promocion").val("");
+        
+        
+    }
+}); 
+ $("#radio1").click(onLimpiarValorTotal);
+ $("#radio2").click(onLimpiarValorTotal);
+
+}
+function onLimpiarValorTotal(){
+    $("#promocion").val("");   
+    $("#pago_final").val($("#pago").val());
 }
 function onkeyup(){
     llenadoGrid();
 }   
 function onActualizarPago(){
     if( $('#check_promo').attr('checked') ) {
+        
     }else{
         $("#pago_final").val($("#pago").val());
+        
     }
     
     
@@ -270,10 +388,17 @@ function onFocus(){
                         <input   id="filtro_fecha_final"  class="texto"  type="text" placeholder="Fecha final">
                         <input  id = "pago" name="pago" class="texto" type="text" placeholder="Monto a pagar $$$">
                         <br />
-                        <br />  
-                        <input type="checkbox" id="check_promo"><label for="check1">Promocion</label>                          
-                        <input  id = "promocion" name="promocion" class="texto" type="text" placeholder="Cantidad promocion $$$">                        
-                        <br />
+                        <br />              
+                        <input type="checkbox" id="check_promo"><label for="check1">Promocion</label> 
+                            <div id="div_datos_promocion" >
+                                <div id="radio">
+                                    <input type="radio" id="radio1" name="radio" checked="checked" ><label for="radio1">Cantidad</label>
+                                    <input type="radio" id="radio2" name="radio" ><label for="radio2">Porcentaje</label>
+                                </div>                         
+                                <input  id = "promocion" name="promocion" class="texto" type="text" placeholder="Cantidad promocion $$$">                        
+                                <br />
+                                <br />
+                            </div>
                         <br />
                         <label>Total a pagar </label>
                         <input  id = "pago_final" name="pago_final" class="texto" type="text" placeholder="Pago Calculado" readonly disabled>
