@@ -44,7 +44,7 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
                  
 function post_nuevo(){
     //tomando variables:
-    $nombre_titulo = trim($_POST["nombre"]);
+    $nombre_titulo = trim($_POST["nombre_titulo"]);
     $contenido_blog = trim($_POST["contenido_blog"]);
     $visibilidad = trim($_POST["visibilidad"]);
     $categoria = trim($_POST["categoria"]);
