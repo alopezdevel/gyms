@@ -112,14 +112,16 @@ function get_entradas(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido FROM ct_blog_noticia WHERE eCategoria = '".$filtro_informacion."' AND eVisibilidad = 'publico'";
+    $sql = "SELECT sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido FROM ct_blog_noticia WHERE eCategoria = '".$filtro_informacion."' AND eVisibilidad = 'publico' ORDER BY iConsecutivo DESC";
     $result = mysql_query($sql, $dbconn);
     $htmlTabla = "";
+    $countcont = 0;
     
     if (mysql_num_rows($result) > 0) { 
         while ($entradas = mysql_fetch_array($result)) {
            if($entradas["sNombreTitulo"] != ""){
                 $categoria="";
+                $countcont = $countcont + 1;
                 $colorcategoria= "";
                  switch ($entradas["eCategoria"]) {
                     case "blog":
@@ -135,7 +137,7 @@ function get_entradas(){
                  $htmlTabla .= "<div class=\"blog-entrada\">
                                     <span class=\"".$colorcategoria."\"><i class=\"fa ".$categoria."\"></i> ".$entradas["eCategoria"]."</span>
                                     <h2>".$entradas["sNombreTitulo"]."</h2>".
-                                    "<div class=\"cont\">".$entradas["bContenido"]."</div>".
+                                    "<div class=\"cont".$countcont."\">".$entradas["bContenido"]."</div>".
                                     "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>
                                     <hr></div>";
              }else{                             
@@ -150,7 +152,7 @@ function get_entradas(){
          $htmlTabla .="<div></div>";
     }
         $html_tabla = utf8_encode($html_tabla); 
-        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla","count" =>"$countcont");   
         echo array2json($response);
 
 } 

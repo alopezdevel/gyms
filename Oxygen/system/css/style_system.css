@@ -729,11 +729,11 @@ border: 2px solid #fff;
     
 }
 #blog-list h2:hover{color:#2288ca;}
-#blog-list .cont{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight: normal;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
-.cont h1, .cont h2, .cont h3, .cont h4, .cont h5, .cont h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+#blog-list div{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight:100;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+#blog-list div h1, #blog-list div h2, #blog-list div h3, #blog-list div h4, #blog-list div h5, #blog-list div h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
 #blog-list .fecha span, #blog-list .autor span{color: #565656; font-style: italic;font-weight:normal!important;}
 #blog-list .autor, #blog-list .fecha{color:#2d60a1;font-weight:bold;font-size:.8em!important;}
-#blog-list .blog-categoria , #blog-list .noticia-categoria{text-transform:uppercase;font-size:.9em!important;}
+#blog-list .blog-categoria , #blog-list .noticia-categoria{text-transform:uppercase;font-size:.9em!important;font-weight: bold;}
 #blog-list .blog-categoria{color:#31bfe2;}
 #blog-list .noticia-categoria{color:#30ceab;}
 
