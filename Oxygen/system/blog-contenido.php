@@ -1,65 +1,37 @@
 <?php
-    session_start();  
+    session_start();
     include("header.php");
 ?>
-<script type="text/javascript"> 
-    $(document).ready(inicio);
+<script type="text/javascript">
+$(document).ready(inicio);
     
     function inicio(){
     
-        fn_blog.fillgrid();   
-        
+        geturl();  
+        fn_blog.getentrada($.get("entrada"));   
+        fbroot();
     }
-    var fn_blog = {
-        domroot:"#blog",
-        blog_list: "#blog-list",
-        count: 0,
-        fillgrid: function(){
-               $.ajax({             
-                type:"POST", 
-                url:"funciones_blog.php", 
-                data:{accion:"get_entradas", filtroInformacion : 'blog'},
-                async : true,
-                dataType : "json",
-                success : function(data){                               
-                    $(fn_blog.blog_list).empty().append(data.tabla);
-                    $count = data.count;
-                        while($count > 0){
-                                if($(fn_blog.blog_list + ' .cont'+$count).text().length > 200){
-                                    limite = $(fn_blog.blog_list + ' .cont'+$count).text().substr(0,200)+" ...";
-                                    $(fn_blog.blog_list + ' .cont'+$count).text(limite);
-                                    $count = $count - 1;
-                                } else{$count = $count - 1;}
-                        }
-                    
-                    }
-            }); 
-            
-        },  
-        mostrarentrada: function(identrada){
-              //carga_facebook(document, 'script', 'facebook-jssdk');
-             $.ajax({             
-                type:"POST", 
-                url:"funciones_blog.php", 
-                data:{accion:"get_entradacont", identrada: identrada},
-                async : true,
-                dataType : "json",
-                success : function(data){                               
-                        $(fn_blog.blog_list).empty().append(data.tabla);
-                        if(data.comentarios != 0){
-                            $('.fb-comments').attr('data-href','http://oxygen-fx.laredo2.net/system/blog2.php');
-                            $('.fb-comments').show();
-                        } 
-                    }
-            });
+function geturl(){
+//empieza tomar valor de url//
+  
+    $.get = function(key)   {  
+        key = key.replace(/[\[]/, '\\[');  
+        key = key.replace(/[\]]/, '\\]');  
+        var pattern = "[\\?&]" + key + "=([^&#]*)";  
+        var regex = new RegExp(pattern);  
+        var url = unescape(window.location.href);  
+        var results = regex.exec(url);  
+        if (results === null) {  
+            return null;  
+        } else {  
+            return results[1];  
         }  
-    } //termina funciones blog
-    //$("#blog-list h2").click(fn_blog.mostrarentrada($(this).attr('id')));  
-    
-    
-</script>
-<div id="fb-root"></div>
-<script>
+    }  
+
+//termina tomar valor de url//
+}
+function fbroot(){
+
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -67,6 +39,33 @@
   js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.3";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+}
+    var fn_blog = {
+        domroot:"#blog",
+        blog_list: "#blog-list",
+        getentrada: function(id){
+               
+            $.ajax({             
+                type:"POST", 
+                url:"funciones_blog.php", 
+                data:{accion:"get_entradacont", identrada : id},
+                async : true,
+                cache: false,
+                dataType : "json",
+                success : function(data){                               
+                    
+                        $(fn_blog.blog_list).empty().append(data.tabla); 
+                    }
+            
+            });    
+          
+        }  
+    } //termina funciones blog 
+    
+</script>
+<?php ?>
+<div id="fb-root"></div>
+<script>
 </script>
 <div id="layer_content" class="main-section"> 
     <div id="blog" class="container"> 

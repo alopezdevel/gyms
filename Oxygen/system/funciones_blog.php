@@ -199,7 +199,7 @@ function get_entradacont(){
                     
                  $htmlTabla .= "<div class=\"comentarios\">
                                     <div class=\"fb-comments\"". 
-                                    "data-href=\"http://oxygen-fx.laredo2.net/system/blog.php\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
+                                    "data-href=\"http://oxygen-fx.laredo2.net/system/contenido-blog.php#".$entradas["iConsecutivo"]."\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
                                     "</div>"; 
                               $comentarios =  $entradas["sNombreTitulo"];
                    
