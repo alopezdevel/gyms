@@ -2,12 +2,14 @@
     session_start();  
     include("header.php");
 ?>
-<script> 
+<script type="text/javascript"> 
 	$(document).ready(inicio);
 	
 	function inicio(){
 	
-	    var fn_blog = {
+        fn_blog.fillgrid();   
+	}
+    var fn_blog = {
         domroot:"#blog",
         blog_list: "#blog-list",
         count: 0,
@@ -31,11 +33,23 @@
                     
                     }
             }); 
-        }    
-    }
-        fn_blog.fillgrid();
-
-	}
+            
+        },  
+        mostrarentrada: function(identrada){
+            
+             $.ajax({             
+                type:"POST", 
+                url:"funciones_blog.php", 
+                data:{accion:"get_entradacont", identrada: identrada},
+                async : true,
+                dataType : "json",
+                success : function(data){                               
+                        $(fn_blog.blog_list).empty().append(data.tabla); 
+                    }
+            });
+        }  
+    } //termina funciones blog
+    //$("#blog-list h2").click(fn_blog.mostrarentrada($(this).attr('id')));  
 	
 	
 </script>
@@ -53,8 +67,8 @@
             <h1>Blog</h1>
             <h2>Casos mas recientes</h2>
         </div>
-	<div id="blog-list" class="col-md-8">
-	</div>
+	<div id="blog-list" class="col-md-8"> 
+    </div>
     <div class="col-md-4">
           <div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-height="300px" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>
     </div>
