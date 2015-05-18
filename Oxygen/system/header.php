@@ -102,7 +102,7 @@ if(1){
                     </li>
                     <li class="submenu"><a href="#">Socios</a>
                         <ul> 
-                           <li><a href="socio_verificacion.php">Asistencia del socio</a></li> 
+                           <li><a href="socio_verificacion_2.php">Asistencia del socio</a></li> 
                            <li><a href="alta_socio.php">Catalogo de socios</a></li>
                         </ul> 
                     </li>
