@@ -33,16 +33,16 @@ $("#fecha").datepicker();
 function llenadoGrid(){
     var filtro = "";  //DATE_FORMAT(dFechaIngreso,  '%m/%d/%Y')         
     if($('#filtro_fecha_creacion').val() !=""){     
-        filtro += "DATE_FORMAT(dFecharegistro,  '%d/%m/%Y')|" + $("#filtro_fecha_creacion").val() + ",*"
+        filtro += "DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')|" + $("#filtro_fecha_creacion").val() + ",*"
     }
     if($('#filtro_id_socio').val() !=""){     
-        filtro += "iIDSocio|" + $("#filtro_id_socio").val() + ",*"
+        filtro += "ct_socio.iIDSocio|" + $("#filtro_id_socio").val() + ",*"
     }                                                 
     if($('#filtro_correo_socio').val() !=""){     
-        filtro += "sCorreoSocio|" + $("#filtro_correo_socio").val() + ",*"
+        filtro += "ct_socio.sCorreoSocio|" + $("#filtro_correo_socio").val() + ",*"
     }            
     if($('#filtro_nombre_socio').val() !=""){     
-        filtro += "Concat(sNombreSocio, ' ', sApellidoPaternoSocio, ' ', sApellidoMaternoSocio)|" + $("#filtro_nombre_socio").val() + ",*"
+        filtro += "Concat(ct_socio.sNombreSocio, ' ', ct_socio.sApellidoPaternoSocio, ' ', ct_socio.sApellidoMaternoSocio)|" + $("#filtro_nombre_socio").val() + ",*"
     }
     
     if($('#filtro_Estatus_Cuenta').val() !="" && $('#filtro_Estatus_Cuenta').val() != null && $('#filtro_Estatus_Cuenta').val() != "null"){     
@@ -81,6 +81,7 @@ function inicio(){
       modal: true,         
       close: function() {
        $("#body_historial").empty().append("<td></td><td></td><td></td><td></td><td></td><td></td>");
+       onLimpiarRegistroPago();
       }
     }); 
      //focus
@@ -221,22 +222,62 @@ function inicio(){
        }
        
     }else{
-        $("#pago").focus();
         $('#div_datos_promocion').hide();
         $("#pago").removeAttr('disabled');
         $("#pago_final").val($("#pago").val());
         $("#promocion").val("");
+        $("#pago").focus();
         
         
     }
 }); 
  $("#radio1").click(onLimpiarValorTotal);
  $("#radio2").click(onLimpiarValorTotal);
-
+ $("#button_aceptar").click(onGuardarPago);
+}
+function onBorrarPago(){
+}
+function onGuardarPago(){
+    var id_pago_guardar = $("#id_pago").val();
+    var filtro_fecha_inicial = $("#filtro_fecha_inicial").val();
+    var filtro_fecha_final = $("#filtro_fecha_final").val();
+    var pago_final = $("#pago_final").val();
+    var promo = "0";
+    if( $('#check_promo').attr('checked') ) {
+        promo = "1";
+    }
+    
+    if(id_pago_guardar != "" && filtro_fecha_inicial != "" &&  filtro_fecha_final != "" && pago_final != ""){
+        $.post("funciones.php", { accion: "guardar_pago_socio",id_socio:id_pago_guardar, filtro_fecha_inicial:filtro_fecha_inicial, filtro_fecha_final:filtro_fecha_final, pago_final:pago_final, promo:promo},
+        function(data){ 
+             switch(data.error){
+             case "1": alert(data.mensaje);
+                    break;
+             case "0":  
+                       alert('El pago se ha registrado correctamente');  
+                       $( "#dialog-user" ).dialog("close"); 
+                       onLimpiarRegistroPago();
+                       llenadoGrid();
+                    break;  
+             }
+         }
+         ,"json");
+    }else{
+        actualizarMensajeAlerta("Favor de llenar todos los campos");
+    }
+    
+    
 }
 function onLimpiarValorTotal(){
     $("#promocion").val("");   
     $("#pago_final").val($("#pago").val());
+}
+function onLimpiarRegistroPago(){
+   $('input.texto').val("");  
+   $("#check_promo").attr('checked', false);
+   $("#radio1").attr('checked', true);
+   $('#div_datos_promocion').hide();
+   $("#pago").removeAttr('disabled');
 }
 function onkeyup(){
     llenadoGrid();
@@ -272,17 +313,23 @@ function onCargarHistorial(id_socio){
 }
 function onRegistrarMensualidad(){
 }           
-function onRegistrarPago(id){
+function onRegistrarPago(id, fecha_pago_plus){
     $("#id_pago").val(id);
     onCargarHistorial($("#id_pago").val());
-    $( "#dialog-user" ).dialog("open"); 
-    var index = "0";
-    $( "#filtro_fecha_inicial" ).datepicker({ minDate: -30,defaultDate: "+1w",changeMonth: false,numberOfMonths: 1, onClose: function( selectedDate ) { $( "#filtro_fecha_final" ).datepicker( "option", "minDate", selectedDate ); },dateFormat: 'dd/mm/yy'});
+    
+    var index = "0"; 
+    if(fecha_pago_plus == ""){
+        fecha_pago_plus =  -30;
+    }
+    
+    $( "#filtro_fecha_inicial" ).datepicker({defaultDate: "+1w",changeMonth: false,numberOfMonths: 1, onClose: function( selectedDate ) { $( "#filtro_fecha_final" ).datepicker( "option", "minDate", selectedDate ); },dateFormat: 'dd/mm/yy'});
     $( "#filtro_fecha_final" ).datepicker({defaultDate: "+1w",changeMonth: false, numberOfMonths: 1,onClose: function( selectedDate ) {
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       },dateFormat: 'dd/mm/yy'});
     //$( "#filtro_fecha_inicial" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
-    $('#tabs').tabs("option", "active", 0);    
+    $('#tabs').tabs("option", "active", 0);  
+    $( "#filtro_fecha_inicial" ).datepicker( "option", "minDate", fecha_pago_plus );// minDate: -30,    
+    $( "#dialog-user" ).dialog("open");    
 }
 
 
@@ -339,15 +386,15 @@ function onFocus(){
                 <td align="center" class="etiqueta_grid"><input class="inp"  id="filtro_id_socio" type="text"></td>
                 <td align="center" class="etiqueta_grid"><input class="inp"  id="filtro_correo_socio" type="text"></td>
                 <td align="center" class="etiqueta_grid"><input class="inp"  id="filtro_nombre_socio" type="text"></td>
-                <td align="center" class="etiqueta_grid" nowrap="nowrap"><select   id="filtro_Estatus_Cuenta" size="3" multiple ><option value="">&nbsp;<option value="0">Pendiente</option><option value="1">Activado</option></td>
+                <td align="center" class="etiqueta_grid" nowrap="nowrap">&nbsp;</td>
                 <td class="etiqueta_grid" colspan = "2">&nbsp;</td> 
             </tr>
             <tr id="grid-head2">                            
-                <td align="center" class="etiqueta_grid" nowrap="nowrap" >Fecha de registro</td>
+                <td align="center" class="etiqueta_grid" nowrap="nowrap" >Fecha de Vencimiento</td>
                 <td align="center" class="etiqueta_grid">ID socio</td>
                 <td align="center" class="etiqueta_grid">Correo socio</td>
                 <td align="center" class="etiqueta_grid">Nombre socio</td>
-                <td align="center" class="etiqueta_grid">Estatus cuenta</td>
+                <td align="center" class="etiqueta_grid">Dias rentantes memebresia</td>
                 <td class="etiqueta_grid" colspan = "2">&nbsp;</td> 
                 
             </tr>
@@ -421,11 +468,13 @@ function onFocus(){
                             <td align="center" class="etiqueta_grid">Fecha de pago</td>
                             <td align="center" class="etiqueta_grid">Cantidad</td>
                             <td align="center" class="etiqueta_grid">Fecha de vencimiento</td>
+                            <td align="center" class="etiqueta_grid">&nbsp;</td>
                         </tr>
                     </thead>   
                     <form id="form_pagos_socio">
                         <tbody id="body_historial">
                             <tr > 
+                                <td align="center" >&nbsp;</td>
                                 <td align="center" >&nbsp;</td>
                                 <td align="center" >&nbsp;</td>
                                 <td align="center" >&nbsp;</td>

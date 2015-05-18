@@ -468,7 +468,7 @@ function get_pagos_asinc(){
     $conexion->autocommit(FALSE);
     $transaccion_exitosa = true;
     $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
-    $filtroQuery .= " WHERE iIDSocio != '' ";  
+    $filtroQuery .= " WHERE ct_socio.iIDSocio != '' ";  
     foreach($array_filtros as $key => $valor){
         if($array_filtros[$key] != ""){
             $campo_valor = explode("|",$array_filtros[$key]);
@@ -480,20 +480,41 @@ function get_pagos_asinc(){
         }
     }
     
-    $sql = "SELECT DATE_FORMAT(dFecharegistro,  '%d/%m/%Y')    as dFechaIngreso, iIDSocio as ID, sCorreoSocio as correo, CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,CASE WHEN  bactivo = '0' THEN 'Pendiente'  ELSE 'Activado' END  as eEstatus FROM ct_socio ".$filtroQuery;
+    $sql = "SELECT DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')    as dFechaIngreso, 
+            ct_socio.iIDSocio as ID, 
+            sCorreoSocio as correo, 
+            CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,
+            pago.dias_restantes  as eEstatus        
+            FROM ct_socio 
+            LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
+            FROM cb_pagos_socio 
+            GROUP BY iIDSocio
+            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio ".$filtroQuery;
     $result = $conexion->query($sql);
     $NUM_ROWs_socios = $result->num_rows;    
     if ($NUM_ROWs_socios > 0) {
         //$items = mysql_fetch_all($result);      
         while ($socios = $result->fetch_assoc()) {
            if($socios["ID"] != ""){
+               $leyenda = "";
+               if($socios['eEstatus'] != ""){               
+                   if($socios['eEstatus'] <0){
+                      $socios['eEstatus'] = $socios['eEstatus'] *-1;
+                      $socios['eEstatus'] = $socios['eEstatus'].' dias vencido';
+                      $leyenda = $socios['eEstatus'];
+                   }else{               
+                       $socios['eEstatus'] = $socios['eEstatus'].' dias restantes';
+                       $leyenda = $socios['eEstatus'];
+                   }
+               }
+             
                  $htmlTabla .= "<tr>                            
                                     <td>".$socios['dFechaIngreso']."</td>".             
                                     "<td>".$socios['ID']."</td>".
                                    "<td>".$socios['correo']."</td>".
                                    "<td>".$socios['nombre']."</td>".                                                  
-                                   "<td>".$socios['eEstatus']."</td>".
-                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarPago(\"".$socios['ID']."\")' class='ui-icon print'></span></td>".
+                                   "<td>".$leyenda."</td>".
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarPago(\"".$socios['ID']."\" , \"".$socios['dFechaIngreso']."\" )' class='ui-icon print'></span></td>".
                                 "</tr>"   ;
              }else{                             
                  $htmlTabla .="<tr>
@@ -613,12 +634,14 @@ function get_pago_asinc(){
                                    "<td>".$pagos['nombre']."</td>".
                                    "<td>".$pagos['fecha_pago']."</td>".
                                    "<td> \$ ".$pagos['pago_cant']."</td>".
-                                   "<td>".$pagos['fecha_vencimiento']."</td>".                                                                                     
+                                   "<td>".$pagos['fecha_vencimiento']."</td>". 
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onBorrarPago(\"".$pagos['id_pago']."\" )' class='ui-icon ui-icon-circle-close'></span></td>".                                                                                    
                                 "</tr>"   ;
              }else{// el pago esta mal registrado                             
                  $htmlTabla .="<tr>
                                     <td>&nbsp;</td>".                       
                                    "<td>&nbsp;</td>".                      
+                                   "<td>&nbsp;</td>".
                                    "<td>&nbsp;</td>".
                                    "<td>&nbsp;</td>".
                  "</tr>"   ;
@@ -643,4 +666,112 @@ function get_pago_asinc(){
     $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
      echo array2json($response);
 }  
+function guardar_pago_socio(){    
+    include("cn_usuarios_2.php");
+    //variables              
+    $error = "0";    
+    $id = $_POST['id_socio'];    
+    $fecha_inicial = $_POST['filtro_fecha_inicial'];
+    $fecha_final = $_POST['filtro_fecha_final'];
+    $pago_final = $_POST['pago_final'];
+    $promocion = $_POST['promo'];
+    $fecha_inicial_formato = substr($fecha_inicial,6,4).'/'.substr($fecha_inicial,3,2).'/'.substr($fecha_inicial,0,2);
+    $fecha_final_formato = substr($fecha_final,6,4).'/'.substr($fecha_final,3,2).'/'.substr($fecha_final,0,2);
+    include("cn_usuarios_2.php");
+    $conexion->autocommit(FALSE);                        
+    $transaccion_exitosa = true;   
+    $sql = "SELECT ct_socio.iIDSocio, ct_socio.sCorreoSocio FROM ct_socio WHERE ct_socio.iIDSocio='".$id."' ";                                                                                                                                             
+    $result = $conexion->query($sql);                                                                                                                                                                              
+    $NUM_ROWs_pagos = $result->num_rows;                                                                                                                                                                                             
+    $error = "0";
+    while ($socios = $result->fetch_assoc()) {
+        $correo_socio =  $socios['sCorreoSocio'];
+    }
+    if ($NUM_ROWs_pagos > 0) {
+        $sql = "INSERT INTO cb_pagos_socio set iIDSocio='".$id."' , dFechaPago='".$fecha_inicial_formato."', iCantidadPago='".$pago_final."', dFechaCreacionRegistro=NOW(), dFechaVencimiento='".$fecha_final_formato."', sUsuarioCreacionRegistro='".$_SESSION['acceso']."' , sIPCreacionRegistro='".$_SERVER['REMOTE_ADDR']."' ";  
+        $conexion->query($sql);   
+        if ($conexion->affected_rows < 1 ) {
+            $error = "1";    
+            $transaccion_exitosa = false;
+            $mensaje = "Error de sistema: Favor de comunicarse con el area de soporte del sistema";           
+        }
+    }else{
+        $error = "1";                                                                                         
+        $transaccion_exitosa = false;           
+        $mensaje = "El socio no existe. Favor de validar los datos";           
+    } 
+    // envio de correo
+    if ($transaccion_exitosa) {
+            //Proceso para enviar correo                 
+            $id_pago = $conexion->insert_id;
+            //fecha de pago
+            $now = time();
+            $num = date("w");
+            if ($num == 0)
+            { $sub = 6; }
+            else { $sub = ($num-1); }
+            $WeekMon  = mktime(0, 0, 0, date("m", $now)  , date("d", $now)-$sub, date("Y", $now));
+            $todayh = getdate($WeekMon);
+            $d = $todayh[mday];
+            $m = $todayh[mon];
+            $y = $todayh[year];
+            $fecha_actual ="$d/$m/$y";
+            require_once("./lib/mail.php");
+            $cuerpo = "
+                    <div style=\"font-size:12px;border:1px solid #6191df;border-radius:3px;padding:10px;width:95%; margin:5px auto;font-family: Arial, Helvetica, sans-serif;\">
+                         <h2 style=\"color:#313131;text-transform: uppercase; text-align:center;\">Registro de pago - Oxygen-FX Gym!</h2> \n 
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\"><strong>$correo</strong><br>Se ha registrado un pago en tu membresia.</p>\n 
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">A continuacion te presentamos la informacion correspondiente a tu pago.</p>
+                         <br><br>
+                         <ul style=\"color:#010101;line-height:15px;\">                                                           
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Folio: </strong>$id_pago</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Fecha de registro: </strong>$fecha_actual</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Fecha Inicial: </strong>$fecha_inicial</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Fecha de Vencimiento: </strong>$fecha_final</li>
+                            <li style=\"line-height:15px;\"><strong style=\"color:#044e8d;\">Cantidad: </strong>$pago_final</li>
+                         </ul>
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Recuerda que puedes verificar en cualquier momento todos tus pagos, solo debes ingresar en nuestra pagina web, en la seccion de historial de pagos.</p><br>
+                         <br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Favor de no responder este correo.</p>                         
+                    </div>";
+             $mail = new Mail();                                    
+             $mail->From = "soporte@oxygen-fx.com";
+             $mail->FromName = "oxygen-fx team";
+             $mail->Host = "oxygen-fx.com";
+             $mail->Mailer = "sendmail";    
+             $mail->Subject = "Registro de pago - Comprobante"; 
+             $mail->Body  = $cuerpo;                                                                                            
+             $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
+             $mail->IsHTML(true);
+             $mail->WordWrap =150;
+             $mail_error = false;
+             $mail->AddAddress(trim($correo_socio));
+             if (!$mail->Send()) {
+                $mail_error = true;
+                $mail->ClearAddresses();
+             }        
+            if(!$mail_error){
+                $mensaje = "El pago al socio :".$correo_socio." se registro con exito";
+                $error = "0";
+                $conexion->commit();
+                $conexion->close();
+            }else{
+                $mensaje = "Error e-mail.";
+                $error = "1";  
+                $transaccion_exitosa = false;
+            }            
+        }
+    if($transaccion_exitosa){    
+        $conexion->commit();
+        $conexion->close();
+    }else{                        
+        $conexion->rollback();
+        $conexion->close();           
+    }
+    $html_tabla = utf8_encode($html_tabla); 
+    $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+    echo array2json($response);                                              
+}
 ?>
