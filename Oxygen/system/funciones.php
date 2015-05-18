@@ -1,4 +1,4 @@
-<?php
+<?php                              
 function array2json($arr) { 
     if(function_exists('json_encode')) return json_encode($arr); //Lastest versions of PHP already has this functionality.
     $parts = array(); 
@@ -796,5 +796,138 @@ function borrar_pago_socio(){
      }
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
-}
+} 
+function get_asistencia_asinc(){    
+    include("cn_usuarios_2.php");
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
+    $filtroQuery .= " WHERE ct_socio.iIDSocio != '' ";  
+    foreach($array_filtros as $key => $valor){
+        if($array_filtros[$key] != ""){
+            $campo_valor = explode("|",$array_filtros[$key]);
+            if ($campo_valor[0] =='bactivo'){
+                    $filtroQuery.= " AND  ".$campo_valor[0]."='".$campo_valor[1]."' ";
+            }else{
+                    $filtroQuery == "" ? $filtroQuery.= " AND  ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'": $filtroQuery.= " AND ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'";
+            }
+        }
+    }
+    
+    $sql = "SELECT DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')    as dFechaIngreso, 
+            ct_socio.iIDSocio as ID, 
+            sCorreoSocio as correo, 
+            CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,
+            pago.dias_restantes  as eEstatus        
+            FROM ct_socio 
+            LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
+            FROM cb_pagos_socio 
+            GROUP BY iIDSocio
+            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio ".$filtroQuery ." LIMIT 50";
+    $result = $conexion->query($sql);
+    $NUM_ROWs_socios = $result->num_rows;    
+    if ($NUM_ROWs_socios > 0) {
+        //$items = mysql_fetch_all($result);      
+        while ($socios = $result->fetch_assoc()) {
+           if($socios["ID"] != ""){
+               $leyenda = "";
+               $leyenda = "";
+               $color_fondo = "#00FF00";   
+               if($socios['eEstatus'] <=0){
+                $estatus = "vencido";
+               }else{
+                $estatus =  "vigente";
+               }
+               if($socios['eEstatus'] <=5){
+                   $color_fondo = "#FF8000";
+               }
+               if($socios['eEstatus'] < 10 && $socios['eEstatus'] > 5){
+                   $color_fondo = "#FFFF00";
+               }
+               if($socios['eEstatus'] != ""){               
+                   if($socios['eEstatus'] <0){
+                      $socios['eEstatus'] = $socios['eEstatus'] *-1;
+                      $socios['eEstatus'] = $socios['eEstatus'].'';
+                      $leyenda = $socios['eEstatus'];
+                      $color_fondo = "#FF0000"; 
+                   }else{               
+                       $socios['eEstatus'] = $socios['eEstatus'].'';
+                       $leyenda = $socios['eEstatus'];
+                   }
+               }
+               if($socios['eEstatus'] == ""){
+                   $color_fondo = "#C0C0C0";
+               }
+             
+                 $htmlTabla .= "<tr bgcolor='".$color_fondo."'>                            
+                                    <td ><font size='5'>".$socios['dFechaIngreso']."</font></td>".             
+                                    "<td ><font size='5'>".$socios['ID']."</font></td>".
+                                   "<td ><font size='5'>".$socios['correo']."</font></td>".
+                                   "<td  ><font size='5'>".$socios['nombre']."</font></td>".                                                  
+                                   "<td ><font size='5'>".$leyenda."</font></td>".
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarAsistencia(\"".$socios['ID']."\" , \"".$socios['correo']."\", \"".$estatus."\" )' class='ui-icon print'></span></td>".
+                                "</tr>"   ;                                         
+             }else{                             
+                 $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".                       
+                                   "<td>&nbsp;</td>".                      
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;
+             }    
+        }
+       // $htmlTabla .="<tr>
+         //                           <td>&nbsp;</td>".
+           //                        "<td>&nbsp;</td>".                          
+             //                      "<td>&nbsp;</td>".
+               //                    "<td>&nbsp;</td>".
+                 //"</tr>"   ;
+        
+        $conexion->rollback();
+        $conexion->close();                                                                                                                                                                       
+    } else { 
+    $htmlTabla .="<tr>
+                                    <td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                                   "<td>&nbsp;</td>".
+                 "</tr>"   ;    
+        
+    }
+    $html_tabla = utf8_encode($html_tabla); 
+     $response = array("mensaje"=>"$mensaje","error"=>"$error","tabla"=>"$htmlTabla");   
+     echo array2json($response);
+}  
+function registrar_asistencia(){    
+     $id = $_POST['id'];
+     $estatus = $_POST['estatus'];
+     $error = "0";
+     include("cn_usuarios_2.php");
+     $conexion->autocommit(FALSE);          
+     $transaccion_exitosa = true;
+     $sql = "INSERT INTO cb_transacciones_socio SET iIDSocio = '".$id."', dFechaVisitaSocio = NOW(), eTipoTransaccion ='".$estatus."' ";
+     $conexion->query($sql);   
+     if ($conexion->affected_rows < 1 ) {
+        $transaccion_exitosa =false;
+     }
+     if($transaccion_exitosa){
+        $conexion->commit();
+        $conexion->close();
+     }else{
+        $conexion->rollback();
+        $conexion->close();
+        $mensaje = "A general system error ocurred : internal error";
+        $error = "1";
+     }
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+} 
+ 
 ?>

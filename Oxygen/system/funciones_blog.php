@@ -192,14 +192,14 @@ function get_entradacont(){
                                     "<div>".$entradas["bContenido"]."</div>".
                                     "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>".
                                     "</div>";
-                                    
+                 $htmlTabla =$htmlTabla. '<div class="fb-comments"  data-href="http://oxygen-fx.laredo2.net/system/blog2.php" data-width="100%" data-numposts="5" data-colorscheme="light"></div> '                     ;
                  if($entradas["eComentarios"] == "si"){
                     
                    // $htmlTabla .= "<div class=\"comentarios\">
                             //        <div class=\"fb-comments\"". 
                              //       "data-href=\"http://oxygen-fx.laredo2.net/system/blog.php\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
                               //      "</div>"; 
-                              $comentarios =  $entradas["sNombreTitulo"];
+                              //$comentarios =  $entradas["sNombreTitulo"];
                    
                      
                  } else{

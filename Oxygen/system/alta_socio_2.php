@@ -121,7 +121,7 @@ function onkeyup(){
 }              
 function Onborrar(id){
    if(confirm("estas seguro que desea borrar al socio con el ID: " + id + "?")){ 
-    $.post("funciones.php", { accion: "borrar_socio", id:id},
+    $.post("funciones.php", { accion: "registrar_asistencia", id:id},
         function(data){ 
              switch(data.error){
              case "1":   alert( data.mensaje);
