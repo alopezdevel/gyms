@@ -24,10 +24,10 @@
     $(document).ready(inicio);
     
     function inicio(){
-    
+        
         fn_blog.getentrada($.get("noticia"));   
         
-    }
+    } 
     var fn_blog = {
         domroot:"#noticia",
         blog_list: "#noticia-list",
@@ -41,15 +41,7 @@
                 dataType : "json",
                 success : function(data){                               
                     $(fn_blog.blog_list).empty().append(data.tabla);
-                    $count = data.count;
-                        while($count > 0){
-                                if($(fn_blog.blog_list + ' .cont'+$count).text().length > 200){
-                                    limite = $(fn_blog.blog_list + ' .cont'+$count).text().substr(0,200)+" ...";
-                                    $(fn_blog.blog_list + ' .cont'+$count).text(limite);
-                                    $count = $count - 1;
-                                } else{$count = $count - 1;}
-                        }
-                    
+
                     }
             }); 
             
