@@ -459,7 +459,7 @@ function get_socios_asinc(){
         
     }
     $html_tabla = utf8_encode($html_tabla); 
-     $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+     $response = array("mensaje"=>"$mensaje","error"=>"$error","tabla"=>"$htmlTabla");   
      echo array2json($response);
 }  
 function get_pagos_asinc(){    
@@ -550,7 +550,7 @@ function get_pagos_asinc(){
         
     }
     $html_tabla = utf8_encode($html_tabla); 
-     $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+     $response = array("mensaje"=>"$mensaje","error"=>"$error","tabla"=>"$htmlTabla");   
      echo array2json($response);
 }  
 function borrar_socio(){    
@@ -573,7 +573,7 @@ function borrar_socio(){
         $mensaje = "A general system error ocurred : internal error";
         $error = "1";
      }
-     $response = array("mensaje"=>"$sql","error"=>"$error");   
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
 }
 function consulta_socio_edicion(){
@@ -601,7 +601,7 @@ function consulta_socio_edicion(){
     }else{
         $error = "1";
     }
-    $response = array("mensaje"=>"$sql",
+    $response = array("mensaje"=>"$mensaje",
                       "error"=>"$error",
                       "correo"=>"$correo",
                       "nombre"=>"$nombre",
@@ -621,13 +621,13 @@ function get_pago_asinc(){
     //$conexion->begin_transaction();
     $conexion->autocommit(FALSE);                        
     $transaccion_exitosa = true;   
-    $sql = "SELECT cb_pagos_socio.iFolio as id_pago,ct_socio.sCorreoSocio as correo, iCantidadPago as pago_cant,  CONCAT(ct_socio.sNombreSocio,' ',ct_socio.sApellidoPaternoSocio,' ', ct_socio.sApellidoMaternoSocio)  as nombre, DATE_FORMAT(cb_pagos_socio.dFechaPago, '%d/%m/%Y') as fecha_pago, DATE_FORMAT(cb_pagos_socio.dFechaVencimiento, '%d/%m/%Y') as fecha_vencimiento FROM cb_pagos_socio LEFT JOIN ct_socio ON cb_pagos_socio.iIDSocio = ct_socio.iIDSocio WHERE cb_pagos_socio.iIDSocio='".$id."' ";
+    $sql = "SELECT cb_pagos_socio.iIDSocio, cb_pagos_socio.iFolio as id_pago,ct_socio.sCorreoSocio as correo, iCantidadPago as pago_cant,  CONCAT(ct_socio.sNombreSocio,' ',ct_socio.sApellidoPaternoSocio,' ', ct_socio.sApellidoMaternoSocio)  as nombre, DATE_FORMAT(cb_pagos_socio.dFechaPago, '%d/%m/%Y') as fecha_pago, DATE_FORMAT(cb_pagos_socio.dFechaVencimiento, '%d/%m/%Y') as fecha_vencimiento FROM cb_pagos_socio LEFT JOIN ct_socio ON cb_pagos_socio.iIDSocio = ct_socio.iIDSocio WHERE cb_pagos_socio.iIDSocio='".$id."' ";
     $result = $conexion->query($sql);
     $NUM_ROWs_pagos = $result->num_rows; 
     $error = "0";
     if ($NUM_ROWs_pagos > 0) {        
         while ($pagos = $result->fetch_assoc()) {
-           if($pagos["id_pago"] != ""){
+           if($pagos["id_pago"] != ""){                                                                 
                  $htmlTabla .= "<tr>                            
                                     <td>".$pagos['id_pago']."</td>".             
                                    "<td>".$pagos['correo']."</td>".
@@ -635,7 +635,7 @@ function get_pago_asinc(){
                                    "<td>".$pagos['fecha_pago']."</td>".
                                    "<td> \$ ".$pagos['pago_cant']."</td>".
                                    "<td>".$pagos['fecha_vencimiento']."</td>". 
-                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onBorrarPago(\"".$pagos['id_pago']."\" )' class='ui-icon ui-icon-circle-close'></span></td>".                                                                                    
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onBorrarPago(\"".$pagos['id_pago']."\" , \"".$pagos['iIDSocio']."\" )' class='ui-icon ui-icon-circle-close'></span></td>".                                             
                                 "</tr>"   ;
              }else{// el pago esta mal registrado                             
                  $htmlTabla .="<tr>
@@ -663,7 +663,7 @@ function get_pago_asinc(){
     }
     //$mensaje = "";
     $html_tabla = utf8_encode($html_tabla); 
-    $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+    $response = array("mensaje"=>"$mensaje","error"=>"$error","tabla"=>"$htmlTabla");   
      echo array2json($response);
 }  
 function guardar_pago_socio(){    
@@ -773,5 +773,28 @@ function guardar_pago_socio(){
     $html_tabla = utf8_encode($html_tabla); 
     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
     echo array2json($response);                                              
+}
+function borrar_pago_socio(){    
+     $id = $_POST['id'];
+     $error = "0";
+     include("cn_usuarios_2.php");
+     $conexion->autocommit(FALSE);
+     $transaccion_exitosa = true;
+     $sql = "DELETE FROM cb_pagos_socio WHERE iFolio = '".$id."'";
+     $conexion->query($sql);   
+     if ($conexion->affected_rows < 1 ) {
+        $transaccion_exitosa =false;
+     }
+     if($transaccion_exitosa){
+        $conexion->commit();
+        $conexion->close();
+     }else{
+        $conexion->rollback();
+        $conexion->close();
+        $mensaje = "A general system error ocurred : internal error";
+        $error = "1";
+     }
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
 }
 ?>

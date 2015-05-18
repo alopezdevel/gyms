@@ -82,6 +82,7 @@ function inicio(){
       close: function() {
        $("#body_historial").empty().append("<td></td><td></td><td></td><td></td><td></td><td></td>");
        onLimpiarRegistroPago();
+       llenadoGrid();
       }
     }); 
      //focus
@@ -235,7 +236,23 @@ function inicio(){
  $("#radio2").click(onLimpiarValorTotal);
  $("#button_aceptar").click(onGuardarPago);
 }
-function onBorrarPago(){
+function onBorrarPago(id_folio_pago_borrar,id_socio){
+    var respuesta_borrar = confirm("Estas seguro que quieres borrar el pago con el folio:" + id_folio_pago_borrar + "?");
+    if(respuesta_borrar){
+         $.post("funciones.php", { accion: "borrar_pago_socio",id:id_folio_pago_borrar},
+        function(data){ 
+             switch(data.error){
+             case "1": alert(data.mensaje);
+                    break;
+             case "0":  
+                       alert('El pago se ha borrado correctamente');                         
+                       onCargarHistorial(id_socio)  
+                       llenadoGrid();                    
+                    break;  
+             }
+         }
+         ,"json");
+    }
 }
 function onGuardarPago(){
     var id_pago_guardar = $("#id_pago").val();
@@ -451,8 +468,7 @@ function onFocus(){
                         <input  id = "pago_final" name="pago_final" class="texto" type="text" placeholder="Pago Calculado" readonly disabled>
                         <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >                             
                         <fieldset>                             
-                            <input  id = "button_aceptar" name="button_aceptar" class="btn_register btn_4" type="button" value="Registrar Pago">
-                            <input  id = "button_cancelar" name="button_cancelar" class="btn_register btn_4" type="button" value="Cancelar Pago">
+                            <input  id = "button_aceptar" name="button_aceptar" class="btn_register btn_4" type="button" value="Registrar Pago">                            
                         </fieldset>
                     </fieldset>
                         

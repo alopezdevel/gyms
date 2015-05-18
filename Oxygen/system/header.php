@@ -87,7 +87,7 @@ if(1){
                            <li><a href="socio_verificacion.php">Asistencia del socio</a></li> 
                            <li><a href="alta_socio_2.php">Catalogo de socios</a></li>
                            <li><a href="registro_socio.php">Nuevo Socio</a></li>
-                           <li><a href="pagar_mensualidad.php">Registrar Pago del socio</a></li>    
+                           <li><a href="pagar_mensualidad_2.php">Registrar Pago del socio</a></li>    
                         </ul> 
                     </li>
                    <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
