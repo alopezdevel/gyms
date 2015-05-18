@@ -167,7 +167,7 @@ function get_entradacont(){
     $sql = "SELECT iConsecutivo, sNombreTitulo, eCategoria, eVisibilidad, sAutor, dFechaCreacion, bContenido, eComentarios FROM ct_blog_noticia WHERE iConsecutivo = '".$identrada."'";
     $result = mysql_query($sql, $dbconn);
     $htmlTabla = "";
-    $countcont = 0;
+    $comentarios = "";
     
     if (mysql_num_rows($result) > 0) { 
         while ($entradas = mysql_fetch_array($result)) {
@@ -190,17 +190,22 @@ function get_entradacont(){
                                     <span class=\"".$colorcategoria."\"><i class=\"fa ".$categoria."\"></i> ".$entradas["eCategoria"]."</span>
                                     <h2>".$entradas["sNombreTitulo"]."</h2>".
                                     "<div>".$entradas["bContenido"]."</div>".
-                                    "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>";
-                 if($entradas["eComentarios"] == "si" || $entradas["eComentarios"] == ""){
+                                    "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>".
+                                    "</div>";
+                                    
+                 if($entradas["eComentarios"] == "si"){
                     
-                    $htmlTabla .= "<div class=\"comentarios\">
-                                    <div class=\"fb-comments\"". 
-                                    "data-href=\"http://oxygen-fx.laredo2.net/system/blog.php#".$entradas["iConsecutivo"]."\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
-                                    "</div>"; 
+                   // $htmlTabla .= "<div class=\"comentarios\">
+                            //        <div class=\"fb-comments\"". 
+                             //       "data-href=\"http://oxygen-fx.laredo2.net/system/blog.php\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
+                              //      "</div>"; 
+                              $comentarios =  $entradas["sNombreTitulo"];
+                   
                      
                  } else{
                      
-                     $htmlTabla .= "</div>";
+                     $comentarios = "0";
+                     //$htmlTabla .= "</div>";
                  }
                                     
              }else{                             
@@ -215,7 +220,7 @@ function get_entradacont(){
          $htmlTabla .="<div></div>";
     }
         $html_tabla = utf8_encode($html_tabla); 
-        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla", "comentarios" => "$comentarios");   
         echo array2json($response);
 
 } 

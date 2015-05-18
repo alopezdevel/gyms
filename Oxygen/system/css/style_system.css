@@ -704,7 +704,7 @@ border: 2px solid #fff;
 .copyright a:hover {color: #fff;}
 /*------BLOG-----*/
 .jHtmlArea iframe{height:242px!important;}
-#blog-list{
+.blog-cont {
 	
   background: #ffffff!important;
   -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
