@@ -7,16 +7,21 @@
     
     function inicio(){
     
-        fn_blog.fillgrid();   
+        fn_blog.fillgrid();
+        fbroot();   
         
     }
-    function carga_facebook(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];          
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.3";          
-          fjs.parentNode.insertBefore(js, fjs);
-    }
+function fbroot(){
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+}
+    
     var fn_blog = {
         domroot:"#blog",
         blog_list: "#blog-list",
@@ -53,8 +58,6 @@
     
 </script>
 <div id="fb-root"></div>
-<div id="fb-root"></div>
-<script></script>
 <div id="layer_content" class="main-section"> 
     <div id="blog" class="container"> 
         <div class="page-title">
@@ -62,8 +65,7 @@
             <h2>Casos mas recientes</h2>
         </div>
     <div class="blog-cont col-md-8">
-         <div id="blog-list"></div>
-         <div class="fb-comments"  data-href="http://oxygen-fx.laredo2.net/system/blog.php" data-width="100%" data-numposts="5" data-colorscheme="light"></div> 
+         <div id="blog-list"></div> 
     </div>
     <div class="col-md-4">
           <div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-height="300px" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>
