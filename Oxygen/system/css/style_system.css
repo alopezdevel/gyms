@@ -704,7 +704,7 @@ border: 2px solid #fff;
 .copyright a:hover {color: #fff;}
 /*------BLOG-----*/
 .jHtmlArea iframe{height:242px!important;}
-.blog-cont {
+.blog-cont, .noticia-cont {
 	
   background: #ffffff!important;
   -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
@@ -713,8 +713,8 @@ border: 2px solid #fff;
   cursor:default;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;
 }
-.blog-entrada{width:100%;margin: 10px auto;padding: 20px 0px 0px;}
-#blog-list h2{
+.blog-entrada, noticia-entrada{width:100%;margin: 10px auto;padding: 20px 0px 0px;}
+#blog-list h2, #noticia-list h2{
    
      font-size: 23px!important;
      letter-spacing:0px!important;
@@ -728,14 +728,14 @@ border: 2px solid #fff;
      cursor:pointer; 
     
 }
-#blog-list h2:hover{color:#2288ca;}
-#blog-list div{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight:100;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
-#blog-list div h1, #blog-list div h2, #blog-list div h3, #blog-list div h4, #blog-list div h5, #blog-list div h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
-#blog-list .fecha span, #blog-list .autor span{color: #565656; font-style: italic;font-weight:normal!important;}
-#blog-list .autor, #blog-list .fecha{color:#2d60a1;font-weight:bold;font-size:.8em!important;}
-#blog-list .blog-categoria , #blog-list .noticia-categoria{text-transform:uppercase;font-size:.9em!important;font-weight: bold;}
-#blog-list .blog-categoria{color:#31bfe2;}
-#blog-list .noticia-categoria{color:#30ceab;}
+#blog-list h2:hover, #noticia-list h2:hover{color:#2288ca;}
+#blog-list div, #noticia-list div{width: 100%; height: auto;margin: 20px auto;text-align: justify; color:#5a5a5a;font-weight:100;font-size:1em;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+#blog-list div h1, #blog-list div h2, #blog-list div h3, #blog-list div h4, #blog-list div h5, #blog-list div h6, #noticia-list div h1, #noticia-list div h2, #noticia-list div h3, #noticia-list div h4, #noticia-list div h5, #noticia-list div h6{font-weight: normal;text-transform:none;font-size:1em;padding: 0;margin: 0;font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Sans Unicode"!important;}
+#blog-list .fecha span, #blog-list .autor span, #noticia-list .fecha span, #noticia-list .autor span{color: #565656; font-style: italic;font-weight:normal!important;}
+#blog-list .autor, #blog-list .fecha, #noticia-list .autor, #noticia-list .fecha{color:#2d60a1;font-weight:bold;font-size:.8em!important;}
+.blog-categoria , .noticia-categoria{text-transform:uppercase;font-size:.9em!important;font-weight: bold;}
+.blog-categoria{color:#31bfe2;}
+.noticia-categoria{color:#30ceab;}
 
 
 /* Animation Timers
