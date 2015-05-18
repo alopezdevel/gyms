@@ -19,11 +19,20 @@ function inicio(){
     $("#nombre_titulo").focus(onFocus);
     //blur
     $("#nombre_titulo").blur(onBlur);
-
-
+    $("#categoria").click(SelectCategoria);
         
-};
-     
+}; 
+function SelectCategoria(){
+    
+    if($('#categoria').val() == "1"){
+        
+       $('#comentarios').removeAttr('disabled'); 
+    }else{
+        
+        $('#comentarios').attr('disabled');
+        $('#comentarios').val('no');
+    }
+} 
 function onInsertarPost(){
          
     //Variables
@@ -31,6 +40,7 @@ function onInsertarPost(){
     var contenido_blog = $('#contenido_blog').htmlarea('html').toString();;
     var visibilidad = $("#visibilidad");
     var categoria = $("#categoria");
+    var comentarios = $("#comentarios");
     todosloscampos = $( [] ).add( nombre_titulo ).add( visibilidad ).add( categoria ).add(contenido_blog);
     todosloscampos.removeClass( "error" );
     
@@ -59,7 +69,7 @@ function onInsertarPost(){
 	//} 
 	
 	if ( valid ) {
-        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog, visibilidad: visibilidad.val(), categoria: categoria.val(), usuario_actual: usuario_actual},
+        $.post("funciones_blog.php", { accion: "post_nuevo", nombre_titulo: nombre.val() , contenido_blog: contenido_blog, visibilidad: visibilidad.val(), categoria: categoria.val(), usuario_actual: usuario_actual, comentarios: comentarios.val()},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
@@ -82,7 +92,6 @@ function onInsertarPost(){
     }   
          
 }
-
 function onFocus(){
      $(this).css("background-color","#FFFFC0");
  }
@@ -122,13 +131,13 @@ function checkLength( o, n, min, max ) {
     <div class="container"> 
         <div class="page-title">
             <h1>Blog</h1>
-            <h2>Añadir nueva entrada</h2>
+            <h2>A&ntilde;adir nueva entrada</h2>
         </div>
         <form id="frm-post-new" action="" method="post">
         <div class="row">
             <div class="col-md-8">
                 <p class="mensaje_valido">&nbsp;Todos los campos son requeridos.</p>
-                <input id="nombre_titulo" type="text" maxlength="200" placeholder="Introduce el título aquí">
+                <input id="nombre_titulo" type="text" maxlength="200" placeholder="Introduce el t&iacute;tulo aqu&iacute;">
                 <hr>
                 <textarea id="contenido_blog"></textarea>
             </div>
@@ -136,16 +145,22 @@ function checkLength( o, n, min, max ) {
                 <div>
                     <h5><i class="fa fa-eye"></i> Visibilidad</h5>
                     <select id="visibilidad" name="visibilidad">
-                    	<option value="">Selecciona una opcion...</option>
-						<option value="1">Público</option>
+                    	<option value="">Selecciona una opci&oacute;n...</option>
+						<option value="1">P&uacute;blico</option>
 						<option value="2">Privado</option>
 					</select>
-					<h5><i class="fa fa-check-square-o"></i> Categoría</h5>
+					<h5><i class="fa fa-check-square-o"></i> Categor&iacute;a</h5>
 					<select id="categoria" name="categoria">
-                    	<option value="">Selecciona una opcion...</option>
+                    	<option value="">Selecciona una opci&oacute;n...</option>
 						<option value="1">Blog</option>
 						<option value="2">Noticias</option>
 					</select>
+                    <h5><i class="fa fa-comments"></i> Permitir Comentarios</h5>
+                    <select id="comentarios" name="comentarios" disabled="disabled">
+                        <option value="">Selecciona una opci&oacute;n...</option>
+                        <option value="1">Si</option>
+                        <option value="2">No</option>
+                    </select>
 					<h5 style="display: none;"><i class="fa fa-file-image-o"></i> Imagen Destacada</h5>
 					<span style="display: none;"><a href="#">Asignar imagen destacada</a></span>
 					<hr>

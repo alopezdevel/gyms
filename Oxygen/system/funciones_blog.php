@@ -49,6 +49,7 @@ function post_nuevo(){
     $visibilidad = trim($_POST["visibilidad"]);
     $categoria = trim($_POST["categoria"]);
     $usuario_actual = trim($_POST["usuario_actual"]);
+    $comentarios =  trim($_POST["comentarios"]); 
     
     switch ($visibilidad) {
     case 1:
@@ -76,7 +77,7 @@ function post_nuevo(){
     if (mysql_num_rows($result) > 0) {
         
         @mysql_free_result($result);
-        $sql= "INSERT INTO ct_blog_noticia SET sNombreTitulo = '".$nombre_titulo."', eCategoria = '".$categoria."', eVisibilidad = '".$visibilidad."', sAutor = '".$usuario_actual."', bContenido = '".$contenido_blog."', dFEchaCreacion = NOW()";
+        $sql= "INSERT INTO ct_blog_noticia SET sNombreTitulo = '".$nombre_titulo."', eCategoria = '".$categoria."', eVisibilidad = '".$visibilidad."', sAutor = '".$usuario_actual."', bContenido = '".$contenido_blog."', dFEchaCreacion = NOW(), eComentarios = '".$comentarios."'";
 
         mysql_query($sql, $dbconn);
         if ( mysql_affected_rows() < 1 ) {
