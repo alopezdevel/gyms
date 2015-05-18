@@ -847,7 +847,7 @@ function get_asistencia_asinc(){
                }
                if($socios['eEstatus'] != ""){               
                    if($socios['eEstatus'] <0){
-                      $socios['eEstatus'] = $socios['eEstatus'] *-1;
+                      $socios['eEstatus'] = $socios['eEstatus'];
                       $socios['eEstatus'] = $socios['eEstatus'].'';
                       $leyenda = $socios['eEstatus'];
                       $color_fondo = "#FF0000"; 
@@ -905,14 +905,14 @@ function get_asistencia_asinc(){
      $response = array("mensaje"=>"$mensaje","error"=>"$error","tabla"=>"$htmlTabla");   
      echo array2json($response);
 }  
-function registrar_asistencia(){    
+function registrar_asistencia(){                                                                                  
      $id = $_POST['id'];
      $estatus = $_POST['estatus'];
      $error = "0";
      include("cn_usuarios_2.php");
      $conexion->autocommit(FALSE);          
      $transaccion_exitosa = true;
-     $sql = "INSERT INTO cb_transacciones_socio SET iIDSocio = '".$id."', dFechaVisitaSocio = NOW(), eTipoTransaccion ='".$estatus."' ";
+     $sql = "INSERT INTO cb_transacciones_socio SET iIDSocio = '".$id."', dFechaVisitaSocio = DATE_SUB( NOW(),INTERVAL 1 HOUR) , eTipoTransaccion ='".$estatus."' ";
      $conexion->query($sql);   
      if ($conexion->affected_rows < 1 ) {
         $transaccion_exitosa =false;
@@ -929,5 +929,76 @@ function registrar_asistencia(){
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
 } 
+function enviar_recordatorio_pago(){
+    include("cn_usuarios_2.php");
+    //$conexion->begin_transaction();
+    $conexion->autocommit(FALSE);
+    $transaccion_exitosa = true;
+    $sql = "SELECT 
+            sCorreoSocio as correo, 
+            pago.dias_restantes  as dias        
+            FROM ct_socio 
+            LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
+            FROM cb_pagos_socio 
+            GROUP BY iIDSocio
+            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio  WHERE pago.dias_restantes <= 5";
+    $result = $conexion->query($sql);
+    $NUM_ROWs_socios = $result->num_rows;   
+    $correo = "";
+    if ($NUM_ROWs_socios > 0) { 
+        $i = 0;       
+        while ($socios = $result->fetch_assoc()) {
+            if($correo == ""){
+                $correo = $socios['correo'];
+            }
+              $correo= $correo.','.$socios['correo'];
+        }
+    }
+        $conexion->close(); 
+    require_once("./lib/mail.php");
+    $cuerpo = "
+                    <div style=\"font-size:12px;border:1px solid #6191df;border-radius:3px;padding:10px;width:95%; margin:5px auto;font-family: Arial, Helvetica, sans-serif;\">
+                         <h2 style=\"color:#313131;text-transform: uppercase; text-align:center;\">Recordatorio  de pago - Oxygen-FX Gym!</h2> \n 
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\"><strong><br>Tu membresia esta a punto de expirar.</p></strong>\n 
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Si quieres saber, tus fechas de pago y dias restantes. Te invitamos a que ingreses a nuestro sitio web.</p>
+                         <br><br>
+                         <br><br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Recuerda que puedes verificar en cualquier momento todos tus pagos, solo debes ingresar en nuestra pagina web, en la seccion de historial de pagos.</p><br>
+                         <br>
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Favor de no responder este correo.</p>                         
+                    </div>";
+    $mail = new Mail();                                    
+    $mail->From = "soporte@oxygen-fx.com";
+    $mail->FromName = "oxygen-fx team";
+    $mail->Host = "oxygen-fx.com";
+    $mail->Mailer = "sendmail";    
+    $mail->Subject = "Tu membresia esta a punto de expirar"; 
+    $mail->Body  = $cuerpo;                                                                                            
+    $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
+    $mail->IsHTML(true);
+    $mail->WordWrap =150;
+    $mail_error = false;    
+    $mail->AddAddress( $correo);
+    if (!$mail->Send()) {
+        $mail_error = true;
+        $mail->ClearAddresses();
+    } 
+    
+           
+    if(!$mail_error){
+        $mensaje = "Se enviar con exito";
+        $error = "0";
+        
+    }else{
+        $mensaje = "Error e-mail.";
+        $error = "1";  
+        $transaccion_exitosa = false;
+    } 
+
+    $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+    
+}
  
 ?>

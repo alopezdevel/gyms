@@ -80,11 +80,12 @@ if(1){
                     <li class="submenu"><a href="#">Utilerias</a>
                         <ul> 
                            <li><a href="postdeldia.php">Mensaje del Día</a></li>    
+                           <li><a href="utileria_recordar_pago.php">Recordatorio Pago</a></li>    
                         </ul> 
                     </li>
                     <li class="submenu"><a href="#">Socios</a>
                         <ul> 
-                           <li><a href="socio_verificacion.php">Asistencia del socio</a></li> 
+                           <li><a href="socio_verificacion_2.php">Asistencia del socio</a></li> 
                            <li><a href="alta_socio_2.php">Catalogo de socios</a></li>
                            <li><a href="registro_socio.php">Nuevo Socio</a></li>
                            <li><a href="pagar_mensualidad_2.php">Registrar Pago del socio</a></li>    
