@@ -67,31 +67,38 @@ if(1){
 		</ul>
         <ul class="main-nav">
             <?php if($_SESSION["acceso"] == "A"){?> 
-                    <li><a href="index.php">Inicio</a></li> 
+                    <li><a href="index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
                     
                     <li class="submenu"><a href="#">Reportes</a>
                         <ul> 
-                            <li><a href="monitor_usuario.php">Monitor por Socio</a></li>
-                            <li><a href="monitor_de_pago_por_usuario.php">Pagos por Socio</a></li>
-                            <li><a href="monitor.php">Asistencias del Dia</a></li>    
+                            <li><a href="monitor_usuario.php"><i class="fa fa-user"></i> Monitor por Socio</a></li>
+                            <li><a href="monitor_de_pago_por_usuario.php"><i class="fa fa-usd"></i> Pagos por Socio</a></li>
+                            <li><a href="monitor.php"><i class="fa fa-check-square-o"></i> Asistencias del Dia</a></li>    
                         </ul> 
                     </li>
                     
                     <li class="submenu"><a href="#">Utilerias</a>
                         <ul> 
-                           <li><a href="postdeldia.php">Mensaje del Día</a></li>    
-                           <li><a href="utileria_recordar_pago.php">Recordatorio Pago</a></li>    
+                           <li><a href="postdeldia.php"><i class="fa fa-comment"></i> Mensaje del Día</a></li>    
+                           <li><a href="utileria_recordar_pago.php"><i class="fa fa-usd"></i> Recordatorio Pago</a></li>   
                         </ul> 
                     </li>
                     <li class="submenu"><a href="#">Socios</a>
                         <ul> 
-                           <li><a href="socio_verificacion_2.php">Asistencia del socio</a></li> 
-                           <li><a href="alta_socio_2.php">Catalogo de socios</a></li>
-                           <li><a href="registro_socio.php">Nuevo Socio</a></li>
-                           <li><a href="pagar_mensualidad_2.php">Registrar Pago del socio</a></li>    
+                           <li><a href="socio_verificacion_2"><i class="fa fa-user"></i> Asistencia del socio</a></li> 
+                           <li><a href="alta_socio_2"><i class="fa fa-users"></i> Catalogo de socios</a></li>
+                           <li><a href="registro_socio"><i class="fa fa-user-plus"></i> Nuevo Socio</a></li>
+                           <li><a href="pagar_mensualidad_2"><i class="fa fa-usd"></i> Registrar Pago del socio</a></li>    
                         </ul> 
                     </li>
-                   <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+                    <li class="submenu"><a href="#">Blog y Noticias</a>
+                        <ul> 
+                           <li><a href="post_nuevo"><i class="fa fa-plus-circle"></i> Nueva Entrada</a></li>    
+                           <li><a href="blog"><i class="fa fa-book"></i> Blog</a></li>
+                           <li><a href="noticias"><i class="fa fa-newspaper-o"></i> Noticias</a></li>    
+                        </ul> 
+                    </li>
+                   <li><a href="soporte_sistema.php"><i class="fa fa-question-circle"></i> Soporte Técnico</a></li>
                     
             <?php } ?>
             <?php if($_SESSION["acceso"] == "U"){?> 
