@@ -845,6 +845,9 @@ function get_asistencia_asinc(){
                if($socios['eEstatus'] < 10 && $socios['eEstatus'] > 5){
                    $color_fondo = "#FFFF00";
                }
+               if($socios['eEstatus'] == 0){
+                   $color_fondo = "#FF0000";
+               }
                if($socios['eEstatus'] != ""){               
                    if($socios['eEstatus'] <0){
                       $socios['eEstatus'] = $socios['eEstatus'];
@@ -999,6 +1002,29 @@ function enviar_recordatorio_pago(){
     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
     
+}
+function consultar_anuncio(){    
+    include("cn_usuarios_2.php");
+    $conexion->autocommit(FALSE);                                                       
+    $transaccion_exitosa = true;
+    $mensaje_dia = " <strong><font size='14' face='Verdana'> Oxygen-FX </font></strong><br /><br /><br /><p class='txt-center'><font size='9' face='Verdana'>";
+    $sql = "SELECT sComentario AS mensaje FROM cb_comentario_del_dia  ";
+    $result = $conexion->query($sql);
+    $NUM_ROWs = $result->num_rows;   
+    $error = "0";
+    if ($NUM_ROWs > 0) {     
+        while ($mensaje = $result->fetch_assoc()) {
+            $mensaje_dia = $mensaje_dia.$mensaje['mensaje'];        
+        }
+    }else{
+        $error = "1";
+    }
+    $mensaje_dia = $mensaje_dia."</font></p><br /><br />";
+    $response = array("mensaje"=>"$mensaje",
+                      "error"=>"$error",
+                      "mensaje_dia"=>"$mensaje_dia"
+                      );   
+    echo array2json($response);
 }
  
 ?>

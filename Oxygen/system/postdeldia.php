@@ -25,7 +25,7 @@ $mensaje_del_dia = Consulta_Comentario_Dia();?>
 <div id="layer_content" class="main-section">
     <div class="container"> 
         <div class="page-title">
-            <h1>Administracion</h1>
+            <h1>Utilerias</h1>
             <h2>Mensaje del dia</h2>
         </div>
     <form action="<?php echo $_SERVER['PHP_SELF']."?type=".sha1(md5("Insertar")).md5(sha1("Comentario")); ?>" method="POST">
