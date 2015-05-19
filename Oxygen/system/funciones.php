@@ -1014,12 +1014,22 @@ function consultar_anuncio(){
     $error = "0";
     if ($NUM_ROWs > 0) {     
         while ($mensaje = $result->fetch_assoc()) {
-            $mensaje_dia = $mensaje_dia.$mensaje['mensaje'];        
+            if(trim($mensaje['mensaje']) == ""){
+                $mensaje_dia = "";
+                $error = "1";
+                                                                        
+            }else{
+                $mensaje_dia = $mensaje_dia.$mensaje['mensaje'];        
+            }
+            
         }
     }else{
         $error = "1";
     }
-    $mensaje_dia = $mensaje_dia."</p></div>";
+    if($error == "0"){
+        $mensaje_dia = $mensaje_dia."</p></div>";
+    }
+    
     $response = array("mensaje"=>"$mensaje",
                       "error"=>"$error",
                       "mensaje_dia"=>"$mensaje_dia"
