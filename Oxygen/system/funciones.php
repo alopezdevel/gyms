@@ -1007,7 +1007,7 @@ function consultar_anuncio(){
     include("cn_usuarios_2.php");
     $conexion->autocommit(FALSE);                                                       
     $transaccion_exitosa = true;
-    $mensaje_dia = " <strong><font size='14' face='Verdana'> Oxygen-FX </font></strong><br /><br /><br /><p class='txt-center'><font size='9' face='Verdana'>";
+    $mensaje_dia = "<div style=\"width:80%;margin:10px auto;text-align:center\"><i class=\"fa fa-exclamation-circle\" style=\"font-size:5em;\"></i><h2 class=\"txt-center\">Oxygen-FX</h2><br><p class='txt-center' style=\"font-size:1.5em;\">";
     $sql = "SELECT sComentario AS mensaje FROM cb_comentario_del_dia  ";
     $result = $conexion->query($sql);
     $NUM_ROWs = $result->num_rows;   
@@ -1019,7 +1019,7 @@ function consultar_anuncio(){
     }else{
         $error = "1";
     }
-    $mensaje_dia = $mensaje_dia."</font></p><br /><br />";
+    $mensaje_dia = $mensaje_dia."</p></div>";
     $response = array("mensaje"=>"$mensaje",
                       "error"=>"$error",
                       "mensaje_dia"=>"$mensaje_dia"

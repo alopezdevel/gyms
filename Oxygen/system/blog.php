@@ -43,8 +43,12 @@ function fbroot(){
                                     $count = $count - 1;
                                 } else{$count = $count - 1;}
                         }
+                            
+                },
+                error: function(){
                     
-                    }
+                    $(fn_blog.blog_list).empty().append("<h3>Error al cargar las entradas, favor de intentarlo nuevamente.</h3>"); 
+                }
             }); 
             
         },  

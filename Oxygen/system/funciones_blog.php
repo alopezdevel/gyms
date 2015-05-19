@@ -142,7 +142,7 @@ function get_entradas(){
                                     "<p class=\"autor\"><span>Publicado por </span>".$entradas["sAutor"]."<span>-<span> ".$entradas["dFechaCreacion"]."</p>
                                     <hr></div>";
              }else{                             
-                 $htmlTabla .="<div></div>";
+                 $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">No hay entradas disponibles.</div>";
              }    
         }
         
@@ -150,7 +150,7 @@ function get_entradas(){
         mysql_close($dbconn);                                                                                                                                                                      
     } else{
         
-         $htmlTabla .="<div></div>";
+         $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">No hay entradas disponibles.</div>";
     }
         $html_tabla = utf8_encode($html_tabla); 
         $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla","count" =>"$countcont");   
@@ -211,7 +211,7 @@ function get_entradacont(){
                  }
                                     
              }else{                             
-                 $htmlTabla .="<div></div>";
+                 $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">Esta entrada no se encuentra disponible.</div>";
              }    
         }
         
@@ -219,7 +219,7 @@ function get_entradacont(){
         mysql_close($dbconn);                                                                                                                                                                      
     } else{
         
-         $htmlTabla .="<div></div>";
+         $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">Esta entrada no se encuentra disponible.</div>";
     }
         $html_tabla = utf8_encode($html_tabla); 
         $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla", "comentarios" => "$comentarios");   
