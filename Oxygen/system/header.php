@@ -98,7 +98,7 @@ if(1){
                            <li><a href="noticias"><i class="fa fa-newspaper-o"></i> Noticias</a></li>    
                         </ul> 
                     </li>
-                   <li><a href="soporte_sistema.php"><i class="fa fa-question-circle"></i> Soporte Técnico</a></li>
+                   <li><a href="soporte_sistema.php"><i class="fa fa-question-circle"></i> Soporte T&eacute;cnico</a></li>
                     
             <?php } ?>
             <?php if($_SESSION["acceso"] == "U"){?> 
