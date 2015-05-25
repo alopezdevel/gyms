@@ -120,7 +120,7 @@ if(1){
             <?php } ?>
             <?php if($_SESSION["acceso"] == "C"){?> 
                      <li><a href="index.php">Inicio</a></li> 
-                     <li><a href="membresia_doit.php">Socios</a></li> 
+                     <li><a href="#">Socios</a></li> 
                      <li><a href="comentarios.php">Comentarios</a></li>
                      <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
                     
