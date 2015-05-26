@@ -1,8 +1,10 @@
 <?php
-    session_start();  
-    include("header.php");
-    
-    
+    session_start();
+    if ($_SESSION['acceso'] != "A" ){ //No ha iniciado session
+            header("Location: login.php");
+    }else{
+        include("header.php");
+           
 ?>
 <link rel="Stylesheet" type="text/css" href="lib/jhtmlarea/css/jHtmlArea.css">
 <script type="text/javascript" src="lib/jhtmlarea/jHtmlArea-0.8.js"></script>
@@ -19,7 +21,7 @@ function inicio(){
     $("#nombre_titulo").focus(onFocus);
     //blur
     $("#nombre_titulo").blur(onBlur);
-    $("#categoria").click(SelectCategoria);
+    $("#categoria").change(SelectCategoria);
         
 }; 
 function SelectCategoria(){
@@ -29,7 +31,7 @@ function SelectCategoria(){
        $('#comentarios').removeAttr('disabled'); 
     }else{
         
-        $('#comentarios').attr('disabled');
+        $('#comentarios').attr('disabled','disabled');
         $('#comentarios').val('no');
     }
 } 
@@ -41,7 +43,7 @@ function onInsertarPost(){
     var visibilidad = $("#visibilidad");
     var categoria = $("#categoria");
     var comentarios = $("#comentarios");
-    todosloscampos = $( [] ).add( nombre_titulo ).add( visibilidad ).add( categoria ).add(contenido_blog);
+    todosloscampos = $( [] ).add( nombre_titulo ).add( visibilidad ).add( categoria ).add(contenido_blog).add(comentarios);
     todosloscampos.removeClass( "error" );
     
     var usuario_actual = <?php echo json_encode($_SESSION['usuario_actual']);?>
@@ -77,14 +79,20 @@ function onInsertarPost(){
                          //email.addClass( "error" ); 
                     break;
              case "0":   actualizarMensajeAlerta("Todos los campos son requeridos.");
-                         $("#nombre_titulo").val("");
-                         $("#contenido_blog").htmlarea('html', '');
-                         $("#visibilidad option[value='']").attr('selected',true);
-                         $("#categoria option[value='']").attr('selected',true);
-                         $("#nombre_titulo").focus();
-                         alert("Gracias, has creado una nueva entrada en tu Blog");
-                         actualizarMensajeAlerta("Gracias, has creado una nueva entrada en tu Blog");
-                         location.href= "index.php";
+                         //$("#nombre_titulo").val("");
+                         //$("#contenido_blog").htmlarea('html', '');
+                         //$("#visibilidad option[value='']").attr('selected',true);
+                         //$("#categoria option[value='']").attr('selected',true);
+                         //$("#nombre_titulo").focus();
+                         alert("Gracias, has creado una nueva entrada en Oxygen-FX");
+                         if($("#categoria").val() == "1"){
+                             
+                             location.href= "blog.php";  
+                         }else{
+                             
+                             location.href= "noticias.php";  
+                         }
+                         
                     break;  
              }
          }
@@ -145,19 +153,17 @@ function checkLength( o, n, min, max ) {
                 <div>
                     <h5><i class="fa fa-eye"></i> Visibilidad</h5>
                     <select id="visibilidad" name="visibilidad">
-                    	<option value="">Selecciona una opci&oacute;n...</option>
+                    	<option value="1">Selecciona una opci&oacute;n...</option>
 						<option value="1">P&uacute;blico</option>
-						<option value="2">Privado</option>
 					</select>
 					<h5><i class="fa fa-check-square-o"></i> Categor&iacute;a</h5>
 					<select id="categoria" name="categoria">
-                    	<option value="">Selecciona una opci&oacute;n...</option>
 						<option value="1">Blog</option>
 						<option value="2">Noticias</option>
 					</select>
                     <h5><i class="fa fa-comments"></i> Permitir Comentarios</h5>
-                    <select id="comentarios" name="comentarios" disabled="disabled">
-                        <option value="">Selecciona una opci&oacute;n...</option>
+                    <select id="comentarios" name="comentarios">
+                        <option value="2">Selecciona una opci&oacute;n...</option>
                         <option value="1">Si</option>
                         <option value="2">No</option>
                     </select>
@@ -175,3 +181,4 @@ function checkLength( o, n, min, max ) {
     <?php include("footer.php"); ?>  
 </body>
 </html>
+<?php }?>

@@ -25,7 +25,8 @@
     
     function inicio(){
         
-        fn_blog.getentrada($.get("noticia"));   
+        fn_blog.getentrada($.get("noticia"));
+        //$('#btn-borrar-entrada').click(borrarentrada);    
         
     } 
     var fn_blog = {
@@ -47,7 +48,29 @@
             
         }
     } //termina funciones noticia     
-    
+function borrarentrada(id){
+               
+            $.ajax({             
+                type:"POST", 
+                url:"funciones_blog.php", 
+                data:{accion:"delete_entradacont", identrada : id},
+                async : true,
+                dataType : "json",
+                success : function(data){                               
+                        switch(data.error){
+                        case "1":  
+                            alert("Error al borrar los datos");
+                            break;
+                        case "0":   
+                            alert("Se ha eliminado la entrada exitosamente");
+                            location.href= "noticias.php";
+                            break;  
+                        } 
+                }
+            
+            });    
+          
+        }
 </script>
 <div id="fb-root"></div>
 <script>
@@ -66,7 +89,10 @@
             <h2>Casos mas recientes</h2>
         </div>
     <div class="noticia-cont col-md-8">
-         <div id="noticia-list"></div> 
+         <div id="noticia-list"></div>
+         <?php if($_SESSION["acceso"] == "A"){?>
+            <div id="btn-borrar-entrada" class="btn-borrar-entrada" onclick="borrarentrada($.get('noticia'))"><i class="fa fa-trash"></i> Eliminar entrada</div>
+         <?php } ?> 
     </div>
     <div class="col-md-4">
           <div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-height="300px" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>
