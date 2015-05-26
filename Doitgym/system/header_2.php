@@ -44,14 +44,6 @@ if(1){
 
 
 <body> 
-   <?php if(isset($_SESSION['acceso'])){ ?>
-		<div id="chat-contenedor" onclick="posision(1);" ondblclick="posision(2)" style="display:none;">
-    	<h3 >Mensajes</h3>
-    	<iframe id="I2" border="0" frameborder="0" height="185" marginheight="0" marginwidth="0" name="iframechat" scrolling="no" src="chat_interno.php" width="250">
-    Your browser does not support inline frames or is currently configured not to display inline frames.
-    </iframe>
-</div>
-<?php }?>
 <nav class="main-nav-outer" id="layer_menu"><!--main-nav-start-->
 	<div class="container">
 		<a href="#home" class="img-logo"><img  src="../images/img-logo.png" alt="logo"></a>
