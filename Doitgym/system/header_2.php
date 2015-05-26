@@ -33,12 +33,12 @@ if(1){
     
     <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>--->
     <script type="text/javascript" src="../new_js/jquery.1.8.3.min.js"></script> 
-    <link href="../css/form.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/style_system.css" type="text/css"> 
-    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"> 
-    <script type="text/javascript" src="../js/bootstrap.js"></script>
-    <link href="css/data_grid.css" rel="stylesheet" type="text/css">
+    <link href="../new_css/form.css" rel="stylesheet" type="text/css">
+    <link href="../new_css/style_system.css" rel="stylesheet" type="text/css"> 
+    <link href="../new_css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../new_css/bootstrap.css" rel="stylesheet" type="text/css"> 
+    <script src="../new_js/bootstrap.js" type="text/javascript"></script>
+    <link href="../new_css/data_grid.css" rel="stylesheet" type="text/css">
 </head>
 
 
