@@ -54,7 +54,7 @@ if(1){
 <?php }?>
 <nav class="main-nav-outer" id="layer_menu"><!--main-nav-start-->
 	<div class="container">
-		<a href="#home" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
+		<a href="#home" class="img-logo"><img  src="../images/img-logo.png" alt="logo"></a>
 		<ul class="top-nav"> 
 			<li>
 			<?php if(isset($_SESSION['usuario_actual'])){ ?>
