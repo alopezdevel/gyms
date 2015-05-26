@@ -32,7 +32,7 @@ if(1){
 
     
     <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>--->
-    <script type="text/javascript" src="../js/jquery.1.8.3.min.js"></script> 
+    <script type="text/javascript" src="../new_js/jquery.1.8.3.min.js"></script> 
     <link href="../css/form.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style_system.css" type="text/css"> 
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
