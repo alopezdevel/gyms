@@ -397,7 +397,7 @@ function get_socios_asinc(){
     $conexion->autocommit(FALSE);
     $transaccion_exitosa = true;
     $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
-    $filtroQuery .= " WHERE iIDSocio != '' ";  
+    $filtroQuery .= " WHERE iIDSocio != '' AND sNombreSocio != ''";  
     foreach($array_filtros as $key => $valor){
         if($array_filtros[$key] != ""){
             $campo_valor = explode("|",$array_filtros[$key]);

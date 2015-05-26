@@ -10,7 +10,9 @@ $(document).ready(inicio);
         geturl();  
         fn_blog.getentrada($.get("entrada"));   
         fbroot();
-    }
+        
+        //$('#btn-borrar-entrada').click(fn_blog.borrarentrada);
+    } 
 function geturl(){
 //empieza tomar valor de url//
   
@@ -59,9 +61,30 @@ function fbroot(){
             
             });    
           
-        }  
+        } 
+        
     } //termina funciones blog 
-    
+function borrarentrada(id){
+               
+            $.ajax({             
+                type:"POST", 
+                url:"funciones_blog.php", 
+                data:{accion:"delete_entradacont", identrada : id},
+                async : true,
+                dataType : "json",
+                success : function(data){                               
+                        switch(data.error){
+                        case "1":  alert("Error al borrar los datos");
+                            break;
+                        case "0":   alert("Se ha eliminado la entrada exitosamente");
+                            location.href= "blog.php";
+                            break;  
+                        } 
+                }
+            
+            });    
+          
+}   
 </script>
 <?php ?>
 <div id="fb-root"></div>
@@ -75,6 +98,9 @@ function fbroot(){
         </div>
     <div class="blog-cont col-md-8">
          <div id="blog-list"></div>
+         <?php if($_SESSION["acceso"] == "A"){?>
+            <div id="btn-borrar-entrada" class="btn-borrar-entrada" onclick="borrarentrada($.get('entrada'))"><i class="fa fa-trash"></i> Eliminar entrada</div>
+         <?php } ?>
     </div>
     <div class="col-md-4">
           <div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-height="300px" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>

@@ -68,6 +68,14 @@ function post_nuevo(){
         $categoria = "noticia";
         break;
     }
+    switch ($comentarios) {
+    case 1:
+        $comentarios = "si";
+        break;
+    case 2:
+        $comentarios = "no";
+        break;
+    }
     
     include("cn_usuarios.php");
     mysql_query("BEGIN");
@@ -169,6 +177,7 @@ function get_entradacont(){
     $result = mysql_query($sql, $dbconn);
     $htmlTabla = "";
     $comentarios = "";
+    $cat_comentarios = "";
     
     if (mysql_num_rows($result) > 0) { 
         while ($entradas = mysql_fetch_array($result)) {
@@ -180,10 +189,12 @@ function get_entradacont(){
                     case "blog":
                         $categoria = "fa-book";
                         $colorcategoria = "blog-categoria";
+                        $cat_comentarios = "entrada";
                         break;
                     case "noticia":
                         $categoria = "fa-newspaper-o";
                         $colorcategoria = "noticia-categoria";
+                        $cat_comentarios = "noticia";
                         break;
                  }
         
@@ -199,7 +210,7 @@ function get_entradacont(){
                     
                  $htmlTabla .= "<div class=\"comentarios\">
                                     <div class=\"fb-comments\"". 
-                                    "data-href=\"http://oxygen-fx.laredo2.net/system/contenido-blog.php#".$entradas["iConsecutivo"]."\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
+                                    "data-href=\"http://oxygen-fx.laredo2.net/system/blog-contenido.php?".$cat_comentarios."=".$entradas["iConsecutivo"]."\" data-width=\"100%\" data-numposts=\"5\" data-colorscheme=\"light\"></div></div>".
                                     "</div>"; 
                               $comentarios =  $entradas["sNombreTitulo"];
                    
@@ -226,4 +237,36 @@ function get_entradacont(){
         echo array2json($response);
 
 } 
+//BORRAR una sola entrada //
+function delete_entradacont(){
+    
+    $identrada = trim($_POST['identrada']);
+    $error = "0"; 
+    include("cn_usuarios.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "DELETE FROM ct_blog_noticia WHERE iConsecutivo = '".$identrada."'";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_affected_rows() < 1) { 
+        
+        $transaccion_exitosa = false;
+        $error = "1";
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);
+                                                                                                                                                                               
+    } else{
+        
+        //mysql_query("COMMIT");
+        mysql_query("COMMIT");     
+        mysql_close($dbconn);
+         
+    }
+        
+        
+       // echo $error;
+       // exit;
+        $response = array("mensaje"=>"$sql","error"=>"$error");   
+        echo array2json($response);
+
+}
 ?>
