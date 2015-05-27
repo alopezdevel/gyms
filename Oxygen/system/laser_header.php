@@ -40,30 +40,17 @@ if(1){
         <ul class="main-nav"> 
                     <li><a href="index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
                     
-                    <li class="submenu"><a href="#">Reportes</a>
+                    <li class="submenu"><a href="#">C&aacute;talogos</a>
                         <ul> 
-                            <li><a href="#"><i class="fa fa-users"></i> Reporte de Empleados</a></li>
-                            <li><a href="#"><i class="fa fa-briefcase"></i> Reporte de Puestos</a></li>
-                            <li><a href="#"><i class="fa fa-clock-o"></i> Reporte de Horarios</a></li>    
+                            <li><a href="laser_empleados.php"><i class="fa fa-users"></i> Empleados</a></li>
+                            <li><a href="laser_horarios.php"><i class="fa fa-clock-o"></i> Horarios</a></li>
+                            <li><a href="#"><i class="fa fa-briefcase"></i> Puestos</a></li>    
                         </ul> 
                     </li>
                     
-                    <li class="submenu"><a href="#">Empleados</a>
+                    <li class="submenu"><a href="#">Reportes</a>
                         <ul> 
-                           <li><a href="#"><i class="fa fa-user-plus"></i> Nuevo empleado</a></li>    
-                           <li><a href="#"><i class="fa fa-users"></i> Catalogo</a></li>   
-                        </ul> 
-                    </li>
-                    <li class="submenu"><a href="#">Puestos</a>
-                        <ul> 
-                           <li><a href="#"><i class="fa fa-plus-circle"></i> Nuevo puesto</a></li> 
-                           <li><a href="#"><i class="fa fa-briefcase"></i> Catalogo</a></li>   
-                        </ul> 
-                    </li>
-                    <li class="submenu"><a href="#">Horarios</a>
-                        <ul> 
-                           <li><a href="post_nuevo"><i class="fa fa-plus-circle"></i> Nuevo horario</a></li>    
-                           <li><a href="blog"><i class="fa fa-clock-o"></i> Catalogo</a></li>    
+                           <li><a href="#"><i class="fa fa-folder-open"></i> Reporte General</a></li>     
                         </ul> 
                     </li>   
         </ul>
