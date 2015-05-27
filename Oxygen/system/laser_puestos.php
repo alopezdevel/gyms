@@ -10,52 +10,50 @@
 $(document).ready(inicio);
 function inicio(){
     
-    CargarEmpleados();
-    
-    $( "#filtro_fecha_creacion" ).datepicker({onSelect: function(){ CargarEmpleados()},dateFormat: 'dd/mm/yy'}); 
-    $('#grid-head1 input').keyup(CargarEmpleados); 
-    $( "#filtro_fecha_creacion" ).keyup(CargarEmpleados);
+    CargarPuestos();
+    $('#grid-head1 input').keyup(CargarPuestos); 
+
     //focus
     $('form input').focus(onFocus);
     //blur
     $('form input').blur(onBlur);
 
-    $("form .numeros").keydown(inputnumero);
+    $(".numeros").keydown(inputnumero);
     //$('#btn-nuevoempleado').click(onNuevoEmpleado); 
 }
-function CargarEmpleados(){
+function CargarPuestos(){
 
-    var filtro_id = "";
-    var filtro_nombre = "";
-    var filtro_correo = "";
-    var filtro_fecha_creacion = "";
+    var filtro_puesto = "";
+    var filtro_area = "";
+    var filtro_id_empleado = "";
+    var filtro_id_horario = "";
     
-    if($('#filtro_fecha_creacion').val() != ""){
+    if($('#filtro_puesto').val() != ""){
         
-        filtro_fecha_creacion = $('#filtro_fecha_creacion').val();
+        filtro_puesto = $('#filtro_puesto').val();
+    }
+    if($('#filtro_area').val() != ""){
+        
+        filtro_area = $('#filtro_area').val();
     }
     if($('#filtro_id_empleado').val() != ""){
         
-        filtro_id = $('#filtro_id_empleado').val();
+        filtro_id_empleado = $('#filtro_id_empleado').val();
     }
-    if($('#filtro_nombre').val() != ""){
+    if($('#filtro_id_horario').val() != ""){
         
-        filtro_nombre = $('#filtro_nombre').val();
-    }
-    if($('#filtro_correo').val() != ""){
-        
-        filtro_correo = $('#filtro_correo').val();
+        filtro_id_horario = $('#filtro_id_horario').val();
     }
     $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"CargarEmpleados", filtro_id : filtro_id, filtro_nombre: filtro_nombre, filtro_correo: filtro_correo, filtro_fecha_creacion: filtro_fecha_creacion},
+        data:{accion:"CargarPuestos", filtro_puesto : filtro_puesto, filtro_area: filtro_area, filtro_id_empleado: filtro_id_empleado, filtro_id_horario: filtro_id_horario},
                 async : true,
                 dataType : "json",
                 success : function(data){                               
-                    $("#data_grid_empleados tbody").empty().append(data.tabla);
-                    $("#data_grid_empleados tbody tr:even").addClass('gray');
-                    $("#data_grid_empleados tbody tr:odd").addClass('white');
+                    $("#data_grid_puestos tbody").empty().append(data.tabla);
+                    $("#data_grid_puestos tbody tr:even").addClass('gray');
+                    $("#data_grid_puestos tbody tr:odd").addClass('white');
                 }
      });            
 }
@@ -338,23 +336,23 @@ function limpiarfiltros(){
 <div id="layer_content" class="main-section">  
     <div class="container">
         <div class="page-title">
-            <h1>Empleados</h1>
-            <h2>Catalogo de Empleados</h2>
+            <h1>C&aacute;talogos</h1>
+            <h2>Puestos</h2>
         </div>
-        <table id="data_grid_empleados" class="data_grid">
+        <table id="data_grid_puestos" class="data_grid">
         <thead>                                                                                       
             <tr id="grid-head1">                                                                                             
-                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_fecha_creacion" type="text"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_id_empleado" type="text" placeholder="ID Empleado:"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_nombre" type="text" placeholder="Nombre Completo:"></td>
-                <td class="etiqueta_grid"><input class="filtro" id="filtro_correo" type="text" placeholder="Correo electronico:"></td> 
-                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_empleados');mostrarventana('#frm_container');mostrarformulario('nuevo_empleado');"><i class="fa fa-user-plus"></i></span></td>  
+                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_puesto" type="text"></td>
+                <td class="etiqueta_grid"><input  class="filtro" id="filtro_area" type="text" placeholder="ID Empleado:"></td>
+                <td class="etiqueta_grid"><input  class="filtro" id="filtro_id_empleado" type="text" placeholder="Nombre Completo:"></td>
+                <td class="etiqueta_grid"><input class="filtro numeros" id="filtro_id_horario" type="text" placeholder="Correo electronico:"></td> 
+                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Nuevo Puesto" onclick="cerrarventana('#data_grid_puestos');mostrarventana('#frm_container');mostrarformulario('nuevo_puesto');"><i class="fa fa-plus-circle"></i> Nuevo</span></td>  
             </tr>
             <tr id="grid-head2">                            
-                <td class="etiqueta_grid" nowrap="nowrap" >Fecha de registro</td>
-                <td class="etiqueta_grid">ID Empleado</td>
-                <td class="etiqueta_grid">Nombre Completo</td> 
-                <td class="etiqueta_grid">Correo Electronico</td>
+                <td class="etiqueta_grid" nowrap="nowrap" >Puesto</td>
+                <td class="etiqueta_grid">Area</td>
+                <td class="etiqueta_grid">Horario del Puesto</td> 
+                <td class="etiqueta_grid">Nombre del Empleado</td> 
                 <td class="etiqueta_grid">&nbsp;</td> 
             </tr>
         </thead>
@@ -372,7 +370,7 @@ function limpiarfiltros(){
         </table>
         <div id="frm_container" class="frm-dialog" style="display: none;">
                 <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_empleados');"><i class="fa fa-times-circle"></i></div>
-                <h2 class="txt-center">Nuevo Empleado</h2>
+                <h2 class="txt-center">Nuevo</h2>
                 <form id="frm_empleado" action="" method="post">
                   <p class="mensaje_valido">Favor de llenar los campos.</p> 
                   <input id="Nombre" type="text" name="NombreEmpleado" placeholder="Nombre:" maxlength="50">  

@@ -247,7 +247,7 @@ function actualizar_empleado(){
         mysql_query($sql, $dbconn);
         if ( mysql_affected_rows() < 1 ) {
             $error = "1";
-            $mensaje = "Error al actualizar el registro."; 
+            $mensaje = "No se actualizo el registro."; 
             $transaccion_exitosa = false;
         }                
         if ($transaccion_exitosa) {
@@ -256,7 +256,7 @@ function actualizar_empleado(){
             mysql_query("COMMIT");     
             mysql_close($dbconn);
         } else {
-            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $mensaje = "No se actualizo el registro.";
             $error = "1"; 
             $transaccion_exitosa = false; 
             mysql_query("ROLLBACK");
@@ -320,8 +320,8 @@ function CargarHorarios(){
                  $htmlTabla .= "<tr>                            
                                     <td>".$horarios['idHorario']."</td>".
                                     "<td>".$horarios['dEntrada1']."</td>".              
-                                   "<td>".$horarios['dEntrada2']."</td>".
                                    "<td>".$horarios['dSalida1']."</td>".
+                                   "<td>".$horarios['dEntrada2']."</td>".
                                    "<td>".$horarios['dSalida2']."</td>".
                                    "<td>".$horarios['eTipoSemana']."</td>".
                                    "<td nowrap='nowrap'><span onclick='onBorrarHorario(\"".$horarios['idHorario']."\")' class=\"btn-grid\" title=\"Eliminar Horario\"><i class=\"fa fa-trash\"></i></span> <span onclick='onCargarHorario(\"".$horarios['idHorario']."\")' class=\"btn-grid\" title=\"Editar Horario\"><i class=\"fa fa-pencil-square-o\"></i></span></td>".                                             
@@ -505,7 +505,7 @@ function ActualizarHorario(){
         mysql_query($sql, $dbconn);
         if ( mysql_affected_rows() < 1 ) {
             $error = "1";
-            $mensaje = "Error al actualizar el registro."; 
+            $mensaje = "Los datos no fueron actualizados."; 
             $transaccion_exitosa = false;
         }                
         if ($transaccion_exitosa) {
@@ -514,7 +514,7 @@ function ActualizarHorario(){
             mysql_query("COMMIT");     
             mysql_close($dbconn);
         } else {
-            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $mensaje = "Los datos no fueron actualizados.";
             $error = "1"; 
             $transaccion_exitosa = false; 
             mysql_query("ROLLBACK");
@@ -533,5 +533,62 @@ function ActualizarHorario(){
      //exit;
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
+}
+//PUESTOS -- PUESTOS
+function CargarPuestos(){ 
+     
+     $filtro_puesto = trim($_POST['filtro_puesto']);
+     $filtro_area =   trim($_POST['filtro_area']);
+     $filtro_id_empleado =   trim($_POST['filtro_id_empleado']);
+     $filtro_id_horario =  trim($_POST['filtro_id_horario']);
+     
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT ct_puesto.idPuesto, ct_puesto.sPuesto, ct_puesto.sArea, CONCAT(DATE_FORMAT(ct_horario.dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(ct_horario.dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(ct_horario.dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(ct_horario.dSalida2,'%h:%i %p')) AS dHorario, CONCAT(ct_empleado.sNombre , ' ', ct_empleado.sApellidoPaterno, ' ',  ct_empleado.sApellidoMaterno) AS sNombre  FROM ct_puesto INNER JOIN ct_horario ON ct_puesto.idHorario = ct_horario.idHorario INNER JOIN ct_empleado ON ct_puesto.idEmpleado = ct_empleado.idEmpleado WHERE ct_puesto.idEmpleado != '' ";
+    
+    if($filtro_puesto != ""){
+          $sql = $sql ." AND idEmpleado LIKE '%".$filtro_puesto."%' ";
+    }
+    if($filtro_area != ""){
+          $sql = $sql ." AND CONCAT(sNombre , ' ', sApellidoPaterno, ' ',  sApellidoMaterno) LIKE '%".$filtro_area."%' ";
+    }
+    if($filtro_id_empleado != ""){
+          $sql = $sql ." AND sCorreoElectronico LIKE '%".$filtro_id_empleado."%' ";
+    }
+    if($filtro_id_horario != ""){
+          $sql = $sql ." AND DATE_FORMAT(dFechaCreacion,  '%d/%m/%Y') LIKE '%".$filtro_id_horario."%' ";
+    }
+    
+    $result = mysql_query($sql, $dbconn);
+    $htmlTabla = "";
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($puestos = mysql_fetch_array($result)) {
+           if($puestos["sPuesto"] != ""){
+        
+                 $htmlTabla .= "<tr>                            
+                                    <td>".$puestos['sPuesto']."</td>".
+                                    "<td>".$puestos['sArea']."</td>".              
+                                   "<td>".$puestos['dHorario']."</td>".
+                                   "<td>".$puestos['sNombre']."</td>".
+                                   "<td nowrap='nowrap'><span onclick='onBorrarPuesto(\"".$puestos['idPuesto']."\")' class=\"btn-grid\" title=\"Eliminar Puesto\"><i class=\"fa fa-trash\"></i></span> <span onclick='onCargarPuesto(\"".$puestos['idPuesto']."\")' class=\"btn-grid\" title=\"Editar Puesto\"><i class=\"fa fa-pencil-square-o\"></i></span></td>".                                             
+                                "</tr>"   ;
+             }else{                             
+                 $error = "1";
+             }    
+        }
+        
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);                                                                                                                                                                      
+    } else{
+        
+         $htmlTabla .="<tr><td style=\"text-align:center; font-weight: bold;\" colspan=\"100%\">No hay datos disponibles.</td><tr>";
+    }
+        $html_tabla = utf8_encode($html_tabla); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        echo array2json($response);
+     
+     
 }
 ?>
