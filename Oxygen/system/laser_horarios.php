@@ -19,8 +19,6 @@ function inicio(){
     $('form input').focus(onFocus);
     //blur
     $('form input').blur(onBlur);
-
-    $("form .numeros").keydown(inputnumero);
      
 }
 function CargarHorarios(){
@@ -82,31 +80,28 @@ function onBorrarHorario(id){
 }
 function onNuevoHorario(){
   
-    //var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
-    var entrada1 = $("#entrada1 option").val();    
-    var entrada2 = $("#entrada2 option").val();
-    var salida1 = $("#salida1 option").val();
-    var salida2 = $("#salida2 option").val(); 
+    var entrada1 = $("#entrada1").val();    
+    var entrada2 = $("#entrada2").val();
+    var salida1 = $("#salida1").val();
+    var salida2 = $("#salida2").val(); 
     var tiposemana = $("#tiposemana").val();
-;
     
     todosloscampos = $( [] ).add( entrada1 ).add( entrada2 ).add( salida1 ).add( salida2 ).add( tiposemana );
     todosloscampos.removeClass( "error" );
-   // $("#nombre").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
     
     var valid = true;
     
     //Entradas:
-    //valid = valid && checkLength( entrada1, "Entrada 1", 3, 25 );
-    //valid = valid && checkLength( entrada2, "Entrada 2", 3, 25 );
+    valid = valid && checkLength( entrada1, "Entrada 1", 1 );
+    valid = valid && checkLength( entrada2, "Entrada 2", 1 ); 
     
     //Salida:
-    //valid = valid && checkLength( salida1, "Salida 1", 3, 25 );
-    //valid = valid && checkLength( salida1, "Salida 2", 3, 25 );
+    valid = valid && checkLength( salida1, "Salida 1", 1 ); 
+    valid = valid && checkLength( salida2, "Salida 2", 1 ); 
     
     //tiposemana
-    //valid = valid && checkLength( tiposemana, "Tipo de Semana", 6, 80 );                                                                                                           
+    valid = valid && checkLength( tiposemana, "Salida 2", 1 );                                                                                                         
 
         
     if ( valid ) {
@@ -123,8 +118,9 @@ function onNuevoHorario(){
                          $("#Nombre").focus();
             break;
             case "0": actualizarMensajeAlerta("Favor de llenar los campos.");
-                        $('form input').val("");                                                             
-                         alert(data.mensaje);   
+                        $('form select option[value=""]').attr("selected",true);                                                             
+                         alert(data.mensaje);  
+                         $('.mensaje_valido').removeClass( "error" ); 
                          cerrarventana('#frm_container');
                          mostrarventana('#data_grid_horarios');
                          CargarHorarios(); 
@@ -137,72 +133,54 @@ function onNuevoHorario(){
     
      
 } 
-function onActualizarEmpleado(){
-   
-   var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
-    var id = $('#id_empleado').val();
-    var nombre = $("#Nombre");    
-    var apellido_paterno = $("#ApellidoPaterno");
-    var apellido_materno = $("#ApellidoMaterno");
-    var telefono = $("#Telefono"); 
-    var direccion = $("#Direccion");
-    var colonia = $("#Colonia");
-    var email = $("#CorreoElectronico");
-    var edad = $("#Edad");
+function onActualizarHorario(){
     
-    todosloscampos = $( [] ).add( nombre ).add( apellido_paterno ).add( apellido_materno ).add( telefono ).add( direccion ).add( colonia ).add( email ).add( edad );
+    var id = $("#id_horario").val(); 
+    var entrada1 = $("#entrada1").val();    
+    var entrada2 = $("#entrada2").val();
+    var salida1 = $("#salida1").val();
+    var salida2 = $("#salida2").val(); 
+    var tiposemana = $("#tiposemana").val();
+    
+    todosloscampos = $( [] ).add( entrada1 ).add( entrada2 ).add( salida1 ).add( salida2 ).add( tiposemana );
     todosloscampos.removeClass( "error" );
-    $("#nombre").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
     
     var valid = true;
     
-    //Nombre 
-    valid = valid && checkLength( nombre, "Nombre", 2, 25 );
-    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    //Apellidos
-    valid = valid && checkLength( apellido_paterno, "Apellido Paterno", 2, 25 );
-    valid = valid && checkRegexp( apellido_paterno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    valid = valid && checkLength( apellido_materno, "Apellido Materno", 2, 25 );
-    valid = valid && checkRegexp( apellido_materno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." );
+    //Entradas:
+    valid = valid && checkLength( entrada1, "Entrada 1", 1 );
+    valid = valid && checkLength( entrada2, "Entrada 2", 1 ); 
     
-    //Telefono:
-    valid = valid && checkLength( telefono, "Telefono", 6, 25 );
+    //Salida:
+    valid = valid && checkLength( salida1, "Salida 1", 1 ); 
+    valid = valid && checkLength( salida2, "Salida 2", 1 ); 
     
-    //Direccion:
-    valid = valid && checkLength( direccion, "Direccion", 6, 25 );
+    //tiposemana
+    valid = valid && checkLength( tiposemana, "Salida 2", 1 );
     
-    //Colonia:
-    valid = valid && checkLength( colonia, "Colonia", 6, 25 );
-    
-    //email
-    valid = valid && checkLength( email, "Correo electronico", 6, 80 );                                                                                                           
-    valid = valid && checkRegexp( email, emailRegex, "ej. ui@hotmail.com" );
-    
-    //Edad:
-    valid = valid && checkLength( edad, "Edad", 2, 10 );
-    
-    
-    
+
     if ( valid ) {
         
         $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"actualizar_empleado", id: id, nombre: nombre.val(), apellidopaterno: apellido_paterno.val(), apellidomaterno: apellido_materno.val(), telefono: telefono.val(), direccion: direccion.val(), colonia: colonia.val(), email: email.val(), edad: edad.val() },
+        data:{accion:"ActualizarHorario", id: id, entrada1: entrada1, entrada2: entrada2, salida1: salida1, salida2: salida2,  tiposemana: tiposemana },
         async : true,
         dataType : "json",
         success : function(data){                               
             switch(data.error){
             case "1": alert(data.mensaje);
-                         $("#Nombre").focus();
+                         $("#entrada1").focus();
             break;
             case "0": actualizarMensajeAlerta("Favor de llenar los campos.");
-                        $('form input').val("");                                                             
-                         alert(data.mensaje);   
+                        $('form select option[value=""]').attr("selected",true);  
+                        $('#id_horario').val("");                                                             
+                         alert(data.mensaje);
+                         $('.mensaje_valido').removeClass( "error" );    
                          cerrarventana('#frm_container');
-                         mostrarventana('#data_grid_empleados');
-                         CargarEmpleados(); 
+                         mostrarventana('#data_grid_horarios');
+                         CargarHorarios(); 
             break;  
             }
         }
@@ -243,7 +221,7 @@ function onCargarHorario(id){
 function cerrarventana(ventana){
     
    $(ventana).hide('slow');
-   $(ventana + ' input').val(""); 
+   $(ventana + ' select option[value=""]').attr("selected",true); 
 } 
 function mostrarventana(ventana){
     $(ventana).show('slow');
@@ -276,46 +254,15 @@ function actualizarMensajeAlerta( t ) {
         mensaje.removeClass( "alertmessage", 2500 );
       }, 700 );
  }
-function checkRegexp( o, regexp, n ) {
-    if ( !( regexp.test( o.val() ) ) ) {
-        actualizarMensajeAlerta( n );
-        o.addClass( "error" );
-        o.focus();
-        return false;
-    } else {                     
-        return true;        
-    }
- }
-function checkLength( o, n, min, max ) {
-    if ( o.val().length > max || o.val().length < min ) {
-        actualizarMensajeAlerta( "La longitud del campo " + n + " debe contener por lo menos entre " + min + " y " + max + ". caracteres"  );
-        o.addClass( "error" );
-        o.focus();
+function checkLength( o, n, min ) {
+    if ( o.length < min ) {
+        actualizarMensajeAlerta( "Favor de elegir un valor en el campo " + n + "." );
+        $('.mensaje_valido').addClass( "error" );
         return false;    
     } else {             
         return true;                     
     }                    
  } 
-function inputnumero(){
-    
-        if(event.shiftKey)
-            {
-                event.preventDefault();
-            }
-        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9){}
-        else {
-                if (event.keyCode < 95) {
-                    if (event.keyCode < 48 || event.keyCode > 57) {
-                        event.preventDefault();
-                    }
-                } 
-                else {
-                    if (event.keyCode < 96 || event.keyCode > 105) {
-                        event.preventDefault();
-                    }
-                }
-      }
-}  
 function limpiarfiltros(){
     $('.filtro').val("");
     CargarHorarios();
@@ -364,8 +311,10 @@ function limpiarfiltros(){
                 <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_horarios');"><i class="fa fa-times-circle"></i></div>
                 <h2 class="txt-center">Nuevo Empleado</h2>
                 <form id="frm_empleado" action="" method="post">
-                  <p class="mensaje_valido">Favor de llenar los campos.</p> 
+                  <p class="mensaje_valido">Favor de llenar los campos.</p>
+                  <label>Entrada (1):</label> 
                   <select id="entrada1" class="hora" name="entrada1">
+                  <option value="">Selecciona una opcion...</option> 
                     <?php 
                         for ($i=0;$i<24;$i++) {
                             $h1=sprintf("%02d",$i).":00";
@@ -375,7 +324,9 @@ function limpiarfiltros(){
                     <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
                     <?php } ?>
                   </select>
-                  <select id="entrada2" class="hora" name="entrada2">
+                  <label>Salida (1):</label> 
+                  <select id="salida1" class="hora" name="entrada2">
+                  <option value="">Selecciona una opcion...</option> 
                     <?php 
                         for ($i=0;$i<24;$i++) {
                             $h1=sprintf("%02d",$i).":00";
@@ -385,7 +336,9 @@ function limpiarfiltros(){
                     <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
                     <?php } ?> 
                   </select>
-                  <select id="salida1" class="hora" name="salida1">
+                  <label>Entrada (2):</label> 
+                  <select id="entrada2" class="hora" name="salida1">
+                  <option value="">Selecciona una opcion...</option> 
                     <?php 
                         for ($i=0;$i<24;$i++) {
                             $h1=sprintf("%02d",$i).":00";
@@ -395,7 +348,9 @@ function limpiarfiltros(){
                     <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
                     <?php } ?> 
                   </select>
+                  <label>Salida (2):</label> 
                   <select id="salida2" class="hora" name="salida2">
+                  <option value="">Selecciona una opcion...</option> 
                     <?php 
                         for ($i=0;$i<24;$i++) {
                             $h1=sprintf("%02d",$i).":00";
@@ -405,7 +360,9 @@ function limpiarfiltros(){
                     <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
                     <?php } ?>
                   </select>
+                  <label>Semana laboral:</label> 
                   <select id="tiposemana" name="tiposemana">
+                  <option value="">Selecciona una opcion...</option> 
                     <option value="1">Inglesa</option>
                     <option value="2">Completa</option>
                   </select>

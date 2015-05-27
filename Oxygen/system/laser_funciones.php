@@ -432,7 +432,7 @@ function CargarHorario(){
     include("cn_laser.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT idHorario, DATE_FORMAT(dEntrada1, '%H:%i') AS dEntrada1, dEntrada2 , dSalida1, dSalida2, eTipoSemana  FROM ct_horario WHERE idHorario = '".$id."' ";
+    $sql = "SELECT idHorario, DATE_FORMAT(dEntrada1, '%H:%i') AS dEntrada1, DATE_FORMAT(dEntrada2, '%H:%i') AS dEntrada2 , DATE_FORMAT(dSalida1, '%H:%i') AS dSalida1, DATE_FORMAT(dSalida2, '%H:%i') AS dSalida2, eTipoSemana  FROM ct_horario WHERE idHorario = '".$id."' ";
     $result = mysql_query($sql, $dbconn);
     
     if (mysql_num_rows($result) > 0) { 
@@ -443,6 +443,15 @@ function CargarHorario(){
             $salida1 = $horarios['dSalida1'];
             $salida2 = $horarios['dSalida2'];   
             $tiposemana = $horarios['eTipoSemana'];
+            switch ($tiposemana) {
+                case 'inglesa':
+                    $tiposemana = "1";
+                    break;
+                case 'completa':
+                    $tiposemana = "2";
+                    break;
+            }
+            
 
         }
                                                                                                                                                                      
@@ -463,5 +472,62 @@ function CargarHorario(){
      
      
 }
-
+function ActualizarHorario(){
+    
+    $id =  trim($_POST['id']);  
+    $entrada1 = trim($_POST['entrada1']);
+    $entrada2 = trim($_POST['entrada2']);
+    $salida1 = trim($_POST['salida1']);
+    $salida2 = trim($_POST['salida2']);
+    $tiposemana = trim($_POST['tiposemana']);
+    
+    switch ($tiposemana) {
+    case 1:
+        $tiposemana = "inglesa";
+        break;
+    case 2:
+        $tiposemana = "completa";
+        break;
+    }
+    
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT idHorario FROM ct_horario WHERE idHorario = '".$id."' LOCK IN SHARE MODE";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_num_rows($result) > 0) {
+       
+        $sql = "UPDATE ct_horario SET dEntrada1 = '".$entrada1."', dEntrada2 = '".$entrada2."', dSalida1 = '".$salida1."', dSalida2 = '".$salida2."', eTipoSemana = '".$tiposemana."', dFechaCreacion = NOW() WHERE idHorario = '".$id."'";
+        mysql_query($sql, $dbconn);
+        if ( mysql_affected_rows() < 1 ) {
+            $error = "1";
+            $mensaje = "Error al actualizar el registro."; 
+            $transaccion_exitosa = false;
+        }                
+        if ($transaccion_exitosa) {
+            $mensaje = "Se han actualizado los datos exitosamente.";
+            $error = "0";
+            mysql_query("COMMIT");     
+            mysql_close($dbconn);
+        } else {
+            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $error = "1"; 
+            $transaccion_exitosa = false; 
+            mysql_query("ROLLBACK");
+            mysql_close($dbconn);
+        }
+        
+    }else{
+    
+       $mensaje = "Error al guardar los datos: No se encontro ningun registro.";
+       $error = "1"; 
+       $transaccion_exitosa = false; 
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn);  
+    }
+     //echo $error;
+     //exit;
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+}
 ?>

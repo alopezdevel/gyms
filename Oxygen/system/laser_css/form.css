@@ -169,8 +169,11 @@ button:hover, .btn-1:hover{background-color:#7ecbee;}
 #frm-post-new .btn-1{
 	width:100%;
 }
-
-
+.mensaje_valido{padding:5px 2px; width: 100%;}
+.mensaje_valido.error{
+    color:#8c2828;
+    background: #ede4d2;
+}
 
 
 
