@@ -210,32 +210,30 @@ function onActualizarEmpleado(){
         
     } 
 }
-function onCargarEmpleado(id){
+function onCargarHorario(id){
         
-       cerrarventana('#data_grid_empleados');
+       cerrarventana('#data_grid_horarios');
        mostrarventana('#frm_container');
-       mostrarformulario('editar_empleado');
-       //cargando los datos del empleado:
+       mostrarformulario('editar_horario');
+       //cargando los datos del horario:
        $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"CargarEmpleado", id : id},
+        data:{accion:"CargarHorario", id : id},
                 async : true,
                 dataType : "json",
                 success : function(data){                               
                 switch(data.error){
                     case "1":   
                         break;
-                    case "0":    
-                    $('#id_empleado').val(id);
-                    $("#Nombre").val(data.nombre);
-                    $("#ApellidoPaterno").val(data.apellidopaterno);
-                    $("#ApellidoMaterno").val(data.apellidomaterno);
-                    $("#Telefono").val(data.telefono);
-                    $("#Direccion").val(data.direccion);
-                    $("#Colonia").val(data.colonia);
-                    $("#CorreoElectronico").val(data.correo);
-                    $("#Edad").val(data.edad);
+                    case "0":  
+                      
+                    $('#id_horario').val(id);
+                    $("#entrada1 option[value="+ data.entrada1 +"]").attr("selected",true);
+                    $("#salida1 option[value="+ data.salida1 +"]").attr("selected",true); 
+                    $("#entrada2 option[value="+ data.entrada2 +"]").attr("selected",true);
+                    $("#salida2 option[value="+ data.salida2 +"]").attr("selected",true);
+                    $("#tiposemana option[value="+ data.tiposemana +"]").attr("selected",true);         
                     break;
                 }
                 }
@@ -363,29 +361,57 @@ function limpiarfiltros(){
         </tfoot>
         </table>
         <div id="frm_container" class="frm-dialog" style="display: none;">
-                <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_empleados');"><i class="fa fa-times-circle"></i></div>
+                <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_horarios');"><i class="fa fa-times-circle"></i></div>
                 <h2 class="txt-center">Nuevo Empleado</h2>
                 <form id="frm_empleado" action="" method="post">
                   <p class="mensaje_valido">Favor de llenar los campos.</p> 
                   <select id="entrada1" class="hora" name="entrada1">
-                         <option value="9:00AM">9:00 AM</option>
+                    <?php 
+                        for ($i=0;$i<24;$i++) {
+                            $h1=sprintf("%02d",$i).":00";
+                            $h2=sprintf("%02d",$i).":30";
+                    ?>
+                    <option value="<?php echo $h1; ?>"><?php echo $h1; ?></option>
+                    <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
+                    <?php } ?>
                   </select>
                   <select id="entrada2" class="hora" name="entrada2">
-                         <option value="10:00AM">10:00 AM</option> 
+                    <?php 
+                        for ($i=0;$i<24;$i++) {
+                            $h1=sprintf("%02d",$i).":00";
+                            $h2=sprintf("%02d",$i).":30";
+                    ?>
+                    <option value="<?php echo $h1; ?>"><?php echo $h1; ?></option>
+                    <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
+                    <?php } ?> 
                   </select>
                   <select id="salida1" class="hora" name="salida1">
-                          <option value="3:00PM">3:00 PM</option> 
+                    <?php 
+                        for ($i=0;$i<24;$i++) {
+                            $h1=sprintf("%02d",$i).":00";
+                            $h2=sprintf("%02d",$i).":30";
+                    ?>
+                    <option value="<?php echo $h1; ?>"><?php echo $h1; ?></option>
+                    <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
+                    <?php } ?> 
                   </select>
                   <select id="salida2" class="hora" name="salida2">
-                         <option value="7:00PM">7:00 PM</option> 
+                    <?php 
+                        for ($i=0;$i<24;$i++) {
+                            $h1=sprintf("%02d",$i).":00";
+                            $h2=sprintf("%02d",$i).":30";
+                    ?>
+                    <option value="<?php echo $h1; ?>"><?php echo $h1; ?></option>
+                    <option value="<?php echo $h2; ?>"><?php echo $h2; ?></option>
+                    <?php } ?>
                   </select>
                   <select id="tiposemana" name="tiposemana">
                     <option value="1">Inglesa</option>
                     <option value="2">Completa</option>
                   </select>
                   <button id="btn-nuevohorario" type="button" class="btn_4" onclick="onNuevoHorario();" style="display: none;">Guardar</button>
-                  <button id="btn-editarempleado" type="button" class="btn_4" onclick="onActualizarEmpleado();" style="display: none;">Guardar</button>  
-                  <input id="id_empleado" type="hidden">
+                  <button id="btn-editarhorario" type="button" class="btn_4" onclick="onActualizarHorario();" style="display: none;">Guardar</button>  
+                  <input id="id_horario" type="hidden">
                 </form>
         </div>
         

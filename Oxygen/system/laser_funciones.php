@@ -425,6 +425,43 @@ function nuevo_horario() {
      $response = array("mensaje"=>"$mensaje","error"=>"$error");   
      echo array2json($response);
 }
+function CargarHorario(){ 
+     
+     $id = trim($_POST['id']);
+     $error = "0";
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT idHorario, DATE_FORMAT(dEntrada1, '%H:%i') AS dEntrada1, dEntrada2 , dSalida1, dSalida2, eTipoSemana  FROM ct_horario WHERE idHorario = '".$id."' ";
+    $result = mysql_query($sql, $dbconn);
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($horarios = mysql_fetch_array($result)) {
+            
+            $entrada1 = $horarios['dEntrada1'];
+            $entrada2 = $horarios['dEntrada2'];
+            $salida1 = $horarios['dSalida1'];
+            $salida2 = $horarios['dSalida2'];   
+            $tiposemana = $horarios['eTipoSemana'];
 
+        }
+                                                                                                                                                                     
+    } else{
+        
+         $error = "1"; 
+    }
+        $response = array("mensaje"=>"$mensaje",
+                      "error"=>"$error",
+                      "entrada1"=>"$entrada1",
+                      "entrada2"=>"$entrada2",
+                      "salida1"=>"$salida1",
+                      "salida2"=>"$salida2",    
+                      "tiposemana"=>"$tiposemana"
+                      
+                      );   
+        echo array2json($response);
+     
+     
+}
 
 ?>
