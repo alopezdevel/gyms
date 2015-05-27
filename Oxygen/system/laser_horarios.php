@@ -10,123 +10,111 @@
 $(document).ready(inicio);
 function inicio(){
     
-    CargarEmpleados();
+    CargarHorarios();
     
-    $( "#filtro_fecha_creacion" ).datepicker({onSelect: function(){ CargarEmpleados()},dateFormat: 'dd/mm/yy'}); 
-    $('#grid-head1 input').keyup(CargarEmpleados); 
-    $( "#filtro_fecha_creacion" ).keyup(CargarEmpleados);
+    //$( "#filtro_fecha_creacion" ).datepicker({onSelect: function(){ CargarHorarios()},dateFormat: 'dd/mm/yy'}); 
+    $('#grid-head1 input').keyup(CargarHorarios); 
+    //$( "#filtro_fecha_creacion" ).keyup(CargarHorarios);
     //focus
     $('form input').focus(onFocus);
     //blur
     $('form input').blur(onBlur);
 
     $("form .numeros").keydown(inputnumero);
-    //$('#btn-nuevoempleado').click(onNuevoEmpleado); 
+     
 }
-function CargarEmpleados(){
+function CargarHorarios(){
 
     var filtro_id = "";
-    var filtro_nombre = "";
-    var filtro_correo = "";
-    var filtro_fecha_creacion = "";
+    var filtro_entrada1 = "";
+    var filtro_entrada2 = "";
+    var filtro_salida1 = "";
+    var filtro_salida2 = "";
     
-    if($('#filtro_fecha_creacion').val() != ""){
+    if($('#filtro_id_horario').val() != ""){
         
-        filtro_fecha_creacion = $('#filtro_fecha_creacion').val();
+        filtro_id = $('#filtro_id_horario').val();
     }
-    if($('#filtro_id_empleado').val() != ""){
+    if($('#filtro_Entrada1').val() != ""){
         
-        filtro_id = $('#filtro_id_empleado').val();
+        filtro_entrada1 = $('#filtro_Entrada1').val();
     }
-    if($('#filtro_nombre').val() != ""){
+    if($('#filtro_Entrada2').val() != ""){
         
-        filtro_nombre = $('#filtro_nombre').val();
+        filtro_entrada2 = $('#filtro_Entrada2').val();
     }
-    if($('#filtro_correo').val() != ""){
+    if($('#filtro_Salida1').val() != ""){
         
-        filtro_correo = $('#filtro_correo').val();
+        filtro_salida1 = $('#filtro_Salida1').val();
+    }
+    if($('#filtro_Salid21').val() != ""){
+        
+        filtro_salida2 = $('#filtro_Salida2').val();
     }
     $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"CargarEmpleados", filtro_id : filtro_id, filtro_nombre: filtro_nombre, filtro_correo: filtro_correo, filtro_fecha_creacion: filtro_fecha_creacion},
+        data:{accion:"CargarHorarios", filtro_id: filtro_id, filtro_entrada1: filtro_entrada1, filtro_entrada2: filtro_entrada2, filtro_salida1: filtro_salida1, filtro_salida2:filtro_salida2},
                 async : true,
                 dataType : "json",
                 success : function(data){                               
-                    $("#data_grid_empleados tbody").empty().append(data.tabla);
-                    $("#data_grid_empleados tbody tr:even").addClass('gray');
-                    $("#data_grid_empleados tbody tr:odd").addClass('white');
+                    $("#data_grid_horarios tbody").empty().append(data.tabla);
+                    $("#data_grid_horarios tbody tr:even").addClass('gray');
+                    $("#data_grid_horarios tbody tr:odd").addClass('white');
                 }
      });            
 }
-function onBorrarEmpleado(id){
-   if(confirm("estas seguro que desea borrar al empleado con el ID: " + id + "?")){ 
-    $.post("laser_funciones.php", { accion: "BorrarEmpleado", id:id},
+function onBorrarHorario(id){
+   if(confirm("Esta seguro que desea borrar el horario con el ID: " + id + "?")){ 
+    $.post("laser_funciones.php", { accion: "BorrarHorario", id:id},
         function(data){ 
              switch(data.error){
              case "1":   alert( data.mensaje);
                     break;
              case "0":   
-                         alert("El empleado se ha borrado de manera satisfactoria.");
-                         CargarEmpleados();
+                         alert("El Horario se ha borrado de manera satisfactoria.");
+                         CargarHorarios();
                     break;  
              }
          }
          ,"json");           
    }
 }
-function onNuevoEmpleado(){
+function onNuevoHorario(){
   
-    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
-    var nombre = $("#Nombre");    
-    var apellido_paterno = $("#ApellidoPaterno");
-    var apellido_materno = $("#ApellidoMaterno");
-    var telefono = $("#Telefono"); 
-    var direccion = $("#Direccion");
-    var colonia = $("#Colonia");
-    var email = $("#CorreoElectronico");
-    var edad = $("#Edad");
+    //var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
+    var entrada1 = $("#entrada1 option").val();    
+    var entrada2 = $("#entrada2 option").val();
+    var salida1 = $("#salida1 option").val();
+    var salida2 = $("#salida2 option").val(); 
+    var tiposemana = $("#tiposemana").val();
+;
     
-    todosloscampos = $( [] ).add( nombre ).add( apellido_paterno ).add( apellido_materno ).add( telefono ).add( direccion ).add( colonia ).add( email ).add( edad );
+    todosloscampos = $( [] ).add( entrada1 ).add( entrada2 ).add( salida1 ).add( salida2 ).add( tiposemana );
     todosloscampos.removeClass( "error" );
-    $("#nombre").focus().css("background-color","#FFFFC0");
+   // $("#nombre").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
     
     var valid = true;
     
-    //Nombre 
-    valid = valid && checkLength( nombre, "Nombre", 2, 25 );
-    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    //Apellidos
-    valid = valid && checkLength( apellido_paterno, "Apellido Paterno", 2, 25 );
-    valid = valid && checkRegexp( apellido_paterno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    valid = valid && checkLength( apellido_materno, "Apellido Materno", 2, 25 );
-    valid = valid && checkRegexp( apellido_materno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." );
+    //Entradas:
+    //valid = valid && checkLength( entrada1, "Entrada 1", 3, 25 );
+    //valid = valid && checkLength( entrada2, "Entrada 2", 3, 25 );
     
-    //Telefono:
-    valid = valid && checkLength( telefono, "Telefono", 6, 25 );
+    //Salida:
+    //valid = valid && checkLength( salida1, "Salida 1", 3, 25 );
+    //valid = valid && checkLength( salida1, "Salida 2", 3, 25 );
     
-    //Direccion:
-    valid = valid && checkLength( direccion, "Direccion", 6, 25 );
-    
-    //Colonia:
-    valid = valid && checkLength( colonia, "Colonia", 6, 25 );
-    
-    //email
-    valid = valid && checkLength( email, "Correo electronico", 6, 80 );                                                                                                           
-    valid = valid && checkRegexp( email, emailRegex, "ej. ui@hotmail.com" );
-    
-    //Edad:
-    valid = valid && checkLength( edad, "Edad", 2, 10 );
-    
-    
-    
+    //tiposemana
+    //valid = valid && checkLength( tiposemana, "Tipo de Semana", 6, 80 );                                                                                                           
+
+        
     if ( valid ) {
         
         $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"nuevo_empleado", nombre: nombre.val(), apellidopaterno: apellido_paterno.val(), apellidomaterno: apellido_materno.val(), telefono: telefono.val(), direccion: direccion.val(), colonia: colonia.val(), email: email.val(), edad: edad.val() },
+        data:{accion:"nuevo_horario", entrada1: entrada1, entrada2: entrada2, salida1: salida1, salida2: salida2,  tiposemana: tiposemana },
         async : true,
         dataType : "json",
         success : function(data){                               
@@ -138,8 +126,8 @@ function onNuevoEmpleado(){
                         $('form input').val("");                                                             
                          alert(data.mensaje);   
                          cerrarventana('#frm_container');
-                         mostrarventana('#data_grid_empleados');
-                         CargarEmpleados(); 
+                         mostrarventana('#data_grid_horarios');
+                         CargarHorarios(); 
             break;  
             }
         }
@@ -265,13 +253,13 @@ function mostrarventana(ventana){
 function mostrarformulario(formulario){
     
     switch (formulario){
-        case 'nuevo_empleado': $('#frm_container h2').empty().text('Nuevo Empleado');
-        $('#btn-nuevoempleado').show('fast');
-        $('#btn-editarempleado').hide('fast'); 
+        case 'nuevo_horario': $('#frm_container h2').empty().text('Nuevo Horario');
+        $('#btn-nuevohorario').show('fast');
+        $('#btn-editarhorario').hide('fast'); 
         break;
-        case 'editar_empleado': $('#frm_container h2').empty().text('Editar Empleado');
-        $('#btn-nuevoempleado').hide('fast');
-        $('#btn-editarempleado').show('fast');
+        case 'editar_horario': $('#frm_container h2').empty().text('Editar Horario');
+        $('#btn-nuevohorario').hide('fast');
+        $('#btn-editarhorario').show('fast');
         break;    
     }
 }
@@ -332,30 +320,34 @@ function inputnumero(){
 }  
 function limpiarfiltros(){
     $('.filtro').val("");
-    CargarEmpleados();
+    CargarHorarios();
 }    
-</script>
+</script>  
 <div id="layer_content" class="main-section">  
     <div class="container">
         <div class="page-title">
-            <h1>Empleados</h1>
-            <h2>Catalogo de Empleados</h2>
+            <h1>Horarios</h1>
+            <h2>Catalogo de Horarios</h2>
         </div>
-        <table id="data_grid_empleados" class="data_grid">
+        <table id="data_grid_horarios" class="data_grid">
         <thead>                                                                                       
             <tr id="grid-head1">                                                                                             
-                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_fecha_creacion" type="text"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_id_empleado" type="text" placeholder="ID Empleado:"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_nombre" type="text" placeholder="Nombre Completo:"></td>
-                <td class="etiqueta_grid"><input class="filtro" id="filtro_correo" type="text" placeholder="Correo electronico:"></td> 
-                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_empleados');mostrarventana('#frm_container');mostrarformulario('nuevo_empleado');"><i class="fa fa-user-plus"></i></span></td>  
+                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_id_horario" type="text" placeholder="ID Horario:"></td>
+                <td class="etiqueta_grid"><input  class="filtro" id="filtro_Entrada1" type="time" placeholder="Entrada 1:"></td>
+                <td class="etiqueta_grid"><input  class="filtro" id="filtro_Salida1" type="time" placeholder="Salida 1:"></td>
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_Entrada2" type="time" placeholder="Entrada 2:"></td> 
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_Salida2" type="time" placeholder="Salida 2:"></td>
+                <td class="etiqueta_grid"></td>
+                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_horarios');mostrarventana('#frm_container');mostrarformulario('nuevo_horario');"><i class="fa fa-plus-circle"></i></span></td>  
             </tr>
             <tr id="grid-head2">                            
-                <td class="etiqueta_grid" nowrap="nowrap" >Fecha de registro</td>
-                <td class="etiqueta_grid">ID Empleado</td>
-                <td class="etiqueta_grid">Nombre Completo</td> 
-                <td class="etiqueta_grid">Correo Electronico</td>
-                <td class="etiqueta_grid">&nbsp;</td> 
+                <td class="etiqueta_grid" nowrap="nowrap" >ID Horario</td>
+                <td class="etiqueta_grid">Entrada (1)</td>
+                <td class="etiqueta_grid">Salida (1)</td> 
+                <td class="etiqueta_grid">Entrada (2)</td>
+                <td class="etiqueta_grid">Salida (2)</td> 
+                <td class="etiqueta_grid">Tipo de Semana</td>
+                <td class="etiqueta_grid"></td>
             </tr>
         </thead>
         <tbody></tbody>
@@ -375,19 +367,28 @@ function limpiarfiltros(){
                 <h2 class="txt-center">Nuevo Empleado</h2>
                 <form id="frm_empleado" action="" method="post">
                   <p class="mensaje_valido">Favor de llenar los campos.</p> 
-                  <input id="Nombre" type="text" name="NombreEmpleado" placeholder="Nombre:" maxlength="50">  
-                  <input id="ApellidoPaterno" type="text" name="ApellidoPaterno" placeholder="Apellido paterno:" maxlength="50">
-                  <input id="ApellidoMaterno" type="text" name="ApellidoMaterno" placeholder="Apellido materno:" maxlength="50">
-                  <input id="Telefono" type="tel" name="Telefono" placeholder="Telefono:" class="numeros" maxlength="10">
-                  <input id="Direccion" type="text" name="Direccion" placeholder="Direccion:" maxlength="200"> 
-                  <input id="Colonia" type="text" name="Colonia" placeholder="Colonia:" maxlength="100">
-                  <input id="CorreoElectronico" type="text" name="CorreoElectronico" placeholder="Correo electronico:" maxlength="50">
-                  <input id="Edad" type="text" name="Edad" placeholder="Edad:" class="numeros" maxlength="2">
-                  <button id="btn-nuevoempleado" type="button" class="btn_4" onclick="onNuevoEmpleado();" style="display: none;">Guardar</button>
+                  <select id="entrada1" class="hora" name="entrada1">
+                         <option value="9:00AM">9:00 AM</option>
+                  </select>
+                  <select id="entrada2" class="hora" name="entrada2">
+                         <option value="10:00AM">10:00 AM</option> 
+                  </select>
+                  <select id="salida1" class="hora" name="salida1">
+                          <option value="3:00PM">3:00 PM</option> 
+                  </select>
+                  <select id="salida2" class="hora" name="salida2">
+                         <option value="7:00PM">7:00 PM</option> 
+                  </select>
+                  <select id="tiposemana" name="tiposemana">
+                    <option value="1">Inglesa</option>
+                    <option value="2">Completa</option>
+                  </select>
+                  <button id="btn-nuevohorario" type="button" class="btn_4" onclick="onNuevoHorario();" style="display: none;">Guardar</button>
                   <button id="btn-editarempleado" type="button" class="btn_4" onclick="onActualizarEmpleado();" style="display: none;">Guardar</button>  
                   <input id="id_empleado" type="hidden">
                 </form>
         </div>
+        
     </div>
  <?php include("laser_footer.php"); ?>
 </div>

@@ -132,16 +132,23 @@ p{line-height:24px;margin:0;}
 	text-decoration:none!important;
 	color:#ffffff;
 	background: #4eb40a;
-    border: 1px solid #59c90e;;
+    border: 1px solid #59c90e;
+}
+.btn-icon.limpiar:hover{
+    text-decoration:none!important;
+    color:#ffffff;
+    background: #19cdc7;
+    border: 1px solid #16b4ae;
 }
 .btn-icon{
     
     color:#ffffff;
     font-size:1em;
     text-decoration:none;
-    padding:3px;
+    padding:3px 5px;
     border:1px solid #2375b1;
     background: #2375b1;
+    margin: 0px 2px 0px 0px;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
