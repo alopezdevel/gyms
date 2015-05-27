@@ -28,6 +28,7 @@ function CargarHorarios(){
     var filtro_entrada2 = "";
     var filtro_salida1 = "";
     var filtro_salida2 = "";
+    var filtro_tiposemana = "";
     
     if($('#filtro_id_horario').val() != ""){
         
@@ -49,10 +50,14 @@ function CargarHorarios(){
         
         filtro_salida2 = $('#filtro_Salida2').val();
     }
+    if($('#filtro_tiposemana').val() != ""){
+        
+        filtro_tiposemana = $('#filtro_tiposemana').val();
+    }
     $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"CargarHorarios", filtro_id: filtro_id, filtro_entrada1: filtro_entrada1, filtro_entrada2: filtro_entrada2, filtro_salida1: filtro_salida1, filtro_salida2:filtro_salida2},
+        data:{accion:"CargarHorarios", filtro_id: filtro_id, filtro_entrada1: filtro_entrada1, filtro_entrada2: filtro_entrada2, filtro_salida1: filtro_salida1, filtro_salida2:filtro_salida2, filtro_tiposemana: filtro_tiposemana},
                 async : true,
                 dataType : "json",
                 success : function(data){                               
@@ -271,8 +276,8 @@ function limpiarfiltros(){
 <div id="layer_content" class="main-section">  
     <div class="container">
         <div class="page-title">
-            <h1>Horarios</h1>
-            <h2>Catalogo de Horarios</h2>
+            <h1>C&aacute;talogos</h1>
+            <h2>Horarios</h2>
         </div>
         <table id="data_grid_horarios" class="data_grid">
         <thead>                                                                                       
@@ -282,7 +287,7 @@ function limpiarfiltros(){
                 <td class="etiqueta_grid"><input  class="filtro" id="filtro_Salida1" type="time" placeholder="Salida 1:"></td>
                 <td class="etiqueta_grid"><input class="filtro" id="filtro_Entrada2" type="time" placeholder="Entrada 2:"></td> 
                 <td class="etiqueta_grid"><input class="filtro" id="filtro_Salida2" type="time" placeholder="Salida 2:"></td>
-                <td class="etiqueta_grid"></td>
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_tiposemana" type="text" placeholder="Semana laboral:"></td>
                 <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_horarios');mostrarventana('#frm_container');mostrarformulario('nuevo_horario');"><i class="fa fa-plus-circle"></i></span></td>  
             </tr>
             <tr id="grid-head2">                            
@@ -309,7 +314,7 @@ function limpiarfiltros(){
         </table>
         <div id="frm_container" class="frm-dialog" style="display: none;">
                 <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_horarios');"><i class="fa fa-times-circle"></i></div>
-                <h2 class="txt-center">Nuevo Empleado</h2>
+                <h2 class="txt-center">Nuevo</h2>
                 <form id="frm_empleado" action="" method="post">
                   <p class="mensaje_valido">Favor de llenar los campos.</p>
                   <label>Entrada (1):</label> 

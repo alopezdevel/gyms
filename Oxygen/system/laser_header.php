@@ -31,14 +31,14 @@ if(1){
 <nav class="main-nav-outer" id="layer_menu"><!--main-nav-start-->
     <div class="container">
         <a href="#home" class="img-logo"><img  src="laser_images/img-logo.png" alt="logo"></a>
-        <ul class="top-nav"> 
+        <ul class="top-nav" style="display: none;"> 
             <li>
                 <a href="#" title="Log In"><i class="fa fa-user"></i> <span> Bienvenido</span></a>
             </li>
             <li><a href="#" title="Salir"><i class="fa fa-sign-out"></i><span> Salir</span></a></li>
         </ul>
         <ul class="main-nav"> 
-                    <li><a href="index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
+                    <li><a href="laser_index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
                     
                     <li class="submenu"><a href="#">C&aacute;talogos</a>
                         <ul> 

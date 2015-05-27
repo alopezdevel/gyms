@@ -338,8 +338,8 @@ function limpiarfiltros(){
 <div id="layer_content" class="main-section">  
     <div class="container">
         <div class="page-title">
-            <h1>C&aacute;talogos</h1>
-            <h2>Empleados</h2>
+            <h1>Empleados</h1>
+            <h2>Catalogo de Empleados</h2>
         </div>
         <table id="data_grid_empleados" class="data_grid">
         <thead>                                                                                       
