@@ -229,11 +229,11 @@ function onCargarHorario(id){
                     case "0":  
                       
                     $('#id_horario').val(id);
-                    $("#entrada1 option[value="+ data.entrada1 +"]").attr("selected",true);
-                    $("#salida1 option[value="+ data.salida1 +"]").attr("selected",true); 
-                    $("#entrada2 option[value="+ data.entrada2 +"]").attr("selected",true);
-                    $("#salida2 option[value="+ data.salida2 +"]").attr("selected",true);
-                    $("#tiposemana option[value="+ data.tiposemana +"]").attr("selected",true);         
+                    $("#entrada1 option[value='"+ data.entrada1 +"']").attr("selected",true);
+                    $("#salida1 option[value='"+ data.salida1 +"']").attr("selected",true); 
+                    $("#entrada2 option[value='"+ data.entrada2 +"']").attr("selected",true);
+                    $("#salida2 option[value='"+ data.salida2 +"']").attr("selected",true);
+                    $("#tiposemana option[value='"+ data.tiposemana +"']").attr("selected",true);         
                     break;
                 }
                 }
