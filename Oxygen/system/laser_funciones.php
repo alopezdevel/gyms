@@ -42,7 +42,8 @@ function array2json($arr) {
 } 
 $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accion"],array()) : "";
 
- function CargarEmpleados(){ 
+//EMPLEADOS -- EMPLEADOS
+function CargarEmpleados(){ 
      
      $filtro_id = trim($_POST['filtro_id']);
      $filtro_nombre =   trim($_POST['filtro_nombre']);
@@ -90,7 +91,7 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
         mysql_close($dbconn);                                                                                                                                                                      
     } else{
         
-         $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">No hay empleados disponibles.</div>";
+         $htmlTabla .="<tr><td style=\"text-align:center; font-weight: bold;\" colspan=\"100%\">No hay datos disponibles.</td><tr>";
     }
         $html_tabla = utf8_encode($html_tabla); 
         $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
@@ -98,7 +99,6 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
      
      
 }
-//Cargar Empleado:
 function CargarEmpleado(){ 
      
      $id = trim($_POST['id']);
@@ -283,7 +283,8 @@ function CargarHorarios(){
     $filtro_entrada1 =   trim($_POST['filtro_entrada1']);
     $filtro_entrada2 =   trim($_POST['filtro_entrada2']);
     $filtro_salida1 =  trim($_POST['filtro_salida1']);
-    $filtro_salida2 =  trim($_POST['filtro_salida2']);  
+    $filtro_salida2 =  trim($_POST['filtro_salida2']);
+    $filtro_tiposemana = trim($_POST['filtro_tiposemana']);   
      
     include("cn_laser.php");
     mysql_query("BEGIN");
@@ -304,6 +305,9 @@ function CargarHorarios(){
     }
     if($filtro_salida2 != ""){
           $sql = $sql ." AND DATE_FORMAT(dSalida2,'%h:%i %p') LIKE '%".$filtro_salida2."%' ";
+    }
+    if($filtro_tiposemana != ""){
+          $sql = $sql ." AND eTipoSemana LIKE '%".$filtro_tiposemana."%' ";
     }
     
     $result = mysql_query($sql, $dbconn);
@@ -331,7 +335,7 @@ function CargarHorarios(){
         mysql_close($dbconn);                                                                                                                                                                      
     } else{
         
-         $htmlTabla .="<div style=\"text-align:center; font-weight: bold;\">No hay empleados disponibles.</div>";
+         $htmlTabla .="<tr><td style=\"text-align:center; font-weight: bold;\" colspan=\"100%\">No hay datos disponibles.</td><tr>";
     }
         $html_tabla = utf8_encode($html_tabla); 
         $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
