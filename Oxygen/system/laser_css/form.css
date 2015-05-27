@@ -70,14 +70,14 @@ button, .btn-1{
 }
 button:hover, .btn-1:hover{background-color:#7ecbee;}
 .msg-success{display:none;}
-form .error{
-	border:1px solid #b64141;
+.error{
+	border:1px solid #b64141!important;
 	-webkit-box-shadow:inset 0px 0px 3px #decfcf;
     -moz-box-shadow:inset 0px 0px 3px #decfcf;
     box-shadow:inset 0px 0px 3px #decfcf;
 
 }
-form .success{
+.success{
 	border:1px solid #8ac975;
 	-webkit-box-shadow:inset 0px 0px 3px #dee8da;
     -moz-box-shadow:inset 0px 0px 3px #dee8da;

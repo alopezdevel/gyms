@@ -11,8 +11,15 @@ $(document).ready(inicio);
 function inicio(){
     
     CargarEmpleados();
-    $('#btn_agregar').click(AgregarEmpleado);
-    $('#grid-head1 input').keyup(CargarEmpleados);
+    $('#grid-head1 input').keyup(CargarEmpleados); 
+
+    //focus
+    $('form input').focus(onFocus);
+    //blur
+    $('form input').blur(onBlur);
+
+     $("form .numeros").keydown(inputnumero);
+     //$('#btn-nuevoempleado').click(onNuevoEmpleado); 
 }
 function CargarEmpleados(){
 
@@ -44,12 +51,159 @@ function CargarEmpleados(){
                 }
      });            
 }
-function AgregarEmpleado(){
-    
-       $('#data_grid_empleados').hide('fast');
-       $('#nuevo_empleado').show('slow');
+function onBorrarEmpleado(id){
+   if(confirm("estas seguro que desea borrar al empleado con el ID: " + id + "?")){ 
+    $.post("laser_funciones.php", { accion: "BorrarEmpleado", id:id},
+        function(data){ 
+             switch(data.error){
+             case "1":   alert( data.mensaje);
+                    break;
+             case "0":   
+                         alert("El empleado se ha borrado de manera satisfactoria.");
+                         CargarEmpleados();
+                    break;  
+             }
+         }
+         ,"json");           
+   }
 }
+function onNuevoEmpleado(){
+  
+    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
+    var nombre = $("#Nombre");    
+    var apellido_paterno = $("#ApellidoPaterno");
+    var apellido_materno = $("#ApellidoMaterno");
+    var telefono = $("#Telefono"); 
+    var direccion = $("#Direccion");
+    var colonia = $("#Colonia");
+    var email = $("#CorreoElectronico");
+    var edad = $("#Edad");
+    
+    todosloscampos = $( [] ).add( nombre ).add( apellido_paterno ).add( apellido_materno ).add( telefono ).add( direccion ).add( colonia ).add( email ).add( edad );
+    todosloscampos.removeClass( "error" );
+    $("#nombre").focus().css("background-color","#FFFFC0");
+    actualizarMensajeAlerta( "" );
+    
+    var valid = true;
+    
+    //Nombre 
+    valid = valid && checkLength( nombre, "Nombre", 2, 25 );
+    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
+    //Apellidos
+    valid = valid && checkLength( apellido_paterno, "Apellido Paterno", 2, 25 );
+    valid = valid && checkRegexp( apellido_paterno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
+    valid = valid && checkLength( apellido_materno, "Apellido Materno", 2, 25 );
+    valid = valid && checkRegexp( apellido_materno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." );
+    
+    //Telefono:
+    valid = valid && checkLength( telefono, "Telefono", 6, 25 );
+    
+    //Direccion:
+    valid = valid && checkLength( direccion, "Direccion", 6, 25 );
+    
+    //Colonia:
+    valid = valid && checkLength( colonia, "Colonia", 6, 25 );
+    
+    //email
+    valid = valid && checkLength( email, "Correo electronico", 6, 80 );                                                                                                           
+    valid = valid && checkRegexp( email, emailRegex, "ej. ui@hotmail.com" );
+    
+    //Edad:
+    valid = valid && checkLength( edad, "Edad", 2, 10 );
+    
+    
+    
+    if ( valid ) {
+        alert(valid);
+        $.ajax({             
+        type:"POST", 
+        url:"laser_funciones.php", 
+        data:{accion:"nuevo_empleado", nombre: nombre.val(), apellidopaterno: apellido_paterno.val(), apellidomaterno: apellido_materno.val(), telefono: telefono.val(), direccion: direccion.val(), colonia: colonia.val(), email: email.val(), edad: edad.val() },
+        async : true,
+        dataType : "json",
+        success : function(data){                               
+            switch(data.error){
+            case "1": alert(data.mensaje);
+                         $("#Nombre").focus();
+            break;
+            case "0": actualizarMensajeAlerta("Favor de llenar los campos.");
+                        $('form input').val("");                                                             
+                         alert("Gracias. El empleado se ha registrado de manera satisfactoria.");   
+                         cerrarventana('#frm_container');
+                         mostrarventana('#data_grid_empleados');
+                         Cargarempleados(); 
+            break;  
+            }
+        }
+     });
         
+    }
+    
+     
+}
+function cerrarventana(ventana){
+    
+   $(ventana).hide('slow');
+   $(ventana + ' input').val(""); 
+} 
+function mostrarventana(ventana){
+    $(ventana).show('slow');
+}
+function onFocus(){
+     $(this).css("background-color","#FFFFC0");
+ }
+function onBlur(){
+    $(this).css("background-color","#FFFFFF");
+ }
+function actualizarMensajeAlerta( t ) {
+      var mensaje = $( ".mensaje_valido" );
+      mensaje
+        .text( t )
+        .addClass( "alertmessage" );
+      setTimeout(function() {
+        mensaje.removeClass( "alertmessage", 2500 );
+      }, 700 );
+ }
+function checkRegexp( o, regexp, n ) {
+    if ( !( regexp.test( o.val() ) ) ) {
+        actualizarMensajeAlerta( n );
+        o.addClass( "error" );
+        o.focus();
+        return false;
+    } else {                     
+        return true;        
+    }
+ }
+function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+        actualizarMensajeAlerta( "La longitud del campo " + n + " debe contener por lo menos entre " + min + " y " + max + ". caracteres"  );
+        o.addClass( "error" );
+        o.focus();
+        return false;    
+    } else {             
+        return true;                     
+    }                    
+ } 
+function inputnumero(){
+    
+        if(event.shiftKey)
+            {
+                event.preventDefault();
+            }
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9){}
+        else {
+                if (event.keyCode < 95) {
+                    if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                    }
+                } 
+                else {
+                    if (event.keyCode < 96 || event.keyCode > 105) {
+                        event.preventDefault();
+                    }
+                }
+      }
+}      
 </script>
 <div id="layer_content" class="main-section">  
     <div class="container">
@@ -63,8 +217,8 @@ function AgregarEmpleado(){
                 <td class="etiqueta_grid" nowrap="nowrap" ><input class="inp"  id="filtro_fecha_creacion" type="text"></td>
                 <td class="etiqueta_grid"><input  id="filtro_id_empleado" type="text" placeholder="ID Empleado:"></td>
                 <td class="etiqueta_grid"><input  id="filtro_nombre" type="text" placeholder="Nombre Completo:"></td>
-                <td class="etiqueta_grid"><input  id="filtro_correo" type="text" placeholder="Correo electronico:"></td> 
-                <td class="etiqueta_grid"><span id="btn_agregar" class="btn-icon" title="Agregar empleado"><i class="fa fa-user-plus"></i></span></td>  
+                <td class="etiqueta_grid"><input id="filtro_correo" type="text" placeholder="Correo electronico:"></td> 
+                <td class="etiqueta_grid"><span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_empleados');mostrarventana('#frm_container');"><i class="fa fa-user-plus"></i></span></td>  
             </tr>
             <tr id="grid-head2">                            
                 <td class="etiqueta_grid" nowrap="nowrap" >Fecha de registro</td>
@@ -86,9 +240,21 @@ function AgregarEmpleado(){
             </tr>
         </tfoot>
         </table>
-        <div id="nuevo_empleado" style="display: none;">
+        <div id="frm_container" class="frm-dialog" style="display: none;">
+                <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_empleados');"><i class="fa fa-times-circle"></i></div>
                 <h2 class="txt-center">Nuevo Empleado</h2>
-                <form action="" method="post" ></form>
+                <form id="frm_nuevoempleado" action="" method="post">
+                  <p class="mensaje_valido">Favor de llenar los campos.</p> 
+                  <input id="Nombre" type="text" name="NombreEmpleado" placeholder="Nombre:" maxlength="50">  
+                  <input id="ApellidoPaterno" type="text" name="ApellidoPaterno" placeholder="Apellido paterno:" maxlength="50">
+                  <input id="ApellidoMaterno" type="text" name="ApellidoMaterno" placeholder="Apellido materno:" maxlength="50">
+                  <input id="Telefono" type="tel" name="Telefono" placeholder="Telefono:" class="numeros" maxlength="10">
+                  <input id="Direccion" type="text" name="Direccion" placeholder="Direccion:" maxlength="200"> 
+                  <input id="Colonia" type="text" name="Colonia" placeholder="Colonia:" maxlength="100">
+                  <input id="CorreoElectronico" type="text" name="CorreoElectronico" placeholder="Correo electronico:" maxlength="50">
+                  <input id="Edad" type="text" name="Edad" placeholder="Edad:" class="numeros" maxlength="2">
+                  <button id="btn-nuevoempleado" type="button" class="btn_4" onclick="onNuevoEmpleado();">Guardar</button> 
+                </form>
         </div>
     </div>
  <?php include("laser_footer.php"); ?>

@@ -75,7 +75,7 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
                                     "<td>".$empleados['idEmpleado']."</td>".              
                                    "<td>".$empleados['sNombre']."</td>".
                                    "<td>".$empleados['sCorreoElectronico']."</td>".
-                                   "<td nowrap='nowrap'><span onclick='onBorrarPago(\"".$empleados['idEmpleado']."\")' class=\"btn_3\" title=\"Eliminar Empleado\"><i class=\"fa fa-trash\"></i></span></td>".                                             
+                                   "<td nowrap='nowrap'><span onclick='onBorrarEmpleado(\"".$empleados['idEmpleado']."\")' class=\"btn-grid\" title=\"Eliminar Empleado\"><i class=\"fa fa-trash\"></i></span> <span onclick='onEditarEmpleado(\"".$empleados['idEmpleado']."\")' class=\"btn-grid\" title=\"Editar Empleado\"><i class=\"fa fa-pencil-square-o\"></i></span></td>".                                             
                                 "</tr>"   ;
              }else{                             
                  $error = "1";
@@ -93,7 +93,89 @@ $_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accio
         echo array2json($response);
      
      
- }
+}
+function BorrarEmpleado(){
+    
+    $id = trim($_POST['id']);
+    $error = "0"; 
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "DELETE FROM ct_empleado WHERE idEmpleado = '".$id."'";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_affected_rows() < 1) { 
+        
+        $transaccion_exitosa = false;
+        $error = "1";
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);
+                                                                                                                                                                               
+    } else{
+        
+        //mysql_query("COMMIT");
+        mysql_query("COMMIT");     
+        mysql_close($dbconn);
+         
+    }
+        
+        
+       // echo $error;
+       // exit;
+        $response = array("mensaje"=>"$sql","error"=>"$error");   
+        echo array2json($response);
+}
+function nuevo_empleado() {
+    
+    $nombre = trim($_POST['nombre']);
+    $apellidopaterno = trim($_POST['apellidopaterno']);
+    $apellidomaterno = trim($_POST['apellidomaterno']);
+    $telefono = trim($_POST['telefono']);
+    $direccion = trim($_POST['direccion']);
+    $colonia = trim($_POST['colonia']);
+    $correo = trim($_POST['email']);
+    $edad = trim($_POST['edad']);
+    
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT sCorreoElectronico FROM ct_empleado WHERE sCorreoElectronico = '".$correo."' LOCK IN SHARE MODE";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_num_rows($result) > 0) {
+       
+       //@mysql_free_result($result); 
+       $mensaje = "Error al guardar los datos.";
+       $error = "1"; 
+       $transaccion_exitosa = false; 
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn); 
+        
+    }else{
+    
+        $sql = "INSERT INTO ct_empleado SET sNombre = '".$nombre."', sApellidoPaterno = '".$apellidopaterno."', sApellidoMaterno = '".$apellidomaterno."', sTelefono = '".$telefono."', sDireccion = '".$direccion."', sColonia = '".$colonia."', sCorreoElectronico = '".$correo."', iEdad = ".$edad.",  dFechaCreacion = NOW()";
+        mysql_query($sql, $dbconn);
+        if ( mysql_affected_rows() < 1 ) {
+            $error = "1";
+            $mensaje = "Error al crear el registro favor de revisar nuevamente los datos."; 
+            $transaccion_exitosa = false;
+        }                
+        if ($transaccion_exitosa) {
+            $mensaje = "Se agreg&oacute; un empleado exitosamente!";
+            $error = "0";
+            mysql_query("COMMIT");     
+            mysql_close($dbconn);
+        } else {
+            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $error = "1"; 
+            $transaccion_exitosa = false; 
+            mysql_query("ROLLBACK");
+            mysql_close($dbconn);
+        }
+    }
+     echo $error;
+     exit;
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+}
 
 
 ?>
