@@ -548,16 +548,16 @@ function CargarPuestos(){
     $sql = "SELECT ct_puesto.idPuesto, ct_puesto.sPuesto, ct_puesto.sArea, CONCAT(DATE_FORMAT(ct_horario.dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(ct_horario.dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(ct_horario.dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(ct_horario.dSalida2,'%h:%i %p')) AS dHorario, CONCAT(ct_empleado.sNombre , ' ', ct_empleado.sApellidoPaterno, ' ',  ct_empleado.sApellidoMaterno) AS sNombre  FROM ct_puesto INNER JOIN ct_horario ON ct_puesto.idHorario = ct_horario.idHorario INNER JOIN ct_empleado ON ct_puesto.idEmpleado = ct_empleado.idEmpleado WHERE ct_puesto.idEmpleado != '' ";
     
     if($filtro_puesto != ""){
-          $sql = $sql ." AND idEmpleado LIKE '%".$filtro_puesto."%' ";
+          $sql = $sql ." AND ct_puesto.sPuesto LIKE '%".$filtro_puesto."%' ";
     }
     if($filtro_area != ""){
-          $sql = $sql ." AND CONCAT(sNombre , ' ', sApellidoPaterno, ' ',  sApellidoMaterno) LIKE '%".$filtro_area."%' ";
+          $sql = $sql ." AND ct_puesto.sArea LIKE '%".$filtro_area."%' ";
     }
     if($filtro_id_empleado != ""){
-          $sql = $sql ." AND sCorreoElectronico LIKE '%".$filtro_id_empleado."%' ";
+          $sql = $sql ." AND CONCAT(ct_empleado.sNombre , ' ', ct_empleado.sApellidoPaterno, ' ',  ct_empleado.sApellidoMaterno) LIKE '%".$filtro_id_empleado."%' ";
     }
     if($filtro_id_horario != ""){
-          $sql = $sql ." AND DATE_FORMAT(dFechaCreacion,  '%d/%m/%Y') LIKE '%".$filtro_id_horario."%' ";
+          $sql = $sql ." AND CONCAT(DATE_FORMAT(ct_horario.dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(ct_horario.dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(ct_horario.dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(ct_horario.dSalida2,'%h:%i %p')) LIKE '%".$filtro_id_horario."%' ";
     }
     
     $result = mysql_query($sql, $dbconn);
@@ -590,5 +590,233 @@ function CargarPuestos(){
         echo array2json($response);
      
      
+}
+function BorrarPuesto(){
+    
+    $id = trim($_POST['id']);
+    $error = "0"; 
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "DELETE FROM ct_puesto WHERE idPuesto = '".$id."'";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_affected_rows() < 1) { 
+        
+        $transaccion_exitosa = false;
+        $error = "1";
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);
+                                                                                                                                                                               
+    } else{
+        
+        //mysql_query("COMMIT");
+        mysql_query("COMMIT");     
+        mysql_close($dbconn);
+         
+    }
+        
+        
+       // echo $error;
+       // exit;
+        $response = array("mensaje"=>"$sql","error"=>"$error");   
+        echo array2json($response);
+}
+function CargarHorariosSelect(){
+    
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $error = "0";
+    $sql = "SELECT idHorario, CONCAT(DATE_FORMAT(dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(dSalida2,'%h:%i %p')) AS dHorario, eTipoSemana  FROM ct_horario";
+    
+    $result = mysql_query($sql, $dbconn);
+    $htmlTabla = "";
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($horarios = mysql_fetch_array($result)) {
+           if($horarios["idHorario"] != ""){
+        
+                 $htmlTabla .= "<option value=\"".$horarios["idHorario"]."\">".$horarios["dHorario"]." Semana laboral: ".$horarios["eTipoSemana"]."</option>";
+             }else{                             
+                 $error = "1";
+             }    
+        }
+        
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);                                                                                                                                                                      
+    } else{
+        
+         $htmlTabla .="<option value=\"\">No hay datos disponibles.</option>";
+    }
+        $html_tabla = utf8_encode($html_tabla); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        echo array2json($response);
+    
+}
+function CargarEmpleadosSelect(){
+       
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $error = "0";
+    $sql = "SELECT idEmpleado, CONCAT(sNombre , ' ', sApellidoPaterno, ' ',  sApellidoMaterno) AS sNombre FROM ct_empleado";
+    
+    $result = mysql_query($sql, $dbconn);
+    $htmlTabla = "";
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($empleados = mysql_fetch_array($result)) {
+           if($empleados["sNombre"] != ""){
+        
+                 $htmlTabla .= "<option value=\"".$empleados["idEmpleado"]."\">".$empleados["sNombre"]."</option>" ;
+             }else{                             
+                 $error = "1";
+             }    
+        }
+        
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);                                                                                                                                                                      
+    } else{
+        
+         $htmlTabla .="<option value=\"\">No hay datos disponibles.</option>";
+    }
+        $html_tabla = utf8_encode($html_tabla); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        echo array2json($response);
+     
+    
+}
+function NuevoPuesto(){
+    
+    $puesto = trim($_POST['puesto']);
+    $area = trim($_POST['area']);
+    $horario = trim($_POST['horario']);
+    $empleado = trim($_POST['empleado']);
+    $error = "0";
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT idEmpleado FROM ct_puesto WHERE idEmpleado = '".$empleado."' LOCK IN SHARE MODE";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_num_rows($result) > 0) {
+       
+       //@mysql_free_result($result); 
+       $mensaje = "Error al guardar los datos: Ya existe un puesto para el empleado que selecciono.";
+       $error = "1"; 
+       $transaccion_exitosa = false; 
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn); 
+        
+    }else{
+    
+        $sql = "INSERT INTO ct_puesto SET sPuesto = '".$puesto."', sArea = '".$area."', idHorario = '".$horario."', idEmpleado = '".$empleado."', dFechaCreacion = NOW()";
+        mysql_query($sql, $dbconn);
+        if ( mysql_affected_rows() < 1 ) {
+            $error = "1";
+            $mensaje = "Error al crear el registro favor de revisar nuevamente los datos."; 
+            $transaccion_exitosa = false;
+        }                
+        if ($transaccion_exitosa) {
+            $mensaje = "Se ha agregado un horario exitosamente.";
+            $error = "0";
+            mysql_query("COMMIT");     
+            mysql_close($dbconn);
+        } else {
+            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $error = "1"; 
+            $transaccion_exitosa = false; 
+            mysql_query("ROLLBACK");
+            mysql_close($dbconn);
+        }
+    }
+     //echo $error;
+     //exit;
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+    
+}
+function ActualizarPuesto(){
+    
+    $id =  trim($_POST['id']);
+    $puesto = trim($_POST['puesto']);
+    $area = trim($_POST['area']);
+    $horario = trim($_POST['horario']);
+    $empleado = trim($_POST['empleado']);
+    $error = "0";
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT idPuesto FROM ct_puesto WHERE idPuesto = '".$id."' LOCK IN SHARE MODE";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_num_rows($result) > 0) {
+       
+        $sql = "UPDATE ct_puesto SET sPuesto = '".$puesto."', sArea = '".$area."', idHorario = '".$horario."', idEmpleado = '".$empleado."' WHERE idPuesto = '".$id."'";
+        mysql_query($sql, $dbconn);
+        if ( mysql_affected_rows() < 1 ) {
+            $error = "1";
+            $mensaje = "No se actualizo el registro."; 
+            $transaccion_exitosa = false;
+        }                
+        if ($transaccion_exitosa) {
+            $mensaje = "Se ha actualizado el horario exitosamente.";
+            $error = "0";
+            mysql_query("COMMIT");     
+            mysql_close($dbconn);
+        } else {
+            $mensaje = "Error al guardar los datos. Favor de verificarlos.";
+            $error = "1"; 
+            $transaccion_exitosa = false; 
+            mysql_query("ROLLBACK");
+            mysql_close($dbconn);
+        }
+   
+        
+    }else{
+        
+        //@mysql_free_result($result); 
+       $mensaje = "Error al guardar los datos: Ya existe un puesto para el empleado que selecciono.";
+       $error = "1"; 
+       $transaccion_exitosa = false; 
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn);
+    }
+     //echo $error;
+     //exit;
+     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     echo array2json($response);
+}
+function CargarPuesto(){
+    
+    $id = trim($_POST['id']);
+    $error = "0";
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT sPuesto, sArea, idHorario, idEmpleado FROM ct_puesto WHERE idPuesto = '".$id."' ";
+    $result = mysql_query($sql, $dbconn);
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($puestos = mysql_fetch_array($result)) {
+            
+            $puesto = $puestos['sPuesto'];
+            $area = $puestos['sArea'];
+            $horario = $puestos['idHorario'];
+            $empleado = $puestos['idEmpleado'];   
+
+        }
+                                                                                                                                                                     
+    } else{
+        
+         $error = "1"; 
+    }
+        $response = array("mensaje"=>"$mensaje",
+                      "error"=>"$error",
+                      "puesto"=>"$puesto",
+                      "area"=>"$area",
+                      "horario"=>"$horario",
+                      "empleado"=>"$empleado"
+                      );   
+        echo array2json($response);
+    
 }
 ?>

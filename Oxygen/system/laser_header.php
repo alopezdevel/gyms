@@ -44,7 +44,7 @@ if(1){
                         <ul> 
                             <li><a href="laser_empleados.php"><i class="fa fa-users"></i> Empleados</a></li>
                             <li><a href="laser_horarios.php"><i class="fa fa-clock-o"></i> Horarios</a></li>
-                            <li><a href="#"><i class="fa fa-briefcase"></i> Puestos</a></li>    
+                            <li><a href="laser_puestos.php"><i class="fa fa-briefcase"></i> Puestos</a></li>    
                         </ul> 
                     </li>
                     

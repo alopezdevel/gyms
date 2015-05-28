@@ -57,66 +57,45 @@ function CargarPuestos(){
                 }
      });            
 }
-function onBorrarEmpleado(id){
-   if(confirm("estas seguro que desea borrar al empleado con el ID: " + id + "?")){ 
-    $.post("laser_funciones.php", { accion: "BorrarEmpleado", id:id},
+function onBorrarPuesto(id){
+   if(confirm("estas seguro que desea borrar el registro del puesto?")){ 
+    $.post("laser_funciones.php", { accion: "BorrarPuesto", id:id},
         function(data){ 
              switch(data.error){
              case "1":   alert( data.mensaje);
                     break;
              case "0":   
-                         alert("El empleado se ha borrado de manera satisfactoria.");
-                         CargarEmpleados();
+                         alert("El registro se ha borrado de manera satisfactoria.");
+                         CargarPuestos();
                     break;  
              }
          }
          ,"json");           
    }
 }
-function onNuevoEmpleado(){
+function onNuevoPuesto(){
   
-    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
-    var nombre = $("#Nombre");    
-    var apellido_paterno = $("#ApellidoPaterno");
-    var apellido_materno = $("#ApellidoMaterno");
-    var telefono = $("#Telefono"); 
-    var direccion = $("#Direccion");
-    var colonia = $("#Colonia");
-    var email = $("#CorreoElectronico");
-    var edad = $("#Edad");
+    var puesto = $("#Puesto");    
+    var area = $("#Area");
+    var horario = $("#horario");
+    var empleado = $("#empleados");
     
-    todosloscampos = $( [] ).add( nombre ).add( apellido_paterno ).add( apellido_materno ).add( telefono ).add( direccion ).add( colonia ).add( email ).add( edad );
+    todosloscampos = $( [] ).add( puesto ).add( area ).add( horario ).add( empleado );
     todosloscampos.removeClass( "error" );
-    $("#nombre").focus().css("background-color","#FFFFC0");
+    $("#Puesto").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
     
     var valid = true;
     
-    //Nombre 
-    valid = valid && checkLength( nombre, "Nombre", 2, 25 );
-    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    //Apellidos
-    valid = valid && checkLength( apellido_paterno, "Apellido Paterno", 2, 25 );
-    valid = valid && checkRegexp( apellido_paterno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    valid = valid && checkLength( apellido_materno, "Apellido Materno", 2, 25 );
-    valid = valid && checkRegexp( apellido_materno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." );
+    valid = valid && checkLength( puesto, "Puesto", 2, 25 );
+    valid = valid && checkRegexp( puesto, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
     
-    //Telefono:
-    valid = valid && checkLength( telefono, "Telefono", 6, 25 );
+    valid = valid && checkLength( area, "Area", 2, 25 );
+    valid = valid && checkRegexp( area, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
     
-    //Direccion:
-    valid = valid && checkLength( direccion, "Direccion", 6, 25 );
+    valid = valid && checkLength( horario, "Horario", 1, 100 );
     
-    //Colonia:
-    valid = valid && checkLength( colonia, "Colonia", 6, 25 );
-    
-    //email
-    valid = valid && checkLength( email, "Correo electronico", 6, 80 );                                                                                                           
-    valid = valid && checkRegexp( email, emailRegex, "ej. ui@hotmail.com" );
-    
-    //Edad:
-    valid = valid && checkLength( edad, "Edad", 2, 10 );
-    
+    valid = valid && checkLength( empleado, "Empleado", 1, 100 );
     
     
     if ( valid ) {
@@ -124,20 +103,20 @@ function onNuevoEmpleado(){
         $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"nuevo_empleado", nombre: nombre.val(), apellidopaterno: apellido_paterno.val(), apellidomaterno: apellido_materno.val(), telefono: telefono.val(), direccion: direccion.val(), colonia: colonia.val(), email: email.val(), edad: edad.val() },
+        data:{accion:"NuevoPuesto", puesto: puesto.val(), area: area.val(), horario: horario.val(), empleado: empleado.val() },
         async : true,
         dataType : "json",
         success : function(data){                               
             switch(data.error){
             case "1": alert(data.mensaje);
-                         $("#Nombre").focus();
+                         $("#Puesto").focus();
             break;
             case "0": actualizarMensajeAlerta("Favor de llenar los campos.");
                         $('form input').val("");                                                             
                          alert(data.mensaje);   
                          cerrarventana('#frm_container');
-                         mostrarventana('#data_grid_empleados');
-                         CargarEmpleados(); 
+                         mostrarventana('#data_grid_puestos');
+                         CargarPuestos(); 
             break;  
             }
         }
@@ -147,50 +126,30 @@ function onNuevoEmpleado(){
     
      
 } 
-function onActualizarEmpleado(){
+function onActualizarPuesto(){
    
-   var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
-    var id = $('#id_empleado').val();
-    var nombre = $("#Nombre");    
-    var apellido_paterno = $("#ApellidoPaterno");
-    var apellido_materno = $("#ApellidoMaterno");
-    var telefono = $("#Telefono"); 
-    var direccion = $("#Direccion");
-    var colonia = $("#Colonia");
-    var email = $("#CorreoElectronico");
-    var edad = $("#Edad");
+    var id = $("#id_puesto").val();
+    var puesto = $("#Puesto");    
+    var area = $("#Area");
+    var horario = $("#horario");
+    var empleado = $("#empleados");
     
-    todosloscampos = $( [] ).add( nombre ).add( apellido_paterno ).add( apellido_materno ).add( telefono ).add( direccion ).add( colonia ).add( email ).add( edad );
+    todosloscampos = $( [] ).add( puesto ).add( area ).add( horario ).add( empleado );
     todosloscampos.removeClass( "error" );
-    $("#nombre").focus().css("background-color","#FFFFC0");
+    $("#Puesto").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
     
     var valid = true;
     
-    //Nombre 
-    valid = valid && checkLength( nombre, "Nombre", 2, 25 );
-    valid = valid && checkRegexp( nombre, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    //Apellidos
-    valid = valid && checkLength( apellido_paterno, "Apellido Paterno", 2, 25 );
-    valid = valid && checkRegexp( apellido_paterno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
-    valid = valid && checkLength( apellido_materno, "Apellido Materno", 2, 25 );
-    valid = valid && checkRegexp( apellido_materno, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." );
+    valid = valid && checkLength( puesto, "Puesto", 2, 25 );
+    valid = valid && checkRegexp( puesto, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
     
-    //Telefono:
-    valid = valid && checkLength( telefono, "Telefono", 6, 25 );
+    valid = valid && checkLength( area, "Area", 2, 25 );
+    valid = valid && checkRegexp( area, /^[a-z]([0-9a-z_\s])+$/i, "Este campo puede contener a-z, 0-9, guiones bajos, espacios y debe iniciar con una letra." ); 
     
-    //Direccion:
-    valid = valid && checkLength( direccion, "Direccion", 6, 25 );
+    valid = valid && checkLength( horario, "Horario", 1, 100 );
     
-    //Colonia:
-    valid = valid && checkLength( colonia, "Colonia", 6, 25 );
-    
-    //email
-    valid = valid && checkLength( email, "Correo electronico", 6, 80 );                                                                                                           
-    valid = valid && checkRegexp( email, emailRegex, "ej. ui@hotmail.com" );
-    
-    //Edad:
-    valid = valid && checkLength( edad, "Edad", 2, 10 );
+    valid = valid && checkLength( empleado, "Empleado", 1, 100 );
     
     
     
@@ -199,20 +158,21 @@ function onActualizarEmpleado(){
         $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"actualizar_empleado", id: id, nombre: nombre.val(), apellidopaterno: apellido_paterno.val(), apellidomaterno: apellido_materno.val(), telefono: telefono.val(), direccion: direccion.val(), colonia: colonia.val(), email: email.val(), edad: edad.val() },
+        data:{accion:"ActualizarPuesto", id: id, puesto: puesto.val(), area: area.val(), horario: horario.val(), empleado: empleado.val() },
         async : true,
         dataType : "json",
         success : function(data){                               
             switch(data.error){
             case "1": alert(data.mensaje);
-                         $("#Nombre").focus();
+                         $("#Puesto").focus();
             break;
             case "0": actualizarMensajeAlerta("Favor de llenar los campos.");
-                        $('form input').val("");                                                             
+                        $('form input').val("");  
+                        $('form select option[value=""]').attr("selected",true);                                                              
                          alert(data.mensaje);   
                          cerrarventana('#frm_container');
-                         mostrarventana('#data_grid_empleados');
-                         CargarEmpleados(); 
+                         mostrarventana('#data_grid_puestos');
+                         CargarPuestos(); 
             break;  
             }
         }
@@ -220,16 +180,16 @@ function onActualizarEmpleado(){
         
     } 
 }
-function onCargarEmpleado(id){
+function onCargarPuesto(id){
         
-       cerrarventana('#data_grid_empleados');
+       cerrarventana('#data_grid_puestos');
        mostrarventana('#frm_container');
-       mostrarformulario('editar_empleado');
+       mostrarformulario('editar_puesto');
        //cargando los datos del empleado:
        $.ajax({             
         type:"POST", 
         url:"laser_funciones.php", 
-        data:{accion:"CargarEmpleado", id : id},
+        data:{accion:"CargarPuesto", id : id},
                 async : true,
                 dataType : "json",
                 success : function(data){                               
@@ -237,15 +197,11 @@ function onCargarEmpleado(id){
                     case "1":   
                         break;
                     case "0":    
-                    $('#id_empleado').val(id);
-                    $("#Nombre").val(data.nombre);
-                    $("#ApellidoPaterno").val(data.apellidopaterno);
-                    $("#ApellidoMaterno").val(data.apellidomaterno);
-                    $("#Telefono").val(data.telefono);
-                    $("#Direccion").val(data.direccion);
-                    $("#Colonia").val(data.colonia);
-                    $("#CorreoElectronico").val(data.correo);
-                    $("#Edad").val(data.edad);
+                    $('#id_puesto').val(id);
+                    $("#Puesto").val(data.puesto);
+                    $("#Area").val(data.area);
+                    $("#horario option[value='"+ data.horario +"']").attr("selected",true);
+                    $("#empleados option[value='"+ data.empleado +"']").attr("selected",true);
                     break;
                 }
                 }
@@ -262,16 +218,56 @@ function mostrarventana(ventana){
 }
 function mostrarformulario(formulario){
     
+    cargarhorarios();
+    cargarempleados();
     switch (formulario){
-        case 'nuevo_empleado': $('#frm_container h2').empty().text('Nuevo Empleado');
-        $('#btn-nuevoempleado').show('fast');
-        $('#btn-editarempleado').hide('fast'); 
+        case 'nuevo_puesto': $('#frm_container h2').empty().text('Nuevo puesto');
+            $('#btn-nuevopuesto').show('fast');
+            $('#btn-editarpuesto').hide('fast'); 
         break;
-        case 'editar_empleado': $('#frm_container h2').empty().text('Editar Empleado');
-        $('#btn-nuevoempleado').hide('fast');
-        $('#btn-editarempleado').show('fast');
+        case 'editar_puesto': $('#frm_container h2').empty().text('Editar puesto');
+        $('#btn-nuevopuesto').hide('fast');
+        $('#btn-editarpuesto').show('fast');
         break;    
     }
+}
+function cargarhorarios(){
+    
+    $.ajax({             
+        type:"POST", 
+        url:"laser_funciones.php", 
+        data:{accion:"CargarHorariosSelect"},
+                async : true,
+                dataType : "json",
+                success : function(data){                               
+                switch(data.error){
+                    case "1":   
+                        break;
+                    case "0":    
+                    $('#horario').empty().append("<option value=''>Selecciona una opcion...</option>" + data.tabla);
+                    break;
+                }
+                }
+        });
+}
+function cargarempleados(){
+    
+    $.ajax({             
+        type:"POST", 
+        url:"laser_funciones.php", 
+        data:{accion:"CargarEmpleadosSelect"},
+                async : true,
+                dataType : "json",
+                success : function(data){                               
+                switch(data.error){
+                    case "1":   
+                        break;
+                    case "0":    
+                    $('#empleados').empty().append("<option value=''>Selecciona una opcion...</option>" + data.tabla);
+                    break;
+                }
+                }
+        });
 }
 function onFocus(){
      $(this).css("background-color","#FFFFC0");
@@ -330,7 +326,7 @@ function inputnumero(){
 }  
 function limpiarfiltros(){
     $('.filtro').val("");
-    CargarEmpleados();
+    CargarPuestos();
 }    
 </script>
 <div id="layer_content" class="main-section">  
@@ -342,10 +338,10 @@ function limpiarfiltros(){
         <table id="data_grid_puestos" class="data_grid">
         <thead>                                                                                       
             <tr id="grid-head1">                                                                                             
-                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_puesto" type="text"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_area" type="text" placeholder="ID Empleado:"></td>
-                <td class="etiqueta_grid"><input  class="filtro" id="filtro_id_empleado" type="text" placeholder="Nombre Completo:"></td>
-                <td class="etiqueta_grid"><input class="filtro numeros" id="filtro_id_horario" type="text" placeholder="Correo electronico:"></td> 
+                <td class="etiqueta_grid" nowrap="nowrap" ><input class="filtro" id="filtro_puesto" type="text" placeholder="Puesto:"></td>
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_area" type="text" placeholder="Area:"></td>
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_id_horario" type="text" placeholder="Horario:"></td>
+                <td class="etiqueta_grid"><input class="filtro" id="filtro_id_empleado" type="text" placeholder="Nombre Empleado:"></td> 
                 <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Nuevo Puesto" onclick="cerrarventana('#data_grid_puestos');mostrarventana('#frm_container');mostrarformulario('nuevo_puesto');"><i class="fa fa-plus-circle"></i> Nuevo</span></td>  
             </tr>
             <tr id="grid-head2">                            
@@ -369,21 +365,23 @@ function limpiarfiltros(){
         </tfoot>
         </table>
         <div id="frm_container" class="frm-dialog" style="display: none;">
-                <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_empleados');"><i class="fa fa-times-circle"></i></div>
+                <div id="btn_cerrar_frm" class="right" onclick="cerrarventana('#frm_container');mostrarventana('#data_grid_puestos');"><i class="fa fa-times-circle"></i></div>
                 <h2 class="txt-center">Nuevo</h2>
-                <form id="frm_empleado" action="" method="post">
+                <form id="frm_puesto" action="" method="post">
                   <p class="mensaje_valido">Favor de llenar los campos.</p> 
-                  <input id="Nombre" type="text" name="NombreEmpleado" placeholder="Nombre:" maxlength="50">  
-                  <input id="ApellidoPaterno" type="text" name="ApellidoPaterno" placeholder="Apellido paterno:" maxlength="50">
-                  <input id="ApellidoMaterno" type="text" name="ApellidoMaterno" placeholder="Apellido materno:" maxlength="50">
-                  <input id="Telefono" type="tel" name="Telefono" placeholder="Telefono:" class="numeros" maxlength="10">
-                  <input id="Direccion" type="text" name="Direccion" placeholder="Direccion:" maxlength="200"> 
-                  <input id="Colonia" type="text" name="Colonia" placeholder="Colonia:" maxlength="100">
-                  <input id="CorreoElectronico" type="text" name="CorreoElectronico" placeholder="Correo electronico:" maxlength="50">
-                  <input id="Edad" type="text" name="Edad" placeholder="Edad:" class="numeros" maxlength="2">
-                  <button id="btn-nuevoempleado" type="button" class="btn_4" onclick="onNuevoEmpleado();" style="display: none;">Guardar</button>
-                  <button id="btn-editarempleado" type="button" class="btn_4" onclick="onActualizarEmpleado();" style="display: none;">Guardar</button>  
-                  <input id="id_empleado" type="hidden">
+                  <input id="Puesto" type="text" name="Puesto" placeholder="Nombre del Puesto:" maxlength="50">  
+                  <input id="Area" type="text" name="Area" placeholder="Area:" maxlength="50">
+                  <label>Horario:</label>
+                  <select id="horario" name="horario">
+                    <option value="">Selecciona una opcion...</option> 
+                  </select>
+                  <label>Empleado:</label>
+                  <select id="empleados" name="empleados">
+                    <option value="">Selecciona una opcion...</option>
+                  </select>
+                  <button id="btn-nuevopuesto" type="button" class="btn_4" onclick="onNuevoPuesto();" style="display: none;">Guardar</button>
+                  <button id="btn-editarpuesto" type="button" class="btn_4" onclick="onActualizarPuesto();" style="display: none;">Guardar</button>  
+                  <input id="id_puesto" type="hidden">
                 </form>
         </div>
     </div>
