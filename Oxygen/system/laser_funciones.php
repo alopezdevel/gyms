@@ -819,4 +819,85 @@ function CargarPuesto(){
         echo array2json($response);
     
 }
+//REPORTE GENERAL -- REPORTE GENERAL
+function CargarReporte(){
+    
+    $filtro_id_empleado =   trim($_POST['filtro_id_empleado']);
+    $filtro_nombre_empleado =   trim($_POST['filtro_nombre_empleado']);
+    $filtro_telefono =   trim($_POST['filtro_telefono']);
+    $filtro_direccion =   trim($_POST['filtro_direccion']);
+    $filtro_correo =   trim($_POST['filtro_correo']);
+    $filtro_edad =   trim($_POST['filtro_edad']);
+    
+    $filtro_puesto = trim($_POST['filtro_puesto']);
+    $filtro_area =   trim($_POST['filtro_area']);
+    $filtro_horario =  trim($_POST['filtro_horario']);
+     
+    include("cn_laser.php");
+    mysql_query("BEGIN");
+    $transaccion_exitosa = true;
+    $sql = "SELECT ct_puesto.sPuesto, ct_puesto.sArea, CONCAT(DATE_FORMAT(ct_horario.dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(ct_horario.dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(ct_horario.dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(ct_horario.dSalida2,'%h:%i %p')) AS dHorario,ct_empleado.idEmpleado, CONCAT(ct_empleado.sNombre , ' ', ct_empleado.sApellidoPaterno, ' ',  ct_empleado.sApellidoMaterno) AS sNombre, ct_empleado.sTelefono, CONCAT(ct_empleado.sDireccion , ' Col. ', ct_empleado.sColonia) AS sDireccion,  ct_empleado.sCorreoElectronico, ct_empleado.iEdad  FROM ct_puesto INNER JOIN ct_horario ON ct_puesto.idHorario = ct_horario.idHorario RIGHT JOIN ct_empleado ON ct_puesto.idEmpleado = ct_empleado.idEmpleado WHERE ct_puesto.idEmpleado != '' ";
+    
+    if($filtro_id_empleado != ""){
+          $sql = $sql ." AND ct_empleado.idEmpleado LIKE '%".$filtro_id_empleado."%' ";
+    }
+    if($filtro_nombre_empleado != ""){
+          $sql = $sql ." AND CONCAT(ct_empleado.sNombre , ' ', ct_empleado.sApellidoPaterno, ' ',  ct_empleado.sApellidoMaterno) LIKE '%".$filtro_nombre_empleado."%' ";
+    }
+    if($filtro_telefono != ""){
+          $sql = $sql ." AND ct_empleado.sTelefono LIKE '%".$filtro_telefono."%' ";
+    }
+    if($filtro_direccion != ""){
+          $sql = $sql ." AND CONCAT(ct_empleado.sDireccion , ' Col. ', ct_empleado.sColonia) LIKE '%".$filtro_direccion."%' ";
+    }
+    if($filtro_correo != ""){
+          $sql = $sql ." AND ct_empleado.sCorreoElectronico LIKE '%".$filtro_correo."%' ";
+    }
+    if($filtro_edad != ""){
+          $sql = $sql ." AND ct_empleado.iEdad LIKE '%".$filtro_edad."%' ";
+    }
+    if($filtro_puesto != ""){
+          $sql = $sql ." AND ct_puesto.sPuesto LIKE '%".$filtro_puesto."%' ";
+    }
+    if($filtro_area != ""){
+          $sql = $sql ." AND ct_puesto.sArea LIKE '%".$filtro_area."%' ";
+    }
+    if($filtro_horario != ""){
+          $sql = $sql ." AND CONCAT(DATE_FORMAT(ct_horario.dEntrada1,'%h:%i %p') , ' - ', DATE_FORMAT(ct_horario.dSalida1,'%h:%i %p'), ' y ', DATE_FORMAT(ct_horario.dEntrada2,'%h:%i %p'), ' - ', DATE_FORMAT(ct_horario.dSalida2,'%h:%i %p')) LIKE '%".$filtro_horario."%' ";
+    }
+    
+    $result = mysql_query($sql, $dbconn);
+    $htmlTabla = "";
+    
+    if (mysql_num_rows($result) > 0) { 
+        while ($reporte = mysql_fetch_array($result)) {
+           if($reporte["sPuesto"] != ""){
+        
+                 $htmlTabla .= "<tr>
+                                    <td>".$reporte['idEmpleado']."</td>". 
+                                    "<td>".$reporte['sNombre']."</td>".
+                                    "<td>".$reporte['sTelefono']."</td>".
+                                    "<td>".$reporte['sDireccion']."</td>".
+                                    "<td>".$reporte['sCorreoElectronico']."</td>".  
+                                    "<td>".$reporte['iEdad']."</td>".                         
+                                    "<td>".$reporte['sPuesto']."</td>".
+                                    "<td>".$reporte['sArea']."</td>".              
+                                    "<td colspan=\"2\">".$reporte['dHorario']."</td>".                                             
+                                "</tr>"   ;
+             }else{                             
+                 $error = "1";
+             }    
+        }
+        
+        mysql_query("ROLLBACK");
+        mysql_close($dbconn);                                                                                                                                                                      
+    } else{
+        
+         $htmlTabla .="<tr><td style=\"text-align:center; font-weight: bold;\" colspan=\"100%\">No hay datos disponibles.</td><tr>";
+    }
+        $html_tabla = utf8_encode($html_tabla); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","tabla"=>"$htmlTabla");   
+        echo array2json($response);
+    
+}
 ?>
