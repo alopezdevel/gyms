@@ -50,7 +50,7 @@ if(1){
                     
                     <li class="submenu"><a href="#">Reportes</a>
                         <ul> 
-                           <li><a href="#"><i class="fa fa-folder-open"></i> Reporte General</a></li>     
+                           <li><a href="laser_reporte.php"><i class="fa fa-folder-open"></i> Reporte General</a></li>     
                         </ul> 
                     </li>   
         </ul>

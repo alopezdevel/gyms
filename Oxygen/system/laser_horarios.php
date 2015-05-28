@@ -288,7 +288,7 @@ function limpiarfiltros(){
                 <td class="etiqueta_grid"><input class="filtro" id="filtro_Entrada2" type="time" placeholder="Entrada 2:"></td> 
                 <td class="etiqueta_grid"><input class="filtro" id="filtro_Salida2" type="time" placeholder="Salida 2:"></td>
                 <td class="etiqueta_grid"><input class="filtro" id="filtro_tiposemana" type="text" placeholder="Semana laboral:"></td>
-                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_horarios');mostrarventana('#frm_container');mostrarformulario('nuevo_horario');"><i class="fa fa-plus-circle"></i></span></td>  
+                <td class="etiqueta_grid"><span class="btn-icon btn-left limpiar" title="Limpiar Filtros" onclick="limpiarfiltros();"><i class="fa fa-undo"></i></span> <span class="btn-icon btn-left" title="Agregar empleado" onclick="cerrarventana('#data_grid_horarios');mostrarventana('#frm_container');mostrarformulario('nuevo_horario');"><i class="fa fa-plus-circle"></i> Nuevo</span></td>  
             </tr>
             <tr id="grid-head2">                            
                 <td class="etiqueta_grid" nowrap="nowrap" >ID Horario</td>
