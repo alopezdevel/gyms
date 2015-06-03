@@ -56,9 +56,15 @@ if(1){
 	<div class="container">
 		<a href="#home" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
 		<ul class="top-nav"> 
-			<li>
+			<li class="top-submenu">
 			<?php if(isset($_SESSION['usuario_actual'])){ ?>
 				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> <?php echo $_SESSION['usuario_actual']; ?></span></a>
+                <ul>
+                    <li><a href="#">Cambiar Contrasena</a></li>
+                    <?php if($_SESSION['acceso'] == "U"){ ?>
+                    <li><a href="#">Ver mi perfil</a></li>
+                    <?php }?>
+                </ul>
 			<?php }else{?>
 				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> Nombre de Usuario</span></a>
 			<?php }?>
