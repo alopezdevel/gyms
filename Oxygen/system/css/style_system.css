@@ -657,7 +657,10 @@ img {
 .btn-borrar-entrada{background: #d5d5d5;color:#8a8a8a;float:right;padding: 5px 8px;border-radius:5px 5px 0px 0px;-moz-border-radius:5px 5px 0px 0px;-webkit-border-radius:5px 5px 0px 0px;}
 .btn-borrar-entrada:hover{color:#ffffff;background:#ac2f2f;cursor:pointer;}
 /*-------------- SECCION MI PERFIL ---------------------------*/
-.foto-perfil img{width:250px!important;height:230px!important;border:5px solid #ffffff;}
+#perfil-cuenta{width:90%;}
+#perfil-cuenta fieldset div{padding:2px 3px;}
+.foto-perfil img{width:200px!important;height:180px!important;border:5px solid #ffffff;}
+.tag_field{color:#3768a4;}
 
 /* Animation Timers
 ---------------------------------*/
