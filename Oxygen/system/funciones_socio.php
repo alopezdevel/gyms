@@ -50,7 +50,7 @@ function CargarDatosSocio(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT iIDSocio, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio,) AS sDireccion, eGenero FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $sql = "SELECT iIDSocio, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion, eGenero FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $informacion_personal = "";
     
@@ -68,14 +68,14 @@ function CargarDatosSocio(){
                         break;
                  }
         
-                 $informacion_personal .= "<legend>Informacion Personal</legend>
-                                    <div><span class=\"tag_field\">ID: </span><span>".$socios["iIDSocio"]."</span></div>
-                                    <div><span class=\"tag_field\">Nombre: </span><span>".$socios["sNombreSocio"]."</span></div>
-                                    <div><span class=\"tag_field\">Region: </span><span>".$socios["sDireccion"]."</span></div>
-                                    <div><span class=\"tag_field\">Genero: </span><span>".$genero."</span></div>
-                                    <div><span class=\"tag_field\">Edad: </span><span></span></div>
-                                    <div><span class=\"tag_field\">Altura: </span><span></span></div>
-                                    <div><span class=\"tag_field\">Peso: </span><span></span></div>";
+                 $informacion_personal .= "<legend>Informacion Personal</legend>".
+                                    "<div><span class=\"tag_field\">ID: </span><span>".$socios["iIDSocio"]."</span></div>".
+                                    "<div><span class=\"tag_field\">Nombre: </span><span>".$socios["sNombreSocio"]."</span></div>".
+                                    "<div><span class=\"tag_field\">Region: </span><span>".$socios["sDireccion"]."</span></div>".
+                                    "<div><span class=\"tag_field\">Genero: </span><span>".$genero."</span></div>".
+                                    "<div><span class=\"tag_field\">Edad: </span><span></span></div>".
+                                    "<div><span class=\"tag_field\">Altura: </span><span></span></div>".
+                                    "<div><span class=\"tag_field\">Peso: </span><span></span></div>";
              }else{                             
                  $informacion_personal .="<div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
              }    
