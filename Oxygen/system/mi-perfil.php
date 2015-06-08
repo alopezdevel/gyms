@@ -23,6 +23,7 @@ function CargarDatosSocio(){
                 success : function(data){                               
                     
                     $("#informacion_personal").empty().append(data.informacion_personal);
+                    $("#socio-workouts").empty().append(data.workouts);
                     
                 }
      });
@@ -43,6 +44,24 @@ function CargarDatosSocio(){
                     <legend>Informacion Personal</legend>
                     
                </fieldset>
+            </div>
+            <!---- DATOS CONSOLA DEL SOCIO--->
+            <div class="row">
+               <div class="col-md-4">
+                  <table id="socio-workouts">
+                       <tr><td colspan="100%" class="table-head">WORKOUTS</td></tr>
+                  </table>
+               </div>
+               <div class="col-md-4">
+                <table id="socio-maxespr">
+                       <tr><td colspan="100%" class="table-head">MAXES PR</td></tr>
+                </table>
+               </div>
+               <div class="col-md-4">
+                  <table id="socio-skills">
+                       <tr><td colspan="100%" class="table-head">SKILLS</td></tr>
+                  </table>
+               </div>
             </div>
         </div>
     </div>
