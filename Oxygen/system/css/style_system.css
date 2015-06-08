@@ -661,6 +661,9 @@ img {
 #perfil-cuenta fieldset div{padding:2px 3px;}
 .foto-perfil img{width:200px!important;height:180px!important;border:5px solid #ffffff;}
 .tag_field{color:#3768a4;}
+.table-head{color:#ffffff; background:#447096;}
+#perfil-cuenta table{width:95%;margin:10px auto;}
+#perfil-cuenta table td{border:1px solid #f0f0f0;}
 
 /* Animation Timers
 ---------------------------------*/
