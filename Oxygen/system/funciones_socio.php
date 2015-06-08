@@ -50,9 +50,10 @@ function CargarDatosSocio(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT iIDSocio, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion, eGenero FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $sql = "SELECT iIDSocio, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion, eGenero, iEdadSocio, iAlturaSocio, iPesoSocio, sWFran, sWGrace, sWHelen, sWFilthy50, sWRow500m, sWSprint400m, sWRun5k FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $informacion_personal = "";
+    $workouts = "";
     
     if (mysql_num_rows($result) > 0) { 
         while ($socios = mysql_fetch_array($result)) {
@@ -73,9 +74,18 @@ function CargarDatosSocio(){
                                     "<div><span class=\"tag_field\">Nombre: </span><span>".$socios["sNombreSocio"]."</span></div>".
                                     "<div><span class=\"tag_field\">Region: </span><span>".$socios["sDireccion"]."</span></div>".
                                     "<div><span class=\"tag_field\">Genero: </span><span>".$genero."</span></div>".
-                                    "<div><span class=\"tag_field\">Edad: </span><span></span></div>".
-                                    "<div><span class=\"tag_field\">Altura: </span><span></span></div>".
-                                    "<div><span class=\"tag_field\">Peso: </span><span></span></div>";
+                                    "<div><span class=\"tag_field\">Edad: </span><span>".$socios["iEdadSocio"]." a&ntilde;os</span></div>".
+                                    "<div><span class=\"tag_field\">Altura: </span><span>".$socios["iAlturaSocio"]." Mts.</span></div>".
+                                    "<div><span class=\"tag_field\">Peso: </span><span>".$socios["iPesoSocio"]." Kgs.</span></div>";
+                                    
+                 $workouts .= "<tr><td colspan=\"100%\" class=\"table-head\">WORKOUTS</td></tr>".
+                                "<tr><td class=\"tag_field\">Fran: </td><td>".$socios["sWFran"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Helen: </td><td>".$socios["sWHelen"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Grace: </td><td>".$socios["sWGrace"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Filthy 50: </td><td>".$socios["sWFilthy50"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Row 500m: </td><td>".$socios["sWRow500m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Sprint 400m: </td><td>".$socios["sWSprint400m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Run 5k: </td><td>".$socios["sWRun5k"]." Min.<td/></tr>";
              }else{                             
                  $informacion_personal .="<div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
              }    
@@ -88,7 +98,8 @@ function CargarDatosSocio(){
          $informacion_personal .="<div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
     }
         $informacion_personal = utf8_encode($informacion_personal); 
-        $response = array("mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal");   
+        $workouts = utf8_encode($workouts);
+        $response = array("mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal", "workouts" => "$workouts");   
         echo array2json($response);
     
     
