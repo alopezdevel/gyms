@@ -150,18 +150,69 @@ function CargarPagosSocio(){
     
     include("cn_usuarios.php");
     mysql_query("BEGIN");
+    $error = "0";
     $transaccion_exitosa = true;
     $sql = "SELECT iIDSocio FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $html_tabla = "";
-    if (mysql_num_rows($result) > 0) { }
-    
+    if (mysql_num_rows($result) > 0) {
+       
+       $socio = mysql_fetch_array($result);
+       $socio =  $socio['iIDSocio'];
+       $sql2 = "SELECT iFolio, iIDSocio, DATE_FORMAT(dFechaPago,'%d %b %y') AS dFechaPago, DATE_FORMAT(dFechaVencimiento,'%d %b %y') AS dFechaVencimiento, DATE_FORMAT(dFechaVencimiento,'%Y-%m-%d') AS dEstadoPago FROM cb_pagos_socio WHERE iIDSocio = '".$socio."'";
+       $result2 = mysql_query($sql2, $dbconn);
+       if (mysql_num_rows($result2) > 0) { 
+           while ($pagos = mysql_fetch_array($result2)) {
+               
+               $Statuspago = calcular_estado_pago($pagos["dEstadoPago"]);
+                if($pagos["iFolio"] != ""){ 
+                     $html_tabla .="<tr>".
+                          "<td><b>".$pagos["iFolio"]."</td>".
+                          "<td><b>".$pagos["iIDSocio"]."</td>".
+                          "<td>".$Statuspago."</td>".
+                          "<td>".$pagos["dFechaPago"]."</td>".
+                          "<td>".$pagos["dFechaVencimiento"]."</td>". 
+                     "</tr>";
+                    
+                }else{
+                    
+                   $error = "1";
+                   $mensaje = "Al cargar los datos.";
+                   $transaccion_exitosa = false;  
+       
+                }
+               
+           }
+              
+       }else{
+           
+           $error = "1";
+           $mensaje = "No se encontraron pagos realizados, favor de revisarlo con el Administrador.";
+           $transaccion_exitosa = false; 
+           
+       }
+        
+    }
     else{
         
+        $error = "1";
+        $mensaje = "No se puede encontrar la clave del socio, favor de intentarlo nuevamente.";
+        $transaccion_exitosa = false; 
+    } 
+    //Revisamos si fue exitosa la consulta.
+    if($transaccion_exitosa){
         
-    }   
-    
-     
+        mysql_query("COMMIT");
+        mysql_close($dbconn); 
+        
+    }else{
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn);  
+    }  
+       
+     $html_tabla = utf8_encode($html_tabla); 
+     $response = array("mensaje"=>"$mensaje","error"=>"$error","html_tabla" => "$html_tabla");   
+     echo array2json($response);
     
 }
 // CALCULAR EDAD...//
@@ -173,5 +224,16 @@ function calculaedad($fechanacimiento){
     if ($dia_diferencia < 0 || $mes_diferencia < 0)
         $ano_diferencia--;
     return $ano_diferencia;
+}
+// CALCULAR ESTADO PAGO SOCIO ----//
+function calcular_estado_pago($fechavencimiento){
+    list($ano,$mes,$dia) = explode("-",$fechavencimiento);
+    $ano_diferencia  = date("Y") - $ano;
+    $mes_diferencia = date("m") - $mes;
+    $dia_diferencia   = date("d") - $dia;
+    if ($dia_diferencia < 0 || $mes_diferencia < 0) {$estado_pago = "EN PROGRESO"; }
+    else{ $estado_pago = "VENCIDO"; }
+          
+    return $estado_pago;
 }
 ?>
