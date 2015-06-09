@@ -50,10 +50,12 @@ function CargarDatosSocio(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT iIDSocio, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion, eGenero, iEdadSocio, iAlturaSocio, iPesoSocio, sWFran, sWGrace, sWHelen, sWFilthy50, sWRow500m, sWSprint400m, sWRun5k FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $sql = "SELECT *, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $informacion_personal = "";
     $workouts = "";
+    $maxespr = "";
+    $skills = "";
     
     if (mysql_num_rows($result) > 0) { 
         while ($socios = mysql_fetch_array($result)) {
@@ -86,8 +88,27 @@ function CargarDatosSocio(){
                                 "<tr><td class=\"tag_field\">Row 500m: </td><td>".$socios["sWRow500m"]." Min.<td/></tr>".
                                 "<tr><td class=\"tag_field\">Sprint 400m: </td><td>".$socios["sWSprint400m"]." Min.<td/></tr>".
                                 "<tr><td class=\"tag_field\">Run 5k: </td><td>".$socios["sWRun5k"]." Min.<td/></tr>";
-             }else{                             
-                 $informacion_personal .="<div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
+                                
+                 $maxespr .= "<tr><td colspan=\"100%\" class=\"table-head\">MAXES PR</td></tr>".
+                                "<tr><td class=\"tag_field\">Clean & Jerk: </td><td>".$socios["sWFran"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Snatch: </td><td>".$socios["sWHelen"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Deadlift: </td><td>".$socios["sWGrace"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">BackSquat: </td><td>".$socios["sWFilthy50"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Pull-Ups: </td><td>".$socios["sWRow500m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Muscle-Up: </td><td>".$socios["sWSprint400m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Burpees Min: </td><td>".$socios["sWRun5k"]." Min.<td/></tr>";
+                                
+                 $skills .= "<tr><td colspan=\"100%\" class=\"table-head\">SKILLS</td></tr>".
+                                "<tr><td class=\"tag_field\">Clean & Jerk: </td><td>".$socios["sWFran"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Snatch: </td><td>".$socios["sWHelen"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Deadlift: </td><td>".$socios["sWGrace"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">BackSquat: </td><td>".$socios["sWFilthy50"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Pull-Ups: </td><td>".$socios["sWRow500m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Muscle-Up: </td><td>".$socios["sWSprint400m"]." Min.<td/></tr>".
+                                "<tr><td class=\"tag_field\">Max Burpees Min: </td><td>".$socios["sWRun5k"]." Min.<td/></tr>";
+             }else{  
+                //si falla la consulta se muestra lo siguiente:                           
+                 $informacion_personal .="<legend>Informacion Personal</legend><div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
              }    
         }
         
@@ -95,11 +116,13 @@ function CargarDatosSocio(){
         mysql_close($dbconn);                                                                                                                                                                      
     } else{
         
-         $informacion_personal .="<div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
+         $informacion_personal .="<legend>Informacion Personal</legend><div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";
     }
         $informacion_personal = utf8_encode($informacion_personal); 
         $workouts = utf8_encode($workouts);
-        $response = array("mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal", "workouts" => "$workouts");   
+        $maxespr = utf8_encode($maxespr); 
+        $skills = utf8_encode($skills); 
+        $response = array("mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal", "workouts" => "$workouts", "maxespr" => "$maxespr", "skills" => "$skills");   
         echo array2json($response);
     
     

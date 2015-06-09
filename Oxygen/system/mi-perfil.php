@@ -1,5 +1,9 @@
 <?php
-    session_start();  
+    session_start();
+if ( $_SESSION['acceso'] != "C" ){ //No ha iniciado session: Esta ventana es solo para socios...no administradores
+    header("Location: index.php");
+    exit;
+}else {  
     include("header.php");
 ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">          
@@ -24,7 +28,8 @@ function CargarDatosSocio(){
                     
                     $("#informacion_personal").empty().append(data.informacion_personal);
                     $("#socio-workouts").empty().append(data.workouts);
-                    
+                    $("#socio-maxespr").empty().append(data.maxespr); 
+                    $("#socio-skills").empty().append(data.skills); 
                 }
      });
 }
@@ -69,3 +74,4 @@ function CargarDatosSocio(){
 </div>
 </body>
 </html>
+<?php } ?>  
