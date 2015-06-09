@@ -51,7 +51,7 @@
                 case sha1(md5("final")):        $_SESSION["limite_inferior_datos_grid"] = $_SESSION["bloque_datos_grids"] * ($x - 1);
                                                 $_SESSION["paginacion_actual"] = $x;
                     break;
-                case sha1(md5("pagina")):        if ( intval($_GET['pag']) == 0 ) {        //PORQUE PUEDE SER QUE EL USUARIO MODIFIQUE EL URL PORQUE EL NUMERO DE LA PAGINA NO VIENE ENCRIPTADA, (si no es numero la variable get de PAG entonces se convierte con el intval en '0', si escogio la la página 1 del combo, entonces tambien tenemos que resetear el limit en 0, para que traiga el primer bloque)
+                case sha1(md5("pagina")):        if ( intval($_GET['pag']) == 0 ) {        //PORQUE PUEDE SER QUE EL USUARIO MODIFIQUE EL URL PORQUE EL NUMERO DE LA PAGINA NO VIENE ENCRIPTADA, (si no es numero la variable get de PAG entonces se convierte con el intval en '0', si escogio la la pï¿½gina 1 del combo, entonces tambien tenemos que resetear el limit en 0, para que traiga el primer bloque)
                                                     $_SESSION["limite_inferior_datos_grid"] = 0;
                                                     $_SESSION["paginacion_actual"] = 1;
                                                 } else {
@@ -165,7 +165,7 @@
         if ( $_GET['type'] == sha1(md5("Guardar")).sha1(md5("nuevo")).md5(sha1("transportista")) ){ //Insertar o editar un proveedor
             include("altas.php");
             if (insertarTransportistaMexicano($valor_clave, $valor_rfc, $valor_curp, $valor_nombre, $valor_numero_CAAT,$valor_numero_SCAAT, $valor_nombre_contacto, $valor_cuenta_correo_contacto, $valor_telefono_contacto, $valor_nextel_contacto, $valor_calle_fiscal, $valor_numero_int_fiscal, $valor_numero_ext_fiscal, $valor_colonia_fiscal, $valor_cp_fiscal, $valor_ciudad_fiscal, $valor_calle_patio, $valor_numero_int_patio, $valor_numero_ext_patio, $valor_colonia_patio, $valor_cp_patio, $valor_ciudad_patio, $valor_comentarios_patio, $_FILES['filCroquis'])) {
-                Consulta_Transportistas_Mexicanos("", "", "", "", "", "NULO", "NULO", $arr_trans_mex_general_comparar);    //para saber en donde es que se ubicó el nuevo registro según el ORDER BY
+                Consulta_Transportistas_Mexicanos("", "", "", "", "", "NULO", "NULO", $arr_trans_mex_general_comparar);    //para saber en donde es que se ubicï¿½ el nuevo registro segï¿½n el ORDER BY
                 if ( count($arr_trans_mex_general_comparar) > 0 ) {
                     for( $i=0; $i < count($arr_trans_mex_general_comparar); $i++) {                    
                         if ( sha1(md5($arr_trans_mex_general_comparar[$i]["clave"])) == sha1(md5(strtoupper(trim($valor_clave)))) ) {
@@ -174,7 +174,7 @@
                     }
 
                     $pagina_actual = intval(($i+1) / $_SESSION["bloque_datos_grids"]);    //registro_actual entre bloque de datos para ubicar al nuevo registro dentro del grid de consulta
-                    if ( ($i+1) % $_SESSION["bloque_datos_grids"] != 0 ) {        //si el registro_actual se ubica en el último renglón del grid, entonces es necesario decirle que se quede en la página que arrojó la división, en caso contrario es necesario incrementar a uno (+1) la páginación del grid
+                    if ( ($i+1) % $_SESSION["bloque_datos_grids"] != 0 ) {        //si el registro_actual se ubica en el ï¿½ltimo renglï¿½n del grid, entonces es necesario decirle que se quede en la pï¿½gina que arrojï¿½ la divisiï¿½n, en caso contrario es necesario incrementar a uno (+1) la pï¿½ginaciï¿½n del grid
                         $pagina_actual++;
                     }
                     $_SESSION["limite_inferior_datos_grid"] = $_SESSION["bloque_datos_grids"] * ($pagina_actual - 1);
@@ -287,7 +287,7 @@ include("header.php");
                     <a href="<?php echo $_SERVER['PHP_SELF']; ?>?type=<?php echo sha1(md5("nuevo")).md5(sha1("transportista")); ?>&cve=<?php echo sha1('-'); ?>">Insertar Nuevo Transportista </a></font>
                     </td>
                     <?php if ( $contador_consulta_transportistas_mexicanos > $_SESSION["bloque_datos_grids"] ) {?>
-                            <td width="39%"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">Página:</font>
+                            <td width="39%"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">Pï¿½gina:</font>
                                 <select name="paginacion" onChange="return Cargar_Paginacion_TransportistasMexicanos()">
                                 <?php
                                     $x = 0;
@@ -310,22 +310,22 @@ include("header.php");
                     <td width="4%" align="center">
                     <?php if ( $_SESSION["paginacion_actual"] > 1 ) { ?>
                             <?php $url=$_SERVER['PHP_SELF']."?type=".sha1('-')."&cve_pag=".sha1(md5("inicio")) ?>
-                            <a title="Primera Página" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_first_big.gif" width="15" height="15"></a></td>
+                            <a title="Primera Pï¿½gina" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_first_big.gif" width="15" height="15"></a></td>
                     <?php } ?>
                     <td width="4%" align="center">
                     <?php if ( $_SESSION["paginacion_actual"] > 1 ) { ?>
                             <?php $url=$_SERVER['PHP_SELF']."?type=".sha1('-')."&cve_pag=".sha1(md5("anterior")) ?>
-                            <a title="Página Anterior" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_back_big.gif" width="15" height="15"></a></td>
+                            <a title="Pï¿½gina Anterior" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_back_big.gif" width="15" height="15"></a></td>
                     <?php } ?>
                         <td width="4%" align="center">
                     <?php if ( $_SESSION["paginacion_actual"] < $x && $contador_consulta_transportistas_mexicanos > $_SESSION["bloque_datos_grids"] ) { ?>
                             <?php $url=$_SERVER['PHP_SELF']."?type=".sha1('-')."&cve_pag=".sha1(md5("siguiente")) ?>
-                            <a title="Página Siguiente" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_next_big.gif" width="15" height="15"></a></td>
+                            <a title="Pï¿½gina Siguiente" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_next_big.gif" width="15" height="15"></a></td>
                     <?php } ?>
                         <td width="4%" align="center">
                     <?php if ( $_SESSION["paginacion_actual"] < $x && $contador_consulta_transportistas_mexicanos > $_SESSION["bloque_datos_grids"] ) { ?>
                             <?php $url=$_SERVER['PHP_SELF']."?type=".sha1('-')."&cve_pag=".sha1(md5("final")) ?>
-                            <a title="Última Página" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_last_big.gif" width="15" height="15"></a></td>
+                            <a title="ï¿½ltima Pï¿½gina" href="javascript: SubmitFormaPaginacion(document.frmPaginacionTransportistasMexicanos, '<?= $url ?>');"> <img border="0" src="<?php echo $_SESSION["diseno"]["botones"] ?>/ico_nav_last_big.gif" width="15" height="15"></a></td>
                     <?php } ?>
                 </tr>
             </table>
@@ -432,7 +432,7 @@ include("header.php");
             </tr>            
 
             <tr>
-            <td width="30%" align="right"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2">Teléfono(s) del contacto:</font></td>
+            <td width="30%" align="right"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2">Telï¿½fono(s) del contacto:</font></td>
             <td width="70%">
                     <input type="text" name="telefono_contacto" size="55" maxlength="120" value="<?= $valor_telefono_contacto ?>">
                     <font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#336699">*</font>
@@ -451,7 +451,7 @@ include("header.php");
               <td colspan="2" align="right"><hr color="<?php echo $_SESSION["diseno"]["separador"] ?>"></td>
             </tr>
              <tr>
-               <td align="right"><div align="left"><strong><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">DIRECCIÓN FISCAL </font></strong></div></td>
+               <td align="right"><div align="left"><strong><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">DIRECCIï¿½N FISCAL </font></strong></div></td>
                <td>&nbsp;</td>
              </tr>
              <tr>
@@ -488,7 +488,7 @@ include("header.php");
               <td colspan="2" align="right"><hr color="<?php echo $_SESSION["diseno"]["separador"] ?>"></td>
             </tr>
              <tr>
-               <td align="right"><div align="left"><strong><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">DIRECCIÓN PATIO </font></strong></div></td>
+               <td align="right"><div align="left"><strong><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C">DIRECCIï¿½N PATIO </font></strong></div></td>
                <td>&nbsp;</td>
              </tr>
              <tr>
@@ -540,7 +540,7 @@ include("header.php");
             </tr>
             <?php if ( !(empty($valor_nombre_archivo)) ) {?>
                     <tr>
-                        <td  colspan="2" align="center"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C"><b>¿Borrar croquis?:</b></font>
+                        <td  colspan="2" align="center"><font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#0D306C"><b>ï¿½Borrar croquis?:</b></font>
                             <input type="checkbox" name="chkBorrar[]" value="Borrar_Croquis"
                             <?php    if ( count($_POST['chkBorrar']) > 0 ) {
                                         if ( in_array("Borrar_Croquis", $_POST['chkBorrar']) ) {
@@ -651,7 +651,7 @@ include("header.php");
 
             <tr>
                 <td width="30%" align="right">
-                    <font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2">Teléfono(s) del contacto:</font>
+                    <font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2">Telï¿½fono(s) del contacto:</font>
                 </td>
                 <td width="70%">
                     <font face="<?php echo $_SESSION["diseno"]["tipo_letra"] ?>" size="2" color="#336699">&nbsp;<?= $arr_trans_mexicano[0]["telefono_contacto"] ?> </font>
