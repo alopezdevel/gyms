@@ -18,7 +18,7 @@ if( $_GET['type'] == sha1(md5("Insertar")).md5(sha1("Comentario"))  ){
             if(insertarComentarioDelDia($usuario_actual,$_POST['txt_mensaje_dia'])){
             }
         }
-        header("Location: postdeldia.php"."?type=".sha1(md5("primera")).md5(sha1("vez")));
+        header("Location: index.php");
 } 
 include("header.php");
 $mensaje_del_dia = Consulta_Comentario_Dia();?>

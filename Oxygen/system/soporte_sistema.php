@@ -24,7 +24,7 @@ if( $_GET['type'] == sha1(md5("Enviar")).md5(sha1("Mail"))  ){
                 $arreglo_correo[1] = "celina@globalpc.net";
                 $cuerpo = '<html>';
                 $cuerpo .= '<head>';
-                $cuerpo .= '<title>GYM - DO IT</title>';
+                $cuerpo .= '<title>oxygen-fx team</title>';
                 $cuerpo .= '</head>';
                 $cuerpo .= '<body>';
                 $cuerpo .= '<table width="100%" border="0">';
@@ -32,12 +32,17 @@ if( $_GET['type'] == sha1(md5("Enviar")).md5(sha1("Mail"))  ){
                 $cuerpo .= '<th width="30%">';
                 $cuerpo .= '</tr>';
                 $cuerpo .= '</table>';
-                $mail = new Mail();
-                $mail->From = "recepcion@gymdoit.net";
-                $mail->FromName = "GYM - DO IT";
-                $mail->Host = "gymdoit.net";                       
-                $mail->Mailer = "sendmail";
-                $mail->Subject = "GYM DO IT. - DUDA SOPORTE. "; 
+                $mail = new Mail();                                    
+                $mail->From = "soporte@oxygen-fx.com";
+                $mail->FromName = "oxygen-fx team";
+                $mail->Host = "oxygen-fx.com";
+                $mail->Mailer = "sendmail";    
+                $mail->Subject = "Solicitud soporte sistema"; 
+                $mail->Body  = $cuerpo;                                                                                            
+                $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
+                $mail->IsHTML(true);
+                $mail->WordWrap =150;
+                $mail_error = false; 
                 $mail->Body  = $cuerpo.'<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" id="AutoNumber2" height="99" bordercolor="#BEBEBE" bordercolorlight="#BEBEBE" bordercolordark="#808080">
                                         <tr>
                                             <td width="50%" height="19" colspan="2" bgcolor="#0D306C" ><font face="Verdana" size="2">&nbsp; GYM - DUDA </font></td>

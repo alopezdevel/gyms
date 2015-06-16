@@ -582,7 +582,16 @@ function consulta_socio_edicion(){
     include("cn_usuarios_2.php");
     $conexion->autocommit(FALSE);
     $transaccion_exitosa = true;
-    $sql = "SELECT sCorreoSocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sTelefonoSocio,eGenero,sCantidadPago FROM ct_socio  ".$filtroQuery;
+    $sql = "SELECT sCorreoSocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sTelefonoSocio,eGenero,sCantidadPago 
+                   sWFran,sWHelen,sWGrace,sWFilthy50,sWRow500m,sWSprint400m,sWRun5k,
+                   eS_ropeclaims,
+                   eS_du,
+                   eS_hspu,
+                   eS_pullups,
+                   eS_walkhs,
+                   iS_boxjumpmax,
+                   eS_ringmuscleup                   
+    FROM ct_socio  ".$filtroQuery;
     $result = $conexion->query($sql);
     $NUM_ROWs_socios = $result->num_rows;   
     $error = "0";
@@ -597,6 +606,22 @@ function consulta_socio_edicion(){
             $telefono = $socios['sTelefonoSocio'];
             $genero = $socios['eGenero'];
             $cantidad = $socios['sCantidadPago'];
+            //Workouts
+            $sWFran = $socios['sWFran'];
+            $sWHelen = $socios['sWHelen'];     
+            $sWGrace = $socios['sWGrace'];
+            $sWFilthy50 = $socios['sWFilthy50'];
+            $sWRow500m = $socios['sWRow500m'];
+            $sWSprint400m = $socios['sWSprint400m'];
+            $sWRun5k = $socios['sWRun5k'];
+            //Skills
+            $eS_ropeclaims = $socios['eS_ropeclaims'];
+            $eS_du = $socios['eS_du'];
+            $eS_hspu = $socios['eS_hspu'];
+            $eS_pullups = $socios['eS_pullups'];
+            $eS_walkhs = $socios['eS_walkhs'];
+            $iS_boxjumpmax = $socios['iS_boxjumpmax'];
+            $eS_ringmuscleup = $socios['eS_ringmuscleup'];                        
         }
     }else{
         $error = "1";
@@ -611,7 +636,21 @@ function consulta_socio_edicion(){
                       "colonia"=>"$colonia",
                       "telefono"=>"$telefono",
                       "genero"=>"$genero",
-                      "cantidad"=>"$cantidad"
+                      "cantidad"=>"$cantidad",
+                      "sWFran"=>"$sWFran",
+                      "sWHelen"=>"$sWHelen",
+                      "sWGrace"=>"$sWGrace",
+                      "sWFilthy50"=>"$sWFilthy50",
+                      "sWRow500m"=>"$sWRow500m",
+                      "sWSprint400m"=>"$sWSprint400m",
+                      "sWRun5k"=>"$sWRun5k",
+                      "eS_ropeclaims"=>"$eS_ropeclaims",
+                      "eS_du"=>"$eS_du",
+                      "eS_hspu"=>"$eS_hspu",
+                      "eS_pullups"=>"$eS_pullups",
+                      "eS_walkhs"=>"$eS_walkhs",
+                      "iS_boxjumpmax"=>"$iS_boxjumpmax",
+                      "eS_ringmuscleup"=>"$eS_ringmuscleup",
                       );   
     echo array2json($response);
 }
