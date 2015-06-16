@@ -119,8 +119,7 @@ if(1){
                            <li><a href="socio_verificacion_2.php">Asistencia del socio</a></li> 
                            <li><a href="alta_socio.php">Catalogo de socios</a></li>
                         </ul> 
-                    </li>
-                    
+                    </li>  
                    <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
                     
             <?php } ?>
@@ -130,7 +129,7 @@ if(1){
                      <li><a href="mi-historial-de-pagos">Consulta tus Pagos</a></li> 
                      <li><a href="blog">Blog</a></li>
                      <li><a href="noticias">Noticias</a></li>
-                     <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
+
                     
             <?php } ?>
         	
