@@ -125,9 +125,11 @@ if(1){
                     
             <?php } ?>
             <?php if($_SESSION["acceso"] == "C"){?> 
-                     <li><a href="index.php">Inicio</a></li> 
-                     <li><a href="#">Socios</a></li> 
-                     <li><a href="comentarios.php">Comentarios</a></li>
+                     <li><a href="index.php">Inicio</a></li>
+                     <li><a href="mi-perfil">Perfil</a></li>  
+                     <li><a href="mi-historial-de-pagos">Consulta tus Pagos</a></li> 
+                     <li><a href="blog">Blog</a></li>
+                     <li><a href="noticias">Noticias</a></li>
                      <li><a href="soporte_sistema.php">Soporte Técnico</a></li>
                     
             <?php } ?>
