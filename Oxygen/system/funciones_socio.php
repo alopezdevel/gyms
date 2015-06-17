@@ -165,11 +165,21 @@ function CargarPagosSocio(){
            while ($pagos = mysql_fetch_array($result2)) {
                
                $Statuspago = calcular_estado_pago($pagos["dEstadoPago"]);
+               $color = "";
+               switch($Statuspago){
+                   
+                   case "EN PROGRESO":
+                        $color = "#008000";
+                   break;
+                   case "VENCIDO":
+                        $color = "#800000";
+                   break;
+               }
                 if($pagos["iFolio"] != ""){ 
                      $html_tabla .="<tr>".
                           "<td><b>".$pagos["iFolio"]."</td>".
                           "<td><b>".$pagos["iIDSocio"]."</td>".
-                          "<td>".$Statuspago."</td>".
+                          "<td style=\"color:".$color."\"><b>".$Statuspago."</b></td>".
                           "<td>".$pagos["dFechaPago"]."</td>".
                           "<td>".$pagos["dFechaVencimiento"]."</td>". 
                      "</tr>";
@@ -212,6 +222,95 @@ function CargarPagosSocio(){
        
      $html_tabla = utf8_encode($html_tabla); 
      $response = array("mensaje"=>"$mensaje","error"=>"$error","html_tabla" => "$html_tabla");   
+     echo array2json($response);
+    
+}
+// ASISTENCIAS DEL SOCIO:
+function CargarAsistenciaSocio(){
+    
+    $username = trim($_POST['usuario_actual']);
+    
+    include("cn_usuarios.php");
+    mysql_query("BEGIN");
+    $error = "0";
+    $transaccion_exitosa = true;
+    $sql = "SELECT iIDSocio FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $result = mysql_query($sql, $dbconn);
+    $html_tabla = "";
+    if (mysql_num_rows($result) > 0) {
+       
+       $socio = mysql_fetch_array($result);
+       $socio =  $socio['iIDSocio'];
+       $sql2 = "SELECT ct_socio.iIDSocio AS iIDSocio, concat(ct_socio.sNombreSocio,' ',ct_socio.sApellidoPaternoSocio,' ',ct_socio.sApellidoMaternoSocio) as nombre_socio, cb_transacciones_socio.eTipoTransaccion as estatus, DATE_FORMAT(cb_transacciones_socio.dFechaVisitaSocio, '%b %d %Y %h:%i %p') as fecha_visita_socio FROM ct_socio RIGHT JOIN cb_transacciones_socio ON ct_socio.iIDSocio = cb_transacciones_socio.iIDSocio WHERE ct_socio.iIDSocio = '".$socio."'";
+       $result2 = mysql_query($sql2, $dbconn);
+       if (mysql_num_rows($result2) > 0) {
+            
+            $asisencias_vencidas = 0;
+            $asistencias_vigentes = 0;
+            $asistencias_totales = 0;
+             
+           while ($socios = mysql_fetch_array($result2)) {
+               
+                if($socios["iIDSocio"] != ""){ 
+                    
+                    $color = "";
+                    switch($socios["estatus"]){
+                   
+                           case "vigente":
+                                $color = "#008000";
+                                $asistencias_vigentes ++;
+                           break;
+                           case "vencido":
+                                $color = "#800000";
+                                $asisencias_vencidas --;
+                           break;
+                   }
+                     $html_tabla .="<tr>".
+                          "<td><b>".$socios["iIDSocio"]."</td>".
+                          "<td><b>".$socios["nombre_socio"]."</td>".
+                          "<td style=\"color:".$color.";font-weight:bold;text-transform:uppercase;\">".$socios["estatus"]."</td>".
+                          "<td>".$socios["fecha_visita_socio"]."</td>".
+                     "</tr>";  
+                    
+                }else{
+                    
+                   $error = "1";
+                   $mensaje = "Al cargar los datos.";
+                   $transaccion_exitosa = false;  
+       
+                }
+               
+           }
+           $asistencias_totales = $asisencias_vencidas + $asistencias_vigentes;
+              
+       }else{
+           
+           $error = "1";
+           $mensaje = "No se encontraron pagos realizados, favor de revisarlo con el Administrador.";
+           $transaccion_exitosa = false; 
+           
+       }
+        
+    }
+    else{
+        
+        $error = "1";
+        $mensaje = "No se puede encontrar la clave del socio, favor de intentarlo nuevamente.";
+        $transaccion_exitosa = false; 
+    } 
+    //Revisamos si fue exitosa la consulta.
+    if($transaccion_exitosa){
+        
+        mysql_query("COMMIT");
+        mysql_close($dbconn); 
+        
+    }else{
+       mysql_query("ROLLBACK");
+       mysql_close($dbconn);  
+    }  
+       
+     $html_tabla = utf8_encode($html_tabla); 
+     $response = array("mensaje"=>"$mensaje","error"=>"$error","html_tabla" => "$html_tabla", "asisencias_vencidas" => "$asisencias_vencidas", "asistencias_vigentes" => "$asistencias_vigentes", "total" => "$asistencias_totales");   
      echo array2json($response);
     
 }
