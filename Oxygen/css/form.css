@@ -1,4 +1,4 @@
-﻿form{width:98%;margin:0 auto;clear:both;}
+form{width:98%;margin:0 auto;clear:both;}
 form p{width:98%;margin:2px auto;}
 form input[type=text], form input[type=tel], form select, form textarea{
 
@@ -6,19 +6,24 @@ form input[type=text], form input[type=tel], form select, form textarea{
     height:40px;
     margin:5px 0px;
     clear:both;
+    font-size:14px;
+    padding:2px 0px 1px 5px;
+    font-family:Calibri, Arial, Helvetica, sans-serif!important;
+}
+input[type="text"],input[type="tel"], select, textarea{
+    
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     background: #ffffff;
     border:1px solid #cbcbcb;
-    padding:2px 0px 1px 5px;
+    
         
     -webkit-box-shadow:inset 0px 0px 3px #cbcbcb;
     -moz-box-shadow:inset 0px 0px 3px #cbcbcb;
     box-shadow:inset 0px 0px 3px #cbcbcb;
     
-    font-family:Calibri, Arial, Helvetica, sans-serif!important;
-    font-size:14px;
+    
 }
 form fieldset{border: 0px;}  
 input[type=radio]{
@@ -29,6 +34,7 @@ input[type=radio]{
 }
 select{height:40px!important;width: 100%!important;}
 textarea{height:120px!important;padding-top:10px!important;}
+label{font-size:0.9em!important;color:#094873!important;display: block; width: auto; min-width: 90px; padding-right: 4px;}
 button{cursor: pointer;/*padding:10px 25px;*/}
 .frm-btns{
     width:99%;
@@ -49,7 +55,7 @@ button{cursor: pointer;/*padding:10px 25px;*/}
 button, .btn-1{
     
     background-color:#4cafd2;
-    text-shadow:1px 1px 1px rgba(0,0,0,0.6);
+    /*text-shadow:1px 1px 1px rgba(0,0,0,0.6);*/
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
@@ -169,6 +175,10 @@ form .success{
 #frm-post-new .btn-1{
 	width:100%;
 }
+.frm-field{width:100%;clear:both}
+.frm-field .field-label{float: left;width:15%;}
+.frm-field .field-input{float: left;width:85%;}
+
 
 
 

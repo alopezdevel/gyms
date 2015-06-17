@@ -487,7 +487,7 @@ function onEditarCliente(id){
                     <h2>Nuevo Socio</h2>
                 </div>
                 <form method="post" action="">
-                    <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
+                    <p class="mensaje_valido">Favor de llenar los campos.</p>
                     <input  id = "nombre"   class="texto" name="nombre" type="text" placeholder="Nombre del socio:">
                     <input  id = "apellido_paterno" class="texto"  name="apellido_paterno" type="text" placeholder="Apellido paterno:">
                     <input  id = "apellido_materno" class="texto"  name="apellido_materno" type="text" placeholder="Apellido materno:">
@@ -527,22 +527,79 @@ function onEditarCliente(id){
                     <h2>Editar Socio</h2>
                 </div>
                 <form method="post" action="">
-                    <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
-                    <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >         
-                    <input  id = "emaile" name="email" class="texto" type="text" placeholder="E-mail:" readonly  disabled>         
-                    <input  id = "nombree"   class="texto" name="nombre" type="text" placeholder="Nombre del socio:">
-                    <input  id = "apellido_paternoe" class="texto"  name="apellido_paterno" type="text" placeholder="Apellido paterno:">
-                    <input  id = "apellido_maternoe" class="texto"  name="apellido_materno" type="text" placeholder="Apellido materno:">
-                    <input  id = "callee" name="calle" class="texto" type="text" placeholder="Calle:">
-                    <input  id = "coloniae" name="colonia" class="texto" type="text" placeholder="Colonia:">
-                    <input  id = "telefonoe" name="Telefono" class="texto" type="text" placeholder="telefono:">
-                    <select name="sexoe" id="sexoe" class="texto">
-                        <option value=""><-Seleccione Genero-></option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                    </select>            
-                    <input  id = "mensualidade"  class="texto" name="mensualidad" type="text" placeholder="Mensualidad sugerida (opcional):">           
-                
+                <div class="container">
+                    <p class="mensaje_valido">Favor de llenar los campos.</p>
+                    <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >
+                    <fieldset>
+                    <legend>Datos Personales</legend> 
+                    <div class="frm-field">
+                       <div class="field-label"><label>Correo electr&oacute;nico:</label></div>
+                       <div class="field-input">
+                           <input  id = "emaile" name="email" class="texto" type="text" placeholder="Correo Electr&oacute;nico:" readonly  disabled>
+                        </div>
+                    </div> 
+                    <div class="frm-field">
+                       <div class="field-label"><label>Nombre del Socio:</label></div>
+                       <div class="field-input">
+                          <input  id = "nombree"   class="texto" name="nombre" type="text" placeholder="Nombre del socio:">
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Apellido Paterno:</label></div>
+                       <div class="field-input">
+                          <input  id = "apellido_paternoe" class="texto"  name="apellido_paterno" type="text" placeholder="Apellido paterno:">
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Apellido Materno:</label></div>
+                       <div class="field-input">
+                           <input  id = "apellido_maternoe" class="texto"  name="apellido_materno" type="text" placeholder="Apellido materno:">
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Genero:</label></div>
+                       <div class="field-input"> 
+                        <select name="sexoe" id="sexoe" class="texto">
+                            <option value=""><-Seleccione Genero-></option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                       </div>
+                    </div>
+                    </fieldset>
+                    <br>      
+                    <fieldset>
+                    <legend>Direcci&oacute;n y Tel&eacute;fono:</legend>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Calle:</label></div>
+                       <div class="field-input">
+                          <input  id = "callee" name="calle" class="texto" type="text" placeholder="Calle:">
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Colonia:</label></div>
+                       <div class="field-input">
+                           <input  id = "coloniae" name="colonia" class="texto" type="text" placeholder="Colonia:"> 
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Tel&eacute;fono:</label></div>
+                       <div class="field-input">
+                           <input  id = "telefonoe" name="Telefono" class="texto" type="text" placeholder="telefono:"> 
+                        </div>
+                    </div>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                    <legend>Informaci&oacute;n sobre Mensualidad</legend>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Mensualidad (Opcional):</label></div>
+                       <div class="field-input">
+                           <input  id = "mensualidade"  class="texto" name="mensualidad" type="text" placeholder="Mensualidad sugerida (opcional):"> 
+                        </div>
+                    </div>
+                    </fieldset>
+               </div> 
             </div>
         </div>
         <div id="tabs-2">
@@ -550,70 +607,135 @@ function onEditarCliente(id){
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>                
             </div>
-            
-                    <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
-                    <label>Fran:</label><input  id = "iFran" name="fran" class="texto" type="text" placeholder="fran:"> 
-                    <label>Helen:</label><input  id = "iHelen" name="helen" class="texto" type="text" placeholder="helen:"> 
-                    <label>Grace:</label><input  id = "iGrace" name="grace" class="texto" type="text" placeholder="grace:"> 
-                    <label>Filthy:</label><input  id = "iFilthy" name="fran" class="texto" type="text" placeholder="filthy:"> 
-                    <label>Row:</label><input  id = "iRow" name="fran" class="texto" type="text" placeholder="row:"> 
-                    <label>Sprint:</label><input  id = "iSprint" name="fran" class="texto" type="text" placeholder="sprint:"> 
-                    <label>Run:</label><input  id = "iRun" name="fran" class="texto" type="text" placeholder="run:">                 
-           
+            <div class="container">
+                <p class="mensaje_valido">Favor de llenar los campos.</p>
+                    <div class="col_4 left">
+                        <label>Fran:</label><input  id = "iFran" name="fran" class="texto" type="text" placeholder="Fran:">
+                    </div>
+                    <div class="col_4 left">
+                        <label>Helen:</label><input  id = "iHelen" name="helen" class="texto" type="text" placeholder="Helen:">
+                    </div>
+                    <div class="col_4 left">
+                        <label>Grace:</label><input  id = "iGrace" name="grace" class="texto" type="text" placeholder="Grace:">
+                    </div>
+                    <div class="col_4 left">
+                        <label>Filthy:</label><input  id = "iFilthy" name="fran" class="texto" type="text" placeholder="Filthy:">
+                    </div>
+                    <div class="col_4 left">
+                        <label>Row:</label><input  id = "iRow" name="fran" class="texto" type="text" placeholder="Row:">
+                    </div>
+                    <div class="col_4 left">
+                        <label>Sprint:</label><input  id = "iSprint" name="fran" class="texto" type="text" placeholder="Sprint:">
+                    </div>
+                    <div class="col_4 left"> 
+                        <label>Run:</label><input  id = "iRun" name="fran" class="texto" type="text" placeholder="Run:">
+                    </div>
+            </div>  
         </div>
         <div id="tabs-3">
             <div class="page-title">
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>                
             </div>            
-                   <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
-                    <label>rope claims:</label><select name="eRope" id="eRope"  class="texto"placeholder="rope claims:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                    <label>DU:</label><select name="eDu" class="texto" id="eDu" placeholder="DU:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                    <label>5M - 3W HSPU:</label><select name="eHspu" id="eHspu" placeholder="5M - 3W HSPU:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                    <label>5M - 3W PULL UPS:</label><select name="ePulls" id="ePulls" placeholder="5M - 3W PULL UPS:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                    <label>M5 - 3W MTS  WALK HS:</label><select name="eMtsWalk" id="eMtsWalk" placeholder="M5 - 3W MTS  WALK HS:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                    <label>BOX JUMP MAX INCH:</label><input  id = "iBoxJump" name="iBoxJump" class="texto" type="text" placeholder="BOX JUMP MAX INCH:"> 
-                    <label>Ring Muscle Up:</label><select name="eRingMuscle" id="eRingMuscle" placeholder="Ring Muscle Up:">   
-                        <option value=""><-Seleccione una opcion-></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-             
+            <div class="container">
+            <p class="mensaje_valido">Favor de llenar los campos.</p>
+                   <div class="frm-field">
+                       <div class="field-label"><label>Rope Claims:</label></div>
+                       <div class="field-input">
+                           <select name="eRope" id="eRope"  class="texto"placeholder="rope claims:">   
+                                <option value=""><-Seleccione una opcion-></option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>DU:</label></div>
+                       <div class="field-input">
+                           <select name="eDu" class="texto" id="eDu" placeholder="DU:">   
+                                <option value=""><-Seleccione una opcion-></option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>5M - 3W HSPU:</label></div>
+                       <div class="field-input">
+                           <select name="eHspu" id="eHspu" placeholder="5M - 3W HSPU:">   
+                                <option value=""><-Seleccione una opcion-></option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>5M - 3W PULL UPS:</label></div>
+                       <div class="field-input">
+                        <select name="ePulls" id="ePulls" placeholder="5M - 3W PULL UPS:">   
+                            <option value=""><-Seleccione una opcion-></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>M5 - 3W MTS  WALK HS:</label></div>
+                       <div class="field-input">
+                           <select name="eMtsWalk" id="eMtsWalk" placeholder="M5 - 3W MTS  WALK HS:">   
+                                <option value=""><-Seleccione una opcion-></option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>BOX JUMP MAX INCH:</label></div>
+                       <div class="field-input">
+                           <input  id = "iBoxJump" name="iBoxJump" class="texto" type="text" placeholder="BOX JUMP MAX INCH:">
+                       </div>
+                   </div>
+                   <div class="frm-field">
+                       <div class="field-label"><label>Ring Muscle Up:</label></div>
+                       <div class="field-input">
+                            <select name="eRingMuscle" id="eRingMuscle" placeholder="Ring Muscle Up:">   
+                                <option value=""><-Seleccione una opcion-></option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                            </select>
+                       </div>
+                   </div>
+            </div> 
         </div>
         <div id="tabs-4">
             <div class="page-title">
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>
             </div>
-           
-                    <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
-                    <label>Clean & Jerk:</label><input  id = "iCleanJerk" name="iCleanJerk" class="texto" type="text" placeholder="Clean & Jerk:"> 
-                    <label>Snatch:</label><input  id = "iSnatch" name="iSnatch" class="texto" type="text" placeholder="Snatch:"> 
-                    <label>Deadlift:</label><input  id = "iDeadlift" name="iDeadlift" class="texto" type="text" placeholder="Deadlift:"> 
-                    <label>Back Squat:</label><input  id = "iBackSquat" name="iBackSquat" class="texto" type="text" placeholder="Back Squat:"> 
-                    <label>Max Pull-ups:</label><input  id = "iMaxPullUps" name="iMaxPullUps" class="texto" type="text" placeholder="Max Pull-ups:"> 
-                    <label>Max MUSCLE -UP:</label><input  id = "iMaxMuscleUp" name="iMaxMuscleUp" class="texto" type="text" placeholder="Max MUSCLE -UP:"> 
-                    <label>MAX BURPEES MIN:</label><input  id = "iMaxBurpeesMin" name="fran" class="texto" type="text" placeholder="MAX BURPEES MIN:">                 
+            <div class="container">
+                <p class="mensaje_valido">Favor de llenar los campos.</p>
+                <div class="col_4 left">
+                   <label>Clean & Jerk:</label><input  id = "iCleanJerk" name="iCleanJerk" class="texto" type="text" placeholder="Clean & Jerk:">
+                </div>
+                <div class="col_4 left">
+                   <label>Snatch:</label><input  id = "iSnatch" name="iSnatch" class="texto" type="text" placeholder="Snatch:">
+                </div>
+                <div class="col_4 left">
+                   <label>Deadlift:</label><input  id = "iDeadlift" name="iDeadlift" class="texto" type="text" placeholder="Deadlift:">
+                </div>
+                <div class="col_4 left">
+                   <label>Back Squat:</label><input  id = "iBackSquat" name="iBackSquat" class="texto" type="text" placeholder="Back Squat:">
+                </div>
+                <div class="col_3 left">
+                   <label>Max Pull-ups:</label><input  id = "iMaxPullUps" name="iMaxPullUps" class="texto" type="text" placeholder="Max Pull-ups:">
+                </div>
+                <div class="col_3 left">
+                   <label>Max MUSCLE -UP:</label><input  id = "iMaxMuscleUp" name="iMaxMuscleUp" class="texto" type="text" placeholder="Max MUSCLE -UP:">
+                </div>
+                <div class="col_3 left">
+                   <label>MAX BURPEES MIN:</label><input  id = "iMaxBurpeesMin" name="fran" class="texto" type="text" placeholder="MAX BURPEES MIN:">
+                </div>
+            </div>                       
             </form>
         </div>       
     
