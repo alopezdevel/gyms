@@ -149,6 +149,7 @@ function onActualizarUsuario(){
     var telefono = $("#telefonoe");
     var sexo = $("#sexoe");
     var mensualidad = $("#mensualidade");
+    
      //Workouts
     var fran = $("#iFran"); 
     var helen = $("#iHelen"); 
@@ -157,8 +158,31 @@ function onActualizarUsuario(){
     var Row = $("#iRow"); 
     var Sprint = $("#iSprint"); 
     var Run = $("#iRun");
+    
+    //Skills
+    var eRope = $("#eRope"); 
+    var eDu = $("#eDu"); 
+    var eHspu = $("#eHspu");         
+    var ePulls = $("#ePulls");         
+    var eMtsWalk = $("#eMtsWalk"); 
+    var iBoxJump = $("#iBoxJump");    
+    var eRingMuscle = $("#eRingMuscle");    
+    
+    //Maxer pr     
+    var iCleanJerk = $("#iCleanJerk"); 
+    var iSnatch = $("#iSnatch"); 
+    var iDeadlift = $("#iDeadlift"); 
+    var iBackSquat = $("#iBackSquat"); 
+    var iMaxPullUps = $("#iMaxPullUps"); 
+    var iMaxMuscleUp = $("#iMaxMuscleUp"); 
+    var iMaxBurpeesMin = $("#iMaxBurpeesMin"); 
+    
+    
     todosloscampos = $( [] ).add( name ).add( apellido_paterno ).add( apellido_materno ).add( apellido_materno ).add( email ).add( calle ).add( colonia ).add( telefono ).add( sexo ).add( mensualidad )
-    .add( fran ).add( helen ).add( grace ).add( Filthy ).add( Row ).add( Sprint ).add( Run );
+    .add( fran ).add( helen ).add( grace ).add( Filthy ).add( Row ).add( Sprint ).add( Run )
+    .add( eRingMuscle ).add( eDu ).add( eHspu ).add( ePulls ).add( eMtsWalk ).add( iBoxJump ).add( eRope )
+    .add( iCleanJerk ).add( iSnatch ).add( iDeadlift ).add( iBackSquat ).add( iMaxPullUps ).add( iMaxMuscleUp ).add( iMaxBurpeesMin )
+    ;
     todosloscampos.removeClass( "error" );
     $("#namee").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
@@ -193,12 +217,17 @@ function onActualizarUsuario(){
         valid = valid && checkLength( mensualidad, "Mensualidad", 1, 25 );
         valid = valid && checkRegexp( mensualidad, floatRegex , "Mensualidad solo permite numeros: 0-9" );
     }
-    if ( valid ) {
+    if ( valid ) {           
         $.post("funciones.php", { accion: "actualizar_usuario", nombre: name.val() , apellido_paterno: apellido_paterno.val(),
                                                           apellido_materno: apellido_materno.val() , id: ID.val(),
                                                           calle: calle.val() , colonia: colonia.val(),
                                                           fran: fran.val(), helen: helen.val(), filthy: Filthy.val(), grace: grace.val(),
-                                                          row:Row.val(), sprint: Sprint.val(), run: Run.val(), 
+                                                          row:Row.val(), sprint: Sprint.val(), run: Run.val(), eRope:eRope.val(),  
+                                                          eRingMuscle:eRingMuscle.val(), eDu: eDu.val(), eHspu: eHspu.val(),    
+                                                          ePulls:ePulls.val(), eMtsWalk: eMtsWalk.val(), iBoxJump: iBoxJump.val(),
+                                                          iCleanJerk:iCleanJerk.val(), iSnatch: iSnatch.val(), iDeadlift: iDeadlift.val(),
+                                                          iBackSquat:iBackSquat.val(), iMaxPullUps: iMaxPullUps.val(), iMaxMuscleUp: iMaxMuscleUp.val(),
+                                                          iMaxBurpeesMin:iMaxBurpeesMin.val(),
                                                           telefono: telefono.val() , mensualidad: mensualidad.val(), 
                                                           sexo: sexo.val() ,nivel: "C"},
         function(data){ 

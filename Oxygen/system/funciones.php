@@ -311,6 +311,23 @@ function actualizar_usuario(){
     $row = $_POST['row'];
     $sprint = $_POST['sprint'];
     $run = $_POST['run'];
+    //Skills
+    $eRope = $_POST['eRope'];
+    $eDu = $_POST['eDu'];
+    $eHspu = $_POST['eHspu'];
+    $ePulls = $_POST['ePulls'];
+    $eMtsWalk = $_POST['eMtsWalk'];
+    $iBoxJump = $_POST['iBoxJump'];
+    $eRingMuscle = $_POST['eRingMuscle'];
+    //Maxer pr
+    $iCleanJerk = $_POST['iCleanJerk'];
+    $iSnatch = $_POST['iSnatch'];
+    $iDeadlift = $_POST['iDeadlift'];
+    $iBackSquat = $_POST['iBackSquat'];
+    $iMaxPullUps = $_POST['iMaxPullUps'];
+    $iMaxMuscleUp = $_POST['iMaxMuscleUp'];
+    $iMaxBurpeesMin = $_POST['iMaxBurpeesMin'];
+    
     $error = "0";
     include("cn_usuarios_2.php");        
     //$conexion->begin_transaction();
@@ -320,19 +337,42 @@ function actualizar_usuario(){
     $result = $conexion->query($sql);
     $NUM_ROWs_Usuario = $result->num_rows;
     if ($NUM_ROWs_Usuario > 0) {         
-        $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' ";
+        $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' ";        
+        
+        $fran = $_POST['fran'];
+    $helen = $_POST['helen'];
+    $filthy = $_POST['filthy'];
+    $grace = $_POST['grace'];
+    $row = $_POST['row'];
+    $sprint = $_POST['sprint'];
+    $run = $_POST['run'];
         //Workouts
         if($fran != ""){ $sql = $sql." ,  sWFran='".$fran."' ";}
         if($helen != ""){ $sql = $sql." , sWHelen='".$helen."' ";}
         if($filthy != ""){ $sql = $sql." , sWFilthy50='".$filthy."' ";}
+        if($grace != ""){ $sql = $sql." , sWGrace='".$grace."' ";}
         if($row != ""){ $sql = $sql." , sWRow500m='".$fran."' ";}
         if($sprint != ""){ $sql = $sql." , sWSprint400m='".$sprint."' ";}
         if($run != ""){ $sql = $sql." , sWRun5k='".$run."' ";}        
-        
+        //Skills
+        if($eRope != ""){ $sql = $sql." ,  eS_ropeclaims='".$eRope."' ";}
+        if($eDu != ""){ $sql = $sql." ,  eS_du='".$eDu."' ";}
+        if($eHspu != ""){ $sql = $sql." ,  eS_hspu='".$eHspu."' ";}
+        if($ePulls != ""){ $sql = $sql." ,  eS_pullups='".$ePulls."' ";}
+        if($eMtsWalk != ""){ $sql = $sql." ,  eS_walkhs='".$eMtsWalk."' ";}
+        if($iBoxJump != ""){ $sql = $sql." ,  iS_boxjumpmax='".$iBoxJump."' ";}
+        if($eRingMuscle != ""){ $sql = $sql." ,  eS_ringmuscleup='".$eRingMuscle."' ";}
+        //Maxe
+        if($iCleanJerk != ""){ $sql = $sql." ,  iMP_cleanandjerk='".$iCleanJerk."' ";}
+        if($iSnatch != ""){ $sql = $sql." ,  iMP_snatch='".$iSnatch."' ";}
+        if($iDeadlift != ""){ $sql = $sql." ,  iMP_deadlift='".$iDeadlift."' ";}
+        if($iBackSquat != ""){ $sql = $sql." ,  iMP_backsquat='".$iBackSquat."' ";}
+        if($iMaxPullUps != ""){ $sql = $sql." ,  iMP_maxpullups='".$iMaxPullUps."' ";}
+        if($iMaxMuscleUp != ""){ $sql = $sql." ,  iMP_maxmuscleup='".$iMaxMuscleUp."' ";}
+        if($iMaxBurpeesMin != ""){ $sql = $sql." ,  iMP_maxburpeesmin='".$iMaxBurpeesMin."' ";}
         $sql = $sql."WHERE iIDSocio = '".$id."'";  
-        
-        
         $conexion->query($sql);   
+        
         if ($conexion->affected_rows < 1 ) {
             $error = "1";
             $transaccion_exitosa = false;
