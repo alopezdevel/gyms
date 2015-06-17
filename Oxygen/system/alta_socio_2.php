@@ -93,7 +93,7 @@ function inicio(){
       },    
       close: function() {
         //form[ 0 ].reset();
-        //allFields.removeClass( "ui-state-error" );
+        //allFields.removeClass( "ui-state-error" );                 
       }
     });  
      //focus
@@ -149,7 +149,16 @@ function onActualizarUsuario(){
     var telefono = $("#telefonoe");
     var sexo = $("#sexoe");
     var mensualidad = $("#mensualidade");
-    todosloscampos = $( [] ).add( name ).add( apellido_paterno ).add( apellido_materno ).add( apellido_materno ).add( email ).add( calle ).add( colonia ).add( telefono ).add( sexo ).add( mensualidad );
+     //Workouts
+    var fran = $("#iFran"); 
+    var helen = $("#iHelen"); 
+    var grace = $("#iGrace"); 
+    var Filthy = $("#iFilthy"); 
+    var Row = $("#iRow"); 
+    var Sprint = $("#iSprint"); 
+    var Run = $("#iRun");
+    todosloscampos = $( [] ).add( name ).add( apellido_paterno ).add( apellido_materno ).add( apellido_materno ).add( email ).add( calle ).add( colonia ).add( telefono ).add( sexo ).add( mensualidad )
+    .add( fran ).add( helen ).add( grace ).add( Filthy ).add( Row ).add( Sprint ).add( Run );
     todosloscampos.removeClass( "error" );
     $("#namee").focus().css("background-color","#FFFFC0");
     actualizarMensajeAlerta( "" );
@@ -187,14 +196,15 @@ function onActualizarUsuario(){
     if ( valid ) {
         $.post("funciones.php", { accion: "actualizar_usuario", nombre: name.val() , apellido_paterno: apellido_paterno.val(),
                                                           apellido_materno: apellido_materno.val() , id: ID.val(),
-                                                          calle: calle.val() , colonia: colonia.val(), 
+                                                          calle: calle.val() , colonia: colonia.val(),
+                                                          fran: fran.val(), helen: helen.val(), filthy: Filthy.val(), grace: grace.val(),
+                                                          row:Row.val(), sprint: Sprint.val(), run: Run.val(), 
                                                           telefono: telefono.val() , mensualidad: mensualidad.val(), 
                                                           sexo: sexo.val() ,nivel: "C"},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
-                         $("#nombre").focus();
-                         email.addClass( "error" ); 
+                         $("#nombre").focus();                         
                     break;
              case "0":   actualizarMensajeAlerta("Favor de llenar los campos.");
                          $('input.texto').val("");
@@ -223,6 +233,9 @@ function onInsertarUsuario(){
     var colonia = $("#colonia");
     var telefono = $("#telefono");
     var sexo = $("#sexo");
+    
+    
+    
     var mensualidad = $("#mensualidad");
     todosloscampos = $( [] ).add( name ).add( apellido_paterno ).add( apellido_materno ).add( apellido_materno ).add( email ).add( calle ).add( colonia ).add( telefono ).add( sexo ).add( mensualidad );
     todosloscampos.removeClass( "error" );
@@ -253,6 +266,9 @@ function onInsertarUsuario(){
     valid = valid && checkLength( telefono, "Telefono", 6, 25 );
     valid = valid && checkRegexp( telefono, /[0-9-()+]{3,20}/, "Telefono solo permite numeros: 0-9" );
     
+    //Workouts
+    
+    
     if($("#sexo").val() == ""){
         valid = false;
         actualizarMensajeAlerta( 'Favor de seleccionar un genero para el socio' );  
@@ -262,16 +278,17 @@ function onInsertarUsuario(){
         valid = valid && checkLength( mensualidad, "Mensualidad", 1, 25 );
         valid = valid && checkRegexp( mensualidad, floatRegex , "Mensualidad solo permite numeros: 0-9" );
     }
-    if ( valid ) {
+    if ( valid ) {     
         $.post("funciones.php", { accion: "alta_usuario", nombre: name.val() , apellido_paterno: apellido_paterno.val(),
                                                           apellido_materno: apellido_materno.val() , email: email.val(),
                                                           calle: calle.val() , colonia: colonia.val(), 
-                                                          telefono: telefono.val() , mensualidad: mensualidad.val(), 
+                                                          telefono: telefono.val() , mensualidad: mensualidad.val(),                                                           
                                                           sexo: sexo.val() ,nivel: "C"},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
                          $("#nombre").focus();
+                         $('#tabs').tabs("option", "active", 0);
                     break;
              case "0":   actualizarMensajeAlerta("Favor de llenar los campos.");
                          $('input.texto').val("");
@@ -328,9 +345,9 @@ function onAltaCliente(){
   
     $( "#dialog-user" ).dialog("open");
 } 
-function onEditarCliente(id){
-    
+function onEditarCliente(id){    
     //llenado el div
+    $('#tabs').tabs("option", "active", 0);
     $.post("funciones.php", { accion: "consulta_socio_edicion", id: id },
         function(data){ 
              switch(data.error){
@@ -363,6 +380,14 @@ function onEditarCliente(id){
                         $("#eMtsWalk").val(data.eS_walkhs);
                         $("#iBoxJump").val(data.iS_boxjumpmax);
                         $("#eRingMuscle").val(data.eS_ringmuscleup);                        
+                        //maxer pr
+                        $("#iCleanJerk").val(data.iMP_cleanandjerk);
+                        $("#iSnatch").val(data.iMP_snatch);
+                        $("#iDeadlift").val(data.iMP_deadlift);
+                        $("#iBackSquat").val(data.iMP_backsquat);
+                        $("#iMaxPullUps").val(data.iMP_maxpullups);
+                        $("#iMaxMuscleUp").val(data.iMP_maxmuscleup);
+                        $("#iMaxBurpeesMin").val(data.iMP_maxburpeesmin);                        
                         $("#nombree").focus()                                ;
                     break;  
              }
@@ -488,7 +513,7 @@ function onEditarCliente(id){
                         <option value="F">Femenino</option>
                     </select>            
                     <input  id = "mensualidade"  class="texto" name="mensualidad" type="text" placeholder="Mensualidad sugerida (opcional):">           
-                </form>
+                
             </div>
         </div>
         <div id="tabs-2">
@@ -496,7 +521,7 @@ function onEditarCliente(id){
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>                
             </div>
-            <form method="post" action="">    
+            
                     <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
                     <label>Fran:</label><input  id = "iFran" name="fran" class="texto" type="text" placeholder="fran:"> 
                     <label>Helen:</label><input  id = "iHelen" name="helen" class="texto" type="text" placeholder="helen:"> 
@@ -505,20 +530,20 @@ function onEditarCliente(id){
                     <label>Row:</label><input  id = "iRow" name="fran" class="texto" type="text" placeholder="row:"> 
                     <label>Sprint:</label><input  id = "iSprint" name="fran" class="texto" type="text" placeholder="sprint:"> 
                     <label>Run:</label><input  id = "iRun" name="fran" class="texto" type="text" placeholder="run:">                 
-            </form>
+           
         </div>
         <div id="tabs-3">
             <div class="page-title">
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>                
-            </div>
-            <form method="post" action=""> 
-                    <label>rope claims:</label><select name="eRope" id="eRope" placeholder="rope claims:">   
+            </div>            
+                   <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
+                    <label>rope claims:</label><select name="eRope" id="eRope"  class="texto"placeholder="rope claims:">   
                         <option value=""><-Seleccione una opcion-></option>
                         <option value="si">Si</option>
                         <option value="no">No</option>
                     </select>
-                    <label>DU:</label><select name="eDu" id="eDu" placeholder="DU:">   
+                    <label>DU:</label><select name="eDu" class="texto" id="eDu" placeholder="DU:">   
                         <option value=""><-Seleccione una opcion-></option>
                         <option value="si">Si</option>
                         <option value="no">No</option>
@@ -544,14 +569,14 @@ function onEditarCliente(id){
                         <option value="si">Si</option>
                         <option value="no">No</option>
                     </select>
-                </form>
+             
         </div>
         <div id="tabs-4">
             <div class="page-title">
                 <h1>Socios</h1>
                 <h2>Editar Socio</h2>
             </div>
-            <form method="post" action="">    
+           
                     <p class="mensaje_valido">&nbsp;Favor de llenar los campos.</p>
                     <label>Clean & Jerk:</label><input  id = "iCleanJerk" name="iCleanJerk" class="texto" type="text" placeholder="Clean & Jerk:"> 
                     <label>Snatch:</label><input  id = "iSnatch" name="iSnatch" class="texto" type="text" placeholder="Snatch:"> 

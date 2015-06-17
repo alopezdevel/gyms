@@ -303,6 +303,14 @@ function actualizar_usuario(){
     $mensualidad = $_POST['mensualidad'];
     $sexo = $_POST['sexo'];
     $nivel = $_POST['nivel'];
+    //Workouts
+    $fran = $_POST['fran'];
+    $helen = $_POST['helen'];
+    $filthy = $_POST['filthy'];
+    $grace = $_POST['grace'];
+    $row = $_POST['row'];
+    $sprint = $_POST['sprint'];
+    $run = $_POST['run'];
     $error = "0";
     include("cn_usuarios_2.php");        
     //$conexion->begin_transaction();
@@ -312,7 +320,18 @@ function actualizar_usuario(){
     $result = $conexion->query($sql);
     $NUM_ROWs_Usuario = $result->num_rows;
     if ($NUM_ROWs_Usuario > 0) {         
-        $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' WHERE iIDSocio = '".$id."'";  
+        $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' ";
+        //Workouts
+        if($fran != ""){ $sql = $sql." ,  sWFran='".$fran."' ";}
+        if($helen != ""){ $sql = $sql." , sWHelen='".$helen."' ";}
+        if($filthy != ""){ $sql = $sql." , sWFilthy50='".$filthy."' ";}
+        if($row != ""){ $sql = $sql." , sWRow500m='".$fran."' ";}
+        if($sprint != ""){ $sql = $sql." , sWSprint400m='".$sprint."' ";}
+        if($run != ""){ $sql = $sql." , sWRun5k='".$run."' ";}        
+        
+        $sql = $sql."WHERE iIDSocio = '".$id."'";  
+        
+        
         $conexion->query($sql);   
         if ($conexion->affected_rows < 1 ) {
             $error = "1";
@@ -582,7 +601,7 @@ function consulta_socio_edicion(){
     include("cn_usuarios_2.php");
     $conexion->autocommit(FALSE);
     $transaccion_exitosa = true;
-    $sql = "SELECT sCorreoSocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sTelefonoSocio,eGenero,sCantidadPago 
+    $sql = "SELECT sCorreoSocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sTelefonoSocio,eGenero,sCantidadPago, 
                    sWFran,sWHelen,sWGrace,sWFilthy50,sWRow500m,sWSprint400m,sWRun5k,
                    eS_ropeclaims,
                    eS_du,
@@ -590,7 +609,14 @@ function consulta_socio_edicion(){
                    eS_pullups,
                    eS_walkhs,
                    iS_boxjumpmax,
-                   eS_ringmuscleup                   
+                   eS_ringmuscleup,
+                   iMP_cleanandjerk,
+                   iMP_snatch,
+                   iMP_deadlift,
+                   iMP_backsquat,
+                   iMP_maxpullups,
+                   iMP_maxmuscleup,
+                   iMP_maxburpeesmin                   
     FROM ct_socio  ".$filtroQuery;
     $result = $conexion->query($sql);
     $NUM_ROWs_socios = $result->num_rows;   
@@ -621,7 +647,16 @@ function consulta_socio_edicion(){
             $eS_pullups = $socios['eS_pullups'];
             $eS_walkhs = $socios['eS_walkhs'];
             $iS_boxjumpmax = $socios['iS_boxjumpmax'];
-            $eS_ringmuscleup = $socios['eS_ringmuscleup'];                        
+            $eS_ringmuscleup = $socios['eS_ringmuscleup'];
+            //Maxer Pr
+            $iMP_cleanandjerk = $socios['iMP_cleanandjerk'];
+            $iMP_snatch = $socios['iMP_snatch'];
+            $iMP_deadlift = $socios['iMP_deadlift'];
+            $iMP_backsquat = $socios['iMP_backsquat'];
+            $iMP_maxpullups = $socios['iMP_maxpullups'];
+            $iMP_maxmuscleup = $socios['iMP_maxmuscleup'];
+            $iMP_maxburpeesmin = $socios['iMP_maxburpeesmin'];
+                                    
         }
     }else{
         $error = "1";
@@ -651,6 +686,14 @@ function consulta_socio_edicion(){
                       "eS_walkhs"=>"$eS_walkhs",
                       "iS_boxjumpmax"=>"$iS_boxjumpmax",
                       "eS_ringmuscleup"=>"$eS_ringmuscleup",
+    
+                      "iMP_cleanandjerk"=>"$iMP_cleanandjerk",
+                      "iMP_snatch"=>"$iMP_snatch",
+                      "iMP_deadlift"=>"$iMP_deadlift",
+                      "iMP_backsquat"=>"$iMP_backsquat",
+                      "iMP_maxpullups"=>"$iMP_maxpullups",
+                      "iMP_maxmuscleup"=>"$iMP_maxmuscleup",
+                      "iMP_maxburpeesmin"=>"$iMP_maxburpeesmin",
                       );   
     echo array2json($response);
 }
