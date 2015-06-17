@@ -22,8 +22,7 @@ input[type="text"],input[type="tel"], select, textarea{
     -webkit-box-shadow:inset 0px 0px 3px #cbcbcb;
     -moz-box-shadow:inset 0px 0px 3px #cbcbcb;
     box-shadow:inset 0px 0px 3px #cbcbcb;
-    
-    
+      
 }
 form fieldset{border: 0px;}  
 input[type=radio]{
