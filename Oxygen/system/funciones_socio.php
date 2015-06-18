@@ -262,7 +262,7 @@ function CargarAsistenciaSocio(){
                            break;
                            case "vencido":
                                 $color = "#800000";
-                                $asisencias_vencidas --;
+                                $asisencias_vencidas ++;
                            break;
                    }
                      $html_tabla .="<tr>".
