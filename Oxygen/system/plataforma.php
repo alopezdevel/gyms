@@ -38,7 +38,7 @@ function CargarDatosSocio(){
     <div id="blog" class="container"> 
         <div class="page-title">
             <h1>Mi Cuenta</h1>
-            <h2>Ver mi Perfil</h2>
+            <h2>Plataforma</h2>
         </div>
         <div id="perfil-cuenta" class="center">
             <div class="col-md-4">
