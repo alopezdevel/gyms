@@ -61,9 +61,6 @@ if(1){
 				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> <?php echo $_SESSION['usuario_actual']; ?></span></a>
                 <ul>
                     <li><a href="#">Cambiar Contrasena</a></li>
-                    <?php if($_SESSION['acceso'] == "U"){ ?>
-                    <li><a href="#">Ver mi perfil</a></li>
-                    <?php }?>
                 </ul>
 			<?php }else{?>
 				<a href="#" title="Log In"><i class="fa fa-user"></i> <span> Nombre de Usuario</span></a>
@@ -125,7 +122,7 @@ if(1){
             <?php } ?>
             <?php if($_SESSION["acceso"] == "C"){?> 
                      <li><a href="index.php">Inicio</a></li>
-                     <li><a href="mi-perfil">Perfil</a></li>  
+                     <li><a href="plataforma">Plataforma</a></li>  
                      <li><a href="mi-historial-de-pagos">Consulta tus Pagos</a></li> 
                      <li><a href="mi-asistencia">Mi Asistencia</a></li> 
                      <li><a href="blog">Blog</a></li>
