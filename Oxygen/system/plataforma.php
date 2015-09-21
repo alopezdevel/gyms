@@ -30,6 +30,8 @@ function CargarDatosSocio(){
                     $("#socio-workouts").empty().append(data.workouts);
                     $("#socio-maxespr").empty().append(data.maxespr); 
                     $("#socio-skills").empty().append(data.skills); 
+                    d = new Date();
+                    $("#foto_perfil_socio_consulta").attr("src",data.ruta + '?' + d.getTime() );
                 }
      });
 }
@@ -42,7 +44,7 @@ function CargarDatosSocio(){
         </div>
         <div id="perfil-cuenta" class="center">
             <div class="col-md-4">
-                <div class="foto-perfil"><img src="/system/images/usr/foto_perfil.jpg" border="0" width="200" height="180" alt="foto_perfil.jpg"></div>
+                <div class="foto-perfil"><img id="foto_perfil_socio_consulta" src="" border="0" width="200" height="180" alt="foto_perfil.jpg"></div>
             </div>
             <div class="col-md-8">
                <fieldset id="informacion_personal">

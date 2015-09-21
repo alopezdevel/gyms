@@ -47,10 +47,11 @@ function CargarDatosSocio(){
     
     $username = trim($_POST['usuario_actual']);
     
+    
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT *, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $sql = "SELECT *, sFotoPerfilRuta, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $informacion_personal = "";
     $workouts = "";
@@ -86,7 +87,7 @@ function CargarDatosSocio(){
                if($socios["iMP_backsquat"] != ""){$socios["iMP_backsquat"] = $socios["iMP_backsquat"]." Lbs.";}
                if($socios["iS_boxjumpmax"] != ""){$socios["iS_boxjumpmax"] = $socios["iS_boxjumpmax"]." In.";}  
                
-        
+                    $ruta = $socios["sFotoPerfilRuta"]; 
                  $informacion_personal .= "<legend>Informacion Personal</legend>".
                                     "<div><span class=\"tag_field\">ID: </span><span>".$socios["iIDSocio"]."</span></div>".
                                     "<div><span class=\"tag_field\">Nombre: </span><span>".$socios["sNombreSocio"]."</span></div>".
@@ -138,7 +139,8 @@ function CargarDatosSocio(){
         $workouts = utf8_encode($workouts);
         $maxespr = utf8_encode($maxespr); 
         $skills = utf8_encode($skills); 
-        $response = array("mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal", "workouts" => "$workouts", "maxespr" => "$maxespr", "skills" => "$skills");   
+        
+        $response = array("ruta"=>"$ruta","mensaje"=>"$sql","error"=>"$error","informacion_personal"=>"$informacion_personal", "workouts" => "$workouts", "maxespr" => "$maxespr", "skills" => "$skills");   
         echo array2json($response);
     
     

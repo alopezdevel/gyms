@@ -40,7 +40,8 @@ function array2json($arr) {
     if($is_list) return '[' . $json . ']';//Return numerical JSON 
     return '{' . $json . '}';//Return associative JSON 
 } 
-$_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accion"],array()) : "";
+
+$_POST["accion"] and  $_POST["accion"]!= "" ? call_user_func_array($_POST["accion"],array()) : "";       
 function validacion_usuario(){
     session_start();
     include("cn_usuarios.php");
@@ -327,6 +328,10 @@ function actualizar_usuario(){
     $iMaxPullUps = $_POST['iMaxPullUps'];
     $iMaxMuscleUp = $_POST['iMaxMuscleUp'];
     $iMaxBurpeesMin = $_POST['iMaxBurpeesMin'];
+    //Datos personales
+    $edad = $_POST['edad'];
+    $altura = $_POST['altura'];
+    $peso = $_POST['peso'];
     
     $error = "0";
     include("cn_usuarios_2.php");        
@@ -338,14 +343,13 @@ function actualizar_usuario(){
     $NUM_ROWs_Usuario = $result->num_rows;
     if ($NUM_ROWs_Usuario > 0) {         
         $sql = "UPDATE ct_socio set sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$apellido_paterno."',sApellidoMaternoSocio='".$apellido_materno."',sCalleSocio='".$calle."',sColoniaSocio='".$colonia."', sTelefonoSocio='".$telefono."',   eGenero='".$sexo."',  sCantidadPago='".$mensualidad."' ";        
-        
         $fran = $_POST['fran'];
-    $helen = $_POST['helen'];
-    $filthy = $_POST['filthy'];
-    $grace = $_POST['grace'];
-    $row = $_POST['row'];
-    $sprint = $_POST['sprint'];
-    $run = $_POST['run'];
+        $helen = $_POST['helen'];
+        $filthy = $_POST['filthy'];
+        $grace = $_POST['grace'];
+        $row = $_POST['row'];
+        $sprint = $_POST['sprint'];
+        $run = $_POST['run'];
         //Workouts
         if($fran != ""){ $sql = $sql." ,  sWFran='".$fran."' ";}
         if($helen != ""){ $sql = $sql." , sWHelen='".$helen."' ";}
@@ -370,13 +374,17 @@ function actualizar_usuario(){
         if($iMaxPullUps != ""){ $sql = $sql." ,  iMP_maxpullups='".$iMaxPullUps."' ";}
         if($iMaxMuscleUp != ""){ $sql = $sql." ,  iMP_maxmuscleup='".$iMaxMuscleUp."' ";}
         if($iMaxBurpeesMin != ""){ $sql = $sql." ,  iMP_maxburpeesmin='".$iMaxBurpeesMin."' ";}
+        //Datos personales
+        if($edad != ""){ $sql = $sql." ,  iEdad='".$edad."' ";}
+        if($altura != ""){ $sql = $sql." ,  iAltura='".$altura."' ";}
+        if($peso != ""){ $sql = $sql." ,  iPeso='".$peso."' ";}
         $sql = $sql."WHERE iIDSocio = '".$id."'";  
         $conexion->query($sql);   
         
         if ($conexion->affected_rows < 1 ) {
             $error = "1";
             $transaccion_exitosa = false;
-            $error = "1";
+            $error = "2";
             $mensaje = "El usuario no ha sufrido ninguna modificacion";
             
         }   
@@ -656,7 +664,11 @@ function consulta_socio_edicion(){
                    iMP_backsquat,
                    iMP_maxpullups,
                    iMP_maxmuscleup,
-                   iMP_maxburpeesmin                   
+                   iMP_maxburpeesmin,
+                   sFotoPerfilRuta,
+                   iEdad,
+                   iAltura,
+                   iPeso                   
     FROM ct_socio  ".$filtroQuery;
     $result = $conexion->query($sql);
     $NUM_ROWs_socios = $result->num_rows;   
@@ -690,13 +702,19 @@ function consulta_socio_edicion(){
             $eS_ringmuscleup = $socios['eS_ringmuscleup'];
             //Maxer Pr
             $iMP_cleanandjerk = $socios['iMP_cleanandjerk'];
-            $iMP_snatch = $socios['iMP_snatch'];
+            $iMP_snatch = $socios['iMP_snatch'];                             
             $iMP_deadlift = $socios['iMP_deadlift'];
             $iMP_backsquat = $socios['iMP_backsquat'];
             $iMP_maxpullups = $socios['iMP_maxpullups'];
             $iMP_maxmuscleup = $socios['iMP_maxmuscleup'];
             $iMP_maxburpeesmin = $socios['iMP_maxburpeesmin'];
-                                    
+            //Foto de perfil
+            $foto_perfil = $socios['sFotoPerfilRuta'];
+            //Datos personales
+            $edad = $socios['iEdad'];
+            $altura = $socios['iAltura'];        
+            $peso = $socios['iPeso'];
+                                                                 
         }
     }else{
         $error = "1";
@@ -726,14 +744,17 @@ function consulta_socio_edicion(){
                       "eS_walkhs"=>"$eS_walkhs",
                       "iS_boxjumpmax"=>"$iS_boxjumpmax",
                       "eS_ringmuscleup"=>"$eS_ringmuscleup",
-    
                       "iMP_cleanandjerk"=>"$iMP_cleanandjerk",
                       "iMP_snatch"=>"$iMP_snatch",
-                      "iMP_deadlift"=>"$iMP_deadlift",
+                      "iMP_deadlift"=>"$iMP_deadlift",        
                       "iMP_backsquat"=>"$iMP_backsquat",
                       "iMP_maxpullups"=>"$iMP_maxpullups",
                       "iMP_maxmuscleup"=>"$iMP_maxmuscleup",
                       "iMP_maxburpeesmin"=>"$iMP_maxburpeesmin",
+                      "ruta"=>"$foto_perfil",
+                      "edad"=>"$edad",
+                      "altura"=>"$altura",
+                      "peso"=>"$peso",
                       );   
     echo array2json($response);
 }
@@ -1122,7 +1143,7 @@ function enviar_recordatorio_pago(){
     } 
 
     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
-     echo array2json($response);
+    echo array2json($response);
     
 }
 function consultar_anuncio(){    
@@ -1158,5 +1179,66 @@ function consultar_anuncio(){
                       );   
     echo array2json($response);
 }
+function subir_imagen_socio(){    
+    $error = "0";
+    $edicion = $_POST['id_edicion'];
+    //Actualizando el registro
+    
+    if (isset($_FILES["file"])){
+        $file = $_FILES["file"];
+        $nombre = $file["name"];
+        $tipo = $file["type"];
+        $ruta_provisional = $file["tmp_name"];
+        $size = $file["size"];
+        $dimensiones = getimagesize($ruta_provisional);
+        $width = $dimensiones[0];
+        $height = $dimensiones[1];
+        $carpeta = "imagenes_perfil/";     
+        if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif'){
+            $mensaje = "Error, el archivo no es una imagen";    
+            $error = "1";
+        }else if ($size > 1024*1024){
+            $mensaje = "Error, el tamano maximo permitido es un 1MB";                                              
+            $error = "1";                                                                                  
+        }else{                                                                                              
+            $src = $carpeta.$nombre.'/';
+            $target_path = "imagenes_perfil/";
+            $target_path = $target_path . basename( $edicion.'.jpg');
+            $error = "0";
+            include("cn_usuarios_2.php");                    
+            $conexion->autocommit(FALSE);
+            $transaccion_exitosa = true; 
+            $sql = "UPDATE ct_socio set sFotoPerfilRuta='".$target_path."' WHERE iIDSocio ='".$edicion."' ";
+            $conexion->query($sql);           
+            if ($conexion->affected_rows < 0 ) {
+                $error = "1";
+                $transaccion_exitosa = false;
+                $error = "1";
+                $mensaje = "El usuario no ha sufrido ninguna modificacion";
+            }
+            if($transaccion_exitosa){
+                $conexion->commit();
+                $conexion->close();
+                if(move_uploaded_file($file['tmp_name'], $target_path)) {
+                    $mensaje = "El archivo ". basename( $_FILES['uploadedfile']['name']). " ha sido subido";
+                } else{
+                    $mensaje = "Ha ocurrido un error, trate de nuevo!";
+                    $error = "1";
+                }
+            }else{
+                $conexion->rollback();
+                $conexion->close(); 
+                $mensaje = $mensaje;
+            }   
+            
+        }
+    }else{
+         $mensaje = "No existe ningun archivo."; 
+         $error = "1";
+    }
+    echo array2json($mensaje);
+
+}
+ 
  
 ?>

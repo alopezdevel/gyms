@@ -6,6 +6,7 @@
 include("header.php");?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">          
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/js/jquery.form.js" type="text/javascript"></script>
 <script>
 function llenadoGrid(){
     var filtro = "";  //DATE_FORMAT(dFechaIngreso,  '%m/%d/%Y')         
@@ -31,7 +32,7 @@ function llenadoGrid(){
         data_grid: "#data_grid_certificate",
         fillgrid: function(){
                $.ajax({             
-                type:"POST", 
+                type:"POST",                                 
                 url:"funciones.php", 
                 data:{accion:"get_socios_asinc", filtroInformacion : filtro},
                 async : true,
@@ -47,7 +48,23 @@ function llenadoGrid(){
     fn_request_certificate.fillgrid();
 }
 $(document).ready(inicio);
-function inicio(){
+function inicio(){   
+    $('#emailForm').ajaxForm({      
+            beforeSubmit: validate,
+            success: function(data, statusText, xhr, form ) {
+            $("#file_imagen").val("");
+            $("button_submit").prop('disabled', false);   
+            $('#loading').hide();
+            alert(data);     
+            onEditarCliente($("#id_edicion").val()); 
+            $("#button_submit").prop('disabled', false);                        
+            } 
+    });
+    function validate(formData, jqForm, options) {     
+            var form =  jqForm[0]; 
+            $('#loading').html('Cargando foto...').show();
+            $("#button_submit").prop('disabled', true);        
+}  
     var dialogo;
     var dialogo2;
     $( "#tabs" ).tabs();
@@ -116,8 +133,39 @@ function inicio(){
     $("#filtro_Estatus_Cuenta" ).selectmenu({ change: function( event, ui ) { onkeyup(); }});
     llenadoGrid();
     $("#borrado_boton").click(Onborrar);
-    
-}
+    /*$("input[name='file']").on("change", function(){
+            var ruta = "funciones.php";
+           $.post("funciones.php", { accion: "subir_imagen_socio", id:ruta},
+           function(data){ 
+             switch(data.error){
+             case "1":   alert( data.mensaje);
+                    break;
+             case "0":   
+                         alert("El socio se ha borrar de manera satisfactoria.");
+                         llenadoGrid();
+                    break;  
+             }
+         }
+         ,"json");   
+        });   */
+}  
+          
+
+                                                           
+function onSubirImagen(){  
+    var formData = new FormData($("#formulario")[0]);
+    var ruta = "imagen-ajax.php";   
+    $.ajax({
+            url: "funciones.php",
+            type: "POST",
+            data:{accion:"subir_imagen_socio", formData : formData}, 
+            contentType: false,
+            processData: false,
+            success: function(datos){
+                //$("#respuesta").html(datos);
+            }
+            });    
+} 
 function onkeyup(){
     llenadoGrid();
 }              
@@ -177,11 +225,18 @@ function onActualizarUsuario(){
     var iMaxMuscleUp = $("#iMaxMuscleUp"); 
     var iMaxBurpeesMin = $("#iMaxBurpeesMin"); 
     
+    //datos personales
+    var edad = $("#edade"); 
+    var altura = $("#alturae"); 
+    var peso = $("#pesoe"); 
+    
+    
     
     todosloscampos = $( [] ).add( name ).add( apellido_paterno ).add( apellido_materno ).add( apellido_materno ).add( email ).add( calle ).add( colonia ).add( telefono ).add( sexo ).add( mensualidad )
     .add( fran ).add( helen ).add( grace ).add( Filthy ).add( Row ).add( Sprint ).add( Run )
     .add( eRingMuscle ).add( eDu ).add( eHspu ).add( ePulls ).add( eMtsWalk ).add( iBoxJump ).add( eRope )
     .add( iCleanJerk ).add( iSnatch ).add( iDeadlift ).add( iBackSquat ).add( iMaxPullUps ).add( iMaxMuscleUp ).add( iMaxBurpeesMin )
+    .add( edad ).add( altura ).add( peso )
     ;
     todosloscampos.removeClass( "error" );
     $("#namee").focus().css("background-color","#FFFFC0");
@@ -217,6 +272,18 @@ function onActualizarUsuario(){
         valid = valid && checkLength( mensualidad, "Mensualidad", 1, 25 );
         valid = valid && checkRegexp( mensualidad, floatRegex , "Mensualidad solo permite numeros: 0-9" );
     }
+     if($("#edade").val()!= ""){
+        valid = valid && checkLength( edad, "Edad", 1, 25 );
+        valid = valid && checkRegexp( edad, floatRegex , "Edad solo permite numeros: 0-9" );
+    }
+     if($("#alturae").val()!= ""){
+        valid = valid && checkLength( altura, "Altura", 1, 25 );
+        valid = valid && checkRegexp( altura, floatRegex , "Altura solo permite numeros: 0-9" );
+    }
+     if($("#pesoe").val()!= ""){
+        valid = valid && checkLength( peso, "Peso", 1, 25 );
+        valid = valid && checkRegexp( peso, floatRegex , "Peso solo permite numeros: 0-9" );
+    }
     if ( valid ) {           
         $.post("funciones.php", { accion: "actualizar_usuario", nombre: name.val() , apellido_paterno: apellido_paterno.val(),
                                                           apellido_materno: apellido_materno.val() , id: ID.val(),
@@ -229,10 +296,14 @@ function onActualizarUsuario(){
                                                           iBackSquat:iBackSquat.val(), iMaxPullUps: iMaxPullUps.val(), iMaxMuscleUp: iMaxMuscleUp.val(),
                                                           iMaxBurpeesMin:iMaxBurpeesMin.val(),
                                                           telefono: telefono.val() , mensualidad: mensualidad.val(), 
+                                                          edad: edad.val(), altura: altura.val(), peso: peso.val(), 
                                                           sexo: sexo.val() ,nivel: "C"},
         function(data){ 
              switch(data.error){
              case "1":   actualizarMensajeAlerta( data.mensaje);
+                         $("#nombre").focus();                         
+                    break;
+             case "2":   actualizarMensajeAlerta( data.mensaje);
                          $("#nombre").focus();                         
                     break;
              case "0":   actualizarMensajeAlerta("Favor de llenar los campos.");
@@ -315,7 +386,7 @@ function onInsertarUsuario(){
                                                           sexo: sexo.val() ,nivel: "C"},
         function(data){ 
              switch(data.error){
-             case "1":   actualizarMensajeAlerta( data.mensaje);
+             case "1":   actualizarMensajeAlerta( data.mensaje);   
                          $("#nombre").focus();
                          $('#tabs').tabs("option", "active", 0);
                     break;
@@ -346,6 +417,7 @@ function onFocus(){
       mensaje
         .text( t )
         .addClass( "alertmessage" );
+        
       setTimeout(function() {
         mensaje.removeClass( "alertmessage", 2500 );
       }, 700 );
@@ -355,6 +427,8 @@ function onFocus(){
         actualizarMensajeAlerta( n );
         o.addClass( "error" );
         o.focus();
+        //$( "#nombree" ).focus();
+        alert(n);
         return false;
     } else {                     
         return true;        
@@ -363,8 +437,10 @@ function onFocus(){
  function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
         actualizarMensajeAlerta( "La longitud del campo " + n + " debe contener por lo menos entre " + min + " y " + max + ". caracteres"  );
+         alert("La longitud del campo " + n + " debe contener por lo menos entre " + min + " y " + max + ". caracteres" ); 
         o.addClass( "error" );
         o.focus();
+        //$( "#nombree" ).focus();
         return false;    
     } else {             
         return true;                     
@@ -376,7 +452,9 @@ function onAltaCliente(){
 } 
 function onEditarCliente(id){    
     //llenado el div
-    $('#tabs').tabs("option", "active", 0);
+    
+    
+    $('#tabs').tabs("option", "active", 0);    
     $.post("funciones.php", { accion: "consulta_socio_edicion", id: id },
         function(data){ 
              switch(data.error){
@@ -417,7 +495,15 @@ function onEditarCliente(id){
                         $("#iMaxPullUps").val(data.iMP_maxpullups);
                         $("#iMaxMuscleUp").val(data.iMP_maxmuscleup);
                         $("#iMaxBurpeesMin").val(data.iMP_maxburpeesmin);                        
-                        $("#nombree").focus()                                ;
+                        $("#nombree").focus();
+                        //foto de perfil
+                        d = new Date();
+                        $("#foto_perfil_socio_consulta").attr("src",data.ruta + '?' + d.getTime() );
+                        //Datos personales
+                        $("#edade").val(data.edad);                        
+                        $("#alturae").val(data.altura);                        
+                        $("#pesoe").val(data.peso);                        
+                        
                     break;  
              }
          }
@@ -486,7 +572,7 @@ function onEditarCliente(id){
                     <h1>Socios</h1>
                     <h2>Nuevo Socio</h2>
                 </div>
-                <form method="post" action="">
+                <form method="post" id="formulario" enctype="multipart/form-data" >
                     <p class="mensaje_valido">Favor de llenar los campos.</p>
                     <input  id = "nombre"   class="texto" name="nombre" type="text" placeholder="Nombre del socio:">
                     <input  id = "apellido_paterno" class="texto"  name="apellido_paterno" type="text" placeholder="Apellido paterno:">
@@ -519,6 +605,7 @@ function onEditarCliente(id){
                 <li><a href="#tabs-2">Workouts</a></li>    
                 <li><a href="#tabs-3">Skills</a></li>
                 <li><a href="#tabs-4">Maxer Pr</a></li>
+                <li><a href="#tabs-5">Foto de Perfil del socio</a></li>
         </ul>  
         <div id="tabs-1">      
             <div class="container">
@@ -526,7 +613,7 @@ function onEditarCliente(id){
                     <h1>Socios</h1>
                     <h2>Editar Socio</h2>
                 </div>
-                <form method="post" action="">
+                <form name="emailForm" id="emailForm" method="POST" action="funciones.php"  enctype="multipart/form-data">
                 <div class="container">
                     <p class="mensaje_valido">Favor de llenar los campos.</p>
                     <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >
@@ -589,6 +676,28 @@ function onEditarCliente(id){
                         </div>
                     </div>
                     </fieldset>
+                    <br>      
+                    <fieldset>
+                    <legend>Datos Personales:</legend>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Edad:</label></div>
+                       <div class="field-input">
+                          <input  id = "edade" name="edad" class="texto" type="text" placeholder="Edad:">
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Altura(cm.):</label></div>
+                       <div class="field-input">
+                           <input  id = "alturae" name="alturae" class="texto" type="text" placeholder="Altura:"> 
+                        </div>
+                    </div>
+                    <div class="frm-field">
+                       <div class="field-label"><label>Peso (kg.):</label></div>
+                       <div class="field-input">
+                           <input  id = "pesoe" name="pesoe" class="texto" type="text" placeholder="Peso:"> 
+                        </div>
+                    </div>
+                    </fieldset>
                     <br>
                     <fieldset>
                     <legend>Informaci&oacute;n sobre Mensualidad</legend>
@@ -640,7 +749,7 @@ function onEditarCliente(id){
             <div class="container">
             <p class="mensaje_valido">Favor de llenar los campos.</p>
                    <div class="frm-field">
-                       <div class="field-label"><label>Rope Claims:</label></div>
+                       <div class="field-label"><label>Rope Climb:</label></div>
                        <div class="field-input">
                            <select name="eRope" id="eRope"  class="texto"placeholder="rope claims:">   
                                 <option value=""><-Seleccione una opcion-></option>
@@ -706,7 +815,22 @@ function onEditarCliente(id){
                        </div>
                    </div>
             </div> 
-        </div>
+        </div>   
+         <div id="tabs-5">
+                <div class="page-title">
+                    <h1>Socios</h1>
+                    <h2>Editar Socio</h2>
+                </div>
+         
+            <div class="container">
+                <p class="mensaje_valido">Favor de llenar los campos.</p>
+                <div class="foto-perfil"><img id = "foto_perfil_socio_consulta" src="" border="0" width="200" height="180" alt="foto_perfil.jpg"></div>
+                <p>Subir foto de perfil: <input type="file" name="file" id="file_imagen" ></p>
+                    <div align="left"><input type="submit" value="Subir Foto" id="button_submit"  class="btn_2" ></div>
+                 <input type="hidden" name="accion" id="accion" value="subir_imagen_socio"  />
+                 <div id="loading"></div> 
+                </div>
+            </div>               
         <div id="tabs-4">
             <div class="page-title">
                 <h1>Socios</h1>
@@ -735,7 +859,11 @@ function onEditarCliente(id){
                 <div class="col_3 left">
                    <label>MAX BURPEES MIN:</label><input  id = "iMaxBurpeesMin" name="fran" class="texto" type="text" placeholder="MAX BURPEES MIN:">
                 </div>
-            </div>                       
+            </div>  
+            
+           
+            
+                       
             </form>
         </div>       
     
