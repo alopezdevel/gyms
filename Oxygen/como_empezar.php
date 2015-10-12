@@ -113,7 +113,7 @@
                     <input class="input-text" type="text" name="subject" placeholder="Asunto: *">
                 	<textarea class="input-text text-area" cols="0" rows="0" placeholder="Mensaje:"></textarea>
                     <button class="btn_2 right" type="submit">Enviar Mensaje</button>
-                    	<input name="email" type="hidden" value="celina@globalpc.net">
+                    	<input name="email" type="hidden" value="victor_rendon@prodigy.net.mx">
 						<input name="thanks" type="hidden" value="http://www.oxygencrossfit.com/?contacto=t">
                     </form>                
                 </div>    
