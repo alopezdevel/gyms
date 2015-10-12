@@ -70,8 +70,8 @@ function fbroot(){
           <div class="widgets">
             <h4>Categorias</h4>
                 <ul>
-                    <li><a href="blog"><i class="fa fa-book"></i> Blog</a></li>
-                    <li><a href="noticias"><i class="fa fa-newspaper-o"></i> Noticias</a></li> 
+                    <li><a href="blog.php"><i class="fa fa-book"></i> Blog</a></li>
+                    <li><a href="noticias.php"><i class="fa fa-newspaper-o"></i> Noticias</a></li> 
                 </ul>
           </div>
     </div>

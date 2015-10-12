@@ -411,7 +411,7 @@ function onFocus(){
                 <td align="center" class="etiqueta_grid">ID socio</td>
                 <td align="center" class="etiqueta_grid">Correo socio</td>
                 <td align="center" class="etiqueta_grid">Nombre socio</td>
-                <td align="center" class="etiqueta_grid">Dias restantes memebresia</td>
+                <td align="center" class="etiqueta_grid">Dias rentantes memebresia</td>
                 <td class="etiqueta_grid" colspan = "2">&nbsp;</td> 
                 
             </tr>

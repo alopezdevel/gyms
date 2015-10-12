@@ -52,8 +52,8 @@ function CargarAsistenciaSocio(){
                 <strong>Total de Asistencias:</strong><span></span>
             </div>
         </div>
-<?php include("footer.php"); ?>
-</div> 
+</div>
+<?php include("footer.php"); ?> 
 </body>
 </html>
 <?php }?>

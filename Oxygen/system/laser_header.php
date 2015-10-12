@@ -30,27 +30,26 @@ if(1){
 <body> 
 <nav class="main-nav-outer" id="layer_menu"><!--main-nav-start-->
     <div class="container">
-        <a href="#home" class="img-logo"><img  src="laser_images/img-logo.png" alt="logo"></a>
-        <ul class="top-nav" style="display: none;"> 
+               <ul class="top-nav"> 
             <li>
                 <a href="#" title="Log In"><i class="fa fa-user"></i> <span> Bienvenido</span></a>
             </li>
             <li><a href="#" title="Salir"><i class="fa fa-sign-out"></i><span> Salir</span></a></li>
         </ul>
         <ul class="main-nav"> 
-                    <li><a href="laser_index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
+                    <li><a href="index.php"><i class="fa fa-home" style="font-size: 1.5em;"></i></a></li> 
                     
                     <li class="submenu"><a href="#">C&aacute;talogos</a>
                         <ul> 
                             <li><a href="laser_empleados.php"><i class="fa fa-users"></i> Empleados</a></li>
                             <li><a href="laser_horarios.php"><i class="fa fa-clock-o"></i> Horarios</a></li>
-                            <li><a href="laser_puestos.php"><i class="fa fa-briefcase"></i> Puestos</a></li>    
+                            <li><a href="#"><i class="fa fa-briefcase"></i> Puestos</a></li>    
                         </ul> 
                     </li>
                     
                     <li class="submenu"><a href="#">Reportes</a>
                         <ul> 
-                           <li><a href="laser_reporte.php"><i class="fa fa-folder-open"></i> Reporte General</a></li>     
+                           <li><a href="#"><i class="fa fa-folder-open"></i> Reporte General</a></li>     
                         </ul> 
                     </li>   
         </ul>

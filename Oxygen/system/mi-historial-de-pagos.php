@@ -50,8 +50,8 @@ function CargarPagosSocio(){
                 <tbody></tbody>
             </table>
         </div>
-<?php include("footer.php"); ?>
-</div> 
+</div>
+<?php include("footer.php"); ?> 
 </body>
 </html>
 <?php }?>
