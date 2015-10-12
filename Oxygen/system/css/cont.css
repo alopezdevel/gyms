@@ -5,10 +5,11 @@ table{
 	clear:both;
 }
 label{
-	font-size:1.1em;
+	font-size:0.9em;
 	color:#4b596c;
-	width:120px;
+	/*width:120px;*/
     margin: 10px 0px;
+    padding:2px 5px;
     font-weight: bolder;
 }
 /*div{margin:0px auto 5px auto;}*/
