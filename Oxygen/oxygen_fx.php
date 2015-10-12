@@ -35,20 +35,20 @@
 <div style="overflow:hidden;" id="home">
 <nav class="main-nav-outer" id="test"><!--main-nav-start-->
     <div class="container">
-        <a href="index.php" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
+        <a href="./" class="img-logo"><img  src="images/img-logo.png" alt="logo"></a>
         <ul class="top-nav">
 			<li class="i-login"><a href="system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
 			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
 			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
-			<li class="i-youtube"><a href="https://www.youtube.com/" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
+			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
 			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
 			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
         </ul>
         <ul class="main-nav">
-            <li><a href="index.php">Inicio</a></li>
+            <li><a href="./">Inicio</a></li>
             <li class="active"><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
-            <li><a href="como_empezar.php">Como Empezar</a></li>
-            <li><a href="galeria/">Galería</a></li>
+            <li><a href="como_empezar">Como Empezar</a></li>
+            <li><a href="galeria/index">Galería</a></li>
             <li><a href="#ubicacion">Ubicación</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -86,7 +86,7 @@
 <section class="main-section ubicacion" id="ubicacion"> 
     <div class="container">
         <h2>Ubicación</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7883787925825!2d-99.49679360000005!3d27.475846900000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b39157fccb%3A0x5b1e3c8f99f827f6!2sCalle+5+de+Febrero+%26+Av+I.+Comonfort%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.!5e0!3m2!1sen!2smx!4v1430038724573" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7111995655805!2d-99.49898528535294!3d27.478249042130308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b441fce351%3A0x6c8d8cee92a18d08!2sAv+I.+Comonfort+2617%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.%2C+Mexico!5e0!3m2!1sen!2sus!4v1444691822896" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
     </div>
 </section>
 <section class="main-section contact" id="contacto"> 
@@ -96,35 +96,35 @@
         <div class="row">
             <div class="col-lg-6 col-sm-5 wow fadeInUp delay-05s">
                 <div class="form">
-                    <form method="POST" action="http://nlaredo.globalpc.net/cgi-bin/mailform" onsubmit="return FrontPage_Form1_Validator(this)">                    
-                    <input class="input-text" type="text" name="Name" value="Nombre: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <input class="input-text" type="text" name="mailto" value="Correo electronico: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <input class="input-text" type="text" name="subject" value="Asunto: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <textarea class="input-text text-area" cols="0" rows="0" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">Mensaje: *</textarea>
+                    <form method="POST" action="http://nlaredo.globalpc.net/cgi-bin/mailform" onsubmit="return FrontPage_Form1_Validator(this)">                	
+            		<input class="input-text" type="text" name="Name" placeholder="Nombre: *" >
+                    <input class="input-text" type="text" name="mailto" placeholder="Correo electronico: *" >
+                    <input class="input-text" type="text" name="subject" placeholder="Asunto: *">
+                	<textarea class="input-text text-area" cols="0" rows="0" placeholder="Mensaje:"></textarea>
                     <button class="btn_2 right" type="submit">Enviar Mensaje</button>
-                        <input name="email" type="hidden" value="celina@globalpc.net, edwin@solo-trucking.com">
-                        <input name="thanks" type="hidden" value="http://solotrucking.laredo2.net">
+                    	<input name="email" type="hidden" value="celina@globalpc.net">
+						<input name="thanks" type="hidden" value="http://www.oxygencrossfit.com/?contacto=t">
                     </form>
                 </div>    
             </div>
             <div class="col-lg-6 col-sm-7 wow fadeInLeft">
                 <div class="contact-info-box address clearfix">
-                    <h3><i class=" icon-map-marker"></i>Dirección:</h3>
-                    <span>Calle Comonfort  #2617 entre  5 de Febrero y Tamaulipas.</span>
+                	<h3><i class=" icon-map-marker"></i>Dirección:</h3>
+                	<span>Comonfort  #2617 Nuevo Laredo Tamps.</span>
                 </div>
                 <div class="contact-info-box phone clearfix">
-                    <h3><i class="fa-phone"></i>Teléfono:</h3>
-                    <span>(867) 196.2777</span>
+                	<h3><i class="fa-phone"></i>Teléfono:</h3>
+                	<span>(867) 126-7360</span>
                 </div>
-                <div class="contact-info-box hours clearfix">
-                    <h3><i class="fa-clock-o"></i>Horario:</h3>
-                    <span><strong>Lunes - Viernes:</strong> 8am - 10pm</span>
+            	<div class="contact-info-box hours clearfix">
+                	<h3><i class="fa-clock-o"></i>Horario:</h3>
+                	<span><strong>Lunes - Viernes:</strong> 8am - 10pm</span>
                 </div>
                 <ul class="social-link">
-                    <li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                	<li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li class="facebook"><a href="https://www.facebook.com/OxigenFEX" target="_blank"><i class="fa fa-facebook"></i></a></li>
                     <li class="gplus"><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="youtube"><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                    <li class="youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" target="_blank"><i class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
         </div>
