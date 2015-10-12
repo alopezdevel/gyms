@@ -161,8 +161,8 @@
                     <input class="input-text" type="text" name="subject" value="Asunto: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
                 	<textarea class="input-text text-area" cols="0" rows="0" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">Mensaje: *</textarea>
                     <button class="btn_2 right" type="submit">Enviar Mensaje</button>
-                    	<input name="email" type="hidden" value="celina@globalpc.net, edwin@solo-trucking.com">
-						<input name="thanks" type="hidden" value="http://solotrucking.laredo2.net">
+                    	<input name="email" type="hidden" value="">
+						<input name="thanks" type="hidden" value="">
                     </form>
                 </div>	
             </div>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="contact-info-box phone clearfix">
                 	<h3><i class="fa-phone"></i>Teléfono:</h3>
-                	<span>(867) 196.2777</span>
+                	<span>(867) 126-7360</span>
                 </div>
             	<div class="contact-info-box hours clearfix">
                 	<h3><i class="fa-clock-o"></i>Horario:</h3>
