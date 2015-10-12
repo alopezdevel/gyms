@@ -355,7 +355,7 @@ function actualizar_usuario(){
         if($helen != ""){ $sql = $sql." , sWHelen='".$helen."' ";}
         if($filthy != ""){ $sql = $sql." , sWFilthy50='".$filthy."' ";}
         if($grace != ""){ $sql = $sql." , sWGrace='".$grace."' ";}
-        if($row != ""){ $sql = $sql." , sWRow500m='".$fran."' ";}
+        if($row != ""){ $sql = $sql." , sWRow500m='".$row."' ";}
         if($sprint != ""){ $sql = $sql." , sWSprint400m='".$sprint."' ";}
         if($run != ""){ $sql = $sql." , sWRun5k='".$run."' ";}        
         //Skills
@@ -1009,10 +1009,10 @@ function get_asistencia_asinc(){
                  $htmlTabla .= "<tr bgcolor='".$color_fondo."'>                            
                                     <td ><font size='5'>".$socios['dFechaIngreso']."</font></td>".             
                                     "<td ><font size='5'>".$socios['ID']."</font></td>".
-                                   "<td ><font size='5'>".$socios['correo']."</font></td>".
-                                   "<td  ><font size='5'>".$socios['nombre']."</font></td>".                                                  
+                                   "<td ><font size='5'>".$socios['correo']."</font></td>".                                                                                          
+                                   "<td nowrap='nowrap'  ><font size='5'>".$socios['nombre']."</font></td>".                                                  
                                    "<td ><font size='5'>".$leyenda."</font></td>".
-                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarAsistencia(\"".$socios['ID']."\" , \"".$socios['correo']."\", \"".$estatus."\" )' class='ui-icon print'></span></td>".
+                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarAsistencia(\"".$socios['ID']."\" , \"".$socios['correo']."\", \"".$estatus."\" )' class='btn_2 right' style='padding: 2px 5px;cursor: pointer;'><i class='fa fa-check-circle'></i></span></td>".
                                 "</tr>"   ;                                         
              }else{                             
                  $htmlTabla .="<tr>

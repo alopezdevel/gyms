@@ -199,7 +199,7 @@ function onFocus(){
                 <td align="center" class="etiqueta_grid">ID socio</td>
                 <td align="center" class="etiqueta_grid">Correo socio</td>
                 <td align="center" class="etiqueta_grid">Nombre socio</td>
-                <td align="center" nowrap="nowrap" class="etiqueta_grid">Dias restantes</td>
+                <td align="center" nowrap="nowrap" class="etiqueta_grid">Dias restantes de asistencia</td>
                 <td class="etiqueta_grid" colspan = "2">&nbsp;</td> 
                 
             </tr>

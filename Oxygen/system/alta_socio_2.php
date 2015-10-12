@@ -618,7 +618,7 @@ function onEditarCliente(id){
                     <p class="mensaje_valido">Favor de llenar los campos.</p>
                     <input  id = "id_edicion" name="id_edicion" class="texto" type="hidden" >
                     <fieldset>
-                    <legend>Datos Personales</legend> 
+                    <legend>Datos Personales Generales</legend> 
                     <div class="frm-field">
                        <div class="field-label"><label>Correo electr&oacute;nico:</label></div>
                        <div class="field-input">
