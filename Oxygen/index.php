@@ -40,15 +40,15 @@
 			<li class="i-login"><a href="system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
 			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
 			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
-			<li class="i-youtube"><a href="https://www.youtube.com/" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
+			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
 			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
 			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
 		</ul>
         <ul class="main-nav">
         	<li class="active"><a href="#home">Inicio</a></li>
-            <li><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
-            <li><a href="como_empezar.php">Como Empezar</a></li>
-            <li><a href="galeria/">Galería</a></li>
+            <li><a href="oxygen_fx">Acerca de Oxygen-FX</a></li>
+            <li><a href="como_empezar">Como Empezar</a></li>
+            <li><a href="galeria/index">Galería</a></li>
             <li><a href="#ubicacion">Ubicación</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -78,7 +78,7 @@
     			<img src="images/home/img-home-1.png" alt="">
     			<h3>Nuestros Entrenadores</h3>
     			<p class="txt-center">Profesionales, certificados, apasionados y con toda la actitud!</p>
-    			<a href="#" class="btn_1"><span>Ver más...</span></a>
+    			<a href="http://www.oxygencrossfit.com/system/login" class="btn_1"><span>Ver más...</span></a>
     		</div>
     	</div>
     	<div class="col_3 left wow fadeInUp delay-03s">
@@ -86,7 +86,7 @@
     			<img src="images/home/img-home-2.png" alt="">
     			<h3>Entrenamiento del día</h3>
     			<p class="txt-center">Confirma el entrenamiento de cada dia por medio de nuestras publicaciones.</p>
-    			<a href="#" class="btn_1"><span>Ver más...</span></a>
+    			<a href="https://www.facebook.com/OxigenFEX" target="_blank" class="btn_1"><span>Ver más...</span></a>
     		</div>
     	</div>
 		<div class="col_3 left wow fadeInUp delay-03s">
@@ -94,8 +94,8 @@
     			<img src="images/home/img-home-3.png" alt="">
     			<h3>Consulta tu membresía</h3>
     			<ul>
-    				<li><a href="#"><strong>» </strong>Consultar estado actual</a></li>
-    				<li><a href="#"><strong>» </strong>Consultar pagos realizados</a></li>
+    				<li><a href="http://www.oxygencrossfit.com/system/login"><strong>» </strong>Consultar estado actual</a></li>
+    				<li><a href="http://www.oxygencrossfit.com/system/login"><strong>» </strong>Consultar pagos realizados</a></li>
     			</ul>
     		</div>
     	</div>  	    
@@ -130,14 +130,14 @@
         <div class="galeria-enlace txt-center left wow fadeInRight delay-05s">
             <p class="txt-center"><br><br>Conoce nuestras instalaciones! <br>nuestro equipo!</p>
             <br>
-            <a href="#" class="btn_1 wow fadeInUp delay-06s">Ver más...</a>
+            <a href="http://www.oxygencrossfit.com/galeria/index" class="btn_1 wow fadeInUp delay-06s">Ver más...</a>
             <br><br><br><br><br>
             <p class="txt-left">Siguenos en:</p>
             <ul class="nav-social-blue">
-                <li><a href="https://www.facebook.com/OxigenFEX"><span class="facebook"></span></a></li>
-                <li><a href="#"><span class="twitter"></span></a></li>
-                <li><a href="#"><span class="instagram"></span></a></li>
-                <li><a href="#"><span class="youtube"></span></a></li>
+                <li><a href="https://www.facebook.com/OxigenFEX" target="_blank"><span class="facebook"></span></a></li>
+                <li><a href="#"><span class="twitter" target="_blank"></span></a></li>
+                <li><a href="#"><span class="instagram" target="_blank"></span></a></li>
+                <li><a href="https://www.youtube.com/CrossfitOxygenFX8" target="_blank"><span class="youtube" target="_blank"></span></a></li>
             </ul>
         </div>
     </div>
