@@ -156,13 +156,13 @@
         	<div class="col-lg-6 col-sm-5 wow fadeInUp delay-05s">
             	<div class="form">
             		<form method="POST" action="http://nlaredo.globalpc.net/cgi-bin/mailform" onsubmit="return FrontPage_Form1_Validator(this)">                	
-            		<input class="input-text" type="text" name="Name" value="Nombre: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <input class="input-text" type="text" name="mailto" value="Correo electronico: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <input class="input-text" type="text" name="subject" value="Asunto: *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                	<textarea class="input-text text-area" cols="0" rows="0" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">Mensaje: *</textarea>
+            		<input class="input-text" type="text" name="Name" value="Nombre: *" >
+                    <input class="input-text" type="text" name="mailto" value="Correo electronico: *" >
+                    <input class="input-text" type="text" name="subject" value="Asunto: *">
+                	<textarea class="input-text text-area" cols="0" rows="0">Mensaje: *</textarea>
                     <button class="btn_2 right" type="submit">Enviar Mensaje</button>
-                    	<input name="email" type="hidden" value="">
-						<input name="thanks" type="hidden" value="">
+                    	<input name="email" type="hidden" value="celina@globalpc.net">
+						<input name="thanks" type="hidden" value="http://www.oxygencrossfit.com/">
                     </form>
                 </div>	
             </div>
