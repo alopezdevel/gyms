@@ -145,7 +145,7 @@
 <section class="main-section ubicacion" id="ubicacion"> 
     <div class="container">
         <h2>Ubicación</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7883787925825!2d-99.49679360000005!3d27.475846900000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b39157fccb%3A0x5b1e3c8f99f827f6!2sCalle+5+de+Febrero+%26+Av+I.+Comonfort%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.!5e0!3m2!1sen!2smx!4v1430038724573" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7111995655805!2d-99.49898528535294!3d27.478249042130308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b441fce351%3A0x6c8d8cee92a18d08!2sAv+I.+Comonfort+2617%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.%2C+Mexico!5e0!3m2!1sen!2sus!4v1444691822896" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
     </div>
 </section>
 <section class="main-section contact" id="contacto"> 
