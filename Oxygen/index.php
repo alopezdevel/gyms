@@ -39,10 +39,8 @@
 		<ul class="top-nav">
 			<li class="i-login"><a href="system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
 			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
-			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
 			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
-			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
-			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
+			<li class="i-instagram"><a href="https://www.instagram.com/pavorendon/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
 		</ul>
         <ul class="main-nav">
         	<li class="active"><a href="#home">Inicio</a></li>
@@ -135,8 +133,7 @@
             <p class="txt-left">Siguenos en:</p>
             <ul class="nav-social-blue">
                 <li><a href="https://www.facebook.com/OxigenFEX" target="_blank"><span class="facebook"></span></a></li>
-                <li><a href="#"><span class="twitter" target="_blank"></span></a></li>
-                <li><a href="#"><span class="instagram" target="_blank"></span></a></li>
+                <li><a href="https://www.instagram.com/pavorendon/" target="_blank"><span class="instagram" target="_blank"></span></a></li>
                 <li><a href="https://www.youtube.com/CrossfitOxygenFX8" target="_blank"><span class="youtube" target="_blank"></span></a></li>
             </ul>
         </div>
@@ -145,7 +142,7 @@
 <section class="main-section ubicacion" id="ubicacion"> 
     <div class="container">
         <h2>Ubicación</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7111995655805!2d-99.49898528535294!3d27.478249042130308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b441fce351%3A0x6c8d8cee92a18d08!2sAv+I.+Comonfort+2617%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.%2C+Mexico!5e0!3m2!1sen!2sus!4v1444691822896" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=zvKGdIaLBJ8Q.kc-TSAS7m_i0&z=18" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
     </div>
 </section>
 <section class="main-section contact" id="contacto"> 
@@ -177,12 +174,11 @@
                 </div>
             	<div class="contact-info-box hours clearfix">
                 	<h3><i class="fa-clock-o"></i>Horario:</h3>
-                	<span><strong>Lunes - Viernes:</strong> 8am - 10pm</span>
+                	<span><strong>Lunes - Viernes:</strong> 7:15AM - 9:15AM / 6:00PM - 9:30PM</span>
                 </div>
                 <ul class="social-link">
-                	<li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li class="facebook"><a href="https://www.facebook.com/OxigenFEX" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li class="gplus"><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="instagram"><a href="https://www.instagram.com/pavorendon/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                     <li class="youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" target="_blank"><i class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>

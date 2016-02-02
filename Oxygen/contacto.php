@@ -39,35 +39,20 @@
         <ul class="top-nav">
 			<li class="i-login"><a href="system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
 			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
-			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
-			<li class="i-youtube"><a href="https://www.youtube.com/" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
-			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
-			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
-        </ul>
+			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
+			<li class="i-instagram"><a href="https://www.instagram.com/pavorendon/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
+		</ul>
         <ul class="main-nav">
             <li><a href="index.php">Inicio</a></li>
             <li class="active"><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
-            <li><a href="como_empezar.php">Como Empezar</a></li>
-            <li><a href="galeria/">Galería</a></li>
-            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="como_empezar">Como Empezar</a></li>
+            <li><a href="galeria/index">Galería</a></li>
+            <li><a href="ubicacion">Ubicación</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
         <a class="res-nav_click right" href="#"><i class="fa-bars"></i></a>
     </div>
 </nav><!--main-nav-end-->
-<!--- HEADER----->
-<div class="header section-oxygenfx">
-    <h1 class="wow animated fadeInLeft delay-02s">OXYGEN-FX CROSSFIT</h1>
-    <h3 class="wow animated fadeInRight delay-03s">Cada dia vamos a probarte, cada día vamos a impulzarte mas.</h3>
-</div>
-<!--- TERMINA HEADER ---->
-
-<section class="main-section ubicacion" id="ubicacion"> 
-    <div class="container">
-        <h2>Ubicación</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7883787925825!2d-99.49679360000005!3d27.475846900000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b39157fccb%3A0x5b1e3c8f99f827f6!2sCalle+5+de+Febrero+%26+Av+I.+Comonfort%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.!5e0!3m2!1sen!2smx!4v1430038724573" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
-    </div>
-</section>
 <section class="main-section contact" id="contacto"> 
     <div class="container">
         <h2>Contacto</h2>

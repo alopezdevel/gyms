@@ -44,41 +44,22 @@
 		</ul>
         <ul class="main-nav">
             <li><a href="./">Inicio</a></li>
-            <li class="active"><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
+            <li><a href="oxygen_fx.php">Acerca de Oxygen-FX</a></li>
             <li><a href="como_empezar">Como Empezar</a></li>
             <li><a href="galeria/index">Galería</a></li>
-            <li><a href="ubicacion">Ubicación</a></li>
+            <li class="active"><a href="ubicacion">Ubicación</a></li>
             <li><a href="contacto">Contacto</a></li>
         </ul>
         <a class="res-nav_click right" href="#"><i class="fa-bars"></i></a>
     </div>
 </nav><!--main-nav-end-->
-<!--- HEADER----->
-<div class="header section-oxygenfx">
-    <h1 class="wow animated fadeInLeft delay-02s">OXYGEN-FX CROSSFIT</h1>
-    <h3 class="wow animated fadeInRight delay-03s">Cada dia vamos a probarte, cada día vamos a impulzarte mas.</h3>
-</div>
-<!--- TERMINA HEADER ---->
-<div class="section-oxygenfx">
-<div class="line"></div>
-<section class="main-section"><!--main-section-start-->
-    <div class="container"> 
-        <div class="center wow fadeInUp delay-03s txt-justify">
-            <p>Esta Bodega como muchos le llaman, no tiene la apariencia de un gimnasio comun y corriente al que estamos acostrumbrados. No existen ni espejos ni maquinas, asi como tampoco dispone de bicicletas fijas, caminadoras, ni estantes cargados de mancuernas.
-            <br><br>El "Box" o lugar donde se llevan acado nuestros entrenamientos, es un espacio abierto con suelo de goma que parecen rompecabezas, sin aire acondicionado, el techo es tan alto que parecera que estas dentro de una fabrica o bodega en l cual no sabes lo que te espera, hay barras, cajas de madera, cuerdas, sogas, aros, estructuras sin sentido, entre otros materiales especiales perfectamente acomodados para su uso.</p>
-        </div>
-        <div class="col_3 left wow fadeInUp delay-03s">
-            <img src="images/cont/img_oxygen.jpg" border="0" width="400" height="500" alt="img_comenzar.jpg (140,825 bytes)">
-        </div> 
-        <p class="left txt-justify" style="width:67%;padding-left: 10px;;">
-            Muchos han probado todo tipo de ejercicios, rutinas y entrenamientos, pero te toma únicamente unas cuantas clases comprender por qué este lugar se convierte en la pasión de muchos y lo llamamos "Oxygenos". Por raro que suene...cuanto te encuentras a la mitad de un WOD (Trabajo del día), el mejor consuelo es que casi termina. Sin embargo, sabes que lo vas a conseguir porque nadie lo puede dejar a medias y hay personas a tu alrededor que te alientan para terminarlo como una sola familia o grupo.
-            <br><br><strong>Una de las razones del por qué vale la pena vivir esta experiencia</strong> es que, en realidad, tu no compites contra tus compañeros sino contigo mismo, con el atleta que todos llevamos dentro.
-            <br><br><strong>Oxygen FX</strong>, se convierte en un lugar en donde cada una de las personas que lo conforman tiene una razón diferente para hacerlo y día a día ser mejores.
-            <br><br>En OXYGEN FX lograras transformar tu cuerpo y tu vida de una manera que creerás que puede ser posible llevando tu esfuerzo al límite, al extremo, hasta convertirse en un Oxygeno.
-            <br><br><span><strong class="txt-center">Te invitamos a que vivas la experiencia y cambies tu vida!! </strong></span>
-        </p>         
+<section class="main-section ubicacion" id="ubicacion" style="background:url('images/cont/bg_ubicacion.jpg') center top no-repeat;-moz-background-size: 100% auto;-o-background-size: 100% auto;-webkit-background-size: 100% auto;background-size: 100% auto;"> 
+    <div class="container">
+        <h2 style="color:#ffffff!important;text-shadow:1px 1px 0px rgba(0,0,0,0.8);">Ubicación</h2>
+        <iframe src="https://www.google.com/maps/d/embed?mid=zvKGdIaLBJ8Q.kc-TSAS7m_i0&z=18" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
     </div>
 </section>
+
 </div>
 <footer class="footer">
     <div class="container"> 

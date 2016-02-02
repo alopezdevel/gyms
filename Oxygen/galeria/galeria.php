@@ -27,49 +27,37 @@
 
 </head>
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5&appId=449727038566262";
-  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-</script>
 <div style="overflow:hidden;" id="home">
 <nav class="main-nav-outer" id="test"><!--main-nav-start-->
     <div class="container">
         <a href="../" class="img-logo"><img  src="../images/img-logo.png" alt="logo"></a>
         <ul class="top-nav">
-			<li class="i-login"><a href="../system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
-			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
-			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
-			<li class="i-instagram"><a href="https://www.instagram.com/pavorendon/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
-		</ul>
+            <li class="i-login"><a href="../system/login" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
+            <li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
+            <li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
+            <li class="i-youtube"><a href="https://www.youtube.com/" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
+            <li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
+            <li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
+        </ul>
         <ul class="main-nav">
             <li><a href="../">Inicio</a></li>
             <li><a href="../oxygen_fx">Acerca de Oxygen-FX</a></li>
             <li><a href="../como_empezar">Como Empezar</a></li>
             <li class="active"><a href="#">Galería</a></li>
-            <li><a href="../ubicacion">Ubicación</a></li>
-            <li><a href="../contacto">Contacto</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
         <a class="res-nav_click right" href="#"><i class="fa-bars"></i></a>
     </div>
 </nav><!--main-nav-end-->
 <section class="main-section section-galeria">
     <div class="container">
-        <h1 class="txt-center">GALER&Iacute;A OXYGEN-FX</h1>
-        <h6 style="margin: 0 0 -15px 0;">Conoce nuestras instalaciones, eventos y mas...</h6>
-        <!----ALBUM FACE -->
-        <div style="width:70%;float:left;">
-			<iframe style="float:left;" src="//embedsocial.com/facebook_album/album_photos/874246865948455" width="100%" height="1450" frameborder="0" scrolling="no" marginheight="0"  marginwidth="0"></iframe>
-    		<br><br>
-    		<div class="txt-center center"><a href="https://www.facebook.com/OxigenFEX/photos_stream?tab=photos_albums" class="btn_2" target="_blank">Ver m&aacute;s fotos en <strong>Facebook</strong></a></div>  
-        </div>
-        <!----TERMINA ALBUM --->        
-    	<div style="width: 29%;float: right;padding-top: 97px;">
-    		<div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>
-    	</div>
+        <h1 class="txt-center">Oxygen-FX Crossfit</h1>
+        <h6>Conoce nuestras instalaciones, eventos y mas...</h6>
+        <div class="row">
+        	<iframe src="https://www.facebook.com/OxigenFEX/photos_stream?tab=photos_albums" width="900px" height="100%" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
+        </div>        
+        <div class="txt-center center"><a href="https://www.facebook.com/OxigenFEX/photos_stream?tab=photos_albums" class="btn_2" target="_blank">Visitanos en <strong>Facebook</strong></a></div>  
     </div>
 </section>
 <footer class="footer">

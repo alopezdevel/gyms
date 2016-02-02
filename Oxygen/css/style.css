@@ -147,7 +147,7 @@ p{line-height:24px;margin:0;}
 
 
 }
-.btn_2:hover{
+.btn_2:hover, .btn_2:active{
 	text-decoration:none!important;
 	color:#ffffff;
 	background: #1651ad;

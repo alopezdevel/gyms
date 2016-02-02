@@ -39,18 +39,16 @@
         <ul class="top-nav">
 			<li class="i-login"><a href="system/login.php" title="Iniciar Sesion" target="_blank"><span><i class="fa fa-user"></i></span></a></li>
 			<li class="i-facebook"><a href="https://www.facebook.com/OxigenFEX" title="Siguenos en Facebook!" target="_blank"><span><i class="fa fa-facebook"></i></span></a></li>
-			<li class="i-twitter"><a href="https://twitter.com/" title="Siguenos en Twitter!"><span><i class="fa fa-twitter"></i></span></a></li>
 			<li class="i-youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" title="Siguenos en YouTube!" target="_blank"><span><i class="fa fa-youtube"></i></span></a></li>
-			<li class="i-instagram"><a href="https://instagram.com/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
-			<li class="i-google"><a href="https://www.google.com/"  title="Siguenos en Google +!"><span><i class="fa fa-google-plus"></i></span></a></li>
-        </ul>
+			<li class="i-instagram"><a href="https://www.instagram.com/pavorendon/" title="Siguenos en Instagram!"><span><i class="fa fa-instagram"></i></span></a></li>
+		</ul>
         <ul class="main-nav">
             <li><a href="./">Inicio</a></li>
             <li><a href="oxygen_fx">Acerca de Oxygen-FX</a></li>
             <li class="active"><a href="como_empezar">Como Empezar</a></li>
             <li><a href="galeria/index">Galería</a></li>
-            <li><a href="#ubicacion">Ubicación</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="ubicacion">Ubicación</a></li>
+            <li><a href="contacto">Contacto</a></li>
         </ul>
         <a class="res-nav_click right" href="#"><i class="fa-bars"></i></a>
     </div>
@@ -91,55 +89,6 @@
             </div>
         </div>          
     </div>
-</section>
-</div>
-
-<section class="main-section ubicacion" id="ubicacion"> 
-    <div class="container">
-        <h2>Ubicación</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.7111995655805!2d-99.49898528535294!3d27.478249042130308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866123b441fce351%3A0x6c8d8cee92a18d08!2sAv+I.+Comonfort+2617%2C+Guerrero%2C+88240+Nuevo+Laredo%2C+Tamps.%2C+Mexico!5e0!3m2!1sen!2sus!4v1444691822896" width="1000" height="450" frameborder="0" style="border:0">[Su navegador no soporta los marcos flotantes por lo tanto ni podra visualizar el mapa.]</iframe>
-    </div>
-</section>
-<section class="main-section contact" id="contacto"> 
-    <div class="container">
-        <h2>Contacto</h2>
-        <h6>Envíanos tus dudas, cuéntanos una historia, o simplemente puedes decir Hola!</h6>
-        <div class="row">
-            <div class="col-lg-6 col-sm-5 wow fadeInUp delay-05s">
-                <div class="form">
-                    <form method="POST" action="http://nlaredo.globalpc.net/cgi-bin/mailform" onsubmit="return FrontPage_Form1_Validator(this)">                	
-            		<input class="input-text" type="text" name="Name" placeholder="Nombre: *" >
-                    <input class="input-text" type="text" name="mailto" placeholder="Correo electronico: *" >
-                    <input class="input-text" type="text" name="subject" placeholder="Asunto: *">
-                	<textarea class="input-text text-area" cols="0" rows="0" placeholder="Mensaje:"></textarea>
-                    <button class="btn_2 right" type="submit">Enviar Mensaje</button>
-                    	<input name="email" type="hidden" value="victor_rendon@prodigy.net.mx">
-						<input name="thanks" type="hidden" value="http://www.oxygencrossfit.com/?contacto=t">
-                    </form>                
-                </div>    
-            </div>
-            <div class="col-lg-6 col-sm-7 wow fadeInLeft">
-                <div class="contact-info-box address clearfix">
-                	<h3><i class=" icon-map-marker"></i>Dirección:</h3>
-                	<span>Comonfort  #2617 Nuevo Laredo Tamps.</span>
-                </div>
-                <div class="contact-info-box phone clearfix">
-                	<h3><i class="fa-phone"></i>Teléfono:</h3>
-                	<span>(867) 126-7360</span>
-                </div>
-            	<div class="contact-info-box hours clearfix">
-                	<h3><i class="fa-clock-o"></i>Horario:</h3>
-                	<span><strong>Lunes - Viernes:</strong> 8am - 10pm</span>
-                </div>
-                <ul class="social-link">
-                	<li class="twitter"><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li class="facebook"><a href="https://www.facebook.com/OxigenFEX" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li class="gplus"><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="youtube"><a href="https://www.youtube.com/CrossfitOxygenFX8" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div> 
 </section>
 <footer class="footer">
     <div class="container"> 
