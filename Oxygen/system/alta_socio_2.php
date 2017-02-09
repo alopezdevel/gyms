@@ -171,7 +171,7 @@ function onkeyup(){
 }              
 function Onborrar(id){
    if(confirm("estas seguro que desea borrar al socio con el ID: " + id + "?")){ 
-    $.post("funciones.php", { accion: "registrar_asistencia", id:id},
+    $.post("funciones.php", { accion: "borrar_socio", id:id},
         function(data){ 
              switch(data.error){
              case "1":   alert( data.mensaje);
@@ -734,10 +734,10 @@ function onEditarCliente(id){
                         <label>Row:</label><input  id = "iRow" name="fran" class="texto" type="text" placeholder="Row:">
                     </div>
                     <div class="col_4 left">
-                        <label>Sprint:</label><input  id = "iSprint" name="fran" class="texto" type="text" placeholder="Sprint:">
+                        <label>Sprint 400 m:</label><input  id = "iSprint" name="fran" class="texto" type="text" placeholder="Sprint:">
                     </div>
                     <div class="col_4 left"> 
-                        <label>Run:</label><input  id = "iRun" name="fran" class="texto" type="text" placeholder="Run:">
+                        <label>Run 3.2 km:</label><input  id = "iRun" name="fran" class="texto" type="text" placeholder="Run:">
                     </div>
             </div>  
         </div>
@@ -805,7 +805,7 @@ function onEditarCliente(id){
                        </div>
                    </div>
                    <div class="frm-field">
-                       <div class="field-label"><label>Ring Muscle Up:</label></div>
+                       <div class="field-label"><label>Bar & Ring Muscle Up:</label></div>
                        <div class="field-input">
                             <select name="eRingMuscle" id="eRingMuscle" placeholder="Ring Muscle Up:">   
                                 <option value=""><-Seleccione una opcion-></option>
@@ -854,7 +854,7 @@ function onEditarCliente(id){
                    <label>Max Pull-ups:</label><input  id = "iMaxPullUps" name="iMaxPullUps" class="texto" type="text" placeholder="Max Pull-ups:">
                 </div>
                 <div class="col_3 left">
-                   <label>Max MUSCLE -UP:</label><input  id = "iMaxMuscleUp" name="iMaxMuscleUp" class="texto" type="text" placeholder="Max MUSCLE -UP:">
+                   <label>Squat Clean:</label><input  id = "iMaxMuscleUp" name="iMaxMuscleUp" class="texto" type="text" placeholder="Squat Clean:">
                 </div>
                 <div class="col_3 left">
                    <label>MAX BURPEES MIN:</label><input  id = "iMaxBurpeesMin" name="fran" class="texto" type="text" placeholder="MAX BURPEES MIN:">
