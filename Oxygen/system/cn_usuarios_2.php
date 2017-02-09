@@ -1,8 +1,9 @@
 <?php
-  $mysql_host = "sv25.byethost25.org";
-  $mysql_database = "laredone_oxygen";
-  $mysql_username = "laredone_wcenter";
-  $mysql_password = "05100248abc";
+  $mysql_host = "31.22.4.142";
+  $mysql_database = "websolu2_oxygen_dev";
+  //$mysql_database = "websolu2_oxygen";
+  $mysql_username = "websolu2_oxygen";
+  $mysql_password = "0xyg3nus3r";
   $conexion = new mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_database);   
   if(mysqli_connect_error()){
       $mensaje_de_error =  "error de conexion";

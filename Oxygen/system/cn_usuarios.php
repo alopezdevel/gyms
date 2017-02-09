@@ -1,12 +1,13 @@
 <?php
 
-$mysql_host = "sql.byethost25.org";
+$mysql_host = "31.22.4.142";
 
-$mysql_database = "laredone_oxygen";
+$mysql_database = "websolu2_oxygen_dev";
+//$mysql_database = "websolu2_oxygen";
 
-$mysql_username = "laredone_wcenter";
+$mysql_username = "websolu2_oxygen";
 
-$mysql_password = "05100248abc";
+$mysql_password = "0xyg3nus3r";
 
 //error_reporting(0);
 
