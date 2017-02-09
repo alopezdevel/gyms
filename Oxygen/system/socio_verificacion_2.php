@@ -3,9 +3,23 @@
  if ($_SESSION['acceso'] != "A" ){ //No ha iniciado session
     header("Location: login.php");
  }else{
-include("header.php");?>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">          
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+include("header.php");
+$arr_opciones = NULL;
+$arr_opciones[0]['folio'] = "R";
+$arr_opciones[0]['descripcion']= "Socios - Vencidos";
+$arr_opciones[1]['folio'] = "A";
+$arr_opciones[1]['descripcion'] = "Socios - Activos";
+$arr_opciones[2]['folio'];
+$arr_opciones[2]['descripcion'];
+?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">        
+
+
+
+</style>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>   
+<script src="/js/jquery.blockUI.js" type="text/javascript"></script> 
+
 <script>
  $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
@@ -30,7 +44,8 @@ $("#fecha").datepicker();
 });
 </script>
 <script>     
-function llenadoGrid(){
+function llenadoGrid(){      
+   
     var filtro = "";  //DATE_FORMAT(dFechaIngreso,  '%m/%d/%Y')         
     if($('#filtro_fecha_creacion').val() !=""){     
         filtro += "DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')|" + $("#filtro_fecha_creacion").val() + ",*"
@@ -45,14 +60,16 @@ function llenadoGrid(){
         filtro += "Concat(ct_socio.sNombreSocio, ' ', ct_socio.sApellidoPaternoSocio, ' ', ct_socio.sApellidoMaternoSocio)|" + $("#filtro_nombre_socio").val() + ",*"
     }
     
-    if($('#filtro_Estatus_Cuenta').val() !="" && $('#filtro_Estatus_Cuenta').val() != null && $('#filtro_Estatus_Cuenta').val() != "null"){     
-        filtro += "bactivo|" + $("#filtro_Estatus_Cuenta").val() + ",*"
+    if($('#sAsistencia').val() !="" && $('#sAsistencia').val() != null && $('#sAsistencia').val() != "null"){     
+        filtro += "pago.dias_restantes|" + $("#sAsistencia").val() + ",*"
     }
+    
     
         var fn_request_certificate = {
         domroot:"#fn_request_certificate",
-        data_grid: "#data_grid_certificate",
+        data_grid: "#data_grid_certificate",                                
         fillgrid: function(){
+            
                $.ajax({             
                 type:"POST", 
                 url:"funciones.php", 
@@ -61,6 +78,7 @@ function llenadoGrid(){
                 dataType : "json",
                 success : function(data){                               
                     $(fn_request_certificate.data_grid+" tbody").empty().append(data.tabla);
+                    //$.unblockUI(); 
                     //$(fn_request_certificate.data_grid+" tbody tr:even").addClass('gray');
                     //$(fn_request_certificate.data_grid+" tbody tr:odd").addClass('white');
                                 }
@@ -68,10 +86,11 @@ function llenadoGrid(){
         }    
     }
     fn_request_certificate.fillgrid();
+    
 }
 $(document).ready(inicio);
 function inicio(){
-    
+      
     var dialogo;
     //dialogo 1
     dialogo = $( "#dialog-user" ).dialog({
@@ -105,8 +124,8 @@ function inicio(){
     $( "#filtro_fecha_creacion" ).keyup(onkeyup);
     $( "#filtro_id_socio" ).keyup(onkeyup);
     $("#filtro_correo_socio").keyup(onkeyup);
-    $("#filtro_nombre_socio").keyup(onkeyup);  
-    $("#filtro_Estatus_Cuenta" ).selectmenu({ change: function( event, ui ) { onkeyup(); }});
+    $("#filtro_nombre_socio").keyup(onkeyup);      
+    $("#sAsistencia" ).selectmenu({ change: function( event, ui ) { onkeyup(); }});
     llenadoGrid();
      
       
@@ -114,22 +133,28 @@ function inicio(){
   
 }
 function onRegistrarAsistencia(id,correo, estatus){
-    $("#id_asis").val(id);
-    confimacion = confirm("Desea Registrar asistencia del socio \n \n ID: "  + id + " \n EMAIL: " + correo + "\n Estatus: " + estatus ) ;
+    $("#id_asis").val(id);     
+    //confimacion = confirm("Desea Registrar asistencia del socio \n \n ID: "  + id + " \n EMAIL: " + correo + "\n Estatus: " + estatus ) ;
+    confimacion = true;
     if(confimacion){
+         $.blockUI({ message: '<h1> Registrando asistencia...</h1>', 
+                css: { border: '3px solid #a00' }  });
         $.post("funciones.php", { accion: "registrar_asistencia", id:id, estatus:estatus},
         function(data){ 
              switch(data.error){
              case "1":   alert( data.mensaje);
                     break;
              case "0":   
-                         alert("Se ha registrado la asistencia satisfactoria.");
+                          
                          llenadoGrid();
+                         $.unblockUI(); 
+                            
                     break;  
              }
          }
          ,"json");           
         }
+      
     }
 
 
@@ -176,6 +201,7 @@ function onFocus(){
 
 
 </script>
+
 <div id="layer_content" class="main-section">
     <div class="container"> 
         <div class="page-title">
@@ -183,7 +209,22 @@ function onFocus(){
             <h2>Asistencia del socio</h2>
         </div>
         
-        
+         <div class="txt-content">              
+            <div class="frm-buscar2">
+             <?php if (count($arr_opciones) > 1){ ?>        
+                            <select name="sAsistencia" id="sAsistencia">
+                            <option value="">Socios - Todos</option>
+                            <?php foreach ($arr_opciones as $opcion) {?>
+                                    <option value="<?php echo $opcion["folio"] ?>"> 
+                             <?php 
+                                echo $opcion["descripcion"];
+                            ?>   
+                            </option>
+                            <?php } ?> 
+                            </select>         
+                <?php }?> 
+             </div>
+            </div>
         <table id="data_grid_certificate" class="data_grid">
         <thead>                                                                                       
             <tr id="grid-head1">                                                                                             

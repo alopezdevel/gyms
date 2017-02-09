@@ -233,7 +233,7 @@ function alta_usuario(){
             //        
         }  
                   
-         $ruta = "http://oxygen-fx.laredo2.net/system/confirm_mail_user.php?cuser=$codigoconfirm";
+         $ruta = "http://www.oxygencrossfit.com/system/confirm_mail_user.php?cuser=$codigoconfirm";
         if ($transaccion_exitosa) {
             //Proceso para enviar correo                 
             require_once("./lib/mail.php");
@@ -254,7 +254,7 @@ function alta_usuario(){
                          <p style=\"margin:5px auto; text-align:center;\"><a href='$ruta' style='color:#ffffff;background:#6191df;padding:5px 8px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;'>Confirmar</a></p>
                          <br>
                          <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Si este correo te ha llegado por error o no deseas acceder a tu cuenta da click en cancelar:</p>
-                         <p style=\"margin:5px auto; text-align:center;\"><a href='oxygen-fx.laredo2.net' style='color:#ffffff;background:#8d0c0c;padding:5px 8px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;'>Cancelar</a></p>
+                         <p style=\"margin:5px auto; text-align:center;\"><a href='http://www.oxygencrossfit.com' style='color:#ffffff;background:#8d0c0c;padding:5px 8px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;'>Cancelar</a></p>
                     </div>";
              $mail = new Mail();                                    
              $mail->From = "soporte@oxygen-fx.com";
@@ -946,28 +946,38 @@ function get_asistencia_asinc(){
     $conexion->autocommit(FALSE);
     $transaccion_exitosa = true;
     $array_filtros = explode(",*",$_POST["filtroInformacion"]); 
-    $filtroQuery .= " WHERE ct_socio.iIDSocio != '' ";  
+    $filtroQuery .= " WHERE ct_socio.iIDSocio != '' AND pago.dFechaVencimiento is not null";  
     foreach($array_filtros as $key => $valor){
         if($array_filtros[$key] != ""){
             $campo_valor = explode("|",$array_filtros[$key]);
-            if ($campo_valor[0] =='bactivo'){
-                    $filtroQuery.= " AND  ".$campo_valor[0]."='".$campo_valor[1]."' ";
+            if ($campo_valor[0] =='pago.dias_restantes'){
+                if($campo_valor[1] == "A"){
+                    $filtroQuery.= " AND  ".$campo_valor[0]."> 0 ";
+                }else{
+                    $filtroQuery.= " AND  ".$campo_valor[0]."<= 0 ";
+                }
+                    
             }else{
                     $filtroQuery == "" ? $filtroQuery.= " AND  ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'": $filtroQuery.= " AND ".$campo_valor[0]." LIKE '%".$campo_valor[1]."%'";
             }
         }
-    }
-    
-    $sql = "SELECT DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')    as dFechaIngreso, 
-            ct_socio.iIDSocio as ID, 
-            sCorreoSocio as correo, 
-            CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,
-            pago.dias_restantes  as eEstatus        
-            FROM ct_socio 
-            LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
-            FROM cb_pagos_socio 
-            GROUP BY iIDSocio
-            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio ".$filtroQuery ." LIMIT 50";
+    }    
+        $sql = " SELECT      
+                 DATE_FORMAT(pago.dFechaVencimiento,  '%d/%m/%Y')    as dFechaIngreso, 
+                 ct_socio.iIDSocio as ID, 
+                 sCorreoSocio as correo, 
+                 CONCAT(sNombreSocio,' ',sApellidoPaternoSocio,' ', sApellidoMaternoSocio)  as nombre,                 
+                 pago.dias_restantes  as eEstatus,
+                 DATE_FORMAT(MAX(cb_transacciones_socio.dFechaVisitaSocio),  '%d/%m/%Y') as ultima_visita,                      
+                 CASE WHEN  DATE_FORMAT(MAX(cb_transacciones_socio.dFechaVisitaSocio),  '%d/%m/%Y')  = DATE_FORMAT( DATE_SUB( NOW(),INTERVAL 1 HOUR),  '%d/%m/%Y')  THEN '1' else '0' end as asistencia ";
+    $sql = $sql."FROM ct_socio 
+                 LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
+                 FROM cb_pagos_socio 
+                 GROUP BY iIDSocio
+                 Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio         
+                 LEFT JOIN cb_transacciones_socio ON cb_transacciones_socio.iIDSocio = ct_socio.iIDSocio ";
+    $sql = $sql. $filtroQuery;                      
+    $sql = $sql. " GROUP BY ct_socio.iIDSocio ORDER BY asistencia ASC, eEstatus ASC  LIMIT 30";
     $result = $conexion->query($sql);
     $NUM_ROWs_socios = $result->num_rows;    
     if ($NUM_ROWs_socios > 0) {
@@ -975,28 +985,26 @@ function get_asistencia_asinc(){
         while ($socios = $result->fetch_assoc()) {
            if($socios["ID"] != ""){
                $leyenda = "";
-               $leyenda = "";
-               $color_fondo = "#00FF00";   
+               $leyenda = "";  
+               $color_fondo = "#69e569";   
                if($socios['eEstatus'] <=0){
                 $estatus = "vencido";
                }else{
                 $estatus =  "vigente";
                }
                if($socios['eEstatus'] <=5){
-                   $color_fondo = "#FF8000";
+                   $color_fondo = "#f7f764";
                }
-               if($socios['eEstatus'] < 10 && $socios['eEstatus'] > 5){
-                   $color_fondo = "#FFFF00";
-               }
+               
                if($socios['eEstatus'] == 0){
-                   $color_fondo = "#FF0000";
-               }
+                   $color_fondo = "#ff5252";
+               }                   
                if($socios['eEstatus'] != ""){               
                    if($socios['eEstatus'] <0){
                       $socios['eEstatus'] = $socios['eEstatus'];
                       $socios['eEstatus'] = $socios['eEstatus'].'';
                       $leyenda = $socios['eEstatus'];
-                      $color_fondo = "#FF0000"; 
+                      $color_fondo = "#ff5252"; 
                    }else{               
                        $socios['eEstatus'] = $socios['eEstatus'].'';
                        $leyenda = $socios['eEstatus'];
@@ -1007,12 +1015,16 @@ function get_asistencia_asinc(){
                }
              
                  $htmlTabla .= "<tr bgcolor='".$color_fondo."'>                            
-                                    <td ><font size='5'>".$socios['dFechaIngreso']."</font></td>".             
-                                    "<td ><font size='5'>".$socios['ID']."</font></td>".
-                                   "<td ><font size='5'>".$socios['correo']."</font></td>".                                                                                          
-                                   "<td nowrap='nowrap'  ><font size='5'>".$socios['nombre']."</font></td>".                                                  
-                                   "<td ><font size='5'>".$leyenda."</font></td>".
-                                   "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarAsistencia(\"".$socios['ID']."\" , \"".$socios['correo']."\", \"".$estatus."\" )' class='btn_2 right' style='padding: 2px 5px;cursor: pointer;'><i class='fa fa-check-circle'></i></span></td>".
+                                    <td ><font size='3'>".$socios['dFechaIngreso']."</font></td>".             
+                                    "<td ><font size='3'>".$socios['ID']."</font></td>".
+                                   "<td ><font size='3'>".$socios['correo']."</font></td>".                                                                                          
+                                   "<td nowrap='nowrap'  ><font size='3'>".$socios['nombre']."</font></td>".                                                  
+                                   "<td ><font size='3'>".$leyenda."</font></td>";
+                 if($socios['asistencia'] == "0"){
+                    $htmlTabla .= "<td nowrap='nowrap' colspan='2' ><span onclick='onRegistrarAsistencia(\"".$socios['ID']."\" , \"".$socios['correo']."\", \"".$estatus."\" )' class='btn_2 right' style='padding: 2px 5px;cursor: pointer;'><i class='fa fa-check-circle'></i></span></td>";
+                 }else{
+                     $htmlTabla .= "<td nowrap='nowrap' colspan='2' >&nbsp;</td>";
+                 }
                                 "</tr>"   ;                                         
              }else{                             
                  $htmlTabla .="<tr>
@@ -1076,36 +1088,60 @@ function registrar_asistencia(){
      echo array2json($response);
 } 
 function enviar_recordatorio_pago(){
-    include("cn_usuarios_2.php");
-    //$conexion->begin_transaction();
-    $conexion->autocommit(FALSE);
+    include("cn_usuarios.php");
+    mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT 
+    $sql = "SELECT sComentario FROM cb_comentario_del_dia WHERE DATE_FORMAT(dFecha,  '%d/%m/%Y')  = DATE_FORMAT( DATE_SUB( NOW(),INTERVAL 1 HOUR),  '%d/%m/%Y') ";
+    $result = mysql_query($sql, $dbconn);
+    if (mysql_num_rows($result) == 0) {
+        mysql_free_result($result);
+        $sql = "INSERT INTO  cb_comentario_del_dia SET  dFecha =   DATE_SUB( NOW(),INTERVAL 1 HOUR) , sUsuario = 'CORREODIARIO', sComentario = 'CORREODIARIO'";
+        mysql_query($sql, $dbconn);
+        if ( mysql_affected_rows() < 0 ) {
+            $transaccion_exitosa = false;
+        }
+       
+        $arr_  = NULL;
+        $correo = "";
+        $sql = "SELECT 
             sCorreoSocio as correo, 
             pago.dias_restantes  as dias        
             FROM ct_socio 
             LEFT JOIN (SELECT  iIDSocio, max(cb_pagos_socio.dFechaVencimiento) as dFechaVencimiento,  DATEDIFF( max(cb_pagos_socio.dFechaVencimiento),NOW()) as dias_restantes
             FROM cb_pagos_socio 
             GROUP BY iIDSocio
-            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio  WHERE pago.dias_restantes <= 5";
-    $result = $conexion->query($sql);
-    $NUM_ROWs_socios = $result->num_rows;   
-    $correo = "";
-    if ($NUM_ROWs_socios > 0) { 
-        $i = 0;       
-        while ($socios = $result->fetch_assoc()) {
-            if($correo == ""){
-                $correo = $socios['correo'];
+            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio  WHERE pago.dias_restantes <= 0 ";
+            $result = mysql_query($sql, $dbconn);
+            if (mysql_num_rows($result) > 0) {
+                while ($Recordset = mysql_fetch_array($result)) {
+                    $arr_[] = array("correo" => $Recordset['correo'],
+                                    "dias" => stripslashes($Recordset['dias']));
+                }
             }
-              $correo= $correo.','.$socios['correo'];
-        }
-    }
-        $conexion->close(); 
-    require_once("./lib/mail.php");
-    $cuerpo = "
+            mysql_free_result($result);
+            if ($transaccion_exitosa) {
+                mysql_query("COMMIT");
+                mysql_close($dbconn);
+            } else {
+                mysql_query("ROLLBACK");
+                mysql_close($dbconn);            
+            }
+            
+            if(count($arr_)>0){
+                foreach($arr_ as $corre_envio){
+                    if($correo == ""){
+                        $correo = $corre_envio['correo'];  
+                        $mensajesssssddds = "oa";
+                    }else{
+                        $correo= $correo.','.$corre_envio['correo'];
+                    }
+                    
+                }
+                require_once("./lib/mail.php");
+                $cuerpo = "
                     <div style=\"font-size:12px;border:1px solid #6191df;border-radius:3px;padding:10px;width:95%; margin:5px auto;font-family: Arial, Helvetica, sans-serif;\">
                          <h2 style=\"color:#313131;text-transform: uppercase; text-align:center;\">Recordatorio  de pago - Oxygen-FX Gym!</h2> \n 
-                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\"><strong><br>Tu membresia esta a punto de expirar.</p></strong>\n 
+                         <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\"><strong><br>Tu membresia esta a punto de expirar o ya expiro.</p></strong>\n 
                          <br><br>
                          <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Si quieres saber, tus fechas de pago y dias restantes. Te invitamos a que ingreses a nuestro sitio web.</p>
                          <br><br>
@@ -1114,37 +1150,34 @@ function enviar_recordatorio_pago(){
                          <br>
                          <p style=\"color:#5c5c5c;margin:5px auto; text-align:left;\">Favor de no responder este correo.</p>                         
                     </div>";
-    $mail = new Mail();                                    
-    $mail->From = "soporte@oxygen-fx.com";
-    $mail->FromName = "oxygen-fx team";
-    $mail->Host = "oxygen-fx.com";
-    $mail->Mailer = "sendmail";    
-    $mail->Subject = "Tu membresia esta a punto de expirar"; 
-    $mail->Body  = $cuerpo;                                                                                            
-    $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
-    $mail->IsHTML(true);
-    $mail->WordWrap =150;
-    $mail_error = false;    
-    $mail->AddAddress( $correo);
-    if (!$mail->Send()) {
-        $mail_error = true;
-        $mail->ClearAddresses();
-    } 
-    
-           
-    if(!$mail_error){
-        $mensaje = "Se enviar con exito";
-        $error = "0";
-        
-    }else{
-        $mensaje = "Error e-mail.";
-        $error = "1";  
-        $transaccion_exitosa = false;
-    } 
-
-    $response = array("mensaje"=>"$mensaje","error"=>"$error");   
-    echo array2json($response);
-    
+                    $mail = new Mail();                                    
+                    $mail->From = "soporte@oxygen-fx.com";
+                    $mail->FromName = "oxygen-fx team";
+                    $mail->Host = "oxygen-fx.com";
+                    $mail->Mailer = "sendmail";    
+                    $mail->Subject = "Tu membresia esta a punto de expirar o ya expiro"; 
+                    $mail->Body  = $cuerpo;                                                                                            
+                    $mail->ContentType ="Content-type: text/html; charset=iso-8859-1";
+                    $mail->IsHTML(true);
+                    $mail->WordWrap =150;
+                    $mail_error = false;    
+                    $mail->AddAddress( $correo);
+                    if (!$mail->Send()) {
+                        $mail_error = true;
+                        $mail->ClearAddresses();
+                    }     
+                    if(!$mail_error){
+                        $mensaje = "Se enviar con exito";
+                        $error = "0";
+                    }else{
+                        $mensaje = "Error e-mail.";
+                        $error = "1";  
+                        $transaccion_exitosa = false;
+                    }                 
+            }
+        }
+    $response = array("mensaje"=>$mensajesssssddds,"error"=>"$error");   
+    echo array2json($response);    
 }
 function consultar_anuncio(){    
     include("cn_usuarios_2.php");

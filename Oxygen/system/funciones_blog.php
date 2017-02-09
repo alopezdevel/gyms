@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 function array2json($arr) { 
     if(function_exists('json_encode')) return json_encode($arr); //Lastest versions of PHP already has this functionality.
     $parts = array(); 
@@ -111,7 +111,7 @@ function post_nuevo(){
         mysql_query("ROLLBACK");
         mysql_close($dbconn);
     }
-     $response = array("mensaje"=>"$mensaje","error"=>"$error");   
+     $response = array("mensaje"=>"$sql","error"=>"$error");   
      echo array2json($response);
 } 
 function get_entradas(){

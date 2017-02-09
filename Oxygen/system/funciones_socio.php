@@ -51,7 +51,7 @@ function CargarDatosSocio(){
     include("cn_usuarios.php");
     mysql_query("BEGIN");
     $transaccion_exitosa = true;
-    $sql = "SELECT *, sFotoPerfilRuta, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio , ' Col. ', sColoniaSocio) AS sDireccion FROM ct_socio WHERE sCorreoSocio = '".$username."'";
+    $sql = "SELECT *, sFotoPerfilRuta, CONCAT(sNombreSocio , ' ', sApellidoPaternoSocio, ' ',  sApellidoMaternoSocio) AS sNombreSocio,  CONCAT(sCalleSocio ,  sColoniaSocio) AS sDireccion FROM ct_socio WHERE sCorreoSocio = '".$username."'";
     $result = mysql_query($sql, $dbconn);
     $informacion_personal = "";
     $workouts = "";
@@ -92,6 +92,7 @@ function CargarDatosSocio(){
                                     "<div><span class=\"tag_field\">ID: </span><span>".$socios["iIDSocio"]."</span></div>".
                                     "<div><span class=\"tag_field\">Nombre: </span><span>".$socios["sNombreSocio"]."</span></div>".
                                     "<div><span class=\"tag_field\">Region: </span><span>".$socios["sDireccion"]."</span></div>".
+                                    "<div><span class=\"tag_field\">Afiliacion: </span><span>OXYGEN FX</span></div>".
                                     "<div><span class=\"tag_field\">Genero: </span><span>".$genero."</span></div>".
                                     "<div><span class=\"tag_field\">Edad: </span><span>".$socios["iEdad"]."</span></div>".
                                     "<div><span class=\"tag_field\">Altura (cm): </span><span>".$socios["iAltura"]."</span></div>".
@@ -104,7 +105,7 @@ function CargarDatosSocio(){
                                 "<tr><td class=\"tag_field\">Filthy 50: </td><td>".$socios["sWFilthy50"]."<td/></tr>".
                                 "<tr><td class=\"tag_field\">Row 500m: </td><td>".$socios["sWRow500m"]."<td/></tr>".
                                 "<tr><td class=\"tag_field\">Sprint 400m: </td><td>".$socios["sWSprint400m"]."<td/></tr>".
-                                "<tr><td class=\"tag_field\">Run 5k: </td><td>".$socios["sWRun5k"]."<td/></tr>";
+                                "<tr><td class=\"tag_field\">Run 3.2k: </td><td>".$socios["sWRun5k"]."<td/></tr>";
                                 
                  $maxespr .= "<tr><td colspan=\"100%\" class=\"table-head\">MAXES PR</td></tr>".
                                 "<tr><td class=\"tag_field\">Clean & Jerk: </td><td>".$socios["iMP_cleanandjerk"]."</td></tr>".
@@ -112,7 +113,7 @@ function CargarDatosSocio(){
                                 "<tr><td class=\"tag_field\">Deadlift: </td><td>".$socios["iMP_deadlift"]."</td></tr>".
                                 "<tr><td class=\"tag_field\">BackSquat: </td><td>".$socios["iMP_backsquat"]."</td></tr>".
                                 "<tr><td class=\"tag_field\">Max Pull-Ups: </td><td>".$socios["iMP_maxpullups"]."</td></tr>".
-                                "<tr><td class=\"tag_field\">Max Muscle-Up: </td><td>".$socios["iMP_maxmuscleup"]."</td></tr>".
+                                "<tr><td class=\"tag_field\">Squat Clean: </td><td>".$socios["iMP_maxmuscleup"]."</td></tr>".
                                 "<tr><td class=\"tag_field\">Max Burpees Min: </td><td>".$socios["iMP_maxburpeesmin"]."</td></tr>";
                                 
                  $skills .= "<tr><td colspan=\"100%\" class=\"table-head\">SKILLS</td></tr>".
@@ -122,7 +123,7 @@ function CargarDatosSocio(){
                                 "<tr><td class=\"tag_field\">5M - 3W PULL UPS: </td><td>".$socios["eS_pullups"]." </td></tr>".
                                 "<tr><td class=\"tag_field\">M5 - 3W MTS WALK HS: </td><td>".$socios["eS_walkhs"]." </td></tr>".
                                 "<tr><td class=\"tag_field\">BOX JUMP MAX INCH: </td><td>".$socios["iS_boxjumpmax"]."</td></tr>".
-                                "<tr><td class=\"tag_field\">Ring Muscle Up: </td><td>".$socios["eS_ringmuscleup"]." </td></tr>";
+                                "<tr><td class=\"tag_field\">Bar & Ring  Muscle Up: </td><td>".$socios["eS_ringmuscleup"]." </td></tr>";
              }else{  
                 //si falla la consulta se muestra lo siguiente:                           
                  $informacion_personal .="<legend>Informacion Personal</legend><div style=\"text-align:center; font-weight: bold;\">No hay datos disponibles.</div>";

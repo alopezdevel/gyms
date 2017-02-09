@@ -20,7 +20,7 @@ if ( $_SESSION['acceso'] != "A"){ //No ha iniciado session
             FROM cb_pagos_socio 
             
             GROUP BY iIDSocio
-            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio WHERE pago.dias_restantes <= 5 ";
+            Order BY dFechaVencimiento DESC   ) as pago ON pago.iIDSocio = ct_socio.iIDSocio WHERE pago.dias_restantes <= 0 ";
     $result = mysql_query($sql, $dbconn);
     if (mysql_num_rows($result) > 0) {
         while ($Recordset = mysql_fetch_array($result)) {
