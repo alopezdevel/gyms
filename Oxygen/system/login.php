@@ -6,7 +6,7 @@ session_unset();
 
 session_destroy();
 
-include("cn_usuarios.php");
+include("cn_usuarios_2.php");
 
 if ($dbconn && $dbselect) {  
 

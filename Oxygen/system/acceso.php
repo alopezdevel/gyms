@@ -1,5 +1,7 @@
 <?php
-
+     error_reporting(-1);
+     error_reporting(E_ALL);
+     ini_set('error_reporting', E_ALL);
   session_start();
 
     //session_regenerate_id();
@@ -19,13 +21,13 @@
 
     //CONSULTA DEL USUARIO
 
-$queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = sha1('".$clave."') AND hActivado = '1'";    $resultadoUsuario = @mysql_query($queryUsuario, $dbconn);
-
-    $Usuario = mysql_fetch_array($resultadoUsuario);
-
-    $NUM_ROWs_Usuario = mysql_num_rows($resultadoUsuario);
-
-    mysql_close($dbconn);
+    $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".$usuario."' AND hClave = sha1('".$clave."') AND hActivado = '1'";  
+    $resultadoUsuario =  mysqli_query($dbconn,$queryUsuario);
+    $NUM_ROWs_Usuario = mysqli_num_rows($resultadoUsuario);    
+    $Usuario = mysqli_fetch_array($resultadoUsuario); 
+    
+    
+    mysqli_close($dbconn);
 
     
 
@@ -35,7 +37,7 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 
          $sql = "INSERT INTO cu_intentos_acceso SET sUsuario = '".$usuario."', sClave = '".$clave."', dFechaIngreso = ".$FECHA_ACCESO.", sIP = '".$_SERVER['REMOTE_ADDR']."', bEntroSistema = '1'";
 
-         @mysql_query($sql, $dbconn); 
+         @mysqli_query( $dbconn,$sql); 
 
          //$Usuario['eTipoUsuario']   
 
@@ -51,7 +53,7 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 
          //Variables de session
 
-         mysql_close($dbconn);
+         mysqli_close($dbconn);
 
          $_SESSION["acceso"] = $acceso;
 
@@ -97,9 +99,9 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 
          $sql = "INSERT INTO cu_intentos_acceso SET sUsuario = '".$usuario."', sClave = '".$clave."', dFechaIngreso = ".$FECHA_ACCESO.", sIP = '".$_SERVER['REMOTE_ADDR']."', bEntroSistema = '0'";
 
-         @mysql_query($sql, $dbconn);
+         @mysqli_query($dbconn,$sql);
 
-         mysql_close($dbconn);
+         mysqli_close($dbconn);
 
          session_unset();
 
@@ -127,10 +129,10 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 </head>
 <div id="layer_login">
     <form id="form-login" name="form-login" method="POST">
-     	<img alt="" src="images/login/img-logo-login.png" alt="logo">
-     	<h1 class="txt-center">Error de acceso</h1>
-     	<br><label>El usuario <?php print "<b>$usuario</b>" ?> no está registrado como un usuario <br>&nbsp;válido o la clave secreta es incorrecta.</label>
-		<br><br><br><a href="login.php" class="btn_1">Regresar</a>
+         <img alt="" src="images/login/img-logo-login.png" alt="logo">
+         <h1 class="txt-center">Error de acceso</h1>
+         <br><label>El usuario <?php print "<b>$usuario</b>" ?> no está registrado como un usuario <br>&nbsp;válido o la clave secreta es incorrecta.</label>
+        <br><br><br><a href="login.php" class="btn_1">Regresar</a>
     </form>
 </div>
 <!--- SLIDER ----->
@@ -152,8 +154,8 @@ $queryUsuario = "SELECT eTipoUsuario FROM cu_control_acceso WHERE sUsuario = '".
 ?>
 <footer class="footer">
     <div class="container"> 
-    	Oxygen-FX Crossfit.  © Copyright 2015.	    
-   	</div>
+        Oxygen-FX Crossfit.  © Copyright 2015.        
+       </div>
 </footer>
 
 

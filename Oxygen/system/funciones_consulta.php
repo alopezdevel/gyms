@@ -41,11 +41,11 @@ function Consulta_pagos_socio($socio, $mes, $year_a, &$arr_){
 
     }
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query( $dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("id_socio" => stripslashes($Recordset['iIDSocio']),       
                             "folio_pago" => stripslashes($Recordset['iFolio']),
@@ -63,9 +63,9 @@ function Consulta_pagos_socio($socio, $mes, $year_a, &$arr_){
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }
 
@@ -97,11 +97,11 @@ function getSocioPago($folio, &$arr_) {
 
              LIMIT 1";
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query( $dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("id_socio" => stripslashes($Recordset['iIDSocio']),
 
@@ -121,9 +121,9 @@ function getSocioPago($folio, &$arr_) {
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }
 
@@ -145,11 +145,11 @@ function Consulta_Log_Del_Dia($fecha="", &$arr_) {
 
              WHERE DATE_FORMAT(cb_transacciones_socio.dFechaVisitaSocio, '%d/%m/%Y') = DATE_FORMAT(".$_SESSION['fecha_actual_server'].", '%d/%m/%Y') ORDER BY cb_transacciones_socio.dFechaVisitaSocio DESC";
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query($dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("id_socio" => stripslashes($Recordset['iIDSocio']),
 
@@ -163,9 +163,9 @@ function Consulta_Log_Del_Dia($fecha="", &$arr_) {
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }
 
@@ -199,11 +199,11 @@ function Consulta_Log_Usuario($socio, $mes, $year_a, &$arr_) {
 
     }
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query($dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("id_socio" => stripslashes($Recordset['iIDSocio']),
 
@@ -217,9 +217,9 @@ function Consulta_Log_Usuario($socio, $mes, $year_a, &$arr_) {
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }
 
@@ -251,11 +251,11 @@ function getMembresia($folio,$nombre,$apellidoPaterno,&$arr_) {
 
                  } 
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query( $dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("id_socio" => stripslashes($Recordset['idsocio']),
 
@@ -273,9 +273,9 @@ function getMembresia($folio,$nombre,$apellidoPaterno,&$arr_) {
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }  
 
@@ -295,8 +295,8 @@ function getSocio($folio,&$arr_) {
                 DATE_FORMAT(dFechaNacimientoSocio, '%d/%m/%Y') as dFechaNacimientoSocio
                 from ct_socio c  
                 where c.iIDSocio='".$folio."' ";               
-    $result = mysql_query($sql, $dbconn);
-    if (mysql_num_rows($result) > 0) {
+    $result = mysqli_query( $dbconn,$sql);
+    if (mysqli_num_rows($result) > 0) {
         while ($Recordset = mysql_fetch_array($result)) {
            $arr_[] = array("id_socio" => stripslashes($Recordset['idsocio']),
                            "nombre" => stripslashes($Recordset['nombre']),
@@ -313,8 +313,8 @@ function getSocio($folio,&$arr_) {
                            );
         }
     }
-    mysql_free_result($result);
-    mysql_close($dbconn);
+    mysqli_free_result($result);
+    mysqli_close($dbconn);
 }  
 
 function Consulta_Chat($total_mensajes,&$arr_){
@@ -327,11 +327,11 @@ function Consulta_Chat($total_mensajes,&$arr_){
 
              ORDER BY iConsecutivo DESC LIMIT ".$total_mensajes;
 
-    $result = mysql_query($sql, $dbconn);
+    $result = mysqli_query( $dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("fecha" => stripslashes($Recordset['fecha']),
 
@@ -343,9 +343,9 @@ function Consulta_Chat($total_mensajes,&$arr_){
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn); 
+    mysqli_close($dbconn); 
 
 }
 
@@ -359,11 +359,11 @@ function getPagoMes($folio,$year,$mes,&$arr_)   {
 
              where iIDSocio='".$folio."' and year(dFechaPago)='".$year."' and month(dFechaPago)='".$mes."' limit 1";                
 
-   $result = mysql_query($sql, $dbconn);
+   $result = mysqli_query( $dbconn,$sql);
 
-    if (mysql_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
-        while ($Recordset = mysql_fetch_array($result)) {
+        while ($Recordset = mysqli_fetch_array($result)) {
 
            $arr_[] = array("FechaPago" => stripslashes($Recordset['dFechaPago']));
 
@@ -371,9 +371,9 @@ function getPagoMes($folio,$year,$mes,&$arr_)   {
 
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
 }
 
@@ -387,9 +387,9 @@ function Consulta_Comentario_Dia() {        //USUARIOS.PHP
 
             WHERE DATE_FORMAT(dFecha,'%d/%m/%Y') = DATE_FORMAT(".$_SESSION['fecha_actual_server'].",'%d/%m/%Y') ";
 
-    $mensaje = mysql_fetch_array(mysql_query($sql, $dbconn));
+    $mensaje = mysqli_fetch_array(mysqli_query( $dbconn,$sql));
 
-    mysql_close($dbconn);
+    mysqli_close($dbconn);
 
     return $mensaje['mensaje'];
 
@@ -526,9 +526,9 @@ function Expresion_Regular($tipo, $campo, $entero = 0, $decimal = 0) {
 function getSocios($nombre,$apellidopaterno,&$arr_) {
     include("cn_usuarios.php");             
        $sql = " select iIDsocio,sNombreSocio,sApellidoPaternoSocio,sApellidoMaternoSocio,sCalleSocio,sColoniaSocio,sCorreoSocio,sComentariosGeneralesSocio,sTelefonoSocio,eGenero from ct_socio where bactivo='1' and  sNombreSocio like '".$nombre."%' and sApellidoPaternoSocio like '".$apellidopaterno."%' group by sNombreSocio,sApellidoPaternoSocio ";               
-    $result = mysql_query($sql, $dbconn);
-    if (mysql_num_rows($result) > 0) {
-        while ($Recordset = mysql_fetch_array($result)) {
+    $result = mysqli_query( $dbconn,$sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($Recordset = mysqli_fetch_array($result)) {
            $arr_[] = array("id_socio" => stripslashes($Recordset['iIDsocio']),
                            "nombre_socio" => stripslashes($Recordset['sNombreSocio']),
                            "apellido_paterno" => stripslashes($Recordset['sApellidoPaternoSocio']),
@@ -542,28 +542,28 @@ function getSocios($nombre,$apellidopaterno,&$arr_) {
                            );
         }
     }
-    mysql_free_result($result);
-    mysql_close($dbconn);
+    mysqli_free_result($result);
+    mysqli_close($dbconn);
 }
 
 function SocioInactivo($folio) {
   include("cn_usuarios.php");//Conexion                
    $transaccion_exitosa = true;                                                                                                                                                                                    
-   mysql_query("BEGIN");//Transaccion inica
+   mysqli_query("BEGIN");//Transaccion inica
    $sql="update ct_socio set bactivo=0 where iidsocio='".$folio."' ";
-   mysql_query($sql, $dbconn);
-   if(mysql_affected_rows() < 0 ) {
+   mysqli_query( $dbconn,$sql);
+   if(mysqli_affected_rows() < 0 ) {
      $transaccion_exitosa = false;
      $mensaje_error="No se pudieron guardar los datos del socio. Favor de verificar los datos.";
     }
     if ($transaccion_exitosa) {
-    mysql_query("COMMIT");
-    mysql_close($dbconn);
+    mysqli_query("COMMIT");
+    mysqli_close($dbconn);
      return TRUE;
     }else{
      echo '<script language="javascript">alert(\''.$mensaje_error.'\')</script>';
-     mysql_query("ROLLBACK");
-     mysql_close($dbconn);
+     mysqli_query("ROLLBACK");
+     mysqli_close($dbconn);
      return false;  
     } 
 }
@@ -672,12 +672,12 @@ function ValidarSocio($nombre,$Apaterno,$Amaterno,$Calle,$Colonia,$Correo,$Comen
   
   return $TodoOk;  
 } 
-function ExisteSocio($nombre,$Amaterno,$Amaterno){
+function ExisteSocio($nombre,$Amaterno,$Apaterno){
    include("cn_usuarios.php");
    $existe=FALSE;
-   $sql = "select sNombreSocio from ct_socio where sNombreSocio='".$nombre."' and sApellidoPaternoSocio='".$Amaterno."' and sApellidoMaternoSocio='".$Amaterno."'";                
-   $result = mysql_query($sql, $dbconn);
-    if (mysql_num_rows($result) > 0) {
+   $sql = "select sNombreSocio from ct_socio where sNombreSocio='".$nombre."' and sApellidoPaternoSocio='".$Apaterno."' and sApellidoMaternoSocio='".$Amaterno."'";                
+   $result = mysqli_query( $dbconn,$sql);
+    if (mysqli_num_rows($result) > 0) {
         $existe=TRUE;
     }
     mysql_free_result($result);
@@ -689,21 +689,21 @@ function ActualizarSocio($folio,$nombre,$Apaterno,$Amaterno,$Calle,$Colonia,$Cor
    $transaccion_exitosa = true;
    //formateando fecha         
    $fechaNacimientoSocio = substr($fechaNacimiento,6,4).'/'.substr($fechaNacimiento,3,2).'/'.substr($fechaNacimiento,0,2);                                                                                                                                                                                    
-   mysql_query("BEGIN");//Transaccion inica
+   mysqli_query("BEGIN");//Transaccion inica
    $sql="update ct_socio set  sNombreSocio='".$nombre."',sApellidoPaternoSocio='".$Apaterno."',sApellidoMaternoSocio='".$Amaterno."',sCalleSocio='".$Calle."',sColoniaSocio='".$Colonia."',sCorreoSocio='".$Correo."',sComentariosGeneralesSocio='".$ComentariosGenerales."',sTelefonoSocio='".$Telefono."',eGenero='".$Genero."',sCantidadPago='".$CantidadPago."',dFechaNacimientoSocio='".$fechaNacimientoSocio."' where iidsocio='".$folio."' ";
-   mysql_query($sql, $dbconn);
-   if(mysql_affected_rows() < 0 ) {
+   mysqli_query( $dbconn,$sql);
+   if(mysqli_affected_rows() < 0 ) {
      $transaccion_exitosa = false;
      $mensaje_error="No se pudieron guardar los datos del socio. Favor de verificar los datos.";
     }
     if ($transaccion_exitosa) {
-    mysql_query("COMMIT");
-    mysql_close($dbconn);
+    mysqli_query("COMMIT");
+    mysqli_close($dbconn);
      return TRUE;
     }else{
      echo '<script language="javascript">alert(\''.$mensaje_error.'\')</script>';
-     mysql_query("ROLLBACK");
-     mysql_close($dbconn);
+     mysqli_query("ROLLBACK");
+     mysqli_close($dbconn);
      return false;  
     }                                                 
 }

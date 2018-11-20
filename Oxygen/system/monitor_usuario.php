@@ -1,6 +1,9 @@
-<?php
+<?php  
+
 session_start();
 include("header.php");
+ //error_reporting(E_ALL);
+//ini_set('display_errors', '1'); 
 include("funciones_consulta.php");
 ?>
 <script>
@@ -60,6 +63,7 @@ if ( $_SESSION['acceso'] != "A" ){ //No ha iniciado session
 if($_POST['txtBusquedaSocio'] != ""){
     $arr_consulta_socio = NULL;
     Consulta_Log_Usuario($_POST['txtBusquedaSocio'], $_POST['txtBusquedaFecha'], $_POST['txtBusquedaFechaYear'],$arr_consulta_socio);
+    echo count($arr_consulta_socio);
 }
 
 ?>
@@ -121,7 +125,7 @@ if($_POST['txtBusquedaSocio'] != ""){
                             $total_de_asistencia = 0;
                              if(count($arr_consulta_socio)>0){
                             $i= 0;
-                            $color_font_normal= "#000000";
+                            $color_font_normal= "#000000";     
                              foreach($arr_consulta_socio as $socio_log){
                                  if ($i % 2 == 0) {
                                      $color = "#C0C0C0";
