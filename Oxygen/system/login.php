@@ -6,7 +6,7 @@ session_unset();
 
 session_destroy();
 
-include("cn_usuarios_2.php");
+include("cn_usuarios.php");
 
 if ($dbconn && $dbselect) {  
 
@@ -57,7 +57,7 @@ function Validar_Login() {                //CONTROL_ACCESO.PHP
 <!--- nuevo login --->
 <div id="layer_login">
     <form id="form-login" name="form-login" method="POST" action="acceso.php" onSubmit="return Validar_Login()">
-     	<img alt="" src="images/login/img-logo-login.png" alt="logo">
+         <img alt="" src="images/login/img-logo-login.png" alt="logo">
         <p class="mensaje_valido">&nbsp;Favor de llenar todos los campos.</p>
         <div class="user"><input id="loginUser" class="user" name="txtUsuario" type="text" placeholder="Usuario"></div>
         <div class="password"><input id="loginPassword" class="pass" name="txtClaveSecreta" type="password" placeholder="Contrase&ntilde;a"></div>
@@ -79,8 +79,8 @@ function Validar_Login() {                //CONTROL_ACCESO.PHP
 <!--- TERMINA SLIDER ----->
 <footer class="footer">
     <div class="container"> 
-    	Oxygen-FX Crossfit.  © Copyright 2015.	    
-   	</div>
+        Oxygen-FX Crossfit.  © Copyright 2015.        
+       </div>
 </footer>
 
 <?php }else{
