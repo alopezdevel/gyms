@@ -104,6 +104,13 @@ function borrarentrada(id){
     </div>
     <div class="col-md-4">
           <div class="fb-page" data-href="https://www.facebook.com/OxigenFEX" data-width="100%" data-height="300px" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/OxigenFEX"><a href="https://www.facebook.com/OxigenFEX">Oxygen-FX Crossfit Nuevo Laredo</a></blockquote></div></div>
+          <div class="widgets">
+            <h4>Categorias</h4>
+                <ul>
+                    <li><a href="blog.php"><i class="fa fa-book"></i> Blog</a></li>
+                    <li><a href="noticias.php"><i class="fa fa-newspaper-o"></i> Noticias</a></li> 
+                </ul>
+          </div>
     </div>
     </div> 
 <?php include("footer.php"); ?> 
